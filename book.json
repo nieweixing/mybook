@@ -1,0 +1,70 @@
+{
+    "title": "TKE Handbook",
+    "description": "TKE 指南",
+    "author": "roc",
+    "gitbook": ">= 3.2.2",
+    "language": "zh-hans",
+    "links": {
+        "sidebar": {
+            "roc": "https://imroc.io"
+        }
+    },
+    "plugins": [
+        "mermaid",
+        "github",
+        "editlink",
+        "-lunr",
+        "-search",
+        "search-plus",
+        "tbfed-pagefooter",
+        "codesnippet",
+        "splitter",
+        "page-toc-button",
+        "image-captions",
+        "back-to-top-button",
+        "-lunr", "-search", "search-plus",
+        "github-buttons@2.1.0",
+        "favicon@^0.0.2",
+        "3-ba",
+        "disqus",
+        "theme-default"
+    ],
+    "pdf": {
+        "toc": true,
+        "pageNumbers": true,
+        "fontSize": 11
+    },
+    "pluginsConfig": {
+        "github": {
+            "url": "https://github.com/TencentCloudContainerTeam/tke-handbook"
+        },
+        "editlink": {
+            "base": "https://github.com/TencentCloudContainerTeam/tke-handbook/blob/master",
+            "label": "编辑本页"
+        },
+        "tbfed-pagefooter": {
+          "copyright":"&copy roc",
+          "modify_label": "Updated at",
+          "modify_format": "YYYY-MM-DD HH:mm:ss"
+        },
+        "image-captions": {
+            "caption": "图片 - _CAPTION_"
+        },
+        "github-buttons": {
+            "repo": "TencentCloudContainerTeam/tke-handbook",
+            "types": ["star"],
+            "size": "small"
+        },
+        "favicon": {
+            "shortcut": "favicon.ico",
+            "bookmark": "favicon.ico"
+        },
+        "disqus": {
+            "shortName": "tencentcloudcontainerteam-github-io"
+        },
+        "3-ba": {
+            "token": "014238987a800856443fcb5e465f4cdd"
+        }
+    },
+    "generator": "site"
+}
