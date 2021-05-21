@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>k8s常用命令总结 · 运维操作指南</title>
+        <title>tke上使用docker-in-docker · 运维操作指南</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -91,10 +91,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="强制删除Terminating状态ns.html" />
+    <link rel="next" href="../cloud/1.md" />
     
     
-    <link rel="prev" href="../docker/1.md" />
+    <link rel="prev" href="../k8s/强制删除Terminating状态ns.html" />
     
 
     
@@ -276,9 +276,9 @@
         
         
     
-        <li class="chapter active" data-level="5.1" data-path="k8s常用命令总结.html">
+        <li class="chapter " data-level="5.1" data-path="../k8s/k8s常用命令总结.html">
             
-                <a href="k8s常用命令总结.html">
+                <a href="../k8s/k8s常用命令总结.html">
             
                     
                     k8s常用命令总结
@@ -289,9 +289,9 @@
             
         </li>
     
-        <li class="chapter " data-level="5.2" data-path="强制删除Terminating状态ns.html">
+        <li class="chapter " data-level="5.2" data-path="../k8s/强制删除Terminating状态ns.html">
             
-                <a href="强制删除Terminating状态ns.html">
+                <a href="../k8s/强制删除Terminating状态ns.html">
             
                     
                     强制删除Terminating状态ns
@@ -309,9 +309,9 @@
         
         
     
-        <li class="chapter " data-level="6.1" data-path="../tke/tke上使用docker-in-docker.html">
+        <li class="chapter active" data-level="6.1" data-path="tke上使用docker-in-docker.html">
             
-                <a href="../tke/tke上使用docker-in-docker.html">
+                <a href="tke上使用docker-in-docker.html">
             
                     
                     tke上使用docker-in-docker
@@ -412,7 +412,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >k8s常用命令总结</a>
+        <a href=".." >tke上使用docker-in-docker</a>
     </h1>
 </div>
 
@@ -427,35 +427,104 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="k8s&#x5E38;&#x7528;&#x547D;&#x4EE4;">k8s&#x5E38;&#x7528;&#x547D;&#x4EE4;</h1>
-<h2 id="&#x83B7;&#x53D6;hostnetwork&#x7F51;&#x7EDC;&#x6A21;&#x5F0F;&#x7684;deployment">&#x83B7;&#x53D6;hostNetwork&#x7F51;&#x7EDC;&#x6A21;&#x5F0F;&#x7684;deployment</h2>
-<pre class="language-"><code>kubectl get deployment --all-namespaces -o jsonpath=&apos;{range .items[?(@.spec.template.spec.hostNetwork==true)]} {&quot;namespace: &quot;} {.metadata.namespace}{&quot; name:&quot;} {.metadata.name} {&quot;\n&quot;} {end}&apos;
-</code></pre><h2 id="&#x83B7;&#x53D6;&#x7279;&#x6743;&#x6A21;&#x5F0F;&#x7684;deployment">&#x83B7;&#x53D6;&#x7279;&#x6743;&#x6A21;&#x5F0F;&#x7684;deployment</h2>
-<pre class="language-"><code>kubectl get deployment --all-namespaces -o jsonpath=&apos;{range .items[?(@.spec.template.spec.containers[*].securityContext.privileged==true)]} {&quot;namespace: &quot;}{.metadata.namespace}{&quot;name:&quot;} {.metadata.name} {&quot;\n&quot;} {end}&apos;
-</code></pre><h2 id="&#x83B7;&#x53D6;&#x63A7;&#x5236;&#x8FDB;&#x7A0B;&#x53EF;&#x4EE5;&#x83B7;&#x5F97;&#x8D85;&#x51FA;&#x5176;&#x7236;&#x8FDB;&#x7A0B;&#x7684;&#x7279;&#x6743;&#x7684;deployment">&#x83B7;&#x53D6;&#x63A7;&#x5236;&#x8FDB;&#x7A0B;&#x53EF;&#x4EE5;&#x83B7;&#x5F97;&#x8D85;&#x51FA;&#x5176;&#x7236;&#x8FDB;&#x7A0B;&#x7684;&#x7279;&#x6743;&#x7684;deployment</h2>
-<pre class="language-"><code>kubectl get deployment --all-namespaces -o jsonpath=&apos;{range .items[?(@.spec.template.spec.containers[*].securityContext.allowPrivilegeEscalation==true)]} {&quot;namespace: &quot;}{.metadata.namespace}{&quot;name:&quot;} {.metadata.name} {&quot;\n&quot;} {end}&apos;
-</code></pre><h2 id="&#x83B7;&#x53D6;&#x6240;&#x6709;deployment&#x7684;&#x5BB9;&#x5668;&#x540D;&#x79F0;&#x548C;namespace">&#x83B7;&#x53D6;&#x6240;&#x6709;deployment&#x7684;&#x5BB9;&#x5668;&#x540D;&#x79F0;&#x548C;namespace</h2>
-<pre class="language-"><code>kubectl get deployment --all-namespaces -o jsonpath=&apos;{range .items[?(@.spec.template.spec.containers[*])]} {&quot;namespace: &quot;}{.metadata.namespace}{&quot;name:&quot;} {.metadata.name} {&quot;\n&quot;} {end}&apos;
-</code></pre><h2 id="&#x83B7;&#x53D6;&#x6240;&#x6709;deployment&#x7684;&#x5BB9;&#x5668;&#x7AEF;&#x53E3;">&#x83B7;&#x53D6;&#x6240;&#x6709;deployment&#x7684;&#x5BB9;&#x5668;&#x7AEF;&#x53E3;</h2>
-<pre class="language-"><code>kubectl get deployment --all-namespaces -o jsonpath=&apos;{range .items[*]} {&quot;namespace: &quot;}{.metadata.namespace}{&quot; name:&quot;} {.metadata.name} {&quot; &quot;}{.spec.template.spec.containers[*].ports} {&quot;\n&quot;} {end}&apos;
-</code></pre><h2 id="&#x83B7;&#x53D6;&#x914D;&#x7F6E;&#x4E86;hostport&#x7684;deployment">&#x83B7;&#x53D6;&#x914D;&#x7F6E;&#x4E86;hostport&#x7684;deployment</h2>
-<pre class="language-"><code>kubectl get deployment --all-namespaces -o jsonpath=&apos;{range .items[*]} {&quot;namespace: &quot;}{.metadata.namespace}{&quot; name:&quot;} {.metadata.name} {&quot; &quot;}{.spec.template.spec.containers[*].ports} {&quot;\n&quot;} {end}&apos; |grep map | grep hostPort | awk &apos;{print $1 $2 &quot; &quot;$3 $4}&apos;
-</code></pre><h2 id="&#x83B7;&#x53D6;&#x914D;&#x7F6E;&#x4E86;capabilities&#x5C5E;&#x6027;&#x7684;deployment">&#x83B7;&#x53D6;&#x914D;&#x7F6E;&#x4E86;capabilities&#x5C5E;&#x6027;&#x7684;deployment</h2>
-<pre class="language-"><code>kubectl get deployment --all-namespaces -o jsonpath=&apos;{range .items[*]} {&quot;namespace: &quot;}{.metadata.namespace}{&quot; name:&quot;} {.metadata.name} {&quot; &quot;}{.spec.template.spec.containers[*].securityContext} {&quot;\n&quot;} {end}&apos; |grep capabilities | awk &apos;{print $1 $2 &quot; &quot;$3 $4}&apos;
-</code></pre><h2 id="&#x83B7;&#x53D6;&#x6240;&#x6709;&#x914D;&#x7F6E;&#x4E86;hostnetwork&#x7684;daemonset">&#x83B7;&#x53D6;&#x6240;&#x6709;&#x914D;&#x7F6E;&#x4E86;hostNetwork&#x7684;DaemonSet</h2>
-<pre class="language-"><code>kubectl get ds --all-namespaces -o jsonpath=&apos;{range .items[?(@.spec.template.spec.hostNetwork==true)]} {&quot;namespace: &quot;} {.metadata.namespace}{&quot; name:&quot;} {.metadata.name} {&quot;\n&quot;} {end}&apos;
-</code></pre><h2 id="&#x83B7;&#x53D6;&#x6240;&#x6709;&#x914D;&#x7F6E;&#x4E86;hostipc&#x6A21;&#x5F0F;&#x7684;daemonset">&#x83B7;&#x53D6;&#x6240;&#x6709;&#x914D;&#x7F6E;&#x4E86;hostIPC&#x6A21;&#x5F0F;&#x7684;DaemonSet</h2>
-<pre class="language-"><code>kubectl get ds --all-namespaces -o jsonpath=&apos;{range .items[?(@.spec.template.spec.hostIPC==true)]} {&quot;namespace: &quot;} {.metadata.namespace}{&quot; name:&quot;} {.metadata.name} {&quot;\n&quot;} {end}&apos;
-</code></pre><h2 id="&#x83B7;&#x53D6;&#x6240;&#x6709;&#x914D;&#x7F6E;&#x4E86;hostpid&#x6A21;&#x5F0F;&#x7684;daemonset">&#x83B7;&#x53D6;&#x6240;&#x6709;&#x914D;&#x7F6E;&#x4E86;hostPID&#x6A21;&#x5F0F;&#x7684;DaemonSet</h2>
-<pre class="language-"><code>kubectl get ds --all-namespaces -o jsonpath=&apos;{range .items[?(@.spec.template.spec.hostPID==true)]} {&quot;namespace: &quot;} {.metadata.namespace}{&quot; name:&quot;} {.metadata.name} {&quot;\n&quot;} {end}&apos;
-</code></pre><h2 id="&#x83B7;&#x53D6;&#x6240;&#x6709;&#x914D;&#x7F6E;&#x4E86;allowprivilegeescalation&#x6A21;&#x5F0F;&#x7684;daemonset">&#x83B7;&#x53D6;&#x6240;&#x6709;&#x914D;&#x7F6E;&#x4E86;allowPrivilegeEscalation&#x6A21;&#x5F0F;&#x7684;DaemonSet</h2>
-<pre class="language-"><code>kubectl get ds --all-namespaces -o jsonpath=&apos;{range .items[?(@.spec.template.spec.containers[*].securityContext.allowPrivilegeEscalation==true)]} {&quot;namespace: &quot;}{.metadata.namespace}{&quot;name:&quot;} {.metadata.name} {&quot;\n&quot;} {end}&apos;
-</code></pre><h2 id="&#x83B7;&#x53D6;&#x914D;&#x7F6E;&#x4E86;hostport&#x7684;daemonset">&#x83B7;&#x53D6;&#x914D;&#x7F6E;&#x4E86;hostport&#x7684;DaemonSet</h2>
-<pre class="language-"><code>kubectl get ds --all-namespaces -o jsonpath=&apos;{range .items[*]} {&quot;namespace: &quot;}{.metadata.namespace}{&quot; name:&quot;} {.metadata.name} {&quot; &quot;}{.spec.template.spec.containers[*].ports} {&quot;\n&quot;} {end}&apos; |grep map | grep hostPort | awk &apos;{print $1 $2 &quot; &quot;$3 $4}&apos;
-</code></pre><h2 id="&#x83B7;&#x53D6;&#x6240;&#x6709;pod&#x7684;ip&#x548C;&#x6240;&#x5728;node&#x7684;ip">&#x83B7;&#x53D6;&#x6240;&#x6709;pod&#x7684;ip&#x548C;&#x6240;&#x5728;node&#x7684;ip</h2>
-<pre class="language-"><code>kubectl get pods --all-namespaces    -o=jsonpath=&apos;{range .items[*]}[nodeip:{.status.hostIP}, podip:{.status.podIP}]{&quot;\n&quot;}{end}&apos;
+                                <p>&#x8FD9;&#x91CC;&#x6211;&#x4EEC;&#x8BB2;&#x4E00;&#x4E0B;&#x5982;&#x4F55;&#x5728;tke&#x96C6;&#x7FA4;&#x4E0A;&#x90E8;&#x7F72;docker in docker&#x7684;pod&#xFF0C;&#x8FD9;&#x91CC;&#x524D;&#x63D0;&#x6761;&#x4EF6;&#x662F;&#x96C6;&#x7FA4;&#x7684;runtime&#x9700;&#x8981;&#x7528;&#x7684;&#x662F;docker&#x7C7B;&#x578B;&#xFF0C;&#x5982;&#x679C;&#x662F;containerd&#x662F;&#x4E0D;&#x884C;&#x7684;&#x3002;</p>
+<pre class="language-"><code>apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    k8s-app: docker-in-docker
+    qcloud-app: docker-in-docker
+  name: docker-in-docker
+  namespace: tke-test
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      k8s-app: docker-in-docker
+      qcloud-app: docker-in-docker
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        k8s-app: docker-in-docker
+        qcloud-app: docker-in-docker
+    spec:
+      containers:
+      - command:
+        - sleep
+        - 70d
+        image: docker:latest
+        imagePullPolicy: Always
+        name: docker-in-docker
+        resources:
+          limits:
+            cpu: 500m
+            memory: 1Gi
+          requests:
+            cpu: 250m
+            memory: 256Mi
+        securityContext:
+          privileged: false
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /var/run/docker.sock
+          name: vol
+          subPath: docker.sock
+      dnsPolicy: ClusterFirst
+      imagePullSecrets:
+      - name: qcloudregistrykey
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - hostPath:
+          path: /var/run
+          type: DirectoryOrCreate
+        name: vol
+</code></pre><p>&#x8FD9;&#x91CC;&#x6211;&#x4EEC;&#x7528;&#x5B98;&#x65B9;&#x63D0;&#x4F9B;&#x7684;docker in docker&#x955C;&#x50CF;&#xFF0C;&#x955C;&#x50CF;&#x9ED8;&#x8BA4;&#x662F;&#x6CA1;&#x6709;&#x5E38;&#x9A7B;&#x8FDB;&#x7A0B;&#xFF0C;&#x9700;&#x8981;&#x52A0;&#x4E0A;sleep&#x547D;&#x4EE4;&#x8D77;&#x4E00;&#x4E2A;&#x5E38;&#x9A7B;&#x8FDB;&#x7A0B;&#xFF0C;&#x7136;&#x540E;&#x6211;&#x4EEC;&#x5C06;&#x8282;&#x70B9;&#x7684;/var/run/docker.sock&#x6302;&#x8F7D;&#x5BB9;&#x5668;&#x5185;&#x3002;</p>
+<p>&#x63A5;&#x4E0B;&#x6765;&#x6211;&#x4EEC;&#x8FDB;&#x5165;&#x5BB9;&#x5668;&#x5C31;&#x53EF;&#x4EE5;&#x6267;&#x884C;docker&#x547D;&#x4EE4;&#x4E86;</p>
+<pre class="language-"><code>[root@VM-0-13-centos ~]# kubectl exec -it  docker-in-docker-5b49479696-cm6gd -n tke-test /bin/sh
+/ # docker version
+Client:
+ Version:           20.10.6
+ API version:       1.40
+ Go version:        go1.13.15
+ Git commit:        370c289
+ Built:             Fri Apr  9 22:42:10 2021
+ OS/Arch:           linux/amd64
+ Context:           default
+ Experimental:      true
+
+Server: Docker Engine - Community
+ Engine:
+  Version:          19.03.9
+  API version:      1.40 (minimum version 1.12)
+  Go version:       go1.13.10
+  Git commit:       9d988398e7
+  Built:            Fri May 15 00:28:17 2020
+  OS/Arch:          linux/amd64
+  Experimental:     false
+ containerd:
+  Version:          v1.2.13
+  GitCommit:        7ad184331fa3e55e52b890ea95e65ba581ae3429
+ runc:
+  Version:          1.0.0-rc10
+  GitCommit:        dc9208a3303feef5b3839f4323d9beb36df0a9dd
+ docker-init:
+  Version:          0.18.0
+  GitCommit:        fec3683
+/ #
 </code></pre><footer class="page-footer"><span class="copyright">&#xA9; vishon all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">Updated at
-2021-05-21 17:07:57
+2021-05-21 20:55:29
 </span></footer>
 <script>console.log("plugin-popup....");document.onclick = function(e){ e.target.tagName === "IMG" && window.open(e.target.src,e.target.src)}</script><style>img{cursor:pointer}</style>
                                 
@@ -484,12 +553,12 @@
 
             
                 
-                <a href="../docker/1.md" class="navigation navigation-prev " aria-label="Previous page: docker简介">
+                <a href="../k8s/强制删除Terminating状态ns.html" class="navigation navigation-prev " aria-label="Previous page: 强制删除Terminating状态ns">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="强制删除Terminating状态ns.html" class="navigation navigation-next " aria-label="Next page: 强制删除Terminating状态ns">
+                <a href="../cloud/1.md" class="navigation navigation-next " aria-label="Next page: 云计算简介">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -500,7 +569,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"k8s常用命令总结","level":"5.1","depth":1,"next":{"title":"强制删除Terminating状态ns","level":"5.2","depth":1,"path":"k8s/强制删除Terminating状态ns.md","ref":"k8s/强制删除Terminating状态ns.md","articles":[]},"previous":{"title":"docker简介","level":"4.1","depth":1,"path":"docker/1.md","ref":"docker/1.md","articles":[]},"dir":"ltr"},"config":{"plugins":["github","editlink","-lunr","-search","search-plus","tbfed-pagefooter","splitter","page-toc-button","back-to-top-button","-lunr","-search","search-plus","github-buttons@2.1.0","favicon@^0.0.2","3-ba","disqus","theme-default","pageview-count","auto-scroll-table","popup","code","-highlight","prism","prism-themes"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"&copy vishon","modify_label":"Updated at","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-okaidia.css"]},"disqus":{"useIdentifier":false,"shortName":"nieweixing-github-io"},"github":{"url":"https://github.com/nieweixing"},"editlink":{"label":"编辑本页","multilingual":false,"base":"https://github.com/nieweixing/mybook/tree/gh-pages"},"splitter":{},"auto-scroll-table":{},"popup":{},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"favicon":{"shortcut":"favicon.ico","bookmark":"favicon.ico"},"page-toc-button":{},"back-to-top-button":{},"pageview-count":{},"prism-themes":{},"github-buttons":{"repo":"nieweixing/mybook","types":["star"],"size":"small"},"3-ba":{"configuration":"auto","token":"c03bec8e82bc53c064e0e648ffa54d88"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{},"image-captions":{"caption":"图片 - _CAPTION_"}},"theme":"default","author":"vishon","pdf":{"pageNumbers":true,"fontSize":11,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"toc":true},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"运维操作指南","language":"zh-hans","links":{"sidebar":{"聂伟星个人博客":"https://www.niewx.cn","TKE运维手册":"https://cloud.tencent.com/developer/column/87421"}},"gitbook":">= 3.2.2","description":"运维操作指南"},"file":{"path":"k8s/k8s常用命令总结.md","mtime":"2021-05-21T09:07:57.254Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-05-21T12:57:36.445Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"tke上使用docker-in-docker","level":"6.1","depth":1,"next":{"title":"云计算简介","level":"7.1","depth":1,"path":"cloud/1.md","ref":"cloud/1.md","articles":[]},"previous":{"title":"强制删除Terminating状态ns","level":"5.2","depth":1,"path":"k8s/强制删除Terminating状态ns.md","ref":"k8s/强制删除Terminating状态ns.md","articles":[]},"dir":"ltr"},"config":{"plugins":["github","editlink","-lunr","-search","search-plus","tbfed-pagefooter","splitter","page-toc-button","back-to-top-button","-lunr","-search","search-plus","github-buttons@2.1.0","favicon@^0.0.2","3-ba","disqus","theme-default","pageview-count","auto-scroll-table","popup","code","-highlight","prism","prism-themes"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"&copy vishon","modify_label":"Updated at","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-okaidia.css"]},"disqus":{"useIdentifier":false,"shortName":"nieweixing-github-io"},"github":{"url":"https://github.com/nieweixing"},"editlink":{"label":"编辑本页","multilingual":false,"base":"https://github.com/nieweixing/mybook/tree/gh-pages"},"splitter":{},"auto-scroll-table":{},"popup":{},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"favicon":{"shortcut":"favicon.ico","bookmark":"favicon.ico"},"page-toc-button":{},"back-to-top-button":{},"pageview-count":{},"prism-themes":{},"github-buttons":{"repo":"nieweixing/mybook","types":["star"],"size":"small"},"3-ba":{"configuration":"auto","token":"c03bec8e82bc53c064e0e648ffa54d88"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{},"image-captions":{"caption":"图片 - _CAPTION_"}},"theme":"default","author":"vishon","pdf":{"pageNumbers":true,"fontSize":11,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"toc":true},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"运维操作指南","language":"zh-hans","links":{"sidebar":{"聂伟星个人博客":"https://www.niewx.cn","TKE运维手册":"https://cloud.tencent.com/developer/column/87421"}},"gitbook":">= 3.2.2","description":"运维操作指南"},"file":{"path":"tke/tke上使用docker-in-docker.md","mtime":"2021-05-21T12:55:29.046Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-05-21T12:57:36.445Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
