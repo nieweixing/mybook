@@ -64,7 +64,10 @@ kubectl get ds --all-namespaces -o jsonpath='{range .items[?(@.spec.template.spe
 ```
  
 # 获取配置了hostport的DaemonSet
+
+```
 kubectl get ds --all-namespaces -o jsonpath='{range .items[*]} {"namespace: "}{.metadata.namespace}{" name:"} {.metadata.name} {" "}{.spec.template.spec.containers[*].ports} {"\n"} {end}' |grep map | grep hostPort | awk '{print $1 $2 " "$3 $4}'
+```
 
 # 获取所有pod的ip和所在node的ip
 
