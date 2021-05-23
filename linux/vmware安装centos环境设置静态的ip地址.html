@@ -53,7 +53,7 @@
                 
             
                 
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-prism/prism-okaidia.css">
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
                 
             
                 
@@ -275,6 +275,19 @@
             
                     
                     mysql运维笔记
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.2" data-path="../database/mongodb运维笔记.html">
+            
+                <a href="../database/mongodb运维笔记.html">
+            
+                    
+                    mongodb运维笔记
             
                 </a>
             
@@ -556,7 +569,7 @@
 </ul>
 <p><img src="image/centos/7.png" alt="upload-image"> </p>
 <p><img src="image/centos/8.png" alt="upload-image"> </p>
-<pre class="language-"><code>#cd /etc/sysconfig/network-scripts/
+<pre><code>#cd /etc/sysconfig/network-scripts/
 #vi ifcfg-eno16777736
 
 
@@ -571,7 +584,7 @@ GATEWAY=192.168.2.1     #&#x7F51;&#x5173;&#xFF0C;&#x8FD9;&#x91CC;&#x662F;&#x4F60
 </code></pre><ul>
 <li>&#x91CD;&#x542F;&#x7F51;&#x7EDC;&#x670D;&#x52A1;</li>
 </ul>
-<pre class="language-"><code>service network restart
+<pre><code>service network restart
 </code></pre><h2 id="&#x68C0;&#x9A8C;&#x914D;&#x7F6E;&#x662F;&#x5426;&#x6210;&#x529F;">&#x68C0;&#x9A8C;&#x914D;&#x7F6E;&#x662F;&#x5426;&#x6210;&#x529F;</h2>
 <ul>
 <li>&#x67E5;&#x770B;&#x4FEE;&#x6539;&#x540E;&#x7684;&#x56FA;&#x5B9A;IP&#x4E3A;192.168.2.2&#xFF0C;&#x914D;&#x7F6E;&#x6B63;&#x786E;</li>
@@ -594,7 +607,7 @@ GATEWAY=192.168.2.1     #&#x7F51;&#x5173;&#xFF0C;&#x8FD9;&#x91CC;&#x662F;&#x4F60
 <ul>
 <li>&#x82E5;&#x8FDE;&#x63A5;&#x5931;&#x8D25;&#x662F;&#x56E0;&#x4E3A;CentOS 7&#x7684;&#x9632;&#x706B;&#x5899;&#x7AEF;&#x53E3;&#x6CA1;&#x6709;&#x6253;&#x5F00;&#xFF0C;&#x6BD4;&#x5982;&#x5F00;&#x542F;80&#xFF0C;3306&#x7AEF;&#x53E3;&#xFF0C;&#x6700;&#x540E;&#x4E00;&#x5B9A;&#x8981;&#x91CD;&#x542F;&#x9632;&#x706B;&#x5899;</li>
 </ul>
-<pre class="language-"><code>#&#x67E5;&#x770B;&#x9632;&#x706B;&#x5899;&#x72B6;&#x6001;
+<pre><code>#&#x67E5;&#x770B;&#x9632;&#x706B;&#x5899;&#x72B6;&#x6001;
 systemctl status firewalld  
 #&#x5F00;&#x542F;80&#x7AEF;&#x53E3;
 firewall-cmd --zone=public --add-port=80/tcp --permanent  
@@ -653,7 +666,7 @@ firewall-cmd --reload
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"vmware安装centos环境设置静态的ip地址","level":"3.2","depth":1,"next":{"title":"mysql运维笔记","level":"4.1","depth":1,"path":"database/mysql运维笔记.md","ref":"database/mysql运维笔记.md","articles":[]},"previous":{"title":"腾讯云cvm上搭建openvpn","level":"3.1","depth":1,"path":"linux/腾讯云cvm上搭建openvpn.md","ref":"linux/腾讯云cvm上搭建openvpn.md","articles":[]},"dir":"ltr"},"config":{"plugins":["github","editlink","-lunr","-search","search-plus","tbfed-pagefooter","splitter","page-toc-button","back-to-top-button","-lunr","-search","search-plus","github-buttons@2.1.0","favicon@^0.0.2","3-ba","disqus","theme-default","pageview-count","auto-scroll-table","popup","code","-highlight","prism","prism-themes"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"&copy vishon","modify_label":"Updated at","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-okaidia.css"]},"disqus":{"useIdentifier":false,"shortName":"nieweixing-github-io"},"github":{"url":"https://github.com/nieweixing"},"editlink":{"label":"编辑本页","multilingual":false,"base":"https://github.com/nieweixing/mybook/tree/gh-pages"},"splitter":{},"auto-scroll-table":{},"popup":{},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"favicon":{"shortcut":"favicon.ico","bookmark":"favicon.ico"},"page-toc-button":{},"back-to-top-button":{},"pageview-count":{},"prism-themes":{},"github-buttons":{"repo":"nieweixing/mybook","types":["star"],"size":"small"},"3-ba":{"configuration":"auto","token":"c03bec8e82bc53c064e0e648ffa54d88"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{},"image-captions":{"caption":"图片 - _CAPTION_"}},"theme":"default","author":"vishon","pdf":{"pageNumbers":true,"fontSize":11,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"toc":true},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"运维操作指南","language":"zh-hans","links":{"sidebar":{"聂伟星个人博客":"https://www.niewx.cn","TKE运维手册":"https://cloud.tencent.com/developer/column/87421"}},"gitbook":">= 3.2.2","description":"运维操作指南"},"file":{"path":"linux/vmware安装centos环境设置静态的ip地址.md","mtime":"2021-05-22T02:44:15.824Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-05-23T04:16:35.140Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"vmware安装centos环境设置静态的ip地址","level":"3.2","depth":1,"next":{"title":"mysql运维笔记","level":"4.1","depth":1,"path":"database/mysql运维笔记.md","ref":"database/mysql运维笔记.md","articles":[]},"previous":{"title":"腾讯云cvm上搭建openvpn","level":"3.1","depth":1,"path":"linux/腾讯云cvm上搭建openvpn.md","ref":"linux/腾讯云cvm上搭建openvpn.md","articles":[]},"dir":"ltr"},"config":{"plugins":["github","editlink","-lunr","-search","search-plus","tbfed-pagefooter","splitter","page-toc-button","back-to-top-button","-lunr","-search","search-plus","github-buttons@2.1.0","favicon@^0.0.2","3-ba","disqus","theme-default","pageview-count","auto-scroll-table","popup","code"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"&copy vishon","modify_label":"Updated at","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-okaidia.css"]},"disqus":{"useIdentifier":false,"shortName":"nieweixing-github-io"},"github":{"url":"https://github.com/nieweixing"},"editlink":{"label":"编辑本页","multilingual":false,"base":"https://github.com/nieweixing/mybook/tree/gh-pages"},"splitter":{},"auto-scroll-table":{},"popup":{},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"favicon":{"shortcut":"favicon.ico","bookmark":"favicon.ico"},"page-toc-button":{},"back-to-top-button":{},"pageview-count":{},"github-buttons":{"repo":"nieweixing/mybook","types":["star"],"size":"small"},"3-ba":{"configuration":"auto","token":"c03bec8e82bc53c064e0e648ffa54d88"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{},"image-captions":{"caption":"图片 - _CAPTION_"}},"theme":"default","author":"vishon","pdf":{"pageNumbers":true,"fontSize":11,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"toc":true},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"运维操作指南","language":"zh-hans","links":{"sidebar":{"聂伟星个人博客":"https://www.niewx.cn","TKE运维手册":"https://cloud.tencent.com/developer/column/87421"}},"gitbook":">= 3.2.2","description":"运维操作指南"},"file":{"path":"linux/vmware安装centos环境设置静态的ip地址.md","mtime":"2021-05-22T02:44:15.824Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-05-23T06:20:09.381Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

@@ -53,7 +53,7 @@
                 
             
                 
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-prism/prism-okaidia.css">
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
                 
             
                 
@@ -275,6 +275,19 @@
             
                     
                     mysql运维笔记
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.2" data-path="../database/mongodb运维笔记.html">
+            
+                <a href="../database/mongodb运维笔记.html">
+            
+                    
+                    mongodb运维笔记
             
                 </a>
             
@@ -521,19 +534,19 @@
                                 <p>&#x672C;&#x7BC7;&#x6587;&#x7AE0;&#x4E3B;&#x8981;&#x8BB2;&#x8FF0;&#x5982;&#x4F55;&#x5728;tke&#x96C6;&#x7FA4;&#x4E0A;&#x90E8;&#x7F72;Jumpserver&#x8DF3;&#x677F;&#x673A;&#xFF0C;&#x672C;&#x6B21;&#x91C7;&#x7528;&#x7684;1.18.4&#x7248;&#x672C;&#x7684;&#x96C6;&#x7FA4;&#x3002;</p>
 <h1 id="&#x90E8;&#x7F72;mysql&#x6570;&#x636E;&#x5E93;">&#x90E8;&#x7F72;mysql&#x6570;&#x636E;&#x5E93;</h1>
 <p>&#x8FD9;&#x91CC;&#x6211;&#x4EEC;&#x901A;&#x8FC7;helm&#x90E8;&#x7F72;mysql&#x6570;&#x636E;&#x5E93;</p>
-<pre class="language-"><code>helm install nwx-mysql stable/mysql --namespace mysql
+<pre><code>helm install nwx-mysql stable/mysql --namespace mysql
 </code></pre><p>&#x8FD9;&#x91CC;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x83B7;&#x53D6;&#x4E0B;mysql&#x7684;root&#x7528;&#x6237;&#x6570;&#x636E;&#x5E93;&#x5BC6;&#x7801;</p>
-<pre class="language-"><code>kubectl get secret nwx-mysql -n mysql -o jsonpath={.data.mysql-root-password} |base64 -d
+<pre><code>kubectl get secret nwx-mysql -n mysql -o jsonpath={.data.mysql-root-password} |base64 -d
 </code></pre><p>&#x6CE8;&#x610F;&#x8FD9;&#x91CC;&#x8FD8;&#x9700;&#x8981;&#x7ED9;Jumpserver&#x521B;&#x5EFA;&#x597D;&#x6570;&#x636E;&#x5E93;&#xFF0C;&#x767B;&#x5F55;mysql&#x6267;&#x884C;&#x4E0B;&#x9762;&#x8FD9;&#x6761;sql</p>
-<pre class="language-"><code>create database jumpserver default charset &apos;utf8&apos;;
+<pre><code>create database jumpserver default charset &apos;utf8&apos;;
 </code></pre><h1 id="&#x90E8;&#x7F72;redis&#x6570;&#x636E;&#x5E93;">&#x90E8;&#x7F72;redis&#x6570;&#x636E;&#x5E93;</h1>
 <p>redis&#x6570;&#x636E;&#x5E93;&#x6211;&#x4EEC;&#x4E5F;&#x901A;&#x8FC7;helm&#x90E8;&#x7F72;&#x4E0B;&#xFF0C;&#x4E5F;&#x90E8;&#x7F72;&#x5728;mysql&#x547D;&#x540D;&#x7A7A;&#x95F4;</p>
-<pre class="language-"><code>helm install nwx-redis bitnami/redis --namespace mysql
+<pre><code>helm install nwx-redis bitnami/redis --namespace mysql
 </code></pre><p>&#x7136;&#x540E;&#x83B7;&#x53D6;&#x4E0B;redis&#x6570;&#x636E;&#x5E93;&#x7684;&#x5BC6;&#x7801;</p>
-<pre class="language-"><code>kubectl get secret nwx-redis -n mysql -o jsonpath={.data.redis-password} |base64 -d
+<pre><code>kubectl get secret nwx-redis -n mysql -o jsonpath={.data.redis-password} |base64 -d
 </code></pre><h1 id="&#x90E8;&#x7F72;jumpserver">&#x90E8;&#x7F72;Jumpserver</h1>
 <p>&#x8FD9;&#x91CC;&#x6211;&#x4EEC;&#x5148;&#x5728;&#x63A7;&#x5236;&#x53F0;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;jumpserver-datadir&#x7684;pvc&#xFF0C;&#x4F7F;&#x7528;&#x4E86;20G&#x7684;&#x4E91;&#x786C;&#x76D8;</p>
-<pre class="language-"><code>apiVersion: v1
+<pre><code>apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: jumpserver-datadir
@@ -547,12 +560,12 @@ spec:
     requests:
       storage: 20Gi
 </code></pre><p>&#x7136;&#x540E;&#x751F;&#x6210;&#x4E0B;jumpserver&#x9700;&#x8981;&#x5230;&#x7684;SECRET_KEY&#x548C;BOOTSTRAP_TOKEN</p>
-<pre class="language-"><code># SECRET_KEY &#x751F;&#x6210;&#x65B9;&#x5F0F;&#xFF1A; 
+<pre><code># SECRET_KEY &#x751F;&#x6210;&#x65B9;&#x5F0F;&#xFF1A; 
 cat /dev/urandom | tr -dc A-Za-z0-9 | head -c 50
 
 # BOOTSTRAP_TOKEN&#x751F;&#x6210;&#x65B9;&#x5F0F;&#xFF1A;
 cat /dev/urandom | tr -dc A-Za-z0-9 | head -c 16
-</code></pre><pre class="language-"><code>apiVersion: apps/v1
+</code></pre><pre><code>apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: jumpserver
@@ -642,7 +655,7 @@ spec:
     app.kubernetes.io/instance: jumpserver
     app.kubernetes.io/name: jumpserver
 </code></pre><h1 id="&#x521B;&#x5EFA;ingress&#x63D0;&#x4F9B;&#x8BBF;&#x95EE;&#x57DF;&#x540D;">&#x521B;&#x5EFA;ingress&#x63D0;&#x4F9B;&#x8BBF;&#x95EE;&#x57DF;&#x540D;</h1>
-<pre class="language-"><code>apiVersion: networking.k8s.io/v1beta1
+<pre><code>apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   annotations:
@@ -706,7 +719,7 @@ spec:
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"tke上部署Jumpserver跳板机","level":"7.2","depth":1,"next":{"title":"云计算简介","level":"8.1","depth":1,"path":"cloud/1.md","ref":"cloud/1.md","articles":[]},"previous":{"title":"tke上使用docker-in-docker","level":"7.1","depth":1,"path":"tke/tke上使用docker-in-docker.md","ref":"tke/tke上使用docker-in-docker.md","articles":[]},"dir":"ltr"},"config":{"plugins":["github","editlink","-lunr","-search","search-plus","tbfed-pagefooter","splitter","page-toc-button","back-to-top-button","-lunr","-search","search-plus","github-buttons@2.1.0","favicon@^0.0.2","3-ba","disqus","theme-default","pageview-count","auto-scroll-table","popup","code","-highlight","prism","prism-themes"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"&copy vishon","modify_label":"Updated at","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-okaidia.css"]},"disqus":{"useIdentifier":false,"shortName":"nieweixing-github-io"},"github":{"url":"https://github.com/nieweixing"},"editlink":{"label":"编辑本页","multilingual":false,"base":"https://github.com/nieweixing/mybook/tree/gh-pages"},"splitter":{},"auto-scroll-table":{},"popup":{},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"favicon":{"shortcut":"favicon.ico","bookmark":"favicon.ico"},"page-toc-button":{},"back-to-top-button":{},"pageview-count":{},"prism-themes":{},"github-buttons":{"repo":"nieweixing/mybook","types":["star"],"size":"small"},"3-ba":{"configuration":"auto","token":"c03bec8e82bc53c064e0e648ffa54d88"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{},"image-captions":{"caption":"图片 - _CAPTION_"}},"theme":"default","author":"vishon","pdf":{"pageNumbers":true,"fontSize":11,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"toc":true},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"运维操作指南","language":"zh-hans","links":{"sidebar":{"聂伟星个人博客":"https://www.niewx.cn","TKE运维手册":"https://cloud.tencent.com/developer/column/87421"}},"gitbook":">= 3.2.2","description":"运维操作指南"},"file":{"path":"tke/tke上部署Jumpserver.md","mtime":"2021-05-23T04:16:29.082Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-05-23T04:16:35.140Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"tke上部署Jumpserver跳板机","level":"7.2","depth":1,"next":{"title":"云计算简介","level":"8.1","depth":1,"path":"cloud/1.md","ref":"cloud/1.md","articles":[]},"previous":{"title":"tke上使用docker-in-docker","level":"7.1","depth":1,"path":"tke/tke上使用docker-in-docker.md","ref":"tke/tke上使用docker-in-docker.md","articles":[]},"dir":"ltr"},"config":{"plugins":["github","editlink","-lunr","-search","search-plus","tbfed-pagefooter","splitter","page-toc-button","back-to-top-button","-lunr","-search","search-plus","github-buttons@2.1.0","favicon@^0.0.2","3-ba","disqus","theme-default","pageview-count","auto-scroll-table","popup","code"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"&copy vishon","modify_label":"Updated at","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-okaidia.css"]},"disqus":{"useIdentifier":false,"shortName":"nieweixing-github-io"},"github":{"url":"https://github.com/nieweixing"},"editlink":{"label":"编辑本页","multilingual":false,"base":"https://github.com/nieweixing/mybook/tree/gh-pages"},"splitter":{},"auto-scroll-table":{},"popup":{},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"favicon":{"shortcut":"favicon.ico","bookmark":"favicon.ico"},"page-toc-button":{},"back-to-top-button":{},"pageview-count":{},"github-buttons":{"repo":"nieweixing/mybook","types":["star"],"size":"small"},"3-ba":{"configuration":"auto","token":"c03bec8e82bc53c064e0e648ffa54d88"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{},"image-captions":{"caption":"图片 - _CAPTION_"}},"theme":"default","author":"vishon","pdf":{"pageNumbers":true,"fontSize":11,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"toc":true},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"运维操作指南","language":"zh-hans","links":{"sidebar":{"聂伟星个人博客":"https://www.niewx.cn","TKE运维手册":"https://cloud.tencent.com/developer/column/87421"}},"gitbook":">= 3.2.2","description":"运维操作指南"},"file":{"path":"tke/tke上部署Jumpserver.md","mtime":"2021-05-23T04:16:29.082Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-05-23T06:20:09.381Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

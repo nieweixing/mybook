@@ -53,7 +53,7 @@
                 
             
                 
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-prism/prism-okaidia.css">
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
                 
             
                 
@@ -275,6 +275,19 @@
             
                     
                     mysql运维笔记
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.2" data-path="../database/mongodb运维笔记.html">
+            
+                <a href="../database/mongodb运维笔记.html">
+            
+                    
+                    mongodb运维笔记
             
                 </a>
             
@@ -519,7 +532,7 @@
                                 <section class="normal markdown-section">
                                 
                                 <p>&#x8FD9;&#x91CC;&#x6211;&#x4EEC;&#x8BB2;&#x4E00;&#x4E0B;&#x5982;&#x4F55;&#x5728;tke&#x96C6;&#x7FA4;&#x4E0A;&#x90E8;&#x7F72;docker in docker&#x7684;pod&#xFF0C;&#x8FD9;&#x91CC;&#x524D;&#x63D0;&#x6761;&#x4EF6;&#x662F;&#x96C6;&#x7FA4;&#x7684;runtime&#x9700;&#x8981;&#x7528;&#x7684;&#x662F;docker&#x7C7B;&#x578B;&#xFF0C;&#x5982;&#x679C;&#x662F;containerd&#x662F;&#x4E0D;&#x884C;&#x7684;&#x3002;</p>
-<pre class="language-"><code>apiVersion: apps/v1
+<pre><code>apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
@@ -583,7 +596,7 @@ spec:
         name: vol
 </code></pre><p>&#x8FD9;&#x91CC;&#x6211;&#x4EEC;&#x7528;&#x5B98;&#x65B9;&#x63D0;&#x4F9B;&#x7684;docker in docker&#x955C;&#x50CF;&#xFF0C;&#x955C;&#x50CF;&#x9ED8;&#x8BA4;&#x662F;&#x6CA1;&#x6709;&#x5E38;&#x9A7B;&#x8FDB;&#x7A0B;&#xFF0C;&#x9700;&#x8981;&#x52A0;&#x4E0A;sleep&#x547D;&#x4EE4;&#x8D77;&#x4E00;&#x4E2A;&#x5E38;&#x9A7B;&#x8FDB;&#x7A0B;&#xFF0C;&#x7136;&#x540E;&#x6211;&#x4EEC;&#x5C06;&#x8282;&#x70B9;&#x7684;/var/run/docker.sock&#x6302;&#x8F7D;&#x5BB9;&#x5668;&#x5185;&#x3002;</p>
 <p>&#x63A5;&#x4E0B;&#x6765;&#x6211;&#x4EEC;&#x8FDB;&#x5165;&#x5BB9;&#x5668;&#x5C31;&#x53EF;&#x4EE5;&#x6267;&#x884C;docker&#x547D;&#x4EE4;&#x4E86;</p>
-<pre class="language-"><code>[root@VM-0-13-centos ~]# kubectl exec -it  docker-in-docker-5b49479696-cm6gd -n tke-test /bin/sh
+<pre><code>[root@VM-0-13-centos ~]# kubectl exec -it  docker-in-docker-5b49479696-cm6gd -n tke-test /bin/sh
 / # docker version
 Client:
  Version:           20.10.6
@@ -660,7 +673,7 @@ Server: Docker Engine - Community
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"tke上使用docker-in-docker","level":"7.1","depth":1,"next":{"title":"tke上部署Jumpserver跳板机","level":"7.2","depth":1,"path":"tke/tke上部署Jumpserver.md","ref":"tke/tke上部署Jumpserver.md","articles":[]},"previous":{"title":"强制删除Terminating状态ns","level":"6.2","depth":1,"path":"k8s/强制删除Terminating状态ns.md","ref":"k8s/强制删除Terminating状态ns.md","articles":[]},"dir":"ltr"},"config":{"plugins":["github","editlink","-lunr","-search","search-plus","tbfed-pagefooter","splitter","page-toc-button","back-to-top-button","-lunr","-search","search-plus","github-buttons@2.1.0","favicon@^0.0.2","3-ba","disqus","theme-default","pageview-count","auto-scroll-table","popup","code","-highlight","prism","prism-themes"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"&copy vishon","modify_label":"Updated at","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-okaidia.css"]},"disqus":{"useIdentifier":false,"shortName":"nieweixing-github-io"},"github":{"url":"https://github.com/nieweixing"},"editlink":{"label":"编辑本页","multilingual":false,"base":"https://github.com/nieweixing/mybook/tree/gh-pages"},"splitter":{},"auto-scroll-table":{},"popup":{},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"favicon":{"shortcut":"favicon.ico","bookmark":"favicon.ico"},"page-toc-button":{},"back-to-top-button":{},"pageview-count":{},"prism-themes":{},"github-buttons":{"repo":"nieweixing/mybook","types":["star"],"size":"small"},"3-ba":{"configuration":"auto","token":"c03bec8e82bc53c064e0e648ffa54d88"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{},"image-captions":{"caption":"图片 - _CAPTION_"}},"theme":"default","author":"vishon","pdf":{"pageNumbers":true,"fontSize":11,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"toc":true},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"运维操作指南","language":"zh-hans","links":{"sidebar":{"聂伟星个人博客":"https://www.niewx.cn","TKE运维手册":"https://cloud.tencent.com/developer/column/87421"}},"gitbook":">= 3.2.2","description":"运维操作指南"},"file":{"path":"tke/tke上使用docker-in-docker.md","mtime":"2021-05-21T12:55:29.046Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-05-23T04:16:35.140Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"tke上使用docker-in-docker","level":"7.1","depth":1,"next":{"title":"tke上部署Jumpserver跳板机","level":"7.2","depth":1,"path":"tke/tke上部署Jumpserver.md","ref":"tke/tke上部署Jumpserver.md","articles":[]},"previous":{"title":"强制删除Terminating状态ns","level":"6.2","depth":1,"path":"k8s/强制删除Terminating状态ns.md","ref":"k8s/强制删除Terminating状态ns.md","articles":[]},"dir":"ltr"},"config":{"plugins":["github","editlink","-lunr","-search","search-plus","tbfed-pagefooter","splitter","page-toc-button","back-to-top-button","-lunr","-search","search-plus","github-buttons@2.1.0","favicon@^0.0.2","3-ba","disqus","theme-default","pageview-count","auto-scroll-table","popup","code"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"&copy vishon","modify_label":"Updated at","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-okaidia.css"]},"disqus":{"useIdentifier":false,"shortName":"nieweixing-github-io"},"github":{"url":"https://github.com/nieweixing"},"editlink":{"label":"编辑本页","multilingual":false,"base":"https://github.com/nieweixing/mybook/tree/gh-pages"},"splitter":{},"auto-scroll-table":{},"popup":{},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"favicon":{"shortcut":"favicon.ico","bookmark":"favicon.ico"},"page-toc-button":{},"back-to-top-button":{},"pageview-count":{},"github-buttons":{"repo":"nieweixing/mybook","types":["star"],"size":"small"},"3-ba":{"configuration":"auto","token":"c03bec8e82bc53c064e0e648ffa54d88"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{},"image-captions":{"caption":"图片 - _CAPTION_"}},"theme":"default","author":"vishon","pdf":{"pageNumbers":true,"fontSize":11,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"toc":true},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"运维操作指南","language":"zh-hans","links":{"sidebar":{"聂伟星个人博客":"https://www.niewx.cn","TKE运维手册":"https://cloud.tencent.com/developer/column/87421"}},"gitbook":">= 3.2.2","description":"运维操作指南"},"file":{"path":"tke/tke上使用docker-in-docker.md","mtime":"2021-05-21T12:55:29.046Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-05-23T06:20:09.381Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
