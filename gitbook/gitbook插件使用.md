@@ -11,7 +11,8 @@ gitbook默认只有一些插件，其他插件需要自己安装，安装插件�
     "language": "zh-hans",
     "links": {
         "sidebar": {
-            "聂伟星个人博客": "https://www.niewx.cn"
+            "聂伟星个人博客": "https://www.niewx.cn",
+            "TKE运维手册": "https://cloud.tencent.com/developer/column/87421"
         }
     },
     "plugins": [
@@ -29,7 +30,12 @@ gitbook默认只有一些插件，其他插件需要自己安装，安装插件�
         "favicon@^0.0.2",
         "3-ba",
         "disqus",
-        "theme-default"
+        "theme-default",
+        "pageview-count",
+        "auto-scroll-table",
+        "popup",
+        "code",
+        "-highlight", "prism", "prism-themes"
     ],
     "pdf": {
         "toc": true,
@@ -65,7 +71,15 @@ gitbook默认只有一些插件，其他插件需要自己安装，安装插件�
             "shortName": "nieweixing-github-io"
         },
         "3-ba": {
-            "token": "014238987a800856443fcb5e465f4cdd"
+            "token": "c03bec8e82bc53c064e0e648ffa54d88"
+        },
+        "code": {
+            "copyButtons": true
+        },
+        "prism": {
+            "css": [
+            "prismjs/themes/prism-okaidia.css"
+            ]
         }
     },
     "generator": "site"
