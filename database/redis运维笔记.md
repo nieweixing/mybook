@@ -147,8 +147,11 @@ gem install redis
 简单说一下原理
 
 redis cluster在设计的时候，就考虑到了去中心化，去中间件，也就是说，集群中的每个节点都是平等的关系，都是对等的，每个节点都保存各自的数据和整个集群的状态。每个节点都和其他所有节点连接，而且这些连接保持活跃，这样就保证了我们只需要连接集群中的任意一个节点，就可以获取到其他节点的数据。
+
 Redis 集群没有并使用传统的一致性哈希来分配数据，而是采用另外一种叫做哈希槽 (hash slot)的方式来分配的。redis cluster 默认分配了 16384 个slot，当我们set一个key 时，会用CRC16算法来取模得到所属的slot，然后将这个key 分到哈希槽区间的节点上，具体算法就是：CRC16(key) % 16384。所以我们在测试的时候看到set 和 get 的时候，直接跳转到了7000端口的节点。
+
 Redis 集群会把数据存在一个 master 节点，然后在这个 master 和其对应的salve 之间进行数据同步。当读取数据时，也根据一致性哈希算法到对应的 master 节点获取数据。只有当一个master 挂掉之后，才会启动一个对应的 salve 节点，充当 master 。
+
 需要注意的是：必须要3个或以上的主节点，否则在创建集群时会失败，并且当存活的主节点数小于总节点数的一半时，整个集群就无法提供服务了。
 
 # Docker搭建Redis集群
@@ -262,16 +265,24 @@ docker run -it --name sentinel-03 -p 26381:26381 -v /root/redis/conf/sentinel.co
 ## Redis日志的格式
 
 In the log files the various log levels are represented as follows:
+
 \. debug
+
 \- verbose
+
 \* notice
+
 \# warning
 
 The log output for Redis 2.x will look something like this: [pid] date loglevel message
 For instance: [4018] 14 Nov 07:01:22.119 * Background saving terminated with success
 
 The possible values for role are as follows:
+
 X sentinel
+
 C RDB/AOF writing child
+
 S slave
+
 M master
