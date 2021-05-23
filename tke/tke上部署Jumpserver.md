@@ -96,9 +96,9 @@ spec:
         containers:
         - env:
           - name: SECRET_KEY
-            value: "j9fKwmVV39DzqZ27tWnpqxQqFdArMffpLzP6TsvQkHCaxJRcKn"
+            value: "j9fKwmVV39DzqZ27tWnMffpLzP6TsvQkHCaxJRcKn"
           - name: BOOTSTRAP_TOKEN
-            value: "nWZStp9kg9OQ1UTO"
+            value: "nWZStpQ1UTO"
           - name: DB_ENGINE
             value: "mysql"
           - name: DB_HOST
@@ -108,7 +108,7 @@ spec:
           - name: DB_USER
             value: "root"
           - name: "DB_PASSWORD"
-            value: "2hbIhplVjr"
+            value: "2hblVjr"
           - name: DB_NAME
             value: "jumpserver"
           - name: REDIS_HOST
@@ -116,7 +116,7 @@ spec:
           - name: REDIS_PORT
             value: "6379"
           - name: REDIS_PASSWORD
-            value: "tws2LEnty9"
+            value: "twsnty9"
           image: jumpserver/jms_all:1.5.9
           imagePullPolicy: IfNotPresent
           name: jumpserver
