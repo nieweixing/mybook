@@ -182,6 +182,6 @@ spec:
         path: /
 ```
 
-然后再控制台输入<jumpserver.tke.niewx.cn>，jumpserver默认的登录密码是admin/admin
+然后再控制台输入访问域名 ，jumpserver默认的登录密码是admin/admin
 
 ![upload-image](image/Snipaste_2021-05-23_11-30-46.png) 
