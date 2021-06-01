@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>vmware安装centos环境设置静态的ip地址 · 运维操作指南</title>
+        <title>docker-compose学习笔记 · 运维操作指南</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -91,10 +91,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="../database/mysql-devops-note.html" />
+    <link rel="next" href="../k8s/k8s-common-commands.html" />
     
     
-    <link rel="prev" href="cvm-build-openvpn.html" />
+    <link rel="prev" href="dockerfile-study.html" />
     
 
     
@@ -236,9 +236,9 @@
         
         
     
-        <li class="chapter " data-level="3.1" data-path="shell-script-template.html">
+        <li class="chapter " data-level="3.1" data-path="../linux/shell-script-template.html">
             
-                <a href="shell-script-template.html">
+                <a href="../linux/shell-script-template.html">
             
                     
                     shell脚本模板
@@ -249,9 +249,9 @@
             
         </li>
     
-        <li class="chapter " data-level="3.2" data-path="cvm-build-openvpn.html">
+        <li class="chapter " data-level="3.2" data-path="../linux/cvm-build-openvpn.html">
             
-                <a href="cvm-build-openvpn.html">
+                <a href="../linux/cvm-build-openvpn.html">
             
                     
                     腾讯云cvm上搭建openvpn
@@ -262,9 +262,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="3.3" data-path="vmware-install-centos-set-static-ip-address.html">
+        <li class="chapter " data-level="3.3" data-path="../linux/vmware-install-centos-set-static-ip-address.html">
             
-                <a href="vmware-install-centos-set-static-ip-address.html">
+                <a href="../linux/vmware-install-centos-set-static-ip-address.html">
             
                     
                     vmware安装centos环境设置静态的ip地址
@@ -328,9 +328,9 @@
         
         
     
-        <li class="chapter " data-level="5.1" data-path="../docker/dockerfile-study.html">
+        <li class="chapter " data-level="5.1" data-path="dockerfile-study.html">
             
-                <a href="../docker/dockerfile-study.html">
+                <a href="dockerfile-study.html">
             
                     
                     dockerfile学习笔记
@@ -341,9 +341,9 @@
             
         </li>
     
-        <li class="chapter " data-level="5.2" data-path="../docker/docker-compose-study.html">
+        <li class="chapter active" data-level="5.2" data-path="docker-compose-study.html">
             
-                <a href="../docker/docker-compose-study.html">
+                <a href="docker-compose-study.html">
             
                     
                     docker-compose学习笔记
@@ -568,7 +568,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >vmware安装centos环境设置静态的ip地址</a>
+        <a href=".." >docker-compose学习笔记</a>
     </h1>
 </div>
 
@@ -583,97 +583,89 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="vmware&#x5B89;&#x88C5;centos&#x73AF;&#x5883;&#x8BBE;&#x7F6E;&#x9759;&#x6001;&#x7684;ip&#x5730;&#x5740;">vmware&#x5B89;&#x88C5;centos&#x73AF;&#x5883;&#x8BBE;&#x7F6E;&#x9759;&#x6001;&#x7684;ip&#x5730;&#x5740;</h1>
-<p>&#x6709;&#x7684;&#x65F6;&#x5019;&#x6211;&#x4EEC;&#x4E3A;&#x4E86;&#x5B66;&#x4E60;&#x6D4B;&#x8BD5;&#xFF0C;&#x4F1A;&#x5728;&#x81EA;&#x5DF1;&#x7684;&#x7B14;&#x8BB0;&#x672C;&#x4E0A;&#x642D;&#x5EFA;&#x865A;&#x62DF;&#x673A;&#xFF0C;&#x4ECA;&#x5929;&#x6211;&#x4EEC;&#x6765;&#x8BB2;&#x4E0B;&#x5728;windows&#x4E0A;&#x5982;&#x4F55;&#x5B89;&#x88C5;centos&#x73AF;&#x5883;&#x5E76;&#x4E14;&#x8BBE;&#x7F6E;&#x9759;&#x6001;ip&#xFF0C;&#x5982;&#x679C;&#x662F;&#x571F;&#x8C6A;&#xFF0C;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x5230;&#x4E91;&#x4E0A;&#x8D2D;&#x4E70;&#x673A;&#x5668;&#xFF0C;&#x672C;&#x7BC7;&#x6587;&#x7AE0;&#x53EF;&#x4EE5;&#x5FFD;&#x7565;&#x3002;</p>
-<ol>
-<li>&#x7B14;&#x8BB0;&#x672C;&#x4E3B;&#x673A;IP&#x4E3A;&#x8BBE;&#x7F6E;&#x81EA;&#x52A8;&#x83B7;&#x53D6;&#xFF0C;&#x4E0D;&#x7BA1;&#x4EC0;&#x4E48;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x4E0D;&#x53D7;&#x865A;&#x62DF;&#x673A;&#x5F71;&#x54CD;&#xFF0C;&#x53EA;&#x8981;&#x8FDE;&#x63A5;&#x5916;&#x7F51;&#x5C31;&#x53EF;&#x4EE5;&#x6B63;&#x5E38;&#x4E0A;&#x7F51;&#xFF1B;</li>
-<li>&#x53EA;&#x8981;&#x7B14;&#x8BB0;&#x672C;&#x4E3B;&#x673A;&#x53EF;&#x4EE5;&#x6B63;&#x5E38;&#x8BBF;&#x95EE;&#x5916;&#x7F51;&#xFF0C;&#x542F;&#x52A8;&#x865A;&#x62DF;&#x673A;&#x4E2D;&#x7684;CentOS 7&#x7CFB;&#x7EDF;&#x5C31;&#x53EF;&#x4EE5;&#x6B63;&#x5E38;&#x8BBF;&#x95EE;&#x5916;&#x7F51;&#xFF0C;&#x65E0;&#x9700;&#x518D;&#x8FDB;&#x884C;&#x4EFB;&#x4F55;&#x8BBE;&#x7F6E;&#xFF1B;</li>
-<li>&#x865A;&#x62DF;&#x673A;&#x8BBE;&#x7F6E;&#x4E3A;&#x56FA;&#x5B9A;IP&#xFF0C;&#x4E0D;&#x7BA1;&#x4E3B;&#x673A;&#x5728;&#x4EC0;&#x4E48;&#x7F51;&#x7EDC;&#x73AF;&#x5883;&#x4E0B;&#xFF0C;&#x662F;&#x65AD;&#x7F51;&#x73AF;&#x5883;&#xFF0C;&#x8FD8;&#x662F;&#x8FDE;&#x63A5;&#x4EFB;&#x4F55;&#x7F51;&#x6BB5;&#x8BBF;&#x95EE;&#x5916;&#x7F51;&#x7684;&#x73AF;&#x5883;&#x4E0B;&#xFF0C;&#x865A;&#x62DF;&#x673A;&#x7684;IP&#x90FD;&#x56FA;&#x5B9A;&#x4E0D;&#x53D8;&#xFF0C;&#x800C;&#x4E14;&#x4F7F;&#x7528;&#x7EC8;&#x7AEF;&#x8FDE;&#x63A5;&#xFF0C;&#x59CB;&#x7EC8;&#x4E0D;&#x53D8;&#xFF0C;&#x6B63;&#x5E38;&#x8FDE;&#x63A5;&#xFF1B;</li>
-<li>&#x865A;&#x62DF;&#x673A;&#x7684;&#x56FA;&#x5B9A;IP&#x53EF;&#x4EE5;&#x6309;&#x7167;&#x81EA;&#x5DF1;&#x60F3;&#x8BBE;&#x7F6E;&#x7684;IP&#x5730;&#x5740;&#x7F51;&#x6BB5;&#x968F;&#x610F;&#x8BBE;&#x7F6E;&#xFF0C;&#x6BD4;&#x5982;&#x6211;&#x5C31;&#x60F3;&#x8BBE;&#x7F6E;&#x56FA;&#x5B9A;IP&#x4E3A;192.168.2.2&#x3002;</li>
-</ol>
-<p>&#x4EE5;&#x4E0A;4&#x70B9;&#xFF0C;&#x7F51;&#x4E0A;&#x6211;&#x6CA1;&#x6709;&#x627E;&#x5230;&#x4E00;&#x4E2A;&#x5E16;&#x5B50;&#x53EF;&#x4EE5;&#x8FBE;&#x5230;&#x6211;&#x8981;&#x6C42;&#x7684;&#x6548;&#x679C;&#xFF0C;&#x7ECF;&#x8FC7;&#x6211;&#x8FD9;&#x6BB5;&#x65F6;&#x95F4;&#x7814;&#x7A76;&#xFF0C;&#x7ECF;&#x8FC7;&#x5404;&#x79CD;&#x5C1D;&#x8BD5;&#xFF0C;&#x671F;&#x95F4;&#x51FA;&#x73B0;&#x5404;&#x79CD;&#x95EE;&#x9898;&#xFF0C;&#x6D4B;&#x8BD5;&#x7A33;&#x5B9A;&#x540E;&#xFF0C;&#x603B;&#x7ED3;&#x5982;&#x4E0B;&#x5206;&#x4EAB;&#x7ED9;&#x5927;&#x5BB6;&#xFF0C;&#x5E0C;&#x671B;&#x5BF9;&#x5927;&#x5BB6;&#x6709;&#x6240;&#x5E2E;&#x52A9;&#xFF0C;&#x5C11;&#x8D70;&#x5F2F;&#x8DEF;&#x3002;
-&#x91C7;&#x7528;&#x65B9;&#x5F0F;&#x4E3A;NAT&#x6A21;&#x5F0F;+&#x56FA;&#x5B9A;IP&#x7684;&#x6A21;&#x5F0F;&#x3002;</p>
-<p>&#x914D;&#x7F6E;&#x73AF;&#x5883;&#x8BF4;&#x660E;&#xFF1A;&#x4E3B;&#x673A;&#x4E3A;Win10&#x5BB6;&#x5EAD;&#x7248;&#xFF0C;&#x865A;&#x62DF;&#x673A;&#x4E3A;VMware Workstation 12 Pro&#x4E2D;&#x6587;&#x7248;&#xFF0C;&#x865A;&#x62DF;&#x673A;&#x4E2D;&#x7684;Linux&#x7CFB;&#x7EDF;&#x4E3A;CentOS 7 64&#x4F4D;&#x3002;</p>
-<h2 id="&#x8BBE;&#x7F6E;&#x865A;&#x62DF;&#x673A;&#x7684;&#x7F51;&#x7EDC;&#x8FDE;&#x63A5;&#x65B9;&#x5F0F;">&#x8BBE;&#x7F6E;&#x865A;&#x62DF;&#x673A;&#x7684;&#x7F51;&#x7EDC;&#x8FDE;&#x63A5;&#x65B9;&#x5F0F;</h2>
-<p>&#x6309;&#x7167;&#x5982;&#x4E0B;&#x56FE;&#x8BBE;&#x7F6E;&#xFF0C;&#x82F1;&#x6587;&#x7248;&#x7684;&#x5BF9;&#x7167;&#x8BBE;&#x7F6E;&#x5373;&#x53EF;</p>
-<p><img src="image/centos/1.png" alt="upload-image"> </p>
-<h2 id="&#x914D;&#x7F6E;&#x865A;&#x62DF;&#x673A;&#x7684;nat&#x6A21;&#x5F0F;&#x5177;&#x4F53;&#x5730;&#x5740;&#x53C2;&#x6570;">&#x914D;&#x7F6E;&#x865A;&#x62DF;&#x673A;&#x7684;NAT&#x6A21;&#x5F0F;&#x5177;&#x4F53;&#x5730;&#x5740;&#x53C2;&#x6570;</h2>
-<ul>
-<li>&#x7F16;&#x8F91;--&#x865A;&#x62DF;&#x7F51;&#x7EDC;&#x7F16;&#x8F91;&#x5668;--&#x66F4;&#x6539;&#x8BBE;&#x7F6E;</li>
-</ul>
-<p><img src="image/centos/2.png" alt="upload-image"> </p>
-<ul>
-<li>&#x9009;&#x62E9;VMnet8--&#x53D6;&#x6D88;&#x52FE;&#x9009;&#x4F7F;&#x7528;&#x672C;&#x5730;DHCP--&#x8BBE;&#x7F6E;&#x5B50;&#x7F51;IP--&#x7F51;&#x5173;IP&#x8BBE;&#x7F6E;&#xFF08;&#x8BB0;&#x4F4F;&#x6B64;&#x5904;&#x8BBE;&#x7F6E;&#xFF0C;&#x540E;&#x9762;&#x8981;&#x7528;&#x5230;&#xFF09;&#xFF0C;&#x5982;&#x4E0B;&#x56FE;
-&#x8BF4;&#x660E;&#xFF1A;&#x4FEE;&#x6539;&#x5B50;&#x7F51;IP&#x8BBE;&#x7F6E;&#xFF0C;&#x5B9E;&#x73B0;&#x81EA;&#x7531;&#x8BBE;&#x7F6E;&#x56FA;&#x5B9A;IP&#xFF0C;&#x82E5;&#x4F60;&#x60F3;&#x8BBE;&#x7F6E;&#x56FA;&#x5B9A;IP&#x4E3A;192.168.2.2-255&#xFF0C;&#x6BD4;&#x5982;192.168.2.2&#xFF0C;&#x5219;&#x5B50;&#x7F51;IP&#x4E3A;192.168.2.0&#xFF1B;&#x82E5;&#x4F60;&#x60F3;&#x8BBE;&#x7F6E;&#x56FA;&#x5B9A;IP&#x4E3A;192.168.1.2-255&#xFF0C;&#x6BD4;&#x5982;192.168.1.2&#xFF0C;&#x5219;&#x5B50;&#x7F51;IP&#x4E3A;192.168.1.0&#xFF1B;</li>
-</ul>
-<p><img src="image/centos/3.png" alt="upload-image"> </p>
-<ul>
-<li>&#x7F51;&#x5173;IP&#x53EF;&#x4EE5;&#x53C2;&#x7167;&#x5982;&#x4E0B;&#x683C;&#x5F0F;&#x4FEE;&#x6539;&#xFF1A;192.168.2.1</li>
-</ul>
-<p><img src="image/centos/4.png" alt="upload-image"> </p>
-<h2 id="&#x914D;&#x7F6E;&#x7B14;&#x8BB0;&#x672C;&#x4E3B;&#x673A;&#x5177;&#x4F53;vmnet8&#x672C;&#x5730;&#x5730;&#x5740;&#x53C2;&#x6570;">&#x914D;&#x7F6E;&#x7B14;&#x8BB0;&#x672C;&#x4E3B;&#x673A;&#x5177;&#x4F53;VMnet8&#x672C;&#x5730;&#x5730;&#x5740;&#x53C2;&#x6570;</h2>
-<p><img src="image/centos/5.png" alt="upload-image"> </p>
-<p>&#x8BF4;&#x660E;&#xFF1A;&#x7B2C;6&#x6B65;&#x4E2D;&#x7684;IP&#x5730;&#x5740;&#x968F;&#x610F;&#x8BBE;&#x7F6E;&#xFF0C;&#x4F46;&#x662F;&#x8981;&#x4FDD;&#x8BC1;&#x4E0D;&#x80FD;&#x8DDF;&#x4F60;&#x8981;&#x8BBE;&#x7F6E;&#x865A;&#x62DF;&#x673A;&#x7684;&#x56FA;&#x5B9A;IP&#x4E00;&#x6837;&#x3002;</p>
-<p><img src="image/centos/6.png" alt="upload-image"> </p>
-<h2 id="&#x4FEE;&#x6539;&#x865A;&#x62DF;&#x673A;&#x4E2D;&#x7684;centos-7&#x7CFB;&#x7EDF;&#x4E3A;&#x56FA;&#x5B9A;ip&#x7684;&#x914D;&#x7F6E;&#x6587;&#x4EF6;">&#x4FEE;&#x6539;&#x865A;&#x62DF;&#x673A;&#x4E2D;&#x7684;CentOS 7&#x7CFB;&#x7EDF;&#x4E3A;&#x56FA;&#x5B9A;IP&#x7684;&#x914D;&#x7F6E;&#x6587;&#x4EF6;</h2>
-<ul>
-<li>&#x8FDB;&#x5165;centos7&#x547D;&#x4EE4;&#x884C;&#x754C;&#x9762;&#xFF0C;&#x4FEE;&#x6539;&#x5982;&#x4E0B;&#x5185;&#x5BB9;</li>
-</ul>
-<p><img src="image/centos/7.png" alt="upload-image"> </p>
-<p><img src="image/centos/8.png" alt="upload-image"> </p>
-<pre><code>#cd /etc/sysconfig/network-scripts/
-#vi ifcfg-eno16777736
+                                <p>Docker Compose &#x662F; Docker &#x5B98;&#x65B9;&#x7F16;&#x6392;&#xFF08;Orchestration&#xFF09;&#x9879;&#x76EE;&#x4E4B;&#x4E00;&#xFF0C;&#x8D1F;&#x8D23;&#x5FEB;&#x901F;&#x5728;&#x96C6;&#x7FA4;&#x4E2D;&#x90E8;&#x7F72;&#x5206;&#x5E03;&#x5F0F;&#x5E94;&#x7528;&#x3002;</p>
+<h1 id="&#x5B89;&#x88C5;&#x65B9;&#x5F0F;">&#x5B89;&#x88C5;&#x65B9;&#x5F0F;</h1>
+<h2 id="&#x4E8C;&#x8FDB;&#x5236;&#x5B89;&#x88C5;">&#x4E8C;&#x8FDB;&#x5236;&#x5B89;&#x88C5;</h2>
+<pre><code>$ sudo curl -L 
+https://github.com/docker/compose/releases/download/1.17.1/docker-compose-`uname -s`-`uname -m` &gt; /usr/local/bin/docker-compose
 
-
-&#x8BF4;&#x660E;&#xFF1A;
-#&#x5C06;IPV6&#x2026;..&#x534F;&#x8BAE;&#x90FD;&#x6CE8;&#x91CA;&#xFF1B;
-BOOTPROTO=static        #&#x5F00;&#x673A;&#x534F;&#x8BAE;&#xFF0C;&#x6709;dhcp&#x53CA;static&#xFF1B;
-ONBOOT=yes              #&#x8BBE;&#x7F6E;&#x4E3A;&#x5F00;&#x673A;&#x542F;&#x52A8;&#xFF1B;
-DNS1=114.114.114.114    #&#x8FD9;&#x4E2A;&#x662F;&#x56FD;&#x5185;&#x7684;DNS&#x5730;&#x5740;&#xFF0C;&#x662F;&#x56FA;&#x5B9A;&#x7684;&#xFF1B;
-IPADDR=192.168.2.2      #&#x4F60;&#x60F3;&#x8981;&#x8BBE;&#x7F6E;&#x7684;&#x56FA;&#x5B9A;IP&#xFF0C;&#x7406;&#x8BBA;&#x4E0A;192.168.2.2-255&#x4E4B;&#x95F4;&#x90FD;&#x53EF;&#x4EE5;&#xFF0C;&#x8BF7;&#x81EA;&#x884C;&#x9A8C;&#x8BC1;&#xFF1B;
-NETMASK=255.255.255.0   #&#x5B50;&#x7F51;&#x63A9;&#x7801;&#xFF0C;&#x4E0D;&#x9700;&#x8981;&#x4FEE;&#x6539;&#xFF1B;
-GATEWAY=192.168.2.1     #&#x7F51;&#x5173;&#xFF0C;&#x8FD9;&#x91CC;&#x662F;&#x4F60;&#x5728;&#x201C;2.&#x914D;&#x7F6E;&#x865A;&#x62DF;&#x673A;&#x7684;NAT&#x6A21;&#x5F0F;&#x5177;&#x4F53;&#x5730;&#x5740;&#x53C2;&#x6570;&#x201D;&#x4E2D;&#x7684;&#xFF08;2&#xFF09;&#x9009;&#x62E9;VMnet8--&#x53D6;&#x6D88;&#x52FE;&#x9009;&#x4F7F;&#x7528;&#x672C;&#x5730;DHCP--&#x8BBE;&#x7F6E;&#x5B50;&#x7F51;IP--&#x7F51;&#x5173;IP&#x8BBE;&#x7F6E;&#x3002;
-</code></pre><ul>
-<li>&#x91CD;&#x542F;&#x7F51;&#x7EDC;&#x670D;&#x52A1;</li>
-</ul>
-<pre><code>service network restart
-</code></pre><h2 id="&#x68C0;&#x9A8C;&#x914D;&#x7F6E;&#x662F;&#x5426;&#x6210;&#x529F;">&#x68C0;&#x9A8C;&#x914D;&#x7F6E;&#x662F;&#x5426;&#x6210;&#x529F;</h2>
-<ul>
-<li>&#x67E5;&#x770B;&#x4FEE;&#x6539;&#x540E;&#x7684;&#x56FA;&#x5B9A;IP&#x4E3A;192.168.2.2&#xFF0C;&#x914D;&#x7F6E;&#x6B63;&#x786E;</li>
-</ul>
-<p>ifconfig</p>
-<p><img src="image/centos/9.png" alt="upload-image"> </p>
-<ul>
-<li>&#x6D4B;&#x8BD5;&#x865A;&#x62DF;&#x673A;&#x4E2D;&#x7684;CentOS 7&#x7CFB;&#x7EDF;&#x662F;&#x5426;&#x80FD;&#x8FDE;&#x5916;&#x7F51;&#xFF0C;&#x6709;&#x6570;&#x636E;&#x8FD4;&#x56DE;&#xFF0C;&#x8BF4;&#x660E;&#x53EF;&#x4EE5;&#x8FDE;&#x63A5;&#x5916;&#x7F51;</li>
-</ul>
-<p>ping www.baidu.com</p>
-<p><img src="image/centos/10.png" alt="upload-image"> </p>
-<ul>
-<li>&#x6D4B;&#x8BD5;&#x672C;&#x673A;&#x662F;&#x5426;&#x80FD;ping&#x901A;&#x865A;&#x62DF;&#x673A;&#x7684;&#x56FA;&#x5B9A;IP</li>
-</ul>
-<p>&#x6709;&#x6570;&#x636E;&#x8FD4;&#x56DE;&#xFF0C;&#x8BF4;&#x660E;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x7EC8;&#x7AEF;&#x5DE5;&#x5177;&#x6B63;&#x5E38;&#x8FDE;&#x63A5;</p>
-<p>&#x9F20;&#x6807;&#x653E;&#x5230;&#x5F00;&#x59CB;&#x83DC;&#x5355;&#x53F3;&#x952E;&#xFF0C;&#x9009;&#x62E9;&#x547D;&#x4EE4;&#x63D0;&#x793A;&#x7B26;&#xFF08;&#x7BA1;&#x7406;&#x5458;&#xFF09;&#xFF0C;&#x6253;&#x5F00;&#x547D;&#x4EE4;&#x64CD;&#x4F5C;&#x754C;&#x9762;&#xFF1A;</p>
-<p>ping 192.168.2.2</p>
-<p><img src="image/centos/11.png" alt="upload-image"> </p>
-<h2 id="&#x8FDC;&#x7A0B;&#x7EC8;&#x7AEF;&#x8FDE;&#x63A5;">&#x8FDC;&#x7A0B;&#x7EC8;&#x7AEF;&#x8FDE;&#x63A5;</h2>
-<ul>
-<li>&#x82E5;&#x8FDE;&#x63A5;&#x5931;&#x8D25;&#x662F;&#x56E0;&#x4E3A;CentOS 7&#x7684;&#x9632;&#x706B;&#x5899;&#x7AEF;&#x53E3;&#x6CA1;&#x6709;&#x6253;&#x5F00;&#xFF0C;&#x6BD4;&#x5982;&#x5F00;&#x542F;80&#xFF0C;3306&#x7AEF;&#x53E3;&#xFF0C;&#x6700;&#x540E;&#x4E00;&#x5B9A;&#x8981;&#x91CD;&#x542F;&#x9632;&#x706B;&#x5899;</li>
-</ul>
-<pre><code>#&#x67E5;&#x770B;&#x9632;&#x706B;&#x5899;&#x72B6;&#x6001;
-systemctl status firewalld  
-#&#x5F00;&#x542F;80&#x7AEF;&#x53E3;
-firewall-cmd --zone=public --add-port=80/tcp --permanent  
-#&#x5F00;&#x542F;3306&#x7AEF;&#x53E3;
-firewall-cmd --zone=public --add-port=3306/tcp --permanent  
-#&#x91CD;&#x542F;&#x9632;&#x706B;&#x5899;&#xFF1A;
-firewall-cmd --reload
-</code></pre><ul>
-<li>&#x8FDE;&#x63A5;&#x6210;&#x529F;</li>
-</ul>
-<p><img src="image/centos/12.png" alt="upload-image"> </p>
-<p><img src="image/centos/13.png" alt="upload-image"> </p>
-<p><footer class="page-footer"><span class="copyright">&#xA9; vishon all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">Updated at
-2021-05-22 10:44:15
+$ sudo chmod +x /usr/local/bin/docker-compose
+</code></pre><p>bash &#x8865;&#x5168;&#x547D;&#x4EE4;</p>
+<pre><code>$ curl -L https://raw.githubusercontent.com/docker/compose/1.8.0/contrib/completion/bash/docker-compose &gt; /etc/bash_completion.d/docker-compose
+</code></pre><p>&#x5220;&#x9664;docker-compose</p>
+<pre><code>sudo rm /usr/local/bin/docker-compose
+</code></pre><h2 id="pip&#x65B9;&#x5F0F;&#x5B89;&#x88C5;">pip&#x65B9;&#x5F0F;&#x5B89;&#x88C5;</h2>
+<pre><code>&#x5B89;&#x88C5;python-pip
+yum -y install python-pip
+&#x5B89;&#x88C5;docker-compose
+pip install docker-compose
+&#x5F85;&#x5B89;&#x88C5;&#x5B8C;&#x6210;&#x540E;&#xFF0C;&#x6267;&#x884C;&#x67E5;&#x8BE2;&#x7248;&#x672C;&#x7684;&#x547D;&#x4EE4;&#xFF0C;&#x5373;&#x53EF;&#x5B89;&#x88C5;docker-compose
+docker-compose version
+</code></pre><h1 id="docker-composeyml&#x6587;&#x4EF6;&#x7684;&#x7F16;&#x5199;">docker-compose.yml&#x6587;&#x4EF6;&#x7684;&#x7F16;&#x5199;</h1>
+<pre><code>version: &apos;3&apos;
+services:
+  web:
+    build: .
+    ports:
+      - &quot;5000:5000&quot;
+    redis:
+      image: &quot;redis:alpine&quot;
+</code></pre><p>&#x6CE8;&#x610F;&#x6BCF;&#x4E2A;&#x670D;&#x52A1;&#x90FD;&#x5FC5;&#x987B;&#x901A;&#x8FC7; image &#x6307;&#x4EE4;&#x6307;&#x5B9A;&#x955C;&#x50CF;&#x6216; build &#x6307;&#x4EE4;&#xFF08;&#x9700;&#x8981; Dockerfile&#xFF09;&#x7B49;&#x6765;&#x81EA;&#x52A8;&#x6784;&#x5EFA;&#x751F;&#x6210;&#x955C;&#x50CF;&#x3002;</p>
+<p>&#x5982;&#x679C;&#x4F7F;&#x7528;build&#x6307;&#x4EE4;&#xFF0C;&#x5728;Dockerfile&#x4E2D;&#x8BBE;&#x7F6E;&#x7684;&#x9009;&#x9879;(&#x4F8B;&#x5982;&#xFF1A; CMD , EXPOSE , VOLUME , ENV&#x7B49;)&#x5C06;&#x4F1A;&#x81EA;&#x52A8;&#x88AB;&#x83B7;&#x53D6;&#xFF0C;&#x65E0;&#x9700;&#x5728;docker-compose.yml&#x4E2D;&#x518D;&#x6B21;&#x8BBE;&#x7F6E;&#x3002;
+build</p>
+<p>&#x6307;&#x5B9A; Dockerfile &#x6240;&#x5728;&#x6587;&#x4EF6;&#x5939;&#x7684;&#x8DEF;&#x5F84;&#xFF08;&#x53EF;&#x4EE5;&#x662F;&#x7EDD;&#x5BF9;&#x8DEF;&#x5F84;&#xFF0C;&#x6216;&#x8005;&#x76F8;&#x5BF9; docker-compose.yml &#x6587;&#x4EF6;&#x7684;&#x8DEF;&#x5F84;&#xFF09;&#x3002;Compose&#x5C06;&#x4F1A;&#x5229;&#x7528;&#x5B83;&#x81EA;&#x52A8;&#x6784;&#x5EFA;&#x8FD9;&#x4E2A;&#x955C;&#x50CF;&#xFF0C;&#x7136;&#x540E;&#x4F7F;&#x7528;&#x8FD9;&#x4E2A;&#x955C;&#x50CF;
+&#x5176;&#x4ED6;&#x5177;&#x4F53;&#x53C2;&#x6570;&#x53EF;&#x4EE5;&#x53C2;&#x8003;&#x5B98;&#x65B9;&#x6587;&#x6863;Docker Compose&#x7684;Compose &#x6A21;&#x677F;&#x6587;&#x4EF6;&#x90E8;&#x5206;</p>
+<h1 id="docker-compose&#x547D;&#x4EE4;">docker-compose&#x547D;&#x4EE4;</h1>
+<pre><code>Options:
+  -f, --file FILE             Specify an alternate compose file
+                              (default: docker-compose.yml)
+  -p, --project-name NAME     Specify an alternate project name
+                              (default: directory name)
+  --verbose                   Show more output
+  --log-level LEVEL           Set log level (DEBUG, INFO, WARNING, ERROR, CRITICAL)
+  --no-ansi                   Do not print ANSI control characters
+  -v, --version               Print version and exit
+  -H, --host HOST             Daemon socket to connect to
+  --tls                       Use TLS; implied by --tlsverify
+  --tlscacert CA_PATH         Trust certs signed only by this CA
+  --tlscert CLIENT_CERT_PATH  Path to TLS certificate file
+  --tlskey TLS_KEY_PATH       Path to TLS key file
+  --tlsverify                 Use TLS and verify the remote
+  --skip-hostname-check       Don&apos;t check the daemon&apos;s hostname against the
+                              name specified in the client certificate
+  --project-directory PATH    Specify an alternate working directory
+                              (default: the path of the Compose file)
+  --compatibility             If set, Compose will attempt to convert deploy
+                              keys in v3 files to their non-Swarm equivalent
+Commands:
+  build              Build or rebuild services
+  bundle             Generate a Docker bundle from the Compose file
+  config             Validate and view the Compose file
+  create             Create services
+  down               Stop and remove containers, networks, images, and volumes
+  events             Receive real time events from containers
+  exec               Execute a command in a running container
+  help               Get help on a command
+  images             List images
+  kill               Kill containers
+  logs               View output from containers
+  pause              Pause services
+  port               Print the public port for a port binding
+  ps                 List containers
+  pull               Pull service images
+  push               Push service images
+  restart            Restart services
+  rm                 Remove stopped containers
+  run                Run a one-off command
+  scale              Set number of containers for a service
+  start              Start services
+  stop               Stop services
+  top                Display the running processes
+  unpause            Unpause services
+  up                 Create and start containers
+  version            Show the Docker-Compose version information
+</code></pre><p><footer class="page-footer"><span class="copyright">&#xA9; vishon all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">Updated at
+2021-06-01 12:55:17
 </span></footer></p>
 <div id="gitalk-container"></div>
 <script>console.log("plugin-popup....");document.onclick = function(e){ e.target.tagName === "IMG" && window.open(e.target.src,e.target.src)}</script><style>img{cursor:pointer}</style>
@@ -703,12 +695,12 @@ firewall-cmd --reload
 
             
                 
-                <a href="cvm-build-openvpn.html" class="navigation navigation-prev " aria-label="Previous page: 腾讯云cvm上搭建openvpn">
+                <a href="dockerfile-study.html" class="navigation navigation-prev " aria-label="Previous page: dockerfile学习笔记">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="../database/mysql-devops-note.html" class="navigation navigation-next " aria-label="Next page: mysql运维笔记">
+                <a href="../k8s/k8s-common-commands.html" class="navigation navigation-next " aria-label="Next page: k8s常用命令总结">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -719,7 +711,7 @@ firewall-cmd --reload
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"vmware安装centos环境设置静态的ip地址","level":"3.3","depth":1,"next":{"title":"mysql运维笔记","level":"4.1","depth":1,"path":"database/mysql-devops-note.md","ref":"database/mysql-devops-note.md","articles":[]},"previous":{"title":"腾讯云cvm上搭建openvpn","level":"3.2","depth":1,"path":"linux/cvm-build-openvpn.md","ref":"linux/cvm-build-openvpn.md","articles":[]},"dir":"ltr"},"config":{"plugins":["github","editlink","-lunr","-search","search-plus","tbfed-pagefooter","splitter","page-toc-button","back-to-top-button","-lunr","-search","search-plus","github-buttons@2.1.0","favicon@^0.0.2","3-ba","theme-default","pageview-count","auto-scroll-table","popup","code","mygitalk"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"&copy vishon","modify_label":"Updated at","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-okaidia.css"]},"disqus":{"shortName":"nieweixing-github-io"},"github":{"url":"https://github.com/nieweixing"},"editlink":{"label":"编辑本页","multilingual":false,"base":"https://github.com/nieweixing/mybook/tree/gh-pages"},"splitter":{},"auto-scroll-table":{},"popup":{},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"favicon":{"shortcut":"favicon.ico","bookmark":"favicon.ico"},"page-toc-button":{},"back-to-top-button":{},"pageview-count":{},"github-buttons":{"repo":"nieweixing/mybook","types":["star"],"size":"small"},"3-ba":{"configuration":"auto","token":"c03bec8e82bc53c064e0e648ffa54d88"},"mygitalk":{"flipMoveOptions":{},"clientID":"5976cd3d9cc251569467","number":-1,"perPage":10,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","admin":["nieweixing"],"createIssueManually":false,"distractionFreeMode":false,"repo":"gitalk-comment","owner":"nieweixing","enableHotKey":true,"clientSecret":"74117131a57324d4d616267265a94f4a1ac293ec","pagerDirection":"last","labels":["Gitalk"]},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{},"image-captions":{"caption":"图片 - _CAPTION_"}},"theme":"default","author":"vishon","pdf":{"pageNumbers":true,"fontSize":11,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"toc":true},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"运维操作指南","language":"zh-hans","links":{"sidebar":{"聂伟星个人博客":"https://www.niewx.cn","TKE运维手册":"https://cloud.tencent.com/developer/column/87421"}},"gitbook":">= 3.2.2","description":"运维操作指南"},"file":{"path":"linux/vmware-install-centos-set-static-ip-address.md","mtime":"2021-05-22T02:44:15.824Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-01T04:56:08.784Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"docker-compose学习笔记","level":"5.2","depth":1,"next":{"title":"k8s常用命令总结","level":"6.1","depth":1,"path":"k8s/k8s-common-commands.md","ref":"k8s/k8s-common-commands.md","articles":[]},"previous":{"title":"dockerfile学习笔记","level":"5.1","depth":1,"path":"docker/dockerfile-study.md","ref":"docker/dockerfile-study.md","articles":[]},"dir":"ltr"},"config":{"plugins":["github","editlink","-lunr","-search","search-plus","tbfed-pagefooter","splitter","page-toc-button","back-to-top-button","-lunr","-search","search-plus","github-buttons@2.1.0","favicon@^0.0.2","3-ba","theme-default","pageview-count","auto-scroll-table","popup","code","mygitalk"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"&copy vishon","modify_label":"Updated at","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-okaidia.css"]},"disqus":{"shortName":"nieweixing-github-io"},"github":{"url":"https://github.com/nieweixing"},"editlink":{"label":"编辑本页","multilingual":false,"base":"https://github.com/nieweixing/mybook/tree/gh-pages"},"splitter":{},"auto-scroll-table":{},"popup":{},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"favicon":{"shortcut":"favicon.ico","bookmark":"favicon.ico"},"page-toc-button":{},"back-to-top-button":{},"pageview-count":{},"github-buttons":{"repo":"nieweixing/mybook","types":["star"],"size":"small"},"3-ba":{"configuration":"auto","token":"c03bec8e82bc53c064e0e648ffa54d88"},"mygitalk":{"flipMoveOptions":{},"clientID":"5976cd3d9cc251569467","number":-1,"perPage":10,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","admin":["nieweixing"],"createIssueManually":false,"distractionFreeMode":false,"repo":"gitalk-comment","owner":"nieweixing","enableHotKey":true,"clientSecret":"74117131a57324d4d616267265a94f4a1ac293ec","pagerDirection":"last","labels":["Gitalk"]},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{},"image-captions":{"caption":"图片 - _CAPTION_"}},"theme":"default","author":"vishon","pdf":{"pageNumbers":true,"fontSize":11,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"toc":true},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"运维操作指南","language":"zh-hans","links":{"sidebar":{"聂伟星个人博客":"https://www.niewx.cn","TKE运维手册":"https://cloud.tencent.com/developer/column/87421"}},"gitbook":">= 3.2.2","description":"运维操作指南"},"file":{"path":"docker/docker-compose-study.md","mtime":"2021-06-01T04:55:17.336Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-01T04:56:08.784Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
