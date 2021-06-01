@@ -1,13 +1,13 @@
-## 问题
+# 问题
 
 当我们的一些服务往istio上迁移的时候，会出现一个问题，就是某些依赖数据库的服务会一直起不了，pod启动失败，这里排查原因是envoy容器还没起来，服务容器就起来了，导致业务流量无法被转发出去，从而连接数据库异常。 
 
 
-## 解决方案
+# 解决方案
 
 这里解决问题的方案就是保证envoy这个sidecar容器先于业务容器启动，那么怎么保证sidecar容器先于业务容器启动呢？
 
-### istio1.7之后版本解决方案
+## istio1.7之后版本解决方案
 
 istio1.7通过给istio-injector注入逻辑增加一个叫HoldApplicationUntilProxyStarts的开关来解决了该问题
 
@@ -17,7 +17,7 @@ istio1.7通过给istio-injector注入逻辑增加一个叫HoldApplicationUntilPr
 
 这里我们可以全局开启这个特性和单独给某个deployment开启这个特性
 
-#### 全局开启HoldApplicationUntilProxyStarts
+### 全局开启HoldApplicationUntilProxyStarts
 
 全局开启只需要修改istiod的全局配置即可
 
@@ -39,7 +39,7 @@ data:
       discoveryAddress: istiod-1-8-1.istio-system.svc:15012
 ```
 
-#### 局部开启HoldApplicationUntilProxyStarts
+### 局部开启HoldApplicationUntilProxyStarts
 
 如果单独给某个deployment开启这个特性，需要在pod的注解加上proxy.istio.io/config，将 holdApplicationUntilProxyStarts 置为 true
 
@@ -66,7 +66,7 @@ spec:
         image: "nginx"
 ```
 
-### istio1.7版本之前的解决方案
+## istio1.7版本之前的解决方案
 
 如果是istio1.7之前的版本，是没有这个特性的，那么需要采用另外一种方案来解决这个问题，我们在业务容器启动前判断下envoy服务是否已经启动成功了
 
