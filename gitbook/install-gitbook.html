@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>gitbook上传到github托管 · 运维操作指南</title>
+        <title>本地机器安装gitbook · 运维操作指南</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -91,10 +91,10 @@
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="gitbook插件使用.html" />
+    <link rel="next" href="gitbook-add-note.md" />
     
     
-    <link rel="prev" href="gitbook添加笔记.html" />
+    <link rel="prev" href="../" />
     
 
     
@@ -162,7 +162,7 @@
                 <a href="../">
             
                     
-                    Introduction
+                    简介
             
                 </a>
             
@@ -177,9 +177,9 @@
         
         
     
-        <li class="chapter " data-level="2.1" data-path="本地机器安装gitbook.html">
+        <li class="chapter active" data-level="2.1" data-path="install-gitbook.html">
             
-                <a href="本地机器安装gitbook.html">
+                <a href="install-gitbook.html">
             
                     
                     本地机器安装gitbook
@@ -190,9 +190,9 @@
             
         </li>
     
-        <li class="chapter " data-level="2.2" data-path="gitbook添加笔记.html">
+        <li class="chapter " data-level="2.2" data-path="gitbook-add-note.md">
             
-                <a href="gitbook添加笔记.html">
+                <span>
             
                     
                     gitbook添加笔记
@@ -203,9 +203,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="2.3" data-path="gitbook上传到github托管.html">
+        <li class="chapter " data-level="2.3" data-path="gitbook-upload-github.html">
             
-                <a href="gitbook上传到github托管.html">
+                <a href="gitbook-upload-github.html">
             
                     
                     gitbook上传到github托管
@@ -216,9 +216,9 @@
             
         </li>
     
-        <li class="chapter " data-level="2.4" data-path="gitbook插件使用.html">
+        <li class="chapter " data-level="2.4" data-path="gitbook-plugin-usage.html">
             
-                <a href="gitbook插件使用.html">
+                <a href="gitbook-plugin-usage.html">
             
                     
                     gitbook插件使用
@@ -236,9 +236,9 @@
         
         
     
-        <li class="chapter " data-level="3.1" data-path="../linux/shell脚本模板.html">
+        <li class="chapter " data-level="3.1" data-path="../linux/shell-script-template.html">
             
-                <a href="../linux/shell脚本模板.html">
+                <a href="../linux/shell-script-template.html">
             
                     
                     shell脚本模板
@@ -249,9 +249,9 @@
             
         </li>
     
-        <li class="chapter " data-level="3.2" data-path="../linux/腾讯云cvm上搭建openvpn.html">
+        <li class="chapter " data-level="3.2" data-path="../linux/cvm-build-openvpn.html">
             
-                <a href="../linux/腾讯云cvm上搭建openvpn.html">
+                <a href="../linux/cvm-build-openvpn.html">
             
                     
                     腾讯云cvm上搭建openvpn
@@ -262,9 +262,9 @@
             
         </li>
     
-        <li class="chapter " data-level="3.3" data-path="../linux/vmware安装centos环境设置静态的ip地址.html">
+        <li class="chapter " data-level="3.3" data-path="../linux/vmware-install-centos-set-static-ip-address.html">
             
-                <a href="../linux/vmware安装centos环境设置静态的ip地址.html">
+                <a href="../linux/vmware-install-centos-set-static-ip-address.html">
             
                     
                     vmware安装centos环境设置静态的ip地址
@@ -555,7 +555,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >gitbook上传到github托管</a>
+        <a href=".." >本地机器安装gitbook</a>
     </h1>
 </div>
 
@@ -570,49 +570,32 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="github&#x521B;&#x5EFA;&#x4EE3;&#x7801;&#x5206;&#x652F;">github&#x521B;&#x5EFA;&#x4EE3;&#x7801;&#x5206;&#x652F;</h1>
-<p>&#x8FD9;&#x91CC;&#x6211;&#x4EEC;&#x521B;&#x5EFA;&#x4E86;&#x4E00;&#x4E2A;mybook&#x7684;&#x4EE3;&#x7801;&#x4ED3;&#x5E93;&#x7528;&#x6765;&#x5B58;&#x653E;gitbook</p>
-<h1 id="&#x7F16;&#x8BD1;gitbook&#x4E3A;&#x9759;&#x6001;&#x6587;&#x4EF6;">&#x7F16;&#x8BD1;gitbook&#x4E3A;&#x9759;&#x6001;&#x6587;&#x4EF6;</h1>
-<pre><code># cd gitbook
-# mkdir content
-</code></pre><p>&#x7136;&#x540E;&#x5C06;&#x6240;&#x6709;&#x7684;md&#x6587;&#x4EF6;&#x62F7;&#x8D1D;&#x5230;content&#x76EE;&#x5F55;&#x4E0B;&#xFF0C;&#x7136;&#x540E;&#x6211;&#x4EEC;&#x8FD0;&#x884C;gitbook</p>
-<pre><code>gitbook serve ./content ./gh-pages
-</code></pre><p>&#x8FD9;&#x6837;&#x4F1A;&#x81EA;&#x52A8;&#x521B;&#x5EFA; gh-pages &#x6587;&#x4EF6;&#x5939;&#xFF0C;&#x6587;&#x4EF6;&#x5939;&#x4E2D;&#x7684;&#x5185;&#x5BB9;&#xFF0C;&#x5C31;&#x662F;&#x7F16;&#x8BD1;&#x540E;&#x7684;&#x8F93;&#x51FA;&#x3002;</p>
-<h1 id="&#x7F16;&#x5199;&#x81EA;&#x52A8;&#x5316;&#x811A;&#x672C;&#x90E8;&#x7F72;gitbook">&#x7F16;&#x5199;&#x81EA;&#x52A8;&#x5316;&#x811A;&#x672C;&#x90E8;&#x7F72;gitbook</h1>
-<p>&#x81EA;&#x52A8;&#x5316;&#x521B;&#x5EFA;&#x548C;&#x66F4;&#x65B0; gh-pages
-&#x6240;&#x4EE5;&#xFF0C;&#x6211;&#x4EEC;&#x91C7;&#x7528;&#x4E00;&#x4E2A; npm &#x5305;&#xFF0C;&#x6765;&#x5E2E;&#x52A9;&#x6211;&#x4EEC;&#x5B8C;&#x6210;&#x4E0A;&#x9762;&#x7684;&#x64CD;&#x4F5C;</p>
-<pre><code>cd gitbook/
-npm i gh-pages
-</code></pre><p>&#x7136;&#x540E;&#x521B;&#x5EFA; gitbook/scripts/deploy-gh-pages.js</p>
-<p>&#x91CC;&#x9762;&#x7684;&#x5185;&#x5BB9;&#x662F;&#xFF1A;</p>
-<pre><code>&apos;use strict&apos;;
-
-var ghpages = require(&apos;gh-pages&apos;);
-
-main();
-
-function main() {
-    ghpages.publish(&apos;./gh-pages&apos;, console.error.bind(console));
-}
-</code></pre><p>&#x4E0A;&#x9762;&#x7684;&#x811A;&#x672C;&#x7684;&#x4F5C;&#x7528;&#xFF0C;&#x5C31;&#x662F;&#x628A;&#x5F53;&#x524D;&#x6587;&#x4EF6;&#x5939;&#x4E0B;&#x7684; gh-pages &#x6587;&#x4EF6;&#x5939;&#x4E2D;&#x7684;&#x6240;&#x6709;&#x5185;&#x5BB9;&#xFF0C;push &#x5230;&#x672C;&#x4ED3;&#x5E93;&#x7684; gh-pages &#x5206;&#x652F;&#x3002;</p>
-<p>&#x7136;&#x540E;&#x6DFB;&#x52A0;&#x51E0;&#x4E2A; npm &#x811A;&#x672C; deploy &#xFF08; deploy &#x5C31;&#x662F;&#x90E8;&#x7F72;&#x7684;&#x610F;&#x601D;&#xFF09;&#xFF0C;&#x8FD8;&#x6709; build &#xFF08;&#x610F;&#x601D;&#x662F;&#x7F16;&#x8BD1;&#xFF09;&#xFF0C;&#x8FD8;&#x6709; publish&#xFF08;&#x610F;&#x601D;&#x662F;&#x53D1;&#x5E03;&#xFF09;&#xFF0C;&#x5982;&#x4E0B;&#xFF1A;</p>
-<pre><code>&quot;scripts&quot;: {
- &quot;start&quot;: &quot;gitbook serve ./content ./gh-pages&quot;,
- &quot;build&quot;: &quot;gitbook build ./content ./gh-pages&quot;,
- &quot;deploy&quot;: &quot;node ./scripts/deploy-gh-pages.js&quot;,
- &quot;publish&quot;: &quot;npm run build&amp;&amp;npm run deploy&quot;
-},
-</code></pre><p>&#x8FD9;&#x6837;&#xFF0C;&#x4EE5;&#x540E;&#x6211;&#x4FEE;&#x6539;&#x4E86;&#x4E66;&#x7A3F;&#xFF0C;&#x53EA;&#x9700;&#x8FD0;&#x884C;</p>
-<pre><code>npm run publish
-</code></pre><p>&#x5982;&#x679C;&#x547D;&#x4EE4;&#x8FD4;&#x56DE; undefined &#x5B57;&#x6837;&#xFF0C;&#x8868;&#x793A;&#x6CA1;&#x6709;&#x51FA;&#x73B0;&#x9519;&#x8BEF;&#xFF0C;&#x90E8;&#x7F72;&#x6210;&#x529F;&#x3002; &#x5C31;&#x53EF;&#x4EE5;&#x628A;&#x6700;&#x65B0;&#x7684;&#x4E66;&#x7A3F; push &#x5230;&#x8FDC;&#x7AEF;&#x4ED3;&#x5E93;&#x7684; gh-pages &#x5206;&#x652F;&#x4E86;&#x3002;</p>
-<h1 id="&#x914D;&#x7F6E;github-page">&#x914D;&#x7F6E;github page</h1>
-<p>&#x8FDB;&#x5165;&#x4ED3;&#x5E93;&#xFF0C;&#x9009;&#x62E9;settings&#x9009;&#x9879;&#xFF0C;&#x627E;&#x5230;page&#x9009;&#x9879;&#xFF0C;&#x914D;&#x7F6E;&#x4E0B;GitHub Pages&#xFF0C;&#x8FD9;&#x91CC;&#x6211;&#x4E4B;&#x524D;&#x914D;&#x7F6E;&#x4E86;&#x6211;&#x81EA;&#x5DF1;&#x7684;&#x57DF;&#x540D;&#x5230;github&#xFF0C;&#x6240;&#x4EE5;&#x6211;&#x8FD9;&#x8FB9;&#x663E;&#x793A;&#x7684;&#x81EA;&#x5B9A;&#x4E49;&#x57DF;&#x540D;&#xFF0C;&#x800C;&#x4E0D;&#x662F;github.io&#x8FD9;&#x4E2A;</p>
-<p><img src="image/Snipaste_2021-05-19_20-17-51.png" alt="upload-image"> </p>
-<h1 id="&#x901A;&#x8FC7;&#x57DF;&#x540D;&#x8BBF;&#x95EE;gitbook">&#x901A;&#x8FC7;&#x57DF;&#x540D;&#x8BBF;&#x95EE;gitbook</h1>
-<p>&#x6D4F;&#x89C8;&#x5668;&#x8F93;&#x5165;<a href="https://www.niewx.cn/mybook" target="_blank">https://www.niewx.cn/mybook</a>&#xFF0C;&#x5C31;&#x53EF;&#x4EE5;&#x67E5;&#x770B;gitbook&#x4E86;</p>
-<p><img src="image/Snipaste_2021-05-19_20-21-36.png" alt="upload-image">  </p>
+                                <h1 id="gitbook&#x7B80;&#x4ECB;">gitbook&#x7B80;&#x4ECB;</h1>
+<p>gitbook&#x7F51;&#x7AD9;&#x662F;&#x4E00;&#x4E2A;&#x7B80;&#x5355;&#x7684;&#x4E2A;&#x4EBA;&#x5728;&#x7EBF;&#x4E66;&#x7C4D;&#x7F51;&#x7AD9;&#xFF0C;&#x5728;&#x8FD9;&#x91CC;&#x53EF;&#x4EE5;&#x628A;&#x81EA;&#x5DF1;&#x7684;&#x6587;&#x6863;&#x6574;&#x7406;&#x6210;&#x4E66;&#x7C4D;&#x53D1;&#x5E03;&#x51FA;&#x6765;&#xFF0C;&#x4FBF;&#x4E8E;&#x9605;&#x8BFB;&#x3002;</p>
+<p>gitbook&#x7F51;&#x7AD9;&#xFF1A;<a href="https://legacy.gitbook.com/" target="_blank">https://legacy.gitbook.com/</a></p>
+<p>&#x672C;&#x6587;&#x4E3B;&#x8981;&#x8BB2;&#x89E3;&#x5728;gitbook&#x7F51;&#x7AD9;&#x4E0A;&#x53D1;&#x5E03;&#x4E00;&#x4E2A;&#x4E66;&#x7C4D;&#x6587;&#x6863;&#x548C;&#x4F7F;&#x7528;gitbook&#x63D0;&#x4F9B;&#x7684;&#x5DE5;&#x5177;&#x5728;&#x672C;&#x5730;&#x5F00;&#x53D1;&#x4E00;&#x4E2A;&#x4E66;&#x7C4D;&#x6587;&#x6863;&#x90E8;&#x7F72;&#x5230;&#x81EA;&#x5DF1;&#x7684;&#x670D;&#x52A1;&#x4E0A;</p>
+<p>&#x5728;&#x6B64;&#x4E4B;&#x524D;&#x4F60;&#x9700;&#x8981;&#x4F1A;&#x5982;&#x4E0B;&#x51C6;&#x5907;&#xFF1A;</p>
+<ul>
+<li>&#x8D26;&#x53F7;&#xFF1A; github&#x6709;&#x8D26;&#x53F7;&#xFF0C;gitbook&#x4F7F;&#x7528;github&#x8D26;&#x53F7;&#x6CE8;&#x518C;</li>
+<li>git&#xFF1A;&#x4EE3;&#x7801;&#x7BA1;&#x7406;&#x5DE5;&#x5177;</li>
+<li>Markdown&#xFF1A;gitbook&#x4E3B;&#x8981;&#x4F7F;&#x7528;MD&#x8BED;&#x6CD5;&#x6765;&#x7F16;&#x5199;&#x4E66;&#x7C4D;&#x7684;</li>
+<li>gitbook&#x5DE5;&#x5177;&#xFF1A;&#x5982;&#x679C;&#x4F60;&#x5728;&#x672C;&#x5730;&#x5F00;&#x53D1;&#x9700;&#x8981;&#x5B89;&#x88C5;&#x6B64;&#x63D2;&#x4EF6;&#xFF0C;&#x4E0B;&#x9762;&#x6709;&#x4ECB;&#x7ECD;</li>
+<li>nodejs&#x73AF;&#x5883;&#xFF1A;gitbook&#x63D2;&#x4EF6;&#x9700;&#x8981;&#x7684;&#x8FD0;&#x884C;&#x73AF;&#x5883;</li>
+<li>&#x4E00;&#x6B3E;Markdown&#x7F16;&#x8F91;&#x5668;&#xFF1A;&#x65B9;&#x4FBF;&#x672C;&#x5730;&#x5F00;&#x53D1;&#xFF0C;&#x63A8;&#x8350;Typora&#x6216;gitbook&#x81EA;&#x5DF1;&#x7684;&#x7F16;&#x8F91;&#x5668;gitbook editor</li>
+</ul>
+<h1 id="&#x5B89;&#x88C5;nodejs&#x73AF;&#x5883;">&#x5B89;&#x88C5;nodejs&#x73AF;&#x5883;</h1>
+<p>&#x672C;&#x6B21;&#x64CD;&#x4F5C;&#x90FD;&#x5728;windows&#x7CFB;&#x7EDF;&#x4E0A;&#x8FDB;&#x884C;&#x64CD;&#x4F5C;&#xFF0C;nodejs&#x7684;&#x5B89;&#x88C5;&#x5177;&#x4F53;&#x53EF;&#x4EE5;&#x53C2;&#x8003;&#x6587;&#x6863;<a href="https://www.runoob.com/nodejs/nodejs-install-setup.html" target="_blank">https://www.runoob.com/nodejs/nodejs-install-setup.html</a></p>
+<h1 id="&#x5B89;&#x88C5;gitbook">&#x5B89;&#x88C5;gitbook</h1>
+<pre><code>npm install gitbook-cli -g
+</code></pre><h1 id="&#x521D;&#x59CB;&#x5316;gitbook">&#x521D;&#x59CB;&#x5316;gitbook</h1>
+<p>&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x6587;&#x4EF6;&#x5939;gitbook&#xFF0C;&#x7136;&#x540E;&#x521D;&#x59CB;&#x5316;gitbook&#xFF0C;&#x6700;&#x540E;&#x8FD0;&#x884C;gitbook</p>
+<pre><code># mkdir gitbook
+# cd gitbook
+# gitbook init
+# gitbook serve
+</code></pre><p>&#x8FD0;&#x884C;&#x540E;&#x4F1A;&#x5728;&#x542F;&#x52A8;&#x4E00;&#x4E2A;&#x670D;&#x52A1;&#xFF0C;&#x53EF;&#x4EE5;&#x5728;&#x6D4F;&#x89C8;&#x5668;&#x8F93;&#x5165;localhost:4000&#xFF0C;&#x8FD9;&#x6837;&#x5C31;&#x53EF;&#x4EE5;&#x8BBF;&#x95EE;gitbook&#x4E86; </p>
 <p><footer class="page-footer"><span class="copyright">&#xA9; vishon all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">Updated at
-2021-05-19 20:21:53
+2021-05-19 20:00:58
 </span></footer></p>
 <div id="gitalk-container"></div>
 <script>console.log("plugin-popup....");document.onclick = function(e){ e.target.tagName === "IMG" && window.open(e.target.src,e.target.src)}</script><style>img{cursor:pointer}</style>
@@ -642,12 +625,12 @@ function main() {
 
             
                 
-                <a href="gitbook添加笔记.html" class="navigation navigation-prev " aria-label="Previous page: gitbook添加笔记">
+                <a href="../" class="navigation navigation-prev " aria-label="Previous page: 简介">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="gitbook插件使用.html" class="navigation navigation-next " aria-label="Next page: gitbook插件使用">
+                <a href="gitbook-add-note.md" class="navigation navigation-next " aria-label="Next page: gitbook添加笔记">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -658,7 +641,7 @@ function main() {
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"gitbook上传到github托管","level":"2.3","depth":1,"next":{"title":"gitbook插件使用","level":"2.4","depth":1,"path":"gitbook/gitbook插件使用.md","ref":"gitbook/gitbook插件使用.md","articles":[]},"previous":{"title":"gitbook添加笔记","level":"2.2","depth":1,"path":"gitbook/gitbook添加笔记.md","ref":"gitbook/gitbook添加笔记.md","articles":[]},"dir":"ltr"},"config":{"plugins":["github","editlink","-lunr","-search","search-plus","tbfed-pagefooter","splitter","page-toc-button","back-to-top-button","-lunr","-search","search-plus","github-buttons@2.1.0","favicon@^0.0.2","3-ba","theme-default","pageview-count","auto-scroll-table","popup","code","mygitalk"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"&copy vishon","modify_label":"Updated at","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-okaidia.css"]},"disqus":{"shortName":"nieweixing-github-io"},"github":{"url":"https://github.com/nieweixing"},"editlink":{"label":"编辑本页","multilingual":false,"base":"https://github.com/nieweixing/mybook/tree/gh-pages"},"splitter":{},"auto-scroll-table":{},"popup":{},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"favicon":{"shortcut":"favicon.ico","bookmark":"favicon.ico"},"page-toc-button":{},"back-to-top-button":{},"pageview-count":{},"github-buttons":{"repo":"nieweixing/mybook","types":["star"],"size":"small"},"3-ba":{"configuration":"auto","token":"c03bec8e82bc53c064e0e648ffa54d88"},"mygitalk":{"flipMoveOptions":{},"clientID":"5976cd3d9cc251569467","number":-1,"perPage":10,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","admin":["nieweixing"],"createIssueManually":false,"distractionFreeMode":false,"repo":"gitalk-comment","owner":"nieweixing","enableHotKey":true,"clientSecret":"74117131a57324d4d616267265a94f4a1ac293ec","pagerDirection":"last","labels":["Gitalk"]},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{},"image-captions":{"caption":"图片 - _CAPTION_"}},"theme":"default","author":"vishon","pdf":{"pageNumbers":true,"fontSize":11,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"toc":true},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"运维操作指南","language":"zh-hans","links":{"sidebar":{"聂伟星个人博客":"https://www.niewx.cn","TKE运维手册":"https://cloud.tencent.com/developer/column/87421"}},"gitbook":">= 3.2.2","description":"运维操作指南"},"file":{"path":"gitbook/gitbook上传到github托管.md","mtime":"2021-05-19T12:21:53.506Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-01T02:55:03.019Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"本地机器安装gitbook","level":"2.1","depth":1,"next":{"title":"gitbook添加笔记","level":"2.2","depth":1,"path":"gitbook/gitbook-add-note.md","ref":"gitbook/gitbook-add-note.md","articles":[]},"previous":{"title":"简介","level":"1.1","depth":1,"path":"README.md","ref":"README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["github","editlink","-lunr","-search","search-plus","tbfed-pagefooter","splitter","page-toc-button","back-to-top-button","-lunr","-search","search-plus","github-buttons@2.1.0","favicon@^0.0.2","3-ba","theme-default","pageview-count","auto-scroll-table","popup","code","mygitalk"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"&copy vishon","modify_label":"Updated at","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-okaidia.css"]},"disqus":{"shortName":"nieweixing-github-io"},"github":{"url":"https://github.com/nieweixing"},"editlink":{"label":"编辑本页","multilingual":false,"base":"https://github.com/nieweixing/mybook/tree/gh-pages"},"splitter":{},"auto-scroll-table":{},"popup":{},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"favicon":{"shortcut":"favicon.ico","bookmark":"favicon.ico"},"page-toc-button":{},"back-to-top-button":{},"pageview-count":{},"github-buttons":{"repo":"nieweixing/mybook","types":["star"],"size":"small"},"3-ba":{"configuration":"auto","token":"c03bec8e82bc53c064e0e648ffa54d88"},"mygitalk":{"flipMoveOptions":{},"clientID":"5976cd3d9cc251569467","number":-1,"perPage":10,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","admin":["nieweixing"],"createIssueManually":false,"distractionFreeMode":false,"repo":"gitalk-comment","owner":"nieweixing","enableHotKey":true,"clientSecret":"74117131a57324d4d616267265a94f4a1ac293ec","pagerDirection":"last","labels":["Gitalk"]},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{},"image-captions":{"caption":"图片 - _CAPTION_"}},"theme":"default","author":"vishon","pdf":{"pageNumbers":true,"fontSize":11,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"toc":true},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"运维操作指南","language":"zh-hans","links":{"sidebar":{"聂伟星个人博客":"https://www.niewx.cn","TKE运维手册":"https://cloud.tencent.com/developer/column/87421"}},"gitbook":">= 3.2.2","description":"运维操作指南"},"file":{"path":"gitbook/install-gitbook.md","mtime":"2021-05-19T12:00:58.626Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-01T03:16:28.203Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
