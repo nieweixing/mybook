@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>k8s常用命令总结 · 运维操作指南</title>
+        <title>kubecm管理多k8s集群 · 运维操作指南</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -91,10 +91,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="k8s-force-delete-terminating-ns.html" />
+    <link rel="next" href="../tke/tke-used-docker-in-docker.html" />
     
     
-    <link rel="prev" href="../docker/docker-compose-study.html" />
+    <link rel="prev" href="k8s-generate-kubeonfig.html" />
     
 
     
@@ -361,7 +361,7 @@
         
         
     
-        <li class="chapter active" data-level="6.1" data-path="k8s-common-commands.html">
+        <li class="chapter " data-level="6.1" data-path="k8s-common-commands.html">
             
                 <a href="k8s-common-commands.html">
             
@@ -413,7 +413,7 @@
             
         </li>
     
-        <li class="chapter " data-level="6.5" data-path="kubecm-manages-k8s-clusters.html">
+        <li class="chapter active" data-level="6.5" data-path="kubecm-manages-k8s-clusters.html">
             
                 <a href="kubecm-manages-k8s-clusters.html">
             
@@ -594,7 +594,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >k8s常用命令总结</a>
+        <a href=".." >kubecm管理多k8s集群</a>
     </h1>
 </div>
 
@@ -609,35 +609,155 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="k8s&#x5E38;&#x7528;&#x547D;&#x4EE4;">k8s&#x5E38;&#x7528;&#x547D;&#x4EE4;</h1>
-<h2 id="&#x83B7;&#x53D6;hostnetwork&#x7F51;&#x7EDC;&#x6A21;&#x5F0F;&#x7684;deployment">&#x83B7;&#x53D6;hostNetwork&#x7F51;&#x7EDC;&#x6A21;&#x5F0F;&#x7684;deployment</h2>
-<pre><code>kubectl get deployment --all-namespaces -o jsonpath=&apos;{range .items[?(@.spec.template.spec.hostNetwork==true)]} {&quot;namespace: &quot;} {.metadata.namespace}{&quot; name:&quot;} {.metadata.name} {&quot;\n&quot;} {end}&apos;
-</code></pre><h2 id="&#x83B7;&#x53D6;&#x7279;&#x6743;&#x6A21;&#x5F0F;&#x7684;deployment">&#x83B7;&#x53D6;&#x7279;&#x6743;&#x6A21;&#x5F0F;&#x7684;deployment</h2>
-<pre><code>kubectl get deployment --all-namespaces -o jsonpath=&apos;{range .items[?(@.spec.template.spec.containers[*].securityContext.privileged==true)]} {&quot;namespace: &quot;}{.metadata.namespace}{&quot;name:&quot;} {.metadata.name} {&quot;\n&quot;} {end}&apos;
-</code></pre><h2 id="&#x83B7;&#x53D6;&#x63A7;&#x5236;&#x8FDB;&#x7A0B;&#x53EF;&#x4EE5;&#x83B7;&#x5F97;&#x8D85;&#x51FA;&#x5176;&#x7236;&#x8FDB;&#x7A0B;&#x7684;&#x7279;&#x6743;&#x7684;deployment">&#x83B7;&#x53D6;&#x63A7;&#x5236;&#x8FDB;&#x7A0B;&#x53EF;&#x4EE5;&#x83B7;&#x5F97;&#x8D85;&#x51FA;&#x5176;&#x7236;&#x8FDB;&#x7A0B;&#x7684;&#x7279;&#x6743;&#x7684;deployment</h2>
-<pre><code>kubectl get deployment --all-namespaces -o jsonpath=&apos;{range .items[?(@.spec.template.spec.containers[*].securityContext.allowPrivilegeEscalation==true)]} {&quot;namespace: &quot;}{.metadata.namespace}{&quot;name:&quot;} {.metadata.name} {&quot;\n&quot;} {end}&apos;
-</code></pre><h2 id="&#x83B7;&#x53D6;&#x6240;&#x6709;deployment&#x7684;&#x5BB9;&#x5668;&#x540D;&#x79F0;&#x548C;namespace">&#x83B7;&#x53D6;&#x6240;&#x6709;deployment&#x7684;&#x5BB9;&#x5668;&#x540D;&#x79F0;&#x548C;namespace</h2>
-<pre><code>kubectl get deployment --all-namespaces -o jsonpath=&apos;{range .items[?(@.spec.template.spec.containers[*])]} {&quot;namespace: &quot;}{.metadata.namespace}{&quot;name:&quot;} {.metadata.name} {&quot;\n&quot;} {end}&apos;
-</code></pre><h2 id="&#x83B7;&#x53D6;&#x6240;&#x6709;deployment&#x7684;&#x5BB9;&#x5668;&#x7AEF;&#x53E3;">&#x83B7;&#x53D6;&#x6240;&#x6709;deployment&#x7684;&#x5BB9;&#x5668;&#x7AEF;&#x53E3;</h2>
-<pre><code>kubectl get deployment --all-namespaces -o jsonpath=&apos;{range .items[*]} {&quot;namespace: &quot;}{.metadata.namespace}{&quot; name:&quot;} {.metadata.name} {&quot; &quot;}{.spec.template.spec.containers[*].ports} {&quot;\n&quot;} {end}&apos;
-</code></pre><h2 id="&#x83B7;&#x53D6;&#x914D;&#x7F6E;&#x4E86;hostport&#x7684;deployment">&#x83B7;&#x53D6;&#x914D;&#x7F6E;&#x4E86;hostport&#x7684;deployment</h2>
-<pre><code>kubectl get deployment --all-namespaces -o jsonpath=&apos;{range .items[*]} {&quot;namespace: &quot;}{.metadata.namespace}{&quot; name:&quot;} {.metadata.name} {&quot; &quot;}{.spec.template.spec.containers[*].ports} {&quot;\n&quot;} {end}&apos; |grep map | grep hostPort | awk &apos;{print $1 $2 &quot; &quot;$3 $4}&apos;
-</code></pre><h2 id="&#x83B7;&#x53D6;&#x914D;&#x7F6E;&#x4E86;capabilities&#x5C5E;&#x6027;&#x7684;deployment">&#x83B7;&#x53D6;&#x914D;&#x7F6E;&#x4E86;capabilities&#x5C5E;&#x6027;&#x7684;deployment</h2>
-<pre><code>kubectl get deployment --all-namespaces -o jsonpath=&apos;{range .items[*]} {&quot;namespace: &quot;}{.metadata.namespace}{&quot; name:&quot;} {.metadata.name} {&quot; &quot;}{.spec.template.spec.containers[*].securityContext} {&quot;\n&quot;} {end}&apos; |grep capabilities | awk &apos;{print $1 $2 &quot; &quot;$3 $4}&apos;
-</code></pre><h2 id="&#x83B7;&#x53D6;&#x6240;&#x6709;&#x914D;&#x7F6E;&#x4E86;hostnetwork&#x7684;daemonset">&#x83B7;&#x53D6;&#x6240;&#x6709;&#x914D;&#x7F6E;&#x4E86;hostNetwork&#x7684;DaemonSet</h2>
-<pre><code>kubectl get ds --all-namespaces -o jsonpath=&apos;{range .items[?(@.spec.template.spec.hostNetwork==true)]} {&quot;namespace: &quot;} {.metadata.namespace}{&quot; name:&quot;} {.metadata.name} {&quot;\n&quot;} {end}&apos;
-</code></pre><h2 id="&#x83B7;&#x53D6;&#x6240;&#x6709;&#x914D;&#x7F6E;&#x4E86;hostipc&#x6A21;&#x5F0F;&#x7684;daemonset">&#x83B7;&#x53D6;&#x6240;&#x6709;&#x914D;&#x7F6E;&#x4E86;hostIPC&#x6A21;&#x5F0F;&#x7684;DaemonSet</h2>
-<pre><code>kubectl get ds --all-namespaces -o jsonpath=&apos;{range .items[?(@.spec.template.spec.hostIPC==true)]} {&quot;namespace: &quot;} {.metadata.namespace}{&quot; name:&quot;} {.metadata.name} {&quot;\n&quot;} {end}&apos;
-</code></pre><h2 id="&#x83B7;&#x53D6;&#x6240;&#x6709;&#x914D;&#x7F6E;&#x4E86;hostpid&#x6A21;&#x5F0F;&#x7684;daemonset">&#x83B7;&#x53D6;&#x6240;&#x6709;&#x914D;&#x7F6E;&#x4E86;hostPID&#x6A21;&#x5F0F;&#x7684;DaemonSet</h2>
-<pre><code>kubectl get ds --all-namespaces -o jsonpath=&apos;{range .items[?(@.spec.template.spec.hostPID==true)]} {&quot;namespace: &quot;} {.metadata.namespace}{&quot; name:&quot;} {.metadata.name} {&quot;\n&quot;} {end}&apos;
-</code></pre><h2 id="&#x83B7;&#x53D6;&#x6240;&#x6709;&#x914D;&#x7F6E;&#x4E86;allowprivilegeescalation&#x6A21;&#x5F0F;&#x7684;daemonset">&#x83B7;&#x53D6;&#x6240;&#x6709;&#x914D;&#x7F6E;&#x4E86;allowPrivilegeEscalation&#x6A21;&#x5F0F;&#x7684;DaemonSet</h2>
-<pre><code>kubectl get ds --all-namespaces -o jsonpath=&apos;{range .items[?(@.spec.template.spec.containers[*].securityContext.allowPrivilegeEscalation==true)]} {&quot;namespace: &quot;}{.metadata.namespace}{&quot;name:&quot;} {.metadata.name} {&quot;\n&quot;} {end}&apos;
-</code></pre><h2 id="&#x83B7;&#x53D6;&#x914D;&#x7F6E;&#x4E86;hostport&#x7684;daemonset">&#x83B7;&#x53D6;&#x914D;&#x7F6E;&#x4E86;hostport&#x7684;DaemonSet</h2>
-<pre><code>kubectl get ds --all-namespaces -o jsonpath=&apos;{range .items[*]} {&quot;namespace: &quot;}{.metadata.namespace}{&quot; name:&quot;} {.metadata.name} {&quot; &quot;}{.spec.template.spec.containers[*].ports} {&quot;\n&quot;} {end}&apos; |grep map | grep hostPort | awk &apos;{print $1 $2 &quot; &quot;$3 $4}&apos;
-</code></pre><h2 id="&#x83B7;&#x53D6;&#x6240;&#x6709;pod&#x7684;ip&#x548C;&#x6240;&#x5728;node&#x7684;ip">&#x83B7;&#x53D6;&#x6240;&#x6709;pod&#x7684;ip&#x548C;&#x6240;&#x5728;node&#x7684;ip</h2>
-<pre><code>kubectl get pods --all-namespaces    -o=jsonpath=&apos;{range .items[*]}[nodeip:{.status.hostIP}, podip:{.status.podIP}]{&quot;\n&quot;}{end}&apos;
-</code></pre><p><footer class="page-footer"><span class="copyright">&#xA9; vishon all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">Updated at
-2021-05-21 17:07:57
+                                <p>kubecm&#x662F;&#x4E00;&#x4E2A;k8s&#x96C6;&#x7FA4;&#x7BA1;&#x7406;&#x5DE5;&#x5177;&#xFF0C;&#x53EF;&#x4EE5;&#x5408;&#x5E76;&#x591A;&#x4E2A;kubeconfig&#x6587;&#x4EF6;&#xFF0C;&#x5207;&#x6362;&#x96C6;&#x7FA4;&#x7B49;</p>
+<h1 id="&#x5B89;&#x88C5;kubecm">&#x5B89;&#x88C5;kubecm</h1>
+<pre><code>curl -Lo kubecm.tar.gz https://github.com/sunny0826/kubecm/releases/download/v${VERSION}/kubecm_${VERSION}_Linux_x86_64.tar.gz
+tar -zxvf kubecm.tar.gz kubecm
+cd kubecm
+sudo mv kubecm /usr/local/bin/
+</code></pre><p>&#x8BBE;&#x7F6E;&#x81EA;&#x52A8;&#x8865;&#x5168;</p>
+<pre><code>$ source &lt;(kubecm completion bash)
+$ echo &quot;source &lt;(kubecm completion bash)&quot; &gt;&gt; ~/.bashrc
+$ source  ~/.bashrc
+</code></pre><h1 id="kubecm&#x7684;&#x4F7F;&#x7528;">kubecm&#x7684;&#x4F7F;&#x7528;</h1>
+<p>&#x6267;&#x884C;kubecm&#xFF0C;&#x5982;&#x679C;&#x663E;&#x793A;&#x4E0B;&#x9762;&#x5185;&#x5BB9;&#x8BF4;&#x660E;&#x5B89;&#x88C5;&#x6210;&#x529F;</p>
+<pre><code>[root@VM-0-13-centos ~]# kubecm
+
+
+        Manage your kubeconfig more easily.
+
+
+&#x2588;&#x2588;   &#x2588;&#x2588; &#x2588;&#x2588;    &#x2588;&#x2588; &#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;  &#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;  &#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588; &#x2588;&#x2588;&#x2588;    &#x2588;&#x2588;&#x2588;
+&#x2588;&#x2588;  &#x2588;&#x2588;  &#x2588;&#x2588;    &#x2588;&#x2588; &#x2588;&#x2588;   &#x2588;&#x2588; &#x2588;&#x2588;      &#x2588;&#x2588;      &#x2588;&#x2588;&#x2588;&#x2588;  &#x2588;&#x2588;&#x2588;&#x2588;
+&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;   &#x2588;&#x2588;    &#x2588;&#x2588; &#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;  &#x2588;&#x2588;&#x2588;&#x2588;&#x2588;   &#x2588;&#x2588;      &#x2588;&#x2588; &#x2588;&#x2588;&#x2588;&#x2588; &#x2588;&#x2588;
+&#x2588;&#x2588;  &#x2588;&#x2588;  &#x2588;&#x2588;    &#x2588;&#x2588; &#x2588;&#x2588;   &#x2588;&#x2588; &#x2588;&#x2588;      &#x2588;&#x2588;      &#x2588;&#x2588;  &#x2588;&#x2588;  &#x2588;&#x2588;
+&#x2588;&#x2588;   &#x2588;&#x2588;  &#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;  &#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;  &#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588;  &#x2588;&#x2588;&#x2588;&#x2588;&#x2588;&#x2588; &#x2588;&#x2588;      &#x2588;&#x2588;
+
+ Tips  Find more information at: https://kubecm.cloud
+
+Usage:
+  kubecm [command]
+
+Available Commands:
+  add         Add KubeConfig to $HOME/.kube/config
+  alias       Generate alias for all contexts
+  clear       Clear lapsed context, cluster and user
+  completion  Generates bash/zsh completion scripts
+  create      Create new KubeConfig(experiment)
+  delete      Delete the specified context from the kubeconfig
+  help        Help about any command
+  list        List KubeConfig
+  merge       Merge the KubeConfig files in the specified directory
+  namespace   Switch or change namespace interactively
+  rename      Rename the contexts of kubeconfig
+  switch      Switch Kube Context interactively
+  version     Print version info
+
+Flags:
+      --config string   path of kubeconfig (default &quot;/root/.kube/config&quot;)
+  -h, --help            help for kubecm
+
+Use &quot;kubecm [command] --help&quot; for more information about a command.
+</code></pre><h2 id="&#x6DFB;&#x52A0;&#x96C6;&#x7FA4;">&#x6DFB;&#x52A0;&#x96C6;&#x7FA4;</h2>
+<p>&#x8FD9;&#x91CC;&#x51C6;&#x5907;&#x4E86;3&#x4E2A;&#x96C6;&#x7FA4;&#x7684;kubeconfig&#x6587;&#x4EF6;</p>
+<pre><code>[root@VM-0-13-centos .kube]# ll | grep config
+-rw-r--r-- 1 root root  1823 Jun  2 14:25 eks.config
+-rw-r--r-- 1 root root  5545 Jun  2 15:12 test.config
+-rw-r--r-- 1 root root  5541 Jun  2 14:54 tke.config
+</code></pre><p>&#x8FD9;&#x91CC;&#x6211;&#x4EEC;&#x5148;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;config&#x6587;&#x4EF6;&#xFF0C;&#x7528;&#x6765;&#x751F;&#x6210;&#x5408;&#x5E76;&#x540E;&#x7684;kubeconfig</p>
+<pre><code>[root@VM-0-13-centos .kube]# touch config
+[root@VM-0-13-centos .kube]# kubecm add -f tke.config
+Add Context: tke
+&#x1F47B; True
+&#x300C;tke.config&#x300D; write successful!
++------------+---------+-----------------------+--------------------+-----------------------------------+--------------+
+|   CURRENT  |   NAME  |        CLUSTER        |        USER        |               SERVER              |   Namespace  |
++============+=========+=======================+====================+===================================+==============+
+|      *     |   tke   |   cluster-k4m2g9mf44  |   user-k4m2g9mf44  |   https://cls-b3mg1p92.ccs.tence  |    default   |
+|            |         |                       |                    |            nt-cloud.com           |              |
++------------+---------+-----------------------+--------------------+-----------------------------------+--------------+
+
+[root@VM-0-13-centos .kube]# kubecm add -f eks.config
+Add Context: eks
+&#x1F47B; True
+&#x300C;eks.config&#x300D; write successful!
++------------+---------+-----------------------+--------------------+-----------------------------------+--------------+
+|   CURRENT  |   NAME  |        CLUSTER        |        USER        |               SERVER              |   Namespace  |
++============+=========+=======================+====================+===================================+==============+
+|            |   eks   |   cluster-6t8847hhfb  |   user-6t8847hhfb  |    https://xx.xx.xx.xx:443/        |    default   |
++------------+---------+-----------------------+--------------------+-----------------------------------+--------------+
+|      *     |   tke   |   cluster-k4m2g9mf44  |   user-k4m2g9mf44  |   https://cls-xxxx.ccs.tence       |    default   |
+|            |         |                       |                    |            nt-cloud.com           |              |
++------------+---------+-----------------------+--------------------+-----------------------------------+--------------+
+
+[root@VM-0-13-centos .kube]# kubecm add -f test.config
+Add Context: test
+&#x1F47B; True
+&#x300C;test.config&#x300D; write successful!
++------------+---------+-----------------------+--------------------+-----------------------------------+--------------+
+|   CURRENT  |   NAME  |        CLUSTER        |        USER        |               SERVER              |   Namespace  |
++============+=========+=======================+====================+===================================+==============+
+|            |   eks   |   cluster-6t8847hhfb  |   user-6t8847hhfb  |    https://xx.xx.xx.xx:443/      |    default   |
++------------+---------+-----------------------+--------------------+-----------------------------------+--------------+
+|            |   test  |   cluster-9f86dg8h88  |   user-9f86dg8h88  |   https://cls-xxxxxx.ccs.tence    |    default   |
+|            |         |                       |                    |            nt-cloud.com           |              |
++------------+---------+-----------------------+--------------------+-----------------------------------+--------------+
+|      *     |   tke   |   cluster-k4m2g9mf44  |   user-k4m2g9mf44  |   https://cls-xx.ccs.tence         |    default   |
+|            |         |                       |                    |            nt-cloud.com           |              |
++------------+---------+-----------------------+--------------------+-----------------------------------+--------------+
+</code></pre><h2 id="kubecm&#x67E5;&#x770B;&#x96C6;&#x7FA4;">kubecm&#x67E5;&#x770B;&#x96C6;&#x7FA4;</h2>
+<pre><code>[root@VM-0-13-centos .kube]# kubecm ls
++------------+---------+-----------------------+--------------------+-----------------------------------+--------------+
+|   CURRENT  |   NAME  |        CLUSTER        |        USER        |               SERVER              |   Namespace  |
++============+=========+=======================+====================+===================================+==============+
+|            |   eks   |   cluster-6t8847hhfb  |   user-6t8847hhfb  |    https://xx.xx.xx.xx:443/    xxx|    default   |
++------------+---------+-----------------------+--------------------+-----------------------------------+--------------+
+|      *     |   tke   |   cluster-k4m2g9mf44  |   user-k4m2g9mf44  |   https://cls-xxxxxxxx.ccs.tence  |    default   |
+|            |         |                       |                    |            nt-cloud.com           |              |
++------------+---------+-----------------------+--------------------+-----------------------------------+--------------+
+
+Cluster check succeeded!
+Kubernetes version v1.18.4-tke.6
+Kubernetes master is running at https://cls-xxxxx.ccs.tencent-cloud.com
+[Summary] Namespace: 63 Node: 4 Pod: 155
+</code></pre><h2 id="kubecm&#x5220;&#x9664;&#x96C6;&#x7FA4;">kubecm&#x5220;&#x9664;&#x96C6;&#x7FA4;</h2>
+<pre><code>[root@VM-0-13-centos .kube]# kubecm delete test
+Context Delete:&#x300C;test&#x300D;
+&#x300C;/root/.kube/config&#x300D; write successful!
++------------+---------+-----------------------+--------------------+-----------------------------------+--------------+
+|   CURRENT  |   NAME  |        CLUSTER        |        USER        |               SERVER              |   Namespace  |
++============+=========+=======================+====================+===================================+==============+
+|            |   eks   |   cluster-6t8847hhfb  |   user-6t8847hhfb  |    https://xx.xx.xx.xx:443/    |    default   |
++------------+---------+-----------------------+--------------------+-----------------------------------+--------------+
+|      *     |   tke   |   cluster-k4m2g9mf44  |   user-k4m2g9mf44  |   https://cls-xxxx.ccs.tence  |    default   |
+|            |         |                       |                    |            nt-cloud.com           |              |
++------------+---------+-----------------------+--------------------+-----------------------------------+--------------+
+</code></pre><p>&#x8FD9;&#x91CC;&#x6211;&#x4EEC;&#x5220;&#x9664;&#x4E86;test&#x96C6;&#x7FA4;</p>
+<h2 id="kubecm&#x5207;&#x6362;&#x96C6;&#x7FA4;">kubecm&#x5207;&#x6362;&#x96C6;&#x7FA4;</h2>
+<pre><code>[root@VM-0-13-centos .kube]# kubectl  get node
+NAME         STATUS   ROLES    AGE    VERSION
+10.0.0.10    Ready    &lt;none&gt;   61d    v1.18.4-tke.8
+10.0.0.157   Ready    &lt;none&gt;   147d   v1.18.4-tke.6
+10.0.0.2     Ready    &lt;none&gt;   56d    v1.18.4-tke.8
+10.0.0.3     Ready    &lt;none&gt;   189d   v1.18.4-tke.8
+[root@VM-0-13-centos .kube]# kubecm switch eks
+&#x300C;/root/.kube/config&#x300D; write successful!
++------------+---------+-----------------------+--------------------+-----------------------------------+--------------+
+|   CURRENT  |   NAME  |        CLUSTER        |        USER        |               SERVER              |   Namespace  |
++============+=========+=======================+====================+===================================+==============+
+|      *     |   eks   |   cluster-6t8847hhfb  |   user-6t8847hhfb  |    https://xx.xx.xx.xx:443/    |    default   |
++------------+---------+-----------------------+--------------------+-----------------------------------+--------------+
+|            |   tke   |   cluster-k4m2g9mf44  |   user-k4m2g9mf44  |   https://cls-xxxxxxxx.ccs.tence  |    default   |
+|            |         |                       |                    |            nt-cloud.com           |              |
++------------+---------+-----------------------+--------------------+-----------------------------------+--------------+
+
+Switched to context &#x300C;eks&#x300D;
+[root@VM-0-13-centos .kube]# kubectl  get node
+NAME                    STATUS   ROLES    AGE   VERSION
+eklet-subnet-ktam6hp8   Ready    &lt;none&gt;   56d   v2.4.4-dirty
+</code></pre><p>&#x4E00;&#x5F00;&#x59CB;&#x6211;&#x4EEC;&#x9ED8;&#x8BA4;&#x64CD;&#x4F5C;&#x96C6;&#x7FA4;&#x662F;tke&#xFF0C;&#x73B0;&#x5728;&#x5207;&#x6362;&#x5230;eks</p>
+<p><footer class="page-footer"><span class="copyright">&#xA9; vishon all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">Updated at
+2021-06-03 19:43:52
 </span></footer></p>
 <div id="gitalk-container"></div>
 <script>console.log("plugin-popup....");document.onclick = function(e){ e.target.tagName === "IMG" && window.open(e.target.src,e.target.src)}</script><style>img{cursor:pointer}</style>
@@ -667,12 +787,12 @@
 
             
                 
-                <a href="../docker/docker-compose-study.html" class="navigation navigation-prev " aria-label="Previous page: docker-compose学习笔记">
+                <a href="k8s-generate-kubeonfig.html" class="navigation navigation-prev " aria-label="Previous page: k8s中生成自定义用户kubeconfig">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="k8s-force-delete-terminating-ns.html" class="navigation navigation-next " aria-label="Next page: 强制删除Terminating状态ns">
+                <a href="../tke/tke-used-docker-in-docker.html" class="navigation navigation-next " aria-label="Next page: tke上使用docker-in-docker">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -683,7 +803,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"k8s常用命令总结","level":"6.1","depth":1,"next":{"title":"强制删除Terminating状态ns","level":"6.2","depth":1,"path":"k8s/k8s-force-delete-terminating-ns.md","ref":"k8s/k8s-force-delete-terminating-ns.md","articles":[]},"previous":{"title":"docker-compose学习笔记","level":"5.2","depth":1,"path":"docker/docker-compose-study.md","ref":"docker/docker-compose-study.md","articles":[]},"dir":"ltr"},"config":{"plugins":["github","editlink","-lunr","-search","search-plus","tbfed-pagefooter","splitter","page-toc-button","back-to-top-button","-lunr","-search","search-plus","github-buttons@2.1.0","favicon@^0.0.2","3-ba","theme-default","pageview-count","auto-scroll-table","popup","code","mygitalk"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"&copy vishon","modify_label":"Updated at","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-okaidia.css"]},"disqus":{"shortName":"nieweixing-github-io"},"github":{"url":"https://github.com/nieweixing"},"editlink":{"label":"编辑本页","multilingual":false,"base":"https://github.com/nieweixing/mybook/tree/gh-pages"},"splitter":{},"auto-scroll-table":{},"popup":{},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"favicon":{"shortcut":"favicon.ico","bookmark":"favicon.ico"},"page-toc-button":{},"back-to-top-button":{},"pageview-count":{},"github-buttons":{"repo":"nieweixing/mybook","types":["star"],"size":"small"},"3-ba":{"configuration":"auto","token":"c03bec8e82bc53c064e0e648ffa54d88"},"mygitalk":{"flipMoveOptions":{},"clientID":"5976cd3d9cc251569467","number":-1,"perPage":10,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","admin":["nieweixing"],"createIssueManually":false,"distractionFreeMode":false,"repo":"gitalk-comment","owner":"nieweixing","enableHotKey":true,"clientSecret":"74117131a57324d4d616267265a94f4a1ac293ec","pagerDirection":"last","labels":["Gitalk"]},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{},"image-captions":{"caption":"图片 - _CAPTION_"}},"theme":"default","author":"vishon","pdf":{"pageNumbers":true,"fontSize":11,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"toc":true},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"运维操作指南","language":"zh-hans","links":{"sidebar":{"聂伟星个人博客":"https://www.niewx.cn","TKE运维手册":"https://cloud.tencent.com/developer/column/87421"}},"gitbook":">= 3.2.2","description":"运维操作指南"},"file":{"path":"k8s/k8s-common-commands.md","mtime":"2021-05-21T09:07:57.254Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-03T11:44:25.552Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"kubecm管理多k8s集群","level":"6.5","depth":1,"next":{"title":"tke上使用docker-in-docker","level":"7.1","depth":1,"path":"tke/tke-used-docker-in-docker.md","ref":"tke/tke-used-docker-in-docker.md","articles":[]},"previous":{"title":"k8s中生成自定义用户kubeconfig","level":"6.4","depth":1,"path":"k8s/k8s-generate-kubeonfig.md","ref":"k8s/k8s-generate-kubeonfig.md","articles":[]},"dir":"ltr"},"config":{"plugins":["github","editlink","-lunr","-search","search-plus","tbfed-pagefooter","splitter","page-toc-button","back-to-top-button","-lunr","-search","search-plus","github-buttons@2.1.0","favicon@^0.0.2","3-ba","theme-default","pageview-count","auto-scroll-table","popup","code","mygitalk"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"&copy vishon","modify_label":"Updated at","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-okaidia.css"]},"disqus":{"shortName":"nieweixing-github-io"},"github":{"url":"https://github.com/nieweixing"},"editlink":{"label":"编辑本页","multilingual":false,"base":"https://github.com/nieweixing/mybook/tree/gh-pages"},"splitter":{},"auto-scroll-table":{},"popup":{},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"favicon":{"shortcut":"favicon.ico","bookmark":"favicon.ico"},"page-toc-button":{},"back-to-top-button":{},"pageview-count":{},"github-buttons":{"repo":"nieweixing/mybook","types":["star"],"size":"small"},"3-ba":{"configuration":"auto","token":"c03bec8e82bc53c064e0e648ffa54d88"},"mygitalk":{"flipMoveOptions":{},"clientID":"5976cd3d9cc251569467","number":-1,"perPage":10,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","admin":["nieweixing"],"createIssueManually":false,"distractionFreeMode":false,"repo":"gitalk-comment","owner":"nieweixing","enableHotKey":true,"clientSecret":"74117131a57324d4d616267265a94f4a1ac293ec","pagerDirection":"last","labels":["Gitalk"]},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{},"image-captions":{"caption":"图片 - _CAPTION_"}},"theme":"default","author":"vishon","pdf":{"pageNumbers":true,"fontSize":11,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"toc":true},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"运维操作指南","language":"zh-hans","links":{"sidebar":{"聂伟星个人博客":"https://www.niewx.cn","TKE运维手册":"https://cloud.tencent.com/developer/column/87421"}},"gitbook":">= 3.2.2","description":"运维操作指南"},"file":{"path":"k8s/kubecm-manages-k8s-clusters.md","mtime":"2021-06-03T11:43:52.107Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-03T11:44:25.552Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
