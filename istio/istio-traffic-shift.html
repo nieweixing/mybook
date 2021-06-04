@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>【k8s】强制删除Terminating状态ns · 运维操作指南</title>
+        <title>【istio】istio流量转移实践 · 运维操作指南</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -91,10 +91,8 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="userd-filebeat-as-sidecar-collect-log.html" />
     
-    
-    <link rel="prev" href="k8s-common-commands.html" />
+    <link rel="prev" href="Sidecar-startup-sequence-problem-in-istio.html" />
     
 
     
@@ -361,9 +359,9 @@
         
         
     
-        <li class="chapter " data-level="6.1" data-path="k8s-common-commands.html">
+        <li class="chapter " data-level="6.1" data-path="../k8s/k8s-common-commands.html">
             
-                <a href="k8s-common-commands.html">
+                <a href="../k8s/k8s-common-commands.html">
             
                     
                     【k8s】k8s常用命令总结
@@ -374,9 +372,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="6.2" data-path="k8s-force-delete-terminating-ns.html">
+        <li class="chapter " data-level="6.2" data-path="../k8s/k8s-force-delete-terminating-ns.html">
             
-                <a href="k8s-force-delete-terminating-ns.html">
+                <a href="../k8s/k8s-force-delete-terminating-ns.html">
             
                     
                     【k8s】强制删除Terminating状态ns
@@ -387,9 +385,9 @@
             
         </li>
     
-        <li class="chapter " data-level="6.3" data-path="userd-filebeat-as-sidecar-collect-log.html">
+        <li class="chapter " data-level="6.3" data-path="../k8s/userd-filebeat-as-sidecar-collect-log.html">
             
-                <a href="userd-filebeat-as-sidecar-collect-log.html">
+                <a href="../k8s/userd-filebeat-as-sidecar-collect-log.html">
             
                     
                     【k8s】k8s中filebeat作为sidecar采集容器日志
@@ -400,9 +398,9 @@
             
         </li>
     
-        <li class="chapter " data-level="6.4" data-path="k8s-generate-kubeonfig.html">
+        <li class="chapter " data-level="6.4" data-path="../k8s/k8s-generate-kubeonfig.html">
             
-                <a href="k8s-generate-kubeonfig.html">
+                <a href="../k8s/k8s-generate-kubeonfig.html">
             
                     
                     【k8s】k8s中生成自定义用户kubeconfig
@@ -413,9 +411,9 @@
             
         </li>
     
-        <li class="chapter " data-level="6.5" data-path="kubecm-manages-k8s-clusters.html">
+        <li class="chapter " data-level="6.5" data-path="../k8s/kubecm-manages-k8s-clusters.html">
             
-                <a href="kubecm-manages-k8s-clusters.html">
+                <a href="../k8s/kubecm-manages-k8s-clusters.html">
             
                     
                     【k8s】kubecm管理多k8s集群
@@ -551,9 +549,9 @@
         
         
     
-        <li class="chapter " data-level="10.1" data-path="../istio/Sidecar-startup-sequence-problem-in-istio.html">
+        <li class="chapter " data-level="10.1" data-path="Sidecar-startup-sequence-problem-in-istio.html">
             
-                <a href="../istio/Sidecar-startup-sequence-problem-in-istio.html">
+                <a href="Sidecar-startup-sequence-problem-in-istio.html">
             
                     
                     【istio】istio中sidecar启动顺序问题
@@ -564,9 +562,9 @@
             
         </li>
     
-        <li class="chapter " data-level="10.2" data-path="../istio/istio-traffic-shift.html">
+        <li class="chapter active" data-level="10.2" data-path="istio-traffic-shift.html">
             
-                <a href="../istio/istio-traffic-shift.html">
+                <a href="istio-traffic-shift.html">
             
                     
                     【istio】istio流量转移实践
@@ -607,7 +605,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >【k8s】强制删除Terminating状态ns</a>
+        <a href=".." >【istio】istio流量转移实践</a>
     </h1>
 </div>
 
@@ -622,63 +620,207 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="&#x5F3A;&#x5236;&#x5220;&#x9664;terminating&#x72B6;&#x6001;ns">&#x5F3A;&#x5236;&#x5220;&#x9664;Terminating&#x72B6;&#x6001;ns</h1>
-<h2 id="kubectl-get-ns-&#x67E5;&#x770B;&#x5904;&#x4E8E;terminating&#x7684;ns">kubectl get ns &#x67E5;&#x770B;&#x5904;&#x4E8E;Terminating&#x7684;ns</h2>
-<pre><code>[root@VM_1_4_centos ~]# kubectl get ns | grep testns
-testns                   Terminating   21d
-</code></pre><h2 id="&#x5C06;&#x5904;&#x4E8E;terminating&#x7684;ns&#x7684;&#x63CF;&#x8FF0;&#x6587;&#x4EF6;&#x4FDD;&#x5B58;&#x4E0B;&#x6765;">&#x5C06;&#x5904;&#x4E8E;Terminating&#x7684;ns&#x7684;&#x63CF;&#x8FF0;&#x6587;&#x4EF6;&#x4FDD;&#x5B58;&#x4E0B;&#x6765;</h2>
-<pre><code>[root@VM_1_4_centos ~]# kubectl get ns testns -o json &gt; tmp.json
-[root@VM_1_4_centos ~]# cat tmp.json 
-{
-    &quot;apiVersion&quot;: &quot;v1&quot;,
-    &quot;kind&quot;: &quot;Namespace&quot;,
-    &quot;metadata&quot;: {
-        &quot;creationTimestamp&quot;: &quot;2020-10-13T14:28:07Z&quot;,
-        &quot;name&quot;: &quot;testns&quot;,
-        &quot;resourceVersion&quot;: &quot;13782744400&quot;,
-        &quot;selfLink&quot;: &quot;/api/v1/namespaces/testns&quot;,
-        &quot;uid&quot;: &quot;9ff63d71-a4a1-43bc-89e3-78bf29788844&quot;
-    },
-    &quot;spec&quot;: {
-        &quot;finalizers&quot;: [
-            &quot;kubernetes&quot;
-        ]
-    },
-    &quot;status&quot;: {
-        &quot;phase&quot;: &quot;Terminating&quot;
-    }
-}
-</code></pre><h2 id="&#x672C;&#x5730;&#x542F;&#x52A8;kube-proxy">&#x672C;&#x5730;&#x542F;&#x52A8;kube proxy</h2>
-<pre><code>kubectl proxy --port=8081
-</code></pre><h2 id="&#x65B0;&#x5F00;&#x7A97;&#x53E3;&#x6267;&#x884C;&#x5220;&#x9664;&#x64CD;&#x4F5C;">&#x65B0;&#x5F00;&#x7A97;&#x53E3;&#x6267;&#x884C;&#x5220;&#x9664;&#x64CD;&#x4F5C;</h2>
-<pre><code>curl -k -H &quot;Content-Type: application/json&quot; -X PUT --data-binary @tmp.json http://127.0.0.1:8081/api/v1/namespaces
-</code></pre><p>&#x5982;&#x679C;&#x4E0A;&#x9762;&#x65B9;&#x6CD5;&#x65E0;&#x6CD5;&#x5220;&#x9664;namespace&#xFF0C;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x5982;&#x4E0B;&#x65B9;&#x6CD5;&#x770B;&#x4E0B;namespace&#x662F;&#x4E0D;&#x662F;&#x8FD8;&#x6709;&#x4EC0;&#x4E48;&#x8D44;&#x6E90;&#x6CA1;&#x6709;&#x6E05;&#x7406;</p>
-<pre><code>&#x82E5;&#x547D;&#x540D;&#x7A7A;&#x95F4;&#x4F9D;&#x7136;&#x65E0;&#x6CD5;&#x5220;&#x9664;&#xFF0C;&#x5219;&#x67E5;&#x8BE2;&#x547D;&#x540D;&#x7A7A;&#x95F4;&#x54EA;&#x4E9B;&#x8D44;&#x6E90;
-kubectl api-resources --verbs=list --namespaced -o name | xargs -n 1 kubectl get --show-kind --ignore-not-found -n &lt;&#x547D;&#x540D;&#x7A7A;&#x95F4;&gt;
+                                <p>&#x6709;&#x65F6;&#x5019;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x5C06;&#x670D;&#x52A1;&#x7684;&#x90E8;&#x5206;&#x6D41;&#x91CF;&#x8F6C;&#x79FB;&#x5230;&#x53E6;&#x5916;&#x4E00;&#x4E2A;&#x670D;&#x52A1;&#xFF0C;&#x7070;&#x5EA6;&#x6D4B;&#x8BD5;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x4E3A;&#x4E86;&#x6D4B;&#x8BD5;&#x65B0;&#x7248;&#x672C;&#x662F;&#x5426;&#x6709;&#x95EE;&#x9898;&#xFF0C;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x5C06;&#x90E8;&#x5206;&#x6D41;&#x91CF;&#x6253;&#x5230;&#x65B0;&#x7248;&#x672C;&#x4E0A;&#xFF0C;&#x672C;&#x6B21;&#x4EFB;&#x52A1;&#xFF0C;&#x6211;&#x4EEC;&#x5B9E;&#x73B0;&#x5C06;&#x8BF7;&#x6C42;&#x6D41;&#x91CF;20%&#x6253;&#x5230;v1&#x7248;&#x672C;&#xFF0C;80%&#x7684;&#x6D41;&#x91CF;&#x6253;&#x5230;v2&#x7248;&#x672C;&#x3002;</p>
+<h1 id="&#x90E8;&#x7F72;nginx&#x7684;v1&#x548C;v2&#x7248;&#x672C;">&#x90E8;&#x7F72;nginx&#x7684;v1&#x548C;v2&#x7248;&#x672C;</h1>
+<pre><code>apiVersion: v1
+data:
+  index.html: I am v1 version
+kind: ConfigMap
+metadata:
+  name: index-v1
+  namespace: mesh
 
+---
 
-&#x7136;&#x540E;&#x5220;&#x9664;&#x8FD9;&#x4E9B;&#x8D44;&#x6E90;&#xFF1A;
-$ kubectl -n p-4q9rv delete projectalertgroup.management.cattle.io/projectalert-workload-alert --grace-period=0 --force
+apiVersion: v1
+data:
+  index.html: I am v2 version
+kind: ConfigMap
+metadata:
+  name: index-v2
+  namespace: mesh
 
+---
 
-&#x82E5; Pod &#x8FD8;&#x662F;&#x65E0;&#x6CD5;&#x5220;&#x9664;&#xFF0C;&#x53EF;&#x4EE5;&#x5728; Pod &#x4E2D;&#x6DFB;&#x52A0;&#x8865;&#x4E01;&#xFF1A;
-kubectl -n p-4q9rv patch projectalertgroup.management.cattle.io/projectalert-workload-alert -p &apos;{&quot;metadata&quot;:{&quot;finalizers&quot;:[]}}&apos; --type=&apos;merge&apos; 
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: nginx
+    version: v1
+  name: nginx-v1
+  namespace: mesh
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: nginx
+        version: v1
+    spec:
+      containers:
+      - image: nginx
+        imagePullPolicy: Always
+        name: nginx-v1
+        resources:
+          limits:
+            cpu: 500m
+            memory: 1Gi
+          requests:
+            cpu: 250m
+            memory: 256Mi
+        volumeMounts:
+        - mountPath: /usr/share/nginx/html/index.html
+          name: vol
+          subPath: index.html
+      dnsPolicy: ClusterFirst
+      imagePullSecrets:
+      - name: qcloudregistrykey
+      restartPolicy: Always
+      volumes:
+      - configMap:
+          defaultMode: 420
+          name: index-v1
+        name: vol
 
+---
 
-&#x6DFB;&#x52A0;&#x8865;&#x4E01;&#x540E;&#xFF0C;&#x5F3A;&#x5236;&#x5220;&#x9664;&#xFF1A;
-kubectl -n p-4q9rv delete projectalertrule.management.cattle.io/memory-close-to-resource-limited --grace-period=0 --force
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: nginx
+    version: v2
+  name: nginx-v2
+  namespace: mesh
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx
+      version: v2
+  template:
+    metadata:
+      labels:
+        app: nginx
+        version: v2
+    spec:
+      containers:
+      - image: nginx
+        imagePullPolicy: Always
+        name: nginx-v2
+        resources:
+          limits:
+            cpu: 500m
+            memory: 1Gi
+          requests:
+            cpu: 250m
+            memory: 256Mi
+        volumeMounts:
+        - mountPath: /usr/share/nginx/html/index.html
+          name: vol
+          subPath: index.html
+      dnsPolicy: ClusterFirst
+      imagePullSecrets:
+      - name: qcloudregistrykey
+      restartPolicy: Always
+      volumes:
+      - configMap:
+          defaultMode: 420
+          name: index-v2
+        name: vol
 
-&#x7136;&#x540E;&#x6267;&#x884C;&#x4E0B;&#x9762;&#x547D;&#x4EE4;&#x5220;&#x9664;namespace
-kubectl patch namespace &lt;&#x547D;&#x540D;&#x7A7A;&#x95F4;&gt; -p &apos;{&quot;metadata&quot;:{&quot;finalizers&quot;:[]}}&apos; --type=&apos;merge&apos;
-kubectl delete namespace cattle-system --grace-period=0 --force
-</code></pre><p>&#x5176;&#x5B9E;&#x4E5F;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x5C06;&#x4FEE;&#x6539;&#x5BF9;&#x5E94;ns&#x751F;&#x6210;json&#x6587;&#x4EF6;</p>
-<pre><code>[root@master-1 ~]# vim tmp.json
-&#x5220;&#x9664;spec&#x5B57;&#x6BB5;&#x540E;&#xFF0C;&#x6267;&#x884C;&#x4EE5;&#x4E0B;curl&#x547D;&#x4EE4;&#xFF0C;&#x4F7F;&#x7528;kube-apiserver&#x7684;8081&#x7AEF;&#x53E3;&#xFF0C;&#x6267;&#x884C;&#x5220;&#x9664;&#x64CD;&#x4F5C;
+---
 
-#&#x6CE8;&#x610F;&#x4FEE;&#x6539;@XXX.json &#xFF0C;&#x4FEE;&#x6539; namespaces/XXX/finalize ,&#x5176;&#x4E2D;XXX &#x8868;&#x793A;&#x4F60;&#x8981;&#x5220;&#x9664;&#x7684;&#x547D;&#x540D;&#x7A7A;&#x95F4;&#x540D;&#x79F0;
-[root@master-1 ~]# curl -k -H &quot;Content-Type: application/json&quot; -X PUT --data-binary @tmp.json http://127.0.0.1:8081/api/v1/namespaces/mysql/finalize
-</code></pre><p><footer class="page-footer"><span class="copyright">&#xA9; vishon all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">Updated at
-2021-05-21 11:46:56
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-v1
+  labels:
+    app: nginx
+    service: nginx
+spec:
+  ports:
+  - port: 80
+    name: http
+  selector:
+    app: nginx
+</code></pre><p>&#x8FD9;&#x91CC;&#x90E8;&#x7F72;&#x4E86;&#x4E00;&#x4E2A;&#x7EDF;&#x4E00;&#x7684;&#x5165;&#x53E3;service&#x5173;&#x8054;&#x5230;&#x540E;&#x7AEF;&#x7684;v1&#x548C;v2&#x7248;&#x672C;pod&#x91CC;&#x9762;</p>
+<h1 id="&#x521B;&#x5EFA;destinationrule">&#x521B;&#x5EFA;DestinationRule</h1>
+<pre><code>apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: nginx
+  namespace: mesh
+spec:
+  host: nginx
+  subsets:
+  - name: v1
+    labels:
+      version: v1
+  - name: v2
+    labels:
+      version: v2
+</code></pre><h1 id="&#x521B;&#x5EFA;gateway">&#x521B;&#x5EFA;gateway</h1>
+<pre><code>apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: nginx-gw
+  namespace: mesh
+spec:
+  servers:
+    - port:
+        number: 88
+        name: HTTP-88-ebsi
+        protocol: HTTP
+      hosts:
+        - &apos;*&apos;
+  selector:
+    app: istio-ingressgateway
+    istio: ingressgateway
+</code></pre><p>&#x6302;&#x8F7D;ingressgateway&#x4F5C;&#x4E3A;&#x7EDF;&#x4E00;&#x7684;&#x8BBF;&#x95EE;&#x5165;&#x53E3;</p>
+<h1 id="&#x521B;&#x5EFA;virtualservice">&#x521B;&#x5EFA;VirtualService</h1>
+<pre><code>apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: nginx
+  namespace: mesh
+spec:
+  hosts:
+    - &apos;*&apos;
+  gateways:
+    - mesh/nginx-gw
+  http:
+    - route:
+      - destination:
+          host: nginx
+          subset: v1
+        weight: 20
+      - destination:
+          host: nginx
+          subset: v2
+        weight: 80
+</code></pre><p>VirtualService&#x91CC;&#x9762;&#x7684;weight&#x5B57;&#x6BB5;&#x4EE3;&#x8868;&#x7684;&#x662F;&#x6D41;&#x91CF;&#x8F6C;&#x53D1;&#x7684;&#x6BD4;&#x4F8B;&#xFF0C;&#x8FD9;&#x91CC;&#x5C06;&#x6D41;&#x91CF;20%&#x8F6C;&#x53D1;&#x5230;v1&#xFF0C;&#x6D41;&#x91CF;80%&#x8F6C;&#x5230;v2</p>
+<h1 id="&#x8BBF;&#x95EE;&#x6D4B;&#x8BD5;">&#x8BBF;&#x95EE;&#x6D4B;&#x8BD5;</h1>
+<p>&#x6211;&#x4EEC;&#x76F4;&#x63A5;&#x7528;ingress&#x7684;LoadBalancer&#x7684;vip&#x548C;88&#x7AEF;&#x53E3;&#x8BBF;&#x95EE;10&#x6B21;&#x770B;&#x4E0B;</p>
+<pre><code>[root@VM-0-13-centos ~]# for i in {1..10};do curl 106.xx.xx.93:88 ; echo &quot;&quot; ;done
+I am v2 version
+I am v2 version
+I am v2 version
+I am v2 version
+I am v2 version
+I am v2 version
+I am v2 version
+I am v2 version
+I am v1 version
+I am v1 version
+</code></pre><p>&#x4ECE;&#x4E0A;&#x9762;&#x7684;&#x6D4B;&#x8BD5;&#x7ED3;&#x679C;&#x770B;&#xFF0C;&quot;I am v1 version&quot;&#x51FA;&#x73B0;&#x4E86;2&#x6B21;&#xFF0C;&quot;I am v2 version&quot;&#x51FA;&#x73B0;&#x4E86;8&#x6B21;&#xFF0C;&#x8BF4;&#x660E;&#x8BF7;&#x6C42;&#x7684;&#x6D41;&#x91CF;&#x662F;&#x7B26;&#x5408;VirtualService&#x7684;&#x5206;&#x914D;&#x6BD4;&#x4F8B;&#x7684; </p>
+<p><footer class="page-footer"><span class="copyright">&#xA9; vishon all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">Updated at
+2021-06-04 10:59:22
 </span></footer></p>
 <div id="gitalk-container"></div>
 <script>console.log("plugin-popup....");document.onclick = function(e){ e.target.tagName === "IMG" && window.open(e.target.src,e.target.src)}</script><style>img{cursor:pointer}</style>
@@ -708,14 +850,10 @@ kubectl delete namespace cattle-system --grace-period=0 --force
 
             
                 
-                <a href="k8s-common-commands.html" class="navigation navigation-prev " aria-label="Previous page: 【k8s】k8s常用命令总结">
+                <a href="Sidecar-startup-sequence-problem-in-istio.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: 【istio】istio中sidecar启动顺序问题">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
-                
-                <a href="userd-filebeat-as-sidecar-collect-log.html" class="navigation navigation-next " aria-label="Next page: 【k8s】k8s中filebeat作为sidecar采集容器日志">
-                    <i class="fa fa-angle-right"></i>
-                </a>
                 
             
         
@@ -724,7 +862,7 @@ kubectl delete namespace cattle-system --grace-period=0 --force
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"【k8s】强制删除Terminating状态ns","level":"6.2","depth":1,"next":{"title":"【k8s】k8s中filebeat作为sidecar采集容器日志","level":"6.3","depth":1,"path":"k8s/userd-filebeat-as-sidecar-collect-log.md","ref":"k8s/userd-filebeat-as-sidecar-collect-log.md","articles":[]},"previous":{"title":"【k8s】k8s常用命令总结","level":"6.1","depth":1,"path":"k8s/k8s-common-commands.md","ref":"k8s/k8s-common-commands.md","articles":[]},"dir":"ltr"},"config":{"plugins":["github","editlink","-lunr","-search","search-plus","tbfed-pagefooter","splitter","page-toc-button","back-to-top-button","-lunr","-search","search-plus","github-buttons@2.1.0","favicon@^0.0.2","3-ba","theme-default","pageview-count","auto-scroll-table","popup","code","mygitalk"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"&copy vishon","modify_label":"Updated at","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-okaidia.css"]},"disqus":{"shortName":"nieweixing-github-io"},"github":{"url":"https://github.com/nieweixing"},"editlink":{"label":"编辑本页","multilingual":false,"base":"https://github.com/nieweixing/mybook/tree/gh-pages"},"splitter":{},"auto-scroll-table":{},"popup":{},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"favicon":{"shortcut":"favicon.ico","bookmark":"favicon.ico"},"page-toc-button":{},"back-to-top-button":{},"pageview-count":{},"github-buttons":{"repo":"nieweixing/mybook","types":["star"],"size":"small"},"3-ba":{"configuration":"auto","token":"c03bec8e82bc53c064e0e648ffa54d88"},"mygitalk":{"flipMoveOptions":{},"clientID":"5976cd3d9cc251569467","number":-1,"perPage":10,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","admin":["nieweixing"],"createIssueManually":false,"distractionFreeMode":false,"repo":"gitalk-comment","owner":"nieweixing","enableHotKey":true,"clientSecret":"74117131a57324d4d616267265a94f4a1ac293ec","pagerDirection":"last","labels":["Gitalk"]},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{},"image-captions":{"caption":"图片 - _CAPTION_"}},"theme":"default","author":"vishon","pdf":{"pageNumbers":true,"fontSize":11,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"toc":true},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"运维操作指南","language":"zh-hans","links":{"sidebar":{"聂伟星个人博客":"https://www.niewx.cn","TKE运维手册":"https://cloud.tencent.com/developer/column/87421"}},"gitbook":">= 3.2.2","description":"运维操作指南"},"file":{"path":"k8s/k8s-force-delete-terminating-ns.md","mtime":"2021-05-21T03:46:56.470Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-04T02:59:44.005Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"【istio】istio流量转移实践","level":"10.2","depth":1,"previous":{"title":"【istio】istio中sidecar启动顺序问题","level":"10.1","depth":1,"path":"istio/Sidecar-startup-sequence-problem-in-istio.md","ref":"istio/Sidecar-startup-sequence-problem-in-istio.md","articles":[]},"dir":"ltr"},"config":{"plugins":["github","editlink","-lunr","-search","search-plus","tbfed-pagefooter","splitter","page-toc-button","back-to-top-button","-lunr","-search","search-plus","github-buttons@2.1.0","favicon@^0.0.2","3-ba","theme-default","pageview-count","auto-scroll-table","popup","code","mygitalk"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"&copy vishon","modify_label":"Updated at","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-okaidia.css"]},"disqus":{"shortName":"nieweixing-github-io"},"github":{"url":"https://github.com/nieweixing"},"editlink":{"label":"编辑本页","multilingual":false,"base":"https://github.com/nieweixing/mybook/tree/gh-pages"},"splitter":{},"auto-scroll-table":{},"popup":{},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"favicon":{"shortcut":"favicon.ico","bookmark":"favicon.ico"},"page-toc-button":{},"back-to-top-button":{},"pageview-count":{},"github-buttons":{"repo":"nieweixing/mybook","types":["star"],"size":"small"},"3-ba":{"configuration":"auto","token":"c03bec8e82bc53c064e0e648ffa54d88"},"mygitalk":{"flipMoveOptions":{},"clientID":"5976cd3d9cc251569467","number":-1,"perPage":10,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","admin":["nieweixing"],"createIssueManually":false,"distractionFreeMode":false,"repo":"gitalk-comment","owner":"nieweixing","enableHotKey":true,"clientSecret":"74117131a57324d4d616267265a94f4a1ac293ec","pagerDirection":"last","labels":["Gitalk"]},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{},"image-captions":{"caption":"图片 - _CAPTION_"}},"theme":"default","author":"vishon","pdf":{"pageNumbers":true,"fontSize":11,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"toc":true},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"运维操作指南","language":"zh-hans","links":{"sidebar":{"聂伟星个人博客":"https://www.niewx.cn","TKE运维手册":"https://cloud.tencent.com/developer/column/87421"}},"gitbook":">= 3.2.2","description":"运维操作指南"},"file":{"path":"istio/istio-traffic-shift.md","mtime":"2021-06-04T02:59:22.282Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-04T02:59:44.005Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
