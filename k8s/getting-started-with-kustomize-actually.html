@@ -1,0 +1,1279 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>【k8s】kustomize入门实践 · 运维操作指南</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="vishon">
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-splitter/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-page-toc-button/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-back-to-top-button/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-pageview-count/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-auto-scroll-table/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-code/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../tke/tke-used-docker-in-docker.html" />
+    
+    
+    <link rel="prev" href="kubecm-manages-k8s-clusters.html" />
+    
+
+    
+        <link rel="shortcut icon" href='../favicon.ico' type="image/x-icon">
+    
+    
+        <link rel="bookmark" href='../favicon.ico' type="image/x-icon">
+    
+    
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"repo":"nieweixing/mybook","types":["star"],"size":"small"};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="https://www.niewx.cn" target="_blank" class="custom-link">聂伟星个人博客</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://cloud.tencent.com/developer/column/87421" target="_blank" class="custom-link">TKE运维手册</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    简介
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">如何搭建属于自己的gitbook</li>
+        
+        
+    
+        <li class="chapter " data-level="2.1" data-path="../gitbook/install-gitbook.html">
+            
+                <a href="../gitbook/install-gitbook.html">
+            
+                    
+                    【gitbook】本地机器安装gitbook
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2" data-path="../gitbook/gitbook-add-note.html">
+            
+                <a href="../gitbook/gitbook-add-note.html">
+            
+                    
+                    【gitbook】gitbook添加笔记
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3" data-path="../gitbook/gitbook-upload-github.html">
+            
+                <a href="../gitbook/gitbook-upload-github.html">
+            
+                    
+                    【gitbook】gitbook上传到github托管
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.4" data-path="../gitbook/gitbook-plugin-usage.html">
+            
+                <a href="../gitbook/gitbook-plugin-usage.html">
+            
+                    
+                    【gitbook】gitbook插件使用
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">linux运维笔记</li>
+        
+        
+    
+        <li class="chapter " data-level="3.1" data-path="../linux/shell-script-template.html">
+            
+                <a href="../linux/shell-script-template.html">
+            
+                    
+                    【linux】shell脚本模板
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.2" data-path="../linux/cvm-build-openvpn.html">
+            
+                <a href="../linux/cvm-build-openvpn.html">
+            
+                    
+                    【linux】腾讯云cvm上搭建openvpn
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.3" data-path="../linux/vmware-install-centos-set-static-ip-address.html">
+            
+                <a href="../linux/vmware-install-centos-set-static-ip-address.html">
+            
+                    
+                    【linux】vmware安装centos环境设置静态的ip地址
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">数据库运维笔记</li>
+        
+        
+    
+        <li class="chapter " data-level="4.1" data-path="../database/mysql-devops-note.html">
+            
+                <a href="../database/mysql-devops-note.html">
+            
+                    
+                    【datebase】mysql运维笔记
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.2" data-path="../database/mongodb-devops-note.html">
+            
+                <a href="../database/mongodb-devops-note.html">
+            
+                    
+                    【datebase】mongodb运维笔记
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.3" data-path="../database/redis-devops-note.html">
+            
+                <a href="../database/redis-devops-note.html">
+            
+                    
+                    【datebase】redis运维笔记
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">docker运维笔记</li>
+        
+        
+    
+        <li class="chapter " data-level="5.1" data-path="../docker/dockerfile-study.html">
+            
+                <a href="../docker/dockerfile-study.html">
+            
+                    
+                    【docker】dockerfile学习笔记
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.2" data-path="../docker/docker-compose-study.html">
+            
+                <a href="../docker/docker-compose-study.html">
+            
+                    
+                    【docker】docker-compose学习笔记
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">kubernetes运维笔记</li>
+        
+        
+    
+        <li class="chapter " data-level="6.1" data-path="k8s-common-commands.html">
+            
+                <a href="k8s-common-commands.html">
+            
+                    
+                    【k8s】k8s常用命令总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.2" data-path="k8s-force-delete-terminating-ns.html">
+            
+                <a href="k8s-force-delete-terminating-ns.html">
+            
+                    
+                    【k8s】强制删除Terminating状态ns
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.3" data-path="userd-filebeat-as-sidecar-collect-log.html">
+            
+                <a href="userd-filebeat-as-sidecar-collect-log.html">
+            
+                    
+                    【k8s】k8s中filebeat作为sidecar采集容器日志
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.4" data-path="k8s-generate-kubeonfig.html">
+            
+                <a href="k8s-generate-kubeonfig.html">
+            
+                    
+                    【k8s】k8s中生成自定义用户kubeconfig
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.5" data-path="kubecm-manages-k8s-clusters.html">
+            
+                <a href="kubecm-manages-k8s-clusters.html">
+            
+                    
+                    【k8s】kubecm管理多k8s集群
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="6.6" data-path="getting-started-with-kustomize-actually.html">
+            
+                <a href="getting-started-with-kustomize-actually.html">
+            
+                    
+                    【k8s】kustomize入门实践
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">TKE运维笔记</li>
+        
+        
+    
+        <li class="chapter " data-level="7.1" data-path="../tke/tke-used-docker-in-docker.html">
+            
+                <a href="../tke/tke-used-docker-in-docker.html">
+            
+                    
+                    【tke】tke上使用docker-in-docker
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.2" data-path="../tke/tke-deploy-jumpserver.html">
+            
+                <a href="../tke/tke-deploy-jumpserver.html">
+            
+                    
+                    【tke】tke上部署Jumpserver跳板机
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">云计算运维笔记</li>
+        
+        
+    
+        <li class="chapter " data-level="8.1" data-path="../cloud/1.md">
+            
+                <span>
+            
+                    
+                    云计算简介
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="8.2" >
+            
+                <span>
+            
+                    
+                    aws
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="8.2.1" data-path="../cloud/aws/awscli-command-operation.html">
+            
+                <a href="../cloud/aws/awscli-command-operation.html">
+            
+                    
+                    【aws】awscli命令行操作
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="8.3" >
+            
+                <span>
+            
+                    
+                    腾讯云
+            
+                </span>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">prometheus运维笔记</li>
+        
+        
+    
+        <li class="chapter " data-level="9.1" data-path="../prometheus/1.md">
+            
+                <span>
+            
+                    
+                    prometheus简介
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">istio运维笔记</li>
+        
+        
+    
+        <li class="chapter " data-level="10.1" data-path="../istio/Sidecar-startup-sequence-problem-in-istio.html">
+            
+                <a href="../istio/Sidecar-startup-sequence-problem-in-istio.html">
+            
+                    
+                    【istio】istio中sidecar启动顺序问题
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="10.2" data-path="../istio/istio-traffic-shift.html">
+            
+                <a href="../istio/istio-traffic-shift.html">
+            
+                    
+                    【istio】istio流量转移实践
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            本书使用 GitBook 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >【k8s】kustomize入门实践</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <p>kustomize&#x662F;kubernetes&#x539F;&#x751F;&#x7684;&#x914D;&#x7F6E;&#x7BA1;&#x7406;&#xFF0C;&#x4EE5;&#x65E0;&#x6A21;&#x677F;&#x65B9;&#x5F0F;&#x6765;&#x5B9A;&#x5236;&#x5E94;&#x7528;&#x7684;&#x914D;&#x7F6E;&#x3002;kustomize&#x4F7F;&#x7528;k8s&#x539F;&#x751F;&#x6982;&#x5FF5;&#x5E2E;&#x52A9;&#x521B;&#x5EFA;&#x5E76;&#x590D;&#x7528;&#x8D44;&#x6E90;&#x914D;&#x7F6E;(YAML)&#xFF0C;&#x5141;&#x8BB8;&#x7528;&#x6237;&#x4EE5;&#x4E00;&#x4E2A;&#x5E94;&#x7528;&#x63CF;&#x8FF0;&#x6587;&#x4EF6;&#xFF08;YAML &#x6587;&#x4EF6;&#xFF09;&#x4E3A;&#x57FA;&#x7840;&#xFF08;Base YAML&#xFF09;&#xFF0C;&#x7136;&#x540E;&#x901A;&#x8FC7;Overlay&#x7684;&#x65B9;&#x5F0F;&#x751F;&#x6210;&#x6700;&#x7EC8;&#x90E8;&#x7F72;&#x5E94;&#x7528;&#x6240;&#x9700;&#x7684;&#x63CF;&#x8FF0;&#x6587;&#x4EF6;&#x3002;</p>
+<p>&#x8FD9;&#x91CC;&#x7B80;&#x5355;&#x4E86;&#x89E3;&#x4E0B;&#x51E0;&#x4E2A;&#x6982;&#x5FF5;</p>
+<ul>
+<li>overlay</li>
+</ul>
+<p>overlay &#x662F;&#x4E00;&#x4E2A; kustomization, &#x5B83;&#x4FEE;&#x6539;(&#x5E76;&#x56E0;&#x6B64;&#x4F9D;&#x8D56;&#x4E8E;)&#x53E6;&#x5916;&#x4E00;&#x4E2A;kustomization. overlay&#x4E2D;&#x7684;kustomization&#x6307;&#x7684;&#x662F;&#x4E00;&#x4E9B;&#x5176;&#x5B83;&#x7684;kustomization, &#x79F0;&#x4E3A;&#x5176; base. &#x6CA1;&#x6709; base, overlay &#x65E0;&#x6CD5;&#x4F7F;&#x7528;&#xFF0C;&#x5E76;&#x4E14;&#x4E00;&#x4E2A; overlay &#x53EF;&#x4EE5;&#x7528;&#x4F5C; &#x53E6;&#x4E00;&#x4E2A; overlay &#x7684; base(&#x57FA;&#x7840;)&#x3002;&#x7B80;&#x800C;&#x8A00;&#x4E4B;&#xFF0C;overlay &#x58F0;&#x660E;&#x4E86;&#x4E0E; base &#x4E4B;&#x95F4;&#x7684;&#x5DEE;&#x5F02;&#x3002;&#x901A;&#x8FC7; overlay &#x6765;&#x7EF4;&#x62A4;&#x57FA;&#x4E8E; base &#x7684;&#x4E0D;&#x540C; variants(&#x53D8;&#x4F53;)&#xFF0C;&#x4F8B;&#x5982;&#x5F00;&#x53D1;&#x3001;QA &#x548C;&#x751F;&#x4EA7;&#x73AF;&#x5883;&#x7684;&#x4E0D;&#x540C;variants&#xFF0C;&#x5176;&#x5B9E;overlay&#x5C31;&#x662F;&#x4E0D;&#x540C;&#x7248;&#x672C;&#x7684;&#x5DE5;&#x4F5C;&#x7A7A;&#x95F4;&#xFF0C;&#x4F9D;&#x8D56;&#x4E8E;base&#x5DE5;&#x4F5C;&#x7A7A;&#x95F4;&#x3002;</p>
+<ul>
+<li>variant</li>
+</ul>
+<p>variant &#x662F;&#x5728;&#x96C6;&#x7FA4;&#x4E2D;&#x5C06; overlay &#x5E94;&#x7528;&#x4E8E; base &#x7684;&#x7ED3;&#x679C;&#x3002;&#x4F8B;&#x5982;&#x5F00;&#x53D1;&#x548C;&#x751F;&#x4EA7;&#x73AF;&#x5883;&#x90FD;&#x4FEE;&#x6539;&#x4E86;&#x4E00;&#x4E9B;&#x5171;&#x540C; base &#x4EE5;&#x521B;&#x5EFA;&#x4E0D;&#x540C;&#x7684; variant&#x3002;&#x8FD9;&#x4E9B; variant &#x4F7F;&#x7528;&#x76F8;&#x540C;&#x7684;&#x603B;&#x4F53;&#x8D44;&#x6E90;&#xFF0C;&#x5E76;&#x4E0E;&#x7B80;&#x5355;&#x7684;&#x65B9;&#x5F0F;&#x53D8;&#x5316;&#xFF0C;&#x4F8B;&#x5982; deployment &#x7684;&#x526F;&#x672C;&#x6570;&#x3001;ConfigMap&#x4F7F;&#x7528;&#x7684;&#x6570;&#x636E;&#x6E90;&#x7B49;&#x3002;&#x7B80;&#x800C;&#x8A00;&#x4E4B;&#xFF0C;variant &#x662F;&#x542B;&#x6709;&#x540C;&#x4E00;&#x7EC4; base &#x7684;&#x4E0D;&#x540C; kustomization&#xFF0C;&#x5176;&#x5B9E;variant&#x5C31;&#x662F;&#x67D0;&#x4E00;&#x4E2A;&#x7248;&#x672C;&#x73AF;&#x5883;&#x7684;&#x6240;&#x6709;&#x8D44;&#x6E90;&#x6587;&#x4EF6;&#x3002;</p>
+<ul>
+<li>resource</li>
+</ul>
+<p>&#x5728;kustomize&#x7684;&#x4E0A;&#x4E0B;&#x6587;&#x4E2D;&#xFF0C;resource &#x662F;&#x63CF;&#x8FF0; k8s API &#x5BF9;&#x8C61;&#x7684; YAML &#x6216; JSON &#x6587;&#x4EF6;&#x7684;&#x76F8;&#x5BF9;&#x8DEF;&#x5F84;&#x3002;&#x5373;&#x662F;&#x6307;&#x5411;&#x4E00;&#x4E2A;&#x58F0;&#x660E;&#x4E86; kubernetes API&#x5BF9;&#x8C61;&#x7684;YAML&#x6587;&#x4EF6;</p>
+<ul>
+<li>patch</li>
+</ul>
+<p>&#x4FEE;&#x6539;&#x6587;&#x4EF6;&#x7684;&#x4E00;&#x822C;&#x8BF4;&#x660E;&#x3002;&#x6587;&#x4EF6;&#x8DEF;&#x5F84;&#xFF0C;&#x6307;&#x5411;&#x4E00;&#x4E2A;&#x58F0;&#x660E;&#x4E86; kubernetes API patch &#x7684; YAML &#x6587;&#x4EF6;</p>
+<h1 id="kustomize&#x5B89;&#x88C5;">kustomize&#x5B89;&#x88C5;</h1>
+<pre><code>curl -s &quot;https://raw.githubusercontent.com/\
+kubernetes-sigs/kustomize/master/hack/install_kustomize.sh&quot;  | bash
+</code></pre><p>&#x5B89;&#x88C5;&#x6210;&#x529F;&#x540E;&#xFF0C;&#x6267;&#x884C;kustomize&#x53EF;&#x4EE5;&#x67E5;&#x770B;&#x5E2E;&#x52A9;&#x6307;&#x5BFC;</p>
+<pre><code>[root@VM-0-13-centos mesh]# kustomize
+
+Manages declarative configuration of Kubernetes.
+See https://sigs.k8s.io/kustomize
+
+Usage:
+  kustomize [command]
+
+Available Commands:
+  build                     Print configuration per contents of kustomization.yaml
+  cfg                       Commands for reading and writing configuration.
+  completion                Generate shell completion script
+  create                    Create a new kustomization in the current directory
+  edit                      Edits a kustomization file
+  fn                        Commands for running functions against configuration.
+  help                      Help about any command
+  version                   Prints the kustomize version
+
+Flags:
+  -h, --help          help for kustomize
+      --stack-trace   print a stack-trace on error
+
+Additional help topics:
+  kustomize docs-fn                   [Alpha] Documentation for developing and invoking Configuration Functions.
+  kustomize docs-fn-spec              [Alpha] Documentation for Configuration Functions Specification.
+  kustomize docs-io-annotations       [Alpha] Documentation for annotations used by io.
+  kustomize docs-merge                [Alpha] Documentation for merging Resources (2-way merge).
+  kustomize docs-merge3               [Alpha] Documentation for merging Resources (3-way merge).
+  kustomize tutorials-command-basics  [Alpha] Tutorials for using basic config commands.
+  kustomize tutorials-function-basics [Alpha] Tutorials for using functions.
+
+Use &quot;kustomize [command] --help&quot; for more information about a command.
+</code></pre><h1 id="kustomize&#x90E8;&#x7F72;helloword">kustomize&#x90E8;&#x7F72;helloword</h1>
+<p>kustomize&#x7684;demo&#x793A;&#x4F8B;&#x53EF;&#x4EE5;&#x53C2;&#x8003;&#x94FE;&#x63A5;<a href="https://github.com/kubernetes-sigs/kustomize/tree/master/examples" target="_blank">https://github.com/kubernetes-sigs/kustomize/tree/master/examples</a>&#xFF0C;&#x4E0B;&#x9762;&#x6211;&#x4EEC;&#x4EE5;helloworld&#x4E3A;&#x4F8B;&#x8FDB;&#x884C;&#x793A;&#x8303;&#x4E0B;</p>
+<h2 id="&#x521B;&#x5EFA;base">&#x521B;&#x5EFA;base</h2>
+<p>&#x9996;&#x5148;&#x6211;&#x4EEC;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x4E00;&#x4E2A;helloworld&#x7684;&#x5DE5;&#x4F5C;&#x7A7A;&#x95F4;&#xFF0C;&#x5728;/tmp&#x4E0B;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x4E34;&#x65F6;&#x76EE;&#x5F55;</p>
+<pre><code>DEMO_HOME=$(mktemp -d)
+</code></pre><p>&#x5982;&#x679C;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x7528;&#x5230;overlay&#xFF0C;&#x5219;&#x9700;&#x8981;&#x521B;&#x5EFA;base&#x5DE5;&#x4F5C;&#x7A7A;&#x95F4;&#xFF0C;&#x8BA9;&#x96C6;&#x7FA4;&#x7684;&#x8D44;&#x6E90;&#x653E;&#x5728;base&#x4E0B;</p>
+<pre><code>BASE=$DEMO_HOME/base
+mkdir -p $BASE
+
+curl -s -o &quot;$BASE/#1.yaml&quot; &quot;https://raw.githubusercontent.com\
+/kubernetes-sigs/kustomize\
+/master/examples/helloWorld\
+/{configMap,deployment,kustomization,service}.yaml&quot;
+</code></pre><p>&#x8FD9;&#x6837;&#x6211;&#x4EEC;&#x5C31;&#x5C06;&#x57FA;&#x7840;&#x7684;yaml&#x6587;&#x4EF6;&#x653E;&#x5230;&#x4E86;base&#x4E0B;</p>
+<pre><code>[root@VM-0-13-centos base]# tree $DEMO_HOME
+/tmp/tmp.w5Ic40K11n
+&#x2514;&#x2500;&#x2500; base
+    &#x251C;&#x2500;&#x2500; configMap.yaml
+    &#x251C;&#x2500;&#x2500; deployment.yaml
+    &#x251C;&#x2500;&#x2500; kustomization.yaml
+    &#x2514;&#x2500;&#x2500; service.yaml
+</code></pre><p>&#x5982;&#x679C;&#x4F60;&#x60F3;&#x90E8;&#x7F72;&#x8FD9;&#x4E9B;&#x8D44;&#x6E90;&#xFF0C;&#x53EF;&#x4EE5;&#x7528;kubectl&#x547D;&#x4EE4;&#x90E8;&#x7F72;</p>
+<pre><code>kubectl apply -f $DEMO_HOME/base
+</code></pre><p>&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x9884;&#x89C8;&#x4E0B;base&#x7684;&#x8D44;&#x6E90;&#xFF0C;&#x4F1A;&#x5C06;base&#x4E0B;&#x7684;yaml&#x5185;&#x5BB9;&#x6253;&#x5370;&#x5728;&#x6807;&#x51C6;&#x8F93;&#x51FA;</p>
+<pre><code>[root@VM-0-13-centos base]# kustomize build $BASE
+apiVersion: v1
+data:
+  altGreeting: Good Morning!
+  enableRisky: &quot;false&quot;
+kind: ConfigMap
+metadata:
+  labels:
+    app: hello
+  name: the-map
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: hello
+  name: the-service
+spec:
+  ports:
+  - port: 8666
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: hello
+    deployment: hello
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: hello
+  name: the-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: hello
+      deployment: hello
+  template:
+    metadata:
+      labels:
+        app: hello
+        deployment: hello
+    spec:
+      containers:
+      - command:
+        - /hello
+        - --port=8080
+        - --enableRiskyFeature=$(ENABLE_RISKY)
+        env:
+        - name: ALT_GREETING
+          valueFrom:
+            configMapKeyRef:
+              key: altGreeting
+              name: the-map
+        - name: ENABLE_RISKY
+          valueFrom:
+            configMapKeyRef:
+              key: enableRisky
+              name: the-map
+        image: monopole/hello:1
+        name: the-container
+        ports:
+        - containerPort: 8080
+</code></pre><p>&#x5F53;&#x7136;&#x6211;&#x4EEC;&#x4E5F;&#x53EF;&#x4EE5;&#x8BA2;&#x5236;base&#x4E0B;&#x7684;&#xFF0C;&#x4E0B;&#x9762;&#x6211;&#x4EEC;&#x8BA2;&#x5236;&#x4E0B;app&#x7684;label</p>
+<pre><code>[root@VM-0-13-centos base]# sed -i.bak &apos;s/app: hello/app: my-hello/&apos; \
+&gt;     $BASE/kustomization.yaml
+[root@VM-0-13-centos base]# ll
+total 20
+-rw-r--r-- 1 root root 117 Jun  4 12:10 configMap.yaml
+-rw-r--r-- 1 root root 750 Jun  4 12:10 deployment.yaml
+-rw-r--r-- 1 root root 266 Jun  4 12:37 kustomization.yaml
+-rw-r--r-- 1 root root 263 Jun  4 12:10 kustomization.yaml.bak
+-rw-r--r-- 1 root root 183 Jun  4 12:10 service.yaml
+[root@VM-0-13-centos base]# kustomize build $BASE | grep -C 3 app:
+kind: ConfigMap
+metadata:
+  labels:
+    app: my-hello
+  name: the-map
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: my-hello
+  name: the-service
+spec:
+  ports:
+--
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: my-hello
+    deployment: hello
+  type: LoadBalancer
+---
+--
+kind: Deployment
+metadata:
+  labels:
+    app: my-hello
+  name: the-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: my-hello
+      deployment: hello
+  template:
+    metadata:
+      labels:
+        app: my-hello
+        deployment: hello
+    spec:
+      containers:
+</code></pre><p>&#x4E0B;&#x9762;&#x6211;&#x4EEC;&#x6765;&#x90E8;&#x7F72;&#x591A;&#x4E2A;Overlays&#x6765;&#x5BF9;&#x5E94;&#x591A;&#x4E2A;helloword&#x8BA2;&#x5236;&#x7248;&#x672C;</p>
+<pre><code>OVERLAYS=$DEMO_HOME/overlays
+mkdir -p $OVERLAYS/staging
+mkdir -p $OVERLAYS/production
+</code></pre><h2 id="&#x521B;&#x5EFA;staging-overlays">&#x521B;&#x5EFA;staging Overlays</h2>
+<p>&#x5728;staging&#x76EE;&#x5F55;&#x4E2D;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;kustomization &#x6587;&#x4EF6;&#xFF0C;&#x7528;&#x6765;&#x5B9A;&#x4E49;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x540D;&#x79F0;&#x524D;&#x7F00;&#x548C;&#x4E00;&#x4E9B;&#x4E0D;&#x540C;&#x7684; labels &#x3002;</p>
+<pre><code>cat &lt;&lt;&apos;EOF&apos; &gt;$OVERLAYS/staging/kustomization.yaml
+namePrefix: staging-
+commonLabels:
+  variant: staging
+  org: acmeCorporation
+commonAnnotations:
+  note: Hello, I am staging!
+resources:
+- ../../base
+patchesStrategicMerge:
+- map.yaml
+EOF
+</code></pre><p>&#x65B0;&#x589E;&#x4E00;&#x4E2A;&#x81EA;&#x5B9A;&#x4E49;&#x7684; configMap &#x5C06;&#x95EE;&#x5019;&#x6D88;&#x606F;&#x4ECE; Good Morning! &#x6539;&#x4E3A; Have a pineapple! &#x3002;</p>
+<p>&#x540C;&#x65F6;&#xFF0C;&#x5C06; risky &#x6807;&#x8BB0;&#x8BBE;&#x7F6E;&#x4E3A; true &#x3002;</p>
+<pre><code>cat &lt;&lt;EOF &gt;$OVERLAYS/staging/map.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: the-map
+data:
+  altGreeting: &quot;Have a pineapple!&quot;
+  enableRisky: &quot;true&quot;
+EOF
+</code></pre><h2 id="&#x521B;&#x5EFA;production-overlays">&#x521B;&#x5EFA;production Overlays</h2>
+<p>&#x5728; production &#x76EE;&#x5F55;&#x4E2D;&#x521B;&#x5EFA;&#x4E00;&#x4E2A; kustomization &#x6587;&#x4EF6;&#xFF0C;&#x7528;&#x6765;&#x5B9A;&#x4E49;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x540D;&#x79F0;&#x524D;&#x7F00;&#x548C; labels &#x3002;</p>
+<pre><code>cat &lt;&lt;EOF &gt;$OVERLAYS/production/kustomization.yaml
+namePrefix: production-
+commonLabels:
+  variant: production
+  org: acmeCorporation
+commonAnnotations:
+  note: Hello, I am production!
+resources:
+- ../../base
+patchesStrategicMerge:
+- deployment.yaml
+EOF
+</code></pre><p>Production Patch&#xFF0C;&#x56E0;&#x4E3A;&#x751F;&#x4EA7;&#x73AF;&#x5883;&#x9700;&#x8981;&#x5904;&#x7406;&#x66F4;&#x591A;&#x7684;&#x6D41;&#x91CF;&#xFF0C;&#x65B0;&#x5EFA;&#x4E00;&#x4E2A;production patch&#x6765;&#x589E;&#x52A0;&#x526F;&#x672C;&#x6570;&#x3002;</p>
+<pre><code>cat &lt;&lt;EOF &gt;$OVERLAYS/production/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: the-deployment
+spec:
+  replicas: 5
+EOF
+</code></pre><h2 id="&#x6BD4;&#x8F83;overlays">&#x6BD4;&#x8F83;overlays</h2>
+<p>DEMO_HOME &#x73B0;&#x5728;&#x5305;&#x542B;&#xFF1A;</p>
+<ul>
+<li><p>base&#x76EE;&#x5F55;&#xFF1A;&#x5BF9;&#x62C9;&#x53D6;&#x5230;&#x7684;&#x6E90;&#x914D;&#x7F6E;&#x8FDB;&#x884C;&#x4E86;&#x7B80;&#x5355;&#x5B9A;&#x5236;</p>
+</li>
+<li><p>overlays&#x76EE;&#x5F55;&#xFF1A;&#x5305;&#x542B;&#x5728;&#x96C6;&#x7FA4;&#x4E2D;&#x521B;&#x5EFA;&#x4E0D;&#x540C; staging &#x548C; production variants &#x7684; kustomizations &#x548C; patches &#x3002;</p>
+</li>
+</ul>
+<p>&#x67E5;&#x770B;&#x76EE;&#x5F55;&#x7ED3;&#x6784;&#x548C;&#x5DEE;&#x5F02;&#xFF1A;</p>
+<pre><code>[root@VM-0-13-centos base]# tree $DEMO_HOME
+/tmp/tmp.w5Ic40K11n
+&#x251C;&#x2500;&#x2500; base
+&#x2502;   &#x251C;&#x2500;&#x2500; configMap.yaml
+&#x2502;   &#x251C;&#x2500;&#x2500; deployment.yaml
+&#x2502;   &#x251C;&#x2500;&#x2500; kustomization.yaml
+&#x2502;   &#x251C;&#x2500;&#x2500; kustomization.yaml.bak
+&#x2502;   &#x2514;&#x2500;&#x2500; service.yaml
+&#x2514;&#x2500;&#x2500; overlays
+    &#x251C;&#x2500;&#x2500; production
+    &#x2502;   &#x251C;&#x2500;&#x2500; deployment.yaml
+    &#x2502;   &#x2514;&#x2500;&#x2500; kustomization.yaml
+    &#x2514;&#x2500;&#x2500; staging
+        &#x251C;&#x2500;&#x2500; kustomization.yaml
+        &#x2514;&#x2500;&#x2500; map.yaml
+</code></pre><p>&#x76F4;&#x63A5;&#x6BD4;&#x8F83; staging &#x548C; production &#x8F93;&#x51FA;&#x7684;&#x4E0D;&#x540C;&#xFF1A;</p>
+<pre><code>[root@VM-0-13-centos base]# diff \
+&gt;   &lt;(kustomize build $OVERLAYS/staging) \
+&gt;   &lt;(kustomize build $OVERLAYS/production) |\
+&gt;   more
+3,4c3,4
+&lt;   altGreeting: Have a pineapple!
+&lt;   enableRisky: &quot;true&quot;
+---
+&gt;   altGreeting: Good Morning!
+&gt;   enableRisky: &quot;false&quot;
+8c8
+&lt;     note: Hello, I am staging!
+---
+&gt;     note: Hello, I am production!
+12,13c12,13
+&lt;     variant: staging
+&lt;   name: staging-the-map
+---
+&gt;     variant: production
+&gt;   name: production-the-map
+19c19
+&lt;     note: Hello, I am staging!
+---
+&gt;     note: Hello, I am production!
+23,24c23,24
+&lt;     variant: staging
+&lt;   name: staging-the-service
+---
+&gt;     variant: production
+&gt;   name: production-the-service
+34c34
+&lt;     variant: staging
+---
+&gt;     variant: production
+41c41
+&lt;     note: Hello, I am staging!
+---
+&gt;     note: Hello, I am production!
+45,46c45,46
+&lt;     variant: staging
+&lt;   name: staging-the-deployment
+---
+&gt;     variant: production
+&gt;   name: production-the-deployment
+48c48
+&lt;   replicas: 3
+---
+&gt;   replicas: 5
+54c54
+&lt;       variant: staging
+---
+&gt;       variant: production
+58c58
+&lt;         note: Hello, I am staging!
+---
+&gt;         note: Hello, I am production!
+63c63
+&lt;         variant: staging
+---
+&gt;         variant: production
+75c75
+&lt;
+</code></pre><h2 id="&#x90E8;&#x7F72;&#x4E0D;&#x540C;&#x7684;overlys">&#x90E8;&#x7F72;&#x4E0D;&#x540C;&#x7684;overlys</h2>
+<p>&#x8F93;&#x51FA;&#x4E0D;&#x540C; overlys &#x7684;&#x914D;&#x7F6E;&#xFF1A;</p>
+<pre><code>[root@VM-0-13-centos base]# kustomize build $OVERLAYS/staging
+apiVersion: v1
+data:
+  altGreeting: Have a pineapple!
+  enableRisky: &quot;true&quot;
+kind: ConfigMap
+metadata:
+  annotations:
+    note: Hello, I am staging!
+  labels:
+    app: my-hello
+    org: acmeCorporation
+    variant: staging
+  name: staging-the-map
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    note: Hello, I am staging!
+  labels:
+    app: my-hello
+    org: acmeCorporation
+    variant: staging
+  name: staging-the-service
+spec:
+  ports:
+  - port: 8666
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: my-hello
+    deployment: hello
+    org: acmeCorporation
+    variant: staging
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    note: Hello, I am staging!
+  labels:
+    app: my-hello
+    org: acmeCorporation
+    variant: staging
+  name: staging-the-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: my-hello
+      deployment: hello
+      org: acmeCorporation
+      variant: staging
+  template:
+    metadata:
+      annotations:
+        note: Hello, I am staging!
+      labels:
+        app: my-hello
+        deployment: hello
+        org: acmeCorporation
+        variant: staging
+    spec:
+      containers:
+      - command:
+        - /hello
+        - --port=8080
+        - --enableRiskyFeature=$(ENABLE_RISKY)
+        env:
+        - name: ALT_GREETING
+          valueFrom:
+            configMapKeyRef:
+              key: altGreeting
+              name: staging-the-map
+        - name: ENABLE_RISKY
+          valueFrom:
+            configMapKeyRef:
+              key: enableRisky
+              name: staging-the-map
+        image: monopole/hello:1
+        name: the-container
+        ports:
+        - containerPort: 8080
+</code></pre><pre><code>[root@VM-0-13-centos base]# kustomize build $OVERLAYS/production
+apiVersion: v1
+data:
+  altGreeting: Good Morning!
+  enableRisky: &quot;false&quot;
+kind: ConfigMap
+metadata:
+  annotations:
+    note: Hello, I am production!
+  labels:
+    app: my-hello
+    org: acmeCorporation
+    variant: production
+  name: production-the-map
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    note: Hello, I am production!
+  labels:
+    app: my-hello
+    org: acmeCorporation
+    variant: production
+  name: production-the-service
+spec:
+  ports:
+  - port: 8666
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: my-hello
+    deployment: hello
+    org: acmeCorporation
+    variant: production
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    note: Hello, I am production!
+  labels:
+    app: my-hello
+    org: acmeCorporation
+    variant: production
+  name: production-the-deployment
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: my-hello
+      deployment: hello
+      org: acmeCorporation
+      variant: production
+  template:
+    metadata:
+      annotations:
+        note: Hello, I am production!
+      labels:
+        app: my-hello
+        deployment: hello
+        org: acmeCorporation
+        variant: production
+    spec:
+      containers:
+      - command:
+        - /hello
+        - --port=8080
+        - --enableRiskyFeature=$(ENABLE_RISKY)
+        env:
+        - name: ALT_GREETING
+          valueFrom:
+            configMapKeyRef:
+              key: altGreeting
+              name: production-the-map
+        - name: ENABLE_RISKY
+          valueFrom:
+            configMapKeyRef:
+              key: enableRisky
+              name: production-the-map
+        image: monopole/hello:1
+        name: the-container
+        ports:
+        - containerPort: 8080
+</code></pre><p>&#x5C06;&#x4E0A;&#x8FF0;&#x547D;&#x4EE4;&#x4F20;&#x9012;&#x7ED9;kubectl&#x8FDB;&#x884C;&#x90E8;&#x7F72;</p>
+<pre><code>kustomize build $OVERLAYS/staging |\
+    kubectl apply -f -
+kustomize build $OVERLAYS/production |\
+   kubectl apply -f -
+</code></pre><p>&#x4E5F;&#x53EF;&#x76F4;&#x63A5;&#x4F7F;&#x7528;kubectl&#x90E8;&#x7F72;&#xFF0C;&#x4F46;&#x662F;&#x9700;&#x8981;&#x6CE8;&#x610F;&#x7684;&#x662F;<strong>kubectl&#x7248;&#x672C;&#x9700;&#x8981;&#x5728;v1.14.0&#x4EE5;&#x4E0A;</strong></p>
+<pre><code>kubectl apply -k $OVERLAYS/staging
+kubectl apply -k $OVERLAYS/production
+</code></pre><p><footer class="page-footer"><span class="copyright">&#xA9; vishon all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">Updated at
+2021-06-04 12:58:17
+</span></footer></p>
+<div id="gitalk-container"></div>
+<script>console.log("plugin-popup....");document.onclick = function(e){ e.target.tagName === "IMG" && window.open(e.target.src,e.target.src)}</script><style>img{cursor:pointer}</style>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="kubecm-manages-k8s-clusters.html" class="navigation navigation-prev " aria-label="Previous page: 【k8s】kubecm管理多k8s集群">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../tke/tke-used-docker-in-docker.html" class="navigation navigation-next " aria-label="Next page: 【tke】tke上使用docker-in-docker">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"【k8s】kustomize入门实践","level":"6.6","depth":1,"next":{"title":"【tke】tke上使用docker-in-docker","level":"7.1","depth":1,"path":"tke/tke-used-docker-in-docker.md","ref":"tke/tke-used-docker-in-docker.md","articles":[]},"previous":{"title":"【k8s】kubecm管理多k8s集群","level":"6.5","depth":1,"path":"k8s/kubecm-manages-k8s-clusters.md","ref":"k8s/kubecm-manages-k8s-clusters.md","articles":[]},"dir":"ltr"},"config":{"plugins":["github","editlink","-lunr","-search","search-plus","tbfed-pagefooter","splitter","page-toc-button","back-to-top-button","-lunr","-search","search-plus","github-buttons@2.1.0","favicon@^0.0.2","3-ba","theme-default","pageview-count","auto-scroll-table","popup","code","mygitalk"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"&copy vishon","modify_label":"Updated at","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-okaidia.css"]},"disqus":{"shortName":"nieweixing-github-io"},"github":{"url":"https://github.com/nieweixing"},"editlink":{"label":"编辑本页","multilingual":false,"base":"https://github.com/nieweixing/mybook/tree/gh-pages"},"splitter":{},"auto-scroll-table":{},"popup":{},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"favicon":{"shortcut":"favicon.ico","bookmark":"favicon.ico"},"page-toc-button":{},"back-to-top-button":{},"pageview-count":{},"github-buttons":{"repo":"nieweixing/mybook","types":["star"],"size":"small"},"3-ba":{"configuration":"auto","token":"c03bec8e82bc53c064e0e648ffa54d88"},"mygitalk":{"flipMoveOptions":{},"clientID":"5976cd3d9cc251569467","number":-1,"perPage":10,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","admin":["nieweixing"],"createIssueManually":false,"distractionFreeMode":false,"repo":"gitalk-comment","owner":"nieweixing","enableHotKey":true,"clientSecret":"74117131a57324d4d616267265a94f4a1ac293ec","pagerDirection":"last","labels":["Gitalk"]},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{},"image-captions":{"caption":"图片 - _CAPTION_"}},"theme":"default","author":"vishon","pdf":{"pageNumbers":true,"fontSize":11,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"toc":true},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"运维操作指南","language":"zh-hans","links":{"sidebar":{"聂伟星个人博客":"https://www.niewx.cn","TKE运维手册":"https://cloud.tencent.com/developer/column/87421"}},"gitbook":">= 3.2.2","description":"运维操作指南"},"file":{"path":"k8s/getting-started-with-kustomize-actually.md","mtime":"2021-06-04T04:58:17.622Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-04T04:59:57.266Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-github/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-editlink/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-splitter/splitter.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-page-toc-button/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-back-to-top-button/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-3-ba/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-pageview-count/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-auto-scroll-table/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-code/plugin.js"></script>
+        
+    
+        
+        <script src="https://cdn.bootcss.com/blueimp-md5/2.12.0/js/md5.min.js"></script>
+        
+    
+        
+        <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-mygitalk/mygitalk.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
