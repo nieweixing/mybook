@@ -64,7 +64,7 @@ spec:
           claimName: grafana
 ```
 
-当我们其他pod之后会发现，pod一直在重启，查看日志报错是没有/var/lib/grafana这个目录的权限，因为grafana镜像的启动用户是grafana，而/var/lib/grafana这个目录，grafana是没有权限读写的。
+当我们启动pod之后会发现，pod一直在重启，查看日志报错是没有/var/lib/grafana这个目录的权限，因为grafana镜像的启动用户是grafana，而/var/lib/grafana这个目录，grafana是没有权限读写的。
 
 ```
 [root@VM-0-13-centos ~]# kubectl logs -f grafana-84774b67d9-r79fv -n monitor
@@ -169,3 +169,18 @@ grafana-84dd4d4454-sp2xx             1/1     Running   0          2m4s   10.0.2.
 ```
 
 这里我们简要说下我们的解决方案，其实就是用一个init容器创建/var/lib/grafana这个目录，然后挂载到cbs卷上，并修改权限为777，init容器执行完之后，grafana再运行去读这个目录的权限就是777，即使grafana的启动用户不是root，也有权限读/var/lib/grafana这个目录，容器也就可以正常运行了
+
+```
+[root@VM-0-13-centos ~]# kubectl  exec -it grafana-84dd4d4454-sp2xx bash
+Error from server (NotFound): pods "grafana-84dd4d4454-sp2xx" not found
+[root@VM-0-13-centos ~]# kubectl  exec -it grafana-84dd4d4454-sp2xx bash -n monitor
+bash-5.0$ cd var/lib/
+bash-5.0$ ls -al
+total 24
+drwxr-xr-x    1 root     root          4096 Nov 26  2020 .
+drwxr-xr-x    1 root     root          4096 Oct 21  2020 ..
+drwxr-xr-x    2 root     root          4096 Oct 21  2020 apk
+drwxrwxrwx    4 root     root          4096 Jun 13 12:03 grafana
+drwxr-xr-x    2 root     root          4096 Oct 21  2020 misc
+drwxr-xr-x    2 root     root          4096 Oct 21  2020 udhcpd
+```
