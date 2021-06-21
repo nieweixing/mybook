@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>【linux】vmware安装centos环境设置静态的ip地址 · 运维操作指南</title>
+        <title>prometheus入门知识概念 · 运维操作指南</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -91,10 +91,8 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="../database/mysql-devops-note.html" />
+    <link rel="next" href="../istio/Sidecar-startup-sequence-problem-in-istio.html" />
     
-    
-    <link rel="prev" href="cvm-build-openvpn.html" />
     
 
     
@@ -236,9 +234,9 @@
         
         
     
-        <li class="chapter " data-level="3.1" data-path="shell-script-template.html">
+        <li class="chapter " data-level="3.1" data-path="../linux/shell-script-template.html">
             
-                <a href="shell-script-template.html">
+                <a href="../linux/shell-script-template.html">
             
                     
                     【linux】shell脚本模板
@@ -249,9 +247,9 @@
             
         </li>
     
-        <li class="chapter " data-level="3.2" data-path="cvm-build-openvpn.html">
+        <li class="chapter " data-level="3.2" data-path="../linux/cvm-build-openvpn.html">
             
-                <a href="cvm-build-openvpn.html">
+                <a href="../linux/cvm-build-openvpn.html">
             
                     
                     【linux】腾讯云cvm上搭建openvpn
@@ -262,9 +260,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="3.3" data-path="vmware-install-centos-set-static-ip-address.html">
+        <li class="chapter " data-level="3.3" data-path="../linux/vmware-install-centos-set-static-ip-address.html">
             
-                <a href="vmware-install-centos-set-static-ip-address.html">
+                <a href="../linux/vmware-install-centos-set-static-ip-address.html">
             
                     
                     【linux】vmware安装centos环境设置静态的ip地址
@@ -609,9 +607,9 @@
         
         
     
-        <li class="chapter " data-level="9.1" data-path="../prometheus/basic-knowledge-of-prometheus.html">
+        <li class="chapter active" data-level="9.1" data-path="basic-knowledge-of-prometheus.html">
             
-                <a href="../prometheus/basic-knowledge-of-prometheus.html">
+                <a href="basic-knowledge-of-prometheus.html">
             
                     
                     prometheus入门知识概念
@@ -698,7 +696,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >【linux】vmware安装centos环境设置静态的ip地址</a>
+        <a href=".." >prometheus入门知识概念</a>
     </h1>
 </div>
 
@@ -713,97 +711,45 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="vmware&#x5B89;&#x88C5;centos&#x73AF;&#x5883;&#x8BBE;&#x7F6E;&#x9759;&#x6001;&#x7684;ip&#x5730;&#x5740;">vmware&#x5B89;&#x88C5;centos&#x73AF;&#x5883;&#x8BBE;&#x7F6E;&#x9759;&#x6001;&#x7684;ip&#x5730;&#x5740;</h1>
-<p>&#x6709;&#x7684;&#x65F6;&#x5019;&#x6211;&#x4EEC;&#x4E3A;&#x4E86;&#x5B66;&#x4E60;&#x6D4B;&#x8BD5;&#xFF0C;&#x4F1A;&#x5728;&#x81EA;&#x5DF1;&#x7684;&#x7B14;&#x8BB0;&#x672C;&#x4E0A;&#x642D;&#x5EFA;&#x865A;&#x62DF;&#x673A;&#xFF0C;&#x4ECA;&#x5929;&#x6211;&#x4EEC;&#x6765;&#x8BB2;&#x4E0B;&#x5728;windows&#x4E0A;&#x5982;&#x4F55;&#x5B89;&#x88C5;centos&#x73AF;&#x5883;&#x5E76;&#x4E14;&#x8BBE;&#x7F6E;&#x9759;&#x6001;ip&#xFF0C;&#x5982;&#x679C;&#x662F;&#x571F;&#x8C6A;&#xFF0C;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x5230;&#x4E91;&#x4E0A;&#x8D2D;&#x4E70;&#x673A;&#x5668;&#xFF0C;&#x672C;&#x7BC7;&#x6587;&#x7AE0;&#x53EF;&#x4EE5;&#x5FFD;&#x7565;&#x3002;</p>
-<ol>
-<li>&#x7B14;&#x8BB0;&#x672C;&#x4E3B;&#x673A;IP&#x4E3A;&#x8BBE;&#x7F6E;&#x81EA;&#x52A8;&#x83B7;&#x53D6;&#xFF0C;&#x4E0D;&#x7BA1;&#x4EC0;&#x4E48;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x4E0D;&#x53D7;&#x865A;&#x62DF;&#x673A;&#x5F71;&#x54CD;&#xFF0C;&#x53EA;&#x8981;&#x8FDE;&#x63A5;&#x5916;&#x7F51;&#x5C31;&#x53EF;&#x4EE5;&#x6B63;&#x5E38;&#x4E0A;&#x7F51;&#xFF1B;</li>
-<li>&#x53EA;&#x8981;&#x7B14;&#x8BB0;&#x672C;&#x4E3B;&#x673A;&#x53EF;&#x4EE5;&#x6B63;&#x5E38;&#x8BBF;&#x95EE;&#x5916;&#x7F51;&#xFF0C;&#x542F;&#x52A8;&#x865A;&#x62DF;&#x673A;&#x4E2D;&#x7684;CentOS 7&#x7CFB;&#x7EDF;&#x5C31;&#x53EF;&#x4EE5;&#x6B63;&#x5E38;&#x8BBF;&#x95EE;&#x5916;&#x7F51;&#xFF0C;&#x65E0;&#x9700;&#x518D;&#x8FDB;&#x884C;&#x4EFB;&#x4F55;&#x8BBE;&#x7F6E;&#xFF1B;</li>
-<li>&#x865A;&#x62DF;&#x673A;&#x8BBE;&#x7F6E;&#x4E3A;&#x56FA;&#x5B9A;IP&#xFF0C;&#x4E0D;&#x7BA1;&#x4E3B;&#x673A;&#x5728;&#x4EC0;&#x4E48;&#x7F51;&#x7EDC;&#x73AF;&#x5883;&#x4E0B;&#xFF0C;&#x662F;&#x65AD;&#x7F51;&#x73AF;&#x5883;&#xFF0C;&#x8FD8;&#x662F;&#x8FDE;&#x63A5;&#x4EFB;&#x4F55;&#x7F51;&#x6BB5;&#x8BBF;&#x95EE;&#x5916;&#x7F51;&#x7684;&#x73AF;&#x5883;&#x4E0B;&#xFF0C;&#x865A;&#x62DF;&#x673A;&#x7684;IP&#x90FD;&#x56FA;&#x5B9A;&#x4E0D;&#x53D8;&#xFF0C;&#x800C;&#x4E14;&#x4F7F;&#x7528;&#x7EC8;&#x7AEF;&#x8FDE;&#x63A5;&#xFF0C;&#x59CB;&#x7EC8;&#x4E0D;&#x53D8;&#xFF0C;&#x6B63;&#x5E38;&#x8FDE;&#x63A5;&#xFF1B;</li>
-<li>&#x865A;&#x62DF;&#x673A;&#x7684;&#x56FA;&#x5B9A;IP&#x53EF;&#x4EE5;&#x6309;&#x7167;&#x81EA;&#x5DF1;&#x60F3;&#x8BBE;&#x7F6E;&#x7684;IP&#x5730;&#x5740;&#x7F51;&#x6BB5;&#x968F;&#x610F;&#x8BBE;&#x7F6E;&#xFF0C;&#x6BD4;&#x5982;&#x6211;&#x5C31;&#x60F3;&#x8BBE;&#x7F6E;&#x56FA;&#x5B9A;IP&#x4E3A;192.168.2.2&#x3002;</li>
-</ol>
-<p>&#x4EE5;&#x4E0A;4&#x70B9;&#xFF0C;&#x7F51;&#x4E0A;&#x6211;&#x6CA1;&#x6709;&#x627E;&#x5230;&#x4E00;&#x4E2A;&#x5E16;&#x5B50;&#x53EF;&#x4EE5;&#x8FBE;&#x5230;&#x6211;&#x8981;&#x6C42;&#x7684;&#x6548;&#x679C;&#xFF0C;&#x7ECF;&#x8FC7;&#x6211;&#x8FD9;&#x6BB5;&#x65F6;&#x95F4;&#x7814;&#x7A76;&#xFF0C;&#x7ECF;&#x8FC7;&#x5404;&#x79CD;&#x5C1D;&#x8BD5;&#xFF0C;&#x671F;&#x95F4;&#x51FA;&#x73B0;&#x5404;&#x79CD;&#x95EE;&#x9898;&#xFF0C;&#x6D4B;&#x8BD5;&#x7A33;&#x5B9A;&#x540E;&#xFF0C;&#x603B;&#x7ED3;&#x5982;&#x4E0B;&#x5206;&#x4EAB;&#x7ED9;&#x5927;&#x5BB6;&#xFF0C;&#x5E0C;&#x671B;&#x5BF9;&#x5927;&#x5BB6;&#x6709;&#x6240;&#x5E2E;&#x52A9;&#xFF0C;&#x5C11;&#x8D70;&#x5F2F;&#x8DEF;&#x3002;
-&#x91C7;&#x7528;&#x65B9;&#x5F0F;&#x4E3A;NAT&#x6A21;&#x5F0F;+&#x56FA;&#x5B9A;IP&#x7684;&#x6A21;&#x5F0F;&#x3002;</p>
-<p>&#x914D;&#x7F6E;&#x73AF;&#x5883;&#x8BF4;&#x660E;&#xFF1A;&#x4E3B;&#x673A;&#x4E3A;Win10&#x5BB6;&#x5EAD;&#x7248;&#xFF0C;&#x865A;&#x62DF;&#x673A;&#x4E3A;VMware Workstation 12 Pro&#x4E2D;&#x6587;&#x7248;&#xFF0C;&#x865A;&#x62DF;&#x673A;&#x4E2D;&#x7684;Linux&#x7CFB;&#x7EDF;&#x4E3A;CentOS 7 64&#x4F4D;&#x3002;</p>
-<h2 id="&#x8BBE;&#x7F6E;&#x865A;&#x62DF;&#x673A;&#x7684;&#x7F51;&#x7EDC;&#x8FDE;&#x63A5;&#x65B9;&#x5F0F;">&#x8BBE;&#x7F6E;&#x865A;&#x62DF;&#x673A;&#x7684;&#x7F51;&#x7EDC;&#x8FDE;&#x63A5;&#x65B9;&#x5F0F;</h2>
-<p>&#x6309;&#x7167;&#x5982;&#x4E0B;&#x56FE;&#x8BBE;&#x7F6E;&#xFF0C;&#x82F1;&#x6587;&#x7248;&#x7684;&#x5BF9;&#x7167;&#x8BBE;&#x7F6E;&#x5373;&#x53EF;</p>
-<p><img src="image/centos/1.png" alt="upload-image"> </p>
-<h2 id="&#x914D;&#x7F6E;&#x865A;&#x62DF;&#x673A;&#x7684;nat&#x6A21;&#x5F0F;&#x5177;&#x4F53;&#x5730;&#x5740;&#x53C2;&#x6570;">&#x914D;&#x7F6E;&#x865A;&#x62DF;&#x673A;&#x7684;NAT&#x6A21;&#x5F0F;&#x5177;&#x4F53;&#x5730;&#x5740;&#x53C2;&#x6570;</h2>
+                                <h1 id="prometheus&#x7B80;&#x4ECB;">prometheus&#x7B80;&#x4ECB;</h1>
+<p>Prometheus&#x662F;&#x4E00;&#x4E2A;&#x5F00;&#x6E90;&#x76D1;&#x63A7;&#x7CFB;&#x7EDF;&#xFF0C;&#x5B83;&#x524D;&#x8EAB;&#x662F;SoundCloud&#x7684;&#x8B66;&#x544A;&#x5DE5;&#x5177;&#x5305;&#x3002;&#x4ECE;2012&#x5E74;&#x5F00;&#x59CB;&#xFF0C;&#x8BB8;&#x591A;&#x516C;&#x53F8;&#x548C;&#x7EC4;&#x7EC7;&#x5F00;&#x59CB;&#x4F7F;&#x7528;Prometheus&#x3002;&#x8BE5;&#x9879;&#x76EE;&#x7684;&#x5F00;&#x53D1;&#x4EBA;&#x5458;&#x548C;&#x7528;&#x6237;&#x793E;&#x533A;&#x975E;&#x5E38;&#x6D3B;&#x8DC3;&#xFF0C;&#x8D8A;&#x6765;&#x8D8A;&#x591A;&#x7684;&#x5F00;&#x53D1;&#x4EBA;&#x5458;&#x548C;&#x7528;&#x6237;&#x53C2;&#x4E0E;&#x5230;&#x8BE5;&#x9879;&#x76EE;&#x4E2D;&#x3002;&#x76EE;&#x524D;&#x5B83;&#x662F;&#x4E00;&#x4E2A;&#x72EC;&#x7ACB;&#x7684;&#x5F00;&#x6E90;&#x9879;&#x76EE;&#xFF0C;&#x4E14;&#x4E0D;&#x4F9D;&#x8D56;&#x4E0E;&#x4EFB;&#x4F55;&#x516C;&#x53F8;&#x3002; &#x4E3A;&#x4E86;&#x5F3A;&#x8C03;&#x8FD9;&#x70B9;&#x548C;&#x660E;&#x786E;&#x8BE5;&#x9879;&#x76EE;&#x6CBB;&#x7406;&#x7ED3;&#x6784;&#xFF0C;Prometheus&#x5728;2016&#x5E74;&#x7EE7;Kurberntes&#x4E4B;&#x540E;&#xFF0C;&#x52A0;&#x5165;&#x4E86;Cloud Native Computing Foundation&#x3002;</p>
+<p><strong>&#x7279;&#x5F81;</strong></p>
+<p>Prometheus&#x7684;&#x4E3B;&#x8981;&#x7279;&#x5F81;&#x6709;&#xFF1A;</p>
 <ul>
-<li>&#x7F16;&#x8F91;--&#x865A;&#x62DF;&#x7F51;&#x7EDC;&#x7F16;&#x8F91;&#x5668;--&#x66F4;&#x6539;&#x8BBE;&#x7F6E;</li>
+<li>&#x591A;&#x7EF4;&#x5EA6;&#x6570;&#x636E;&#x6A21;&#x578B;</li>
+<li>&#x7075;&#x6D3B;&#x7684;&#x67E5;&#x8BE2;&#x8BED;&#x8A00;</li>
+<li>&#x4E0D;&#x4F9D;&#x8D56;&#x5206;&#x5E03;&#x5F0F;&#x5B58;&#x50A8;&#xFF0C;&#x5355;&#x4E2A;&#x670D;&#x52A1;&#x5668;&#x8282;&#x70B9;&#x662F;&#x81EA;&#x4E3B;&#x7684;</li>
+<li>&#x4EE5;HTTP&#x65B9;&#x5F0F;&#xFF0C;&#x901A;&#x8FC7;pull&#x6A21;&#x578B;&#x62C9;&#x53BB;&#x65F6;&#x95F4;&#x5E8F;&#x5217;&#x6570;&#x636E;</li>
+<li>&#x4E5F;&#x901A;&#x8FC7;&#x4E2D;&#x95F4;&#x7F51;&#x5173;&#x652F;&#x6301;push&#x6A21;&#x578B;</li>
+<li>&#x901A;&#x8FC7;&#x670D;&#x52A1;&#x53D1;&#x73B0;&#x6216;&#x8005;&#x9759;&#x6001;&#x914D;&#x7F6E;&#xFF0C;&#x6765;&#x53D1;&#x73B0;&#x76EE;&#x6807;&#x670D;&#x52A1;&#x5BF9;&#x8C61;</li>
+<li>&#x652F;&#x6301;&#x591A;&#x79CD;&#x591A;&#x6837;&#x7684;&#x56FE;&#x8868;&#x548C;&#x754C;&#x9762;&#x5C55;&#x793A;&#xFF0C;grafana&#x4E5F;&#x652F;&#x6301;&#x5B83;</li>
 </ul>
-<p><img src="image/centos/2.png" alt="upload-image"> </p>
+<p><strong>&#x7EC4;&#x4EF6;</strong></p>
+<p>Prometheus&#x751F;&#x6001;&#x5305;&#x62EC;&#x4E86;&#x5F88;&#x591A;&#x7EC4;&#x4EF6;&#xFF0C;&#x5B83;&#x4EEC;&#x4E2D;&#x7684;&#x4E00;&#x4E9B;&#x662F;&#x53EF;&#x9009;&#x7684;&#xFF1A;</p>
 <ul>
-<li>&#x9009;&#x62E9;VMnet8--&#x53D6;&#x6D88;&#x52FE;&#x9009;&#x4F7F;&#x7528;&#x672C;&#x5730;DHCP--&#x8BBE;&#x7F6E;&#x5B50;&#x7F51;IP--&#x7F51;&#x5173;IP&#x8BBE;&#x7F6E;&#xFF08;&#x8BB0;&#x4F4F;&#x6B64;&#x5904;&#x8BBE;&#x7F6E;&#xFF0C;&#x540E;&#x9762;&#x8981;&#x7528;&#x5230;&#xFF09;&#xFF0C;&#x5982;&#x4E0B;&#x56FE;
-&#x8BF4;&#x660E;&#xFF1A;&#x4FEE;&#x6539;&#x5B50;&#x7F51;IP&#x8BBE;&#x7F6E;&#xFF0C;&#x5B9E;&#x73B0;&#x81EA;&#x7531;&#x8BBE;&#x7F6E;&#x56FA;&#x5B9A;IP&#xFF0C;&#x82E5;&#x4F60;&#x60F3;&#x8BBE;&#x7F6E;&#x56FA;&#x5B9A;IP&#x4E3A;192.168.2.2-255&#xFF0C;&#x6BD4;&#x5982;192.168.2.2&#xFF0C;&#x5219;&#x5B50;&#x7F51;IP&#x4E3A;192.168.2.0&#xFF1B;&#x82E5;&#x4F60;&#x60F3;&#x8BBE;&#x7F6E;&#x56FA;&#x5B9A;IP&#x4E3A;192.168.1.2-255&#xFF0C;&#x6BD4;&#x5982;192.168.1.2&#xFF0C;&#x5219;&#x5B50;&#x7F51;IP&#x4E3A;192.168.1.0&#xFF1B;</li>
+<li>&#x4E3B;&#x670D;&#x52A1;Prometheus Server&#x8D1F;&#x8D23;&#x6293;&#x53D6;&#x548C;&#x5B58;&#x50A8;&#x65F6;&#x95F4;&#x5E8F;&#x5217;&#x6570;&#x636E;</li>
+<li>&#x5BA2;&#x6237;&#x5E93;&#x8D1F;&#x8D23;&#x68C0;&#x6D4B;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x4EE3;&#x7801;</li>
+<li>&#x652F;&#x6301;&#x77ED;&#x751F;&#x547D;&#x5468;&#x671F;&#x7684;PUSH&#x7F51;&#x5173;</li>
+<li>&#x57FA;&#x4E8E;Rails/SQL&#x4EEA;&#x8868;&#x76D8;&#x6784;&#x5EFA;&#x5668;&#x7684;GUI</li>
+<li>&#x591A;&#x79CD;&#x5BFC;&#x51FA;&#x5DE5;&#x5177;&#xFF0C;&#x53EF;&#x4EE5;&#x652F;&#x6301;Prometheus&#x5B58;&#x50A8;&#x6570;&#x636E;&#x8F6C;&#x5316;&#x4E3A;HAProxy&#x3001;StatsD&#x3001;Graphite&#x7B49;&#x5DE5;&#x5177;&#x6240;&#x9700;&#x8981;&#x7684;&#x6570;&#x636E;&#x5B58;&#x50A8;&#x683C;&#x5F0F;</li>
+<li>&#x8B66;&#x544A;&#x7BA1;&#x7406;&#x5668;</li>
+<li>&#x547D;&#x4EE4;&#x884C;&#x67E5;&#x8BE2;&#x5DE5;&#x5177;</li>
+<li>&#x5176;&#x4ED6;&#x5404;&#x79CD;&#x652F;&#x6491;&#x5DE5;&#x5177;</li>
+<li>&#x591A;&#x6570;Prometheus&#x7EC4;&#x4EF6;&#x662F;Go&#x8BED;&#x8A00;&#x5199;&#x7684;&#xFF0C;&#x8FD9;&#x4F7F;&#x5F97;&#x8FD9;&#x4E9B;&#x7EC4;&#x4EF6;&#x5F88;&#x5BB9;&#x6613;&#x7F16;&#x8BD1;&#x548C;&#x90E8;&#x7F72;&#x3002;</li>
 </ul>
-<p><img src="image/centos/3.png" alt="upload-image"> </p>
-<ul>
-<li>&#x7F51;&#x5173;IP&#x53EF;&#x4EE5;&#x53C2;&#x7167;&#x5982;&#x4E0B;&#x683C;&#x5F0F;&#x4FEE;&#x6539;&#xFF1A;192.168.2.1</li>
-</ul>
-<p><img src="image/centos/4.png" alt="upload-image"> </p>
-<h2 id="&#x914D;&#x7F6E;&#x7B14;&#x8BB0;&#x672C;&#x4E3B;&#x673A;&#x5177;&#x4F53;vmnet8&#x672C;&#x5730;&#x5730;&#x5740;&#x53C2;&#x6570;">&#x914D;&#x7F6E;&#x7B14;&#x8BB0;&#x672C;&#x4E3B;&#x673A;&#x5177;&#x4F53;VMnet8&#x672C;&#x5730;&#x5730;&#x5740;&#x53C2;&#x6570;</h2>
-<p><img src="image/centos/5.png" alt="upload-image"> </p>
-<p>&#x8BF4;&#x660E;&#xFF1A;&#x7B2C;6&#x6B65;&#x4E2D;&#x7684;IP&#x5730;&#x5740;&#x968F;&#x610F;&#x8BBE;&#x7F6E;&#xFF0C;&#x4F46;&#x662F;&#x8981;&#x4FDD;&#x8BC1;&#x4E0D;&#x80FD;&#x8DDF;&#x4F60;&#x8981;&#x8BBE;&#x7F6E;&#x865A;&#x62DF;&#x673A;&#x7684;&#x56FA;&#x5B9A;IP&#x4E00;&#x6837;&#x3002;</p>
-<p><img src="image/centos/6.png" alt="upload-image"> </p>
-<h2 id="&#x4FEE;&#x6539;&#x865A;&#x62DF;&#x673A;&#x4E2D;&#x7684;centos-7&#x7CFB;&#x7EDF;&#x4E3A;&#x56FA;&#x5B9A;ip&#x7684;&#x914D;&#x7F6E;&#x6587;&#x4EF6;">&#x4FEE;&#x6539;&#x865A;&#x62DF;&#x673A;&#x4E2D;&#x7684;CentOS 7&#x7CFB;&#x7EDF;&#x4E3A;&#x56FA;&#x5B9A;IP&#x7684;&#x914D;&#x7F6E;&#x6587;&#x4EF6;</h2>
-<ul>
-<li>&#x8FDB;&#x5165;centos7&#x547D;&#x4EE4;&#x884C;&#x754C;&#x9762;&#xFF0C;&#x4FEE;&#x6539;&#x5982;&#x4E0B;&#x5185;&#x5BB9;</li>
-</ul>
-<p><img src="image/centos/7.png" alt="upload-image"> </p>
-<p><img src="image/centos/8.png" alt="upload-image"> </p>
-<pre><code>#cd /etc/sysconfig/network-scripts/
-#vi ifcfg-eno16777736
-
-
-&#x8BF4;&#x660E;&#xFF1A;
-#&#x5C06;IPV6&#x2026;..&#x534F;&#x8BAE;&#x90FD;&#x6CE8;&#x91CA;&#xFF1B;
-BOOTPROTO=static        #&#x5F00;&#x673A;&#x534F;&#x8BAE;&#xFF0C;&#x6709;dhcp&#x53CA;static&#xFF1B;
-ONBOOT=yes              #&#x8BBE;&#x7F6E;&#x4E3A;&#x5F00;&#x673A;&#x542F;&#x52A8;&#xFF1B;
-DNS1=114.114.114.114    #&#x8FD9;&#x4E2A;&#x662F;&#x56FD;&#x5185;&#x7684;DNS&#x5730;&#x5740;&#xFF0C;&#x662F;&#x56FA;&#x5B9A;&#x7684;&#xFF1B;
-IPADDR=192.168.2.2      #&#x4F60;&#x60F3;&#x8981;&#x8BBE;&#x7F6E;&#x7684;&#x56FA;&#x5B9A;IP&#xFF0C;&#x7406;&#x8BBA;&#x4E0A;192.168.2.2-255&#x4E4B;&#x95F4;&#x90FD;&#x53EF;&#x4EE5;&#xFF0C;&#x8BF7;&#x81EA;&#x884C;&#x9A8C;&#x8BC1;&#xFF1B;
-NETMASK=255.255.255.0   #&#x5B50;&#x7F51;&#x63A9;&#x7801;&#xFF0C;&#x4E0D;&#x9700;&#x8981;&#x4FEE;&#x6539;&#xFF1B;
-GATEWAY=192.168.2.1     #&#x7F51;&#x5173;&#xFF0C;&#x8FD9;&#x91CC;&#x662F;&#x4F60;&#x5728;&#x201C;2.&#x914D;&#x7F6E;&#x865A;&#x62DF;&#x673A;&#x7684;NAT&#x6A21;&#x5F0F;&#x5177;&#x4F53;&#x5730;&#x5740;&#x53C2;&#x6570;&#x201D;&#x4E2D;&#x7684;&#xFF08;2&#xFF09;&#x9009;&#x62E9;VMnet8--&#x53D6;&#x6D88;&#x52FE;&#x9009;&#x4F7F;&#x7528;&#x672C;&#x5730;DHCP--&#x8BBE;&#x7F6E;&#x5B50;&#x7F51;IP--&#x7F51;&#x5173;IP&#x8BBE;&#x7F6E;&#x3002;
-</code></pre><ul>
-<li>&#x91CD;&#x542F;&#x7F51;&#x7EDC;&#x670D;&#x52A1;</li>
-</ul>
-<pre><code>service network restart
-</code></pre><h2 id="&#x68C0;&#x9A8C;&#x914D;&#x7F6E;&#x662F;&#x5426;&#x6210;&#x529F;">&#x68C0;&#x9A8C;&#x914D;&#x7F6E;&#x662F;&#x5426;&#x6210;&#x529F;</h2>
-<ul>
-<li>&#x67E5;&#x770B;&#x4FEE;&#x6539;&#x540E;&#x7684;&#x56FA;&#x5B9A;IP&#x4E3A;192.168.2.2&#xFF0C;&#x914D;&#x7F6E;&#x6B63;&#x786E;</li>
-</ul>
-<p>ifconfig</p>
-<p><img src="image/centos/9.png" alt="upload-image"> </p>
-<ul>
-<li>&#x6D4B;&#x8BD5;&#x865A;&#x62DF;&#x673A;&#x4E2D;&#x7684;CentOS 7&#x7CFB;&#x7EDF;&#x662F;&#x5426;&#x80FD;&#x8FDE;&#x5916;&#x7F51;&#xFF0C;&#x6709;&#x6570;&#x636E;&#x8FD4;&#x56DE;&#xFF0C;&#x8BF4;&#x660E;&#x53EF;&#x4EE5;&#x8FDE;&#x63A5;&#x5916;&#x7F51;</li>
-</ul>
-<p>ping www.baidu.com</p>
-<p><img src="image/centos/10.png" alt="upload-image"> </p>
-<ul>
-<li>&#x6D4B;&#x8BD5;&#x672C;&#x673A;&#x662F;&#x5426;&#x80FD;ping&#x901A;&#x865A;&#x62DF;&#x673A;&#x7684;&#x56FA;&#x5B9A;IP</li>
-</ul>
-<p>&#x6709;&#x6570;&#x636E;&#x8FD4;&#x56DE;&#xFF0C;&#x8BF4;&#x660E;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x7EC8;&#x7AEF;&#x5DE5;&#x5177;&#x6B63;&#x5E38;&#x8FDE;&#x63A5;</p>
-<p>&#x9F20;&#x6807;&#x653E;&#x5230;&#x5F00;&#x59CB;&#x83DC;&#x5355;&#x53F3;&#x952E;&#xFF0C;&#x9009;&#x62E9;&#x547D;&#x4EE4;&#x63D0;&#x793A;&#x7B26;&#xFF08;&#x7BA1;&#x7406;&#x5458;&#xFF09;&#xFF0C;&#x6253;&#x5F00;&#x547D;&#x4EE4;&#x64CD;&#x4F5C;&#x754C;&#x9762;&#xFF1A;</p>
-<p>ping 192.168.2.2</p>
-<p><img src="image/centos/11.png" alt="upload-image"> </p>
-<h2 id="&#x8FDC;&#x7A0B;&#x7EC8;&#x7AEF;&#x8FDE;&#x63A5;">&#x8FDC;&#x7A0B;&#x7EC8;&#x7AEF;&#x8FDE;&#x63A5;</h2>
-<ul>
-<li>&#x82E5;&#x8FDE;&#x63A5;&#x5931;&#x8D25;&#x662F;&#x56E0;&#x4E3A;CentOS 7&#x7684;&#x9632;&#x706B;&#x5899;&#x7AEF;&#x53E3;&#x6CA1;&#x6709;&#x6253;&#x5F00;&#xFF0C;&#x6BD4;&#x5982;&#x5F00;&#x542F;80&#xFF0C;3306&#x7AEF;&#x53E3;&#xFF0C;&#x6700;&#x540E;&#x4E00;&#x5B9A;&#x8981;&#x91CD;&#x542F;&#x9632;&#x706B;&#x5899;</li>
-</ul>
-<pre><code>#&#x67E5;&#x770B;&#x9632;&#x706B;&#x5899;&#x72B6;&#x6001;
-systemctl status firewalld  
-#&#x5F00;&#x542F;80&#x7AEF;&#x53E3;
-firewall-cmd --zone=public --add-port=80/tcp --permanent  
-#&#x5F00;&#x542F;3306&#x7AEF;&#x53E3;
-firewall-cmd --zone=public --add-port=3306/tcp --permanent  
-#&#x91CD;&#x542F;&#x9632;&#x706B;&#x5899;&#xFF1A;
-firewall-cmd --reload
-</code></pre><ul>
-<li>&#x8FDE;&#x63A5;&#x6210;&#x529F;</li>
-</ul>
-<p><img src="image/centos/12.png" alt="upload-image"> </p>
-<p><img src="image/centos/13.png" alt="upload-image"> </p>
+<p><strong>&#x67B6;&#x6784;</strong></p>
+<p>&#x4E0B;&#x9762;&#x8FD9;&#x5F20;&#x56FE;&#x8BF4;&#x660E;&#x4E86;Prometheus&#x7684;&#x6574;&#x4F53;&#x67B6;&#x6784;&#xFF0C;&#x4EE5;&#x53CA;&#x751F;&#x6001;&#x4E2D;&#x7684;&#x4E00;&#x4E9B;&#x7EC4;&#x4EF6;&#x4F5C;&#x7528;:</p>
+<p><img src="image/Snipaste_2021-06-17_15-19-54.png" alt="upload-image"> </p>
+<p>Prometheus&#x670D;&#x52A1;&#xFF0C;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x901A;&#x8FC7;&#x76EE;&#x6807;&#x62C9;&#x53D6;&#x6570;&#x636E;&#xFF0C;&#x6216;&#x8005;&#x95F4;&#x63A5;&#x5730;&#x901A;&#x8FC7;&#x4E2D;&#x95F4;&#x7F51;&#x5173;&#x62C9;&#x53D6;&#x6570;&#x636E;&#x3002;&#x5B83;&#x5728;&#x672C;&#x5730;&#x5B58;&#x50A8;&#x6293;&#x53D6;&#x7684;&#x6240;&#x6709;&#x6570;&#x636E;&#xFF0C;&#x5E76;&#x901A;&#x8FC7;&#x4E00;&#x5B9A;&#x89C4;&#x5219;&#x8FDB;&#x884C;&#x6E05;&#x7406;&#x548C;&#x6574;&#x7406;&#x6570;&#x636E;&#xFF0C;&#x5E76;&#x628A;&#x5F97;&#x5230;&#x7684;&#x7ED3;&#x679C;&#x5B58;&#x50A8;&#x5230;&#x65B0;&#x7684;&#x65F6;&#x95F4;&#x5E8F;&#x5217;&#x4E2D;&#xFF0C;PromQL&#x548C;&#x5176;&#x4ED6;API&#x53EF;&#x89C6;&#x5316;&#x5730;&#x5C55;&#x793A;&#x6536;&#x96C6;&#x7684;&#x6570;&#x636E;</p>
+<p><strong>&#x9002;&#x7528;&#x573A;&#x666F;</strong></p>
+<p>Prometheus&#x5728;&#x8BB0;&#x5F55;&#x7EAF;&#x6570;&#x5B57;&#x65F6;&#x95F4;&#x5E8F;&#x5217;&#x65B9;&#x9762;&#x8868;&#x73B0;&#x975E;&#x5E38;&#x597D;&#x3002;&#x5B83;&#x65E2;&#x9002;&#x7528;&#x4E8E;&#x9762;&#x5411;&#x670D;&#x52A1;&#x5668;&#x7B49;&#x786C;&#x4EF6;&#x6307;&#x6807;&#x7684;&#x76D1;&#x63A7;&#xFF0C;&#x4E5F;&#x9002;&#x7528;&#x4E8E;&#x9AD8;&#x52A8;&#x6001;&#x7684;&#x9762;&#x5411;&#x670D;&#x52A1;&#x67B6;&#x6784;&#x7684;&#x76D1;&#x63A7;&#x3002;&#x5BF9;&#x4E8E;&#x73B0;&#x5728;&#x6D41;&#x884C;&#x7684;&#x5FAE;&#x670D;&#x52A1;&#xFF0C;Prometheus&#x7684;&#x591A;&#x7EF4;&#x5EA6;&#x6570;&#x636E;&#x6536;&#x96C6;&#x548C;&#x6570;&#x636E;&#x7B5B;&#x9009;&#x67E5;&#x8BE2;&#x8BED;&#x8A00;&#x4E5F;&#x662F;&#x975E;&#x5E38;&#x7684;&#x5F3A;&#x5927;&#x3002;</p>
+<p>Prometheus&#x662F;&#x4E3A;&#x670D;&#x52A1;&#x7684;&#x53EF;&#x9760;&#x6027;&#x800C;&#x8BBE;&#x8BA1;&#x7684;&#xFF0C;&#x5F53;&#x670D;&#x52A1;&#x51FA;&#x73B0;&#x6545;&#x969C;&#x65F6;&#xFF0C;&#x5B83;&#x53EF;&#x4EE5;&#x4F7F;&#x4F60;&#x5FEB;&#x901F;&#x5B9A;&#x4F4D;&#x548C;&#x8BCA;&#x65AD;&#x95EE;&#x9898;&#x3002;&#x5B83;&#x7684;&#x642D;&#x5EFA;&#x8FC7;&#x7A0B;&#x5BF9;&#x786C;&#x4EF6;&#x548C;&#x670D;&#x52A1;&#x6CA1;&#x6709;&#x5F88;&#x5F3A;&#x7684;&#x4F9D;&#x8D56;&#x5173;&#x7CFB;&#x3002;</p>
+<p><strong>&#x4E0D;&#x9002;&#x7528;&#x573A;&#x666F;</strong></p>
+<p>Prometheus&#xFF0C;&#x5B83;&#x7684;&#x4EF7;&#x503C;&#x5728;&#x4E8E;&#x53EF;&#x9760;&#x6027;&#xFF0C;&#x751A;&#x81F3;&#x5728;&#x5F88;&#x6076;&#x52A3;&#x7684;&#x73AF;&#x5883;&#x4E0B;&#xFF0C;&#x4F60;&#x90FD;&#x53EF;&#x4EE5;&#x968F;&#x65F6;&#x8BBF;&#x95EE;&#x5B83;&#x548C;&#x67E5;&#x770B;&#x7CFB;&#x7EDF;&#x670D;&#x52A1;&#x5404;&#x79CD;&#x6307;&#x6807;&#x7684;&#x7EDF;&#x8BA1;&#x4FE1;&#x606F;&#x3002; &#x5982;&#x679C;&#x4F60;&#x5BF9;&#x7EDF;&#x8BA1;&#x6570;&#x636E;&#x9700;&#x8981;100%&#x7684;&#x7CBE;&#x786E;&#xFF0C;&#x5B83;&#x5E76;&#x4E0D;&#x9002;&#x7528;&#xFF0C;&#x4F8B;&#x5982;&#xFF1A;&#x5B83;&#x4E0D;&#x9002;&#x7528;&#x4E8E;&#x5B9E;&#x65F6;&#x8BA1;&#x8D39;&#x7CFB;&#x7EDF;</p>
+<h1 id="&#x6307;&#x6807;&#x7C7B;&#x578B;">&#x6307;&#x6807;&#x7C7B;&#x578B;</h1>
+<h1 id="promql">promql</h1>
 <p><footer class="page-footer"><span class="copyright">&#xA9; vishon all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">Updated at
-2021-05-22 10:44:15
+2021-06-18 11:57:33
 </span></footer></p>
 <div id="gitalk-container"></div>
 <script>console.log("plugin-popup....");document.onclick = function(e){ e.target.tagName === "IMG" && window.open(e.target.src,e.target.src)}</script><style>img{cursor:pointer}</style>
@@ -833,12 +779,8 @@ firewall-cmd --reload
 
             
                 
-                <a href="cvm-build-openvpn.html" class="navigation navigation-prev " aria-label="Previous page: 【linux】腾讯云cvm上搭建openvpn">
-                    <i class="fa fa-angle-left"></i>
-                </a>
                 
-                
-                <a href="../database/mysql-devops-note.html" class="navigation navigation-next " aria-label="Next page: 【datebase】mysql运维笔记">
+                <a href="../istio/Sidecar-startup-sequence-problem-in-istio.html" class="navigation navigation-next navigation-unique" aria-label="Next page: 【istio】istio中sidecar启动顺序问题">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -849,7 +791,7 @@ firewall-cmd --reload
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"【linux】vmware安装centos环境设置静态的ip地址","level":"3.3","depth":1,"next":{"title":"【datebase】mysql运维笔记","level":"4.1","depth":1,"path":"database/mysql-devops-note.md","ref":"database/mysql-devops-note.md","articles":[]},"previous":{"title":"【linux】腾讯云cvm上搭建openvpn","level":"3.2","depth":1,"path":"linux/cvm-build-openvpn.md","ref":"linux/cvm-build-openvpn.md","articles":[]},"dir":"ltr"},"config":{"plugins":["github","editlink","-lunr","-search","search-plus","tbfed-pagefooter","splitter","page-toc-button","back-to-top-button","-lunr","-search","search-plus","github-buttons@2.1.0","favicon@^0.0.2","3-ba","theme-default","pageview-count","auto-scroll-table","popup","code","mygitalk"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"&copy vishon","modify_label":"Updated at","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-okaidia.css"]},"disqus":{"shortName":"nieweixing-github-io"},"github":{"url":"https://github.com/nieweixing"},"editlink":{"label":"编辑本页","multilingual":false,"base":"https://github.com/nieweixing/mybook/tree/gh-pages"},"splitter":{},"auto-scroll-table":{},"popup":{},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"favicon":{"shortcut":"favicon.ico","bookmark":"favicon.ico"},"page-toc-button":{},"back-to-top-button":{},"pageview-count":{},"github-buttons":{"repo":"nieweixing/mybook","types":["star"],"size":"small"},"3-ba":{"configuration":"auto","token":"c03bec8e82bc53c064e0e648ffa54d88"},"mygitalk":{"flipMoveOptions":{},"clientID":"5976cd3d9cc251569467","number":-1,"perPage":10,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","admin":["nieweixing"],"createIssueManually":false,"distractionFreeMode":false,"repo":"gitalk-comment","owner":"nieweixing","enableHotKey":true,"clientSecret":"74117131a57324d4d616267265a94f4a1ac293ec","pagerDirection":"last","labels":["Gitalk"]},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{},"image-captions":{"caption":"图片 - _CAPTION_"}},"theme":"default","author":"vishon","pdf":{"pageNumbers":true,"fontSize":11,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"toc":true},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"运维操作指南","language":"zh-hans","links":{"sidebar":{"聂伟星个人博客":"https://www.niewx.cn","TKE使用操作文档":"https://cloud.tencent.com/developer/column/87421"}},"gitbook":">= 3.2.2","description":"运维操作指南"},"file":{"path":"linux/vmware-install-centos-set-static-ip-address.md","mtime":"2021-05-22T02:44:15.824Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-21T05:57:28.984Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"prometheus入门知识概念","level":"9.1","depth":1,"next":{"title":"【istio】istio中sidecar启动顺序问题","level":"10.1","depth":1,"path":"istio/Sidecar-startup-sequence-problem-in-istio.md","ref":"istio/Sidecar-startup-sequence-problem-in-istio.md","articles":[]},"previous":{"title":"腾讯云","level":"8.3","depth":1,"ref":"","articles":[]},"dir":"ltr"},"config":{"plugins":["github","editlink","-lunr","-search","search-plus","tbfed-pagefooter","splitter","page-toc-button","back-to-top-button","-lunr","-search","search-plus","github-buttons@2.1.0","favicon@^0.0.2","3-ba","theme-default","pageview-count","auto-scroll-table","popup","code","mygitalk"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"&copy vishon","modify_label":"Updated at","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-okaidia.css"]},"disqus":{"shortName":"nieweixing-github-io"},"github":{"url":"https://github.com/nieweixing"},"editlink":{"label":"编辑本页","multilingual":false,"base":"https://github.com/nieweixing/mybook/tree/gh-pages"},"splitter":{},"auto-scroll-table":{},"popup":{},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"favicon":{"shortcut":"favicon.ico","bookmark":"favicon.ico"},"page-toc-button":{},"back-to-top-button":{},"pageview-count":{},"github-buttons":{"repo":"nieweixing/mybook","types":["star"],"size":"small"},"3-ba":{"configuration":"auto","token":"c03bec8e82bc53c064e0e648ffa54d88"},"mygitalk":{"flipMoveOptions":{},"clientID":"5976cd3d9cc251569467","number":-1,"perPage":10,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","admin":["nieweixing"],"createIssueManually":false,"distractionFreeMode":false,"repo":"gitalk-comment","owner":"nieweixing","enableHotKey":true,"clientSecret":"74117131a57324d4d616267265a94f4a1ac293ec","pagerDirection":"last","labels":["Gitalk"]},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{},"image-captions":{"caption":"图片 - _CAPTION_"}},"theme":"default","author":"vishon","pdf":{"pageNumbers":true,"fontSize":11,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"toc":true},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"运维操作指南","language":"zh-hans","links":{"sidebar":{"聂伟星个人博客":"https://www.niewx.cn","TKE使用操作文档":"https://cloud.tencent.com/developer/column/87421"}},"gitbook":">= 3.2.2","description":"运维操作指南"},"file":{"path":"prometheus/basic-knowledge-of-prometheus.md","mtime":"2021-06-18T03:57:33.566Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-21T05:57:28.984Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
