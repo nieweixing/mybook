@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>【docker】dockerfile学习笔记 · 运维操作指南</title>
+        <title>【k8s】k8s部署hostport模式pod报错端口冲突 · 运维操作指南</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -91,10 +91,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="docker-compose-study.html" />
+    <link rel="next" href="../tke/tke-used-docker-in-docker.html" />
     
     
-    <link rel="prev" href="../database/redis-devops-note.html" />
+    <link rel="prev" href="getting-started-with-kustomize-actually.html" />
     
 
     
@@ -341,9 +341,9 @@
         
         
     
-        <li class="chapter active" data-level="5.1" data-path="dockerfile-study.html">
+        <li class="chapter " data-level="5.1" data-path="../docker/dockerfile-study.html">
             
-                <a href="dockerfile-study.html">
+                <a href="../docker/dockerfile-study.html">
             
                     
                     【docker】dockerfile学习笔记
@@ -354,9 +354,9 @@
             
         </li>
     
-        <li class="chapter " data-level="5.2" data-path="docker-compose-study.html">
+        <li class="chapter " data-level="5.2" data-path="../docker/docker-compose-study.html">
             
-                <a href="docker-compose-study.html">
+                <a href="../docker/docker-compose-study.html">
             
                     
                     【docker】docker-compose学习笔记
@@ -374,9 +374,9 @@
         
         
     
-        <li class="chapter " data-level="6.1" data-path="../k8s/k8s-common-commands.html">
+        <li class="chapter " data-level="6.1" data-path="k8s-common-commands.html">
             
-                <a href="../k8s/k8s-common-commands.html">
+                <a href="k8s-common-commands.html">
             
                     
                     【k8s】k8s常用命令总结
@@ -387,9 +387,9 @@
             
         </li>
     
-        <li class="chapter " data-level="6.2" data-path="../k8s/k8s-force-delete-terminating-ns.html">
+        <li class="chapter " data-level="6.2" data-path="k8s-force-delete-terminating-ns.html">
             
-                <a href="../k8s/k8s-force-delete-terminating-ns.html">
+                <a href="k8s-force-delete-terminating-ns.html">
             
                     
                     【k8s】强制删除Terminating状态ns
@@ -400,9 +400,9 @@
             
         </li>
     
-        <li class="chapter " data-level="6.3" data-path="../k8s/userd-filebeat-as-sidecar-collect-log.html">
+        <li class="chapter " data-level="6.3" data-path="userd-filebeat-as-sidecar-collect-log.html">
             
-                <a href="../k8s/userd-filebeat-as-sidecar-collect-log.html">
+                <a href="userd-filebeat-as-sidecar-collect-log.html">
             
                     
                     【k8s】k8s中filebeat作为sidecar采集容器日志
@@ -413,9 +413,9 @@
             
         </li>
     
-        <li class="chapter " data-level="6.4" data-path="../k8s/k8s-generate-kubeonfig.html">
+        <li class="chapter " data-level="6.4" data-path="k8s-generate-kubeonfig.html">
             
-                <a href="../k8s/k8s-generate-kubeonfig.html">
+                <a href="k8s-generate-kubeonfig.html">
             
                     
                     【k8s】k8s中生成自定义用户kubeconfig
@@ -426,9 +426,9 @@
             
         </li>
     
-        <li class="chapter " data-level="6.5" data-path="../k8s/kubecm-manages-k8s-clusters.html">
+        <li class="chapter " data-level="6.5" data-path="kubecm-manages-k8s-clusters.html">
             
-                <a href="../k8s/kubecm-manages-k8s-clusters.html">
+                <a href="kubecm-manages-k8s-clusters.html">
             
                     
                     【k8s】kubecm管理多k8s集群
@@ -439,9 +439,9 @@
             
         </li>
     
-        <li class="chapter " data-level="6.6" data-path="../k8s/getting-started-with-kustomize-actually.html">
+        <li class="chapter " data-level="6.6" data-path="getting-started-with-kustomize-actually.html">
             
-                <a href="../k8s/getting-started-with-kustomize-actually.html">
+                <a href="getting-started-with-kustomize-actually.html">
             
                     
                     【k8s】kustomize入门实践
@@ -452,9 +452,9 @@
             
         </li>
     
-        <li class="chapter " data-level="6.7" data-path="../k8s/k8s-deploys-hostport-mode-pod-error-report.html">
+        <li class="chapter active" data-level="6.7" data-path="k8s-deploys-hostport-mode-pod-error-report.html">
             
-                <a href="../k8s/k8s-deploys-hostport-mode-pod-error-report.html">
+                <a href="k8s-deploys-hostport-mode-pod-error-report.html">
             
                     
                     【k8s】k8s部署hostport模式pod报错端口冲突
@@ -724,7 +724,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >【docker】dockerfile学习笔记</a>
+        <a href=".." >【k8s】k8s部署hostport模式pod报错端口冲突</a>
     </h1>
 </div>
 
@@ -739,67 +739,153 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="dockerfile&#x7684;&#x4F8B;&#x5B50;">DockerFile&#x7684;&#x4F8B;&#x5B50;</h1>
-<pre><code>FROM centos
-MAINTAINER nobody &quot;xx@qq.com&quot;
-RUN mkdir -p /opt/jdk/
-RUN mkdir -p /opt/tomcat/
-ADD jdk1.7.0_79 /opt/jdk/
-ADD tomcat  /opt/tomcat/
-ENV CATALINA_HOME /opt/tomcat
-ENV JAVA_HOME /opt/jdk
-EXPOSE 8080
-VOLUME /opt/tomcat/data
-ENV PATH $PATH:$JAVA_HOME/bin
-CMD [&quot;/opt/tomcat/bin/catalina.sh&quot;,&quot;run&quot;]
-</code></pre><h1 id="dockerfile&#x7684;&#x8BED;&#x6CD5;&#x89E3;&#x6790;">DockerFile&#x7684;&#x8BED;&#x6CD5;&#x89E3;&#x6790;</h1>
-<p>Dockerfile&#x7684;&#x57FA;&#x672C;&#x6307;&#x4EE4;&#x6709;&#x5341;&#x4E09;&#x4E2A;&#xFF0C;&#x5206;&#x522B;&#x662F;&#xFF1A;FROM&#x3001;MAINTAINER&#x3001;RUN&#x3001;CMD&#x3001;EXPOSE&#x3001;ENV&#x3001;ADD&#x3001;COPY&#x3001;ENTRYPOINT&#x3001;VOLUME&#x3001;USER&#x3001;WORKDIR&#x3001;ONBUILD&#x3002;&#x4E0B;&#x9762;&#x5BF9;&#x8FD9;&#x4E9B;&#x6307;&#x4EE4;&#x7684;&#x7528;&#x6CD5;&#x4E00;&#x4E00;&#x8BF4;&#x660E;&#x3002;</p>
-<h2 id="from">FROM</h2>
-<p>&#x7528;&#x6CD5;&#xFF1A;FROM <image></image></p>
-<p>&#x8BF4;&#x660E;&#xFF1A;&#x7B2C;&#x4E00;&#x4E2A;&#x6307;&#x4EE4;&#x5FC5;&#x987B;&#x662F;FROM&#x4E86;&#xFF0C;&#x5176;&#x6307;&#x5B9A;&#x4E00;&#x4E2A;&#x6784;&#x5EFA;&#x955C;&#x50CF;&#x7684;&#x57FA;&#x7840;&#x6E90;&#x955C;&#x50CF;&#xFF0C;&#x5982;&#x679C;&#x672C;&#x5730;&#x6CA1;&#x6709;&#x5C31;&#x4F1A;&#x4ECE;&#x516C;&#x5171;&#x5E93;&#x4E2D;&#x62C9;&#x53D6;&#xFF0C;&#x6CA1;&#x6709;&#x6307;&#x5B9A;&#x955C;&#x50CF;&#x7684;&#x6807;&#x7B7E;&#x4F1A;&#x4F7F;&#x7528;&#x9ED8;&#x8BA4;&#x7684;latest&#x6807;&#x7B7E;&#xFF0C;&#x53EF;&#x4EE5;&#x51FA;&#x73B0;&#x591A;&#x6B21;&#xFF0C;&#x5982;&#x679C;&#x9700;&#x8981;&#x5728;&#x4E00;&#x4E2A;Dockerfile&#x4E2D;&#x6784;&#x5EFA;&#x591A;&#x4E2A;&#x955C;&#x50CF;&#x3002;</p>
-<h2 id="maintainer">MAINTAINER</h2>
-<p>&#x7528;&#x6CD5;&#xFF1A;MAINTAINER <name> <email></email></name></p>
-<p>&#x8BF4;&#x660E;&#xFF1A;&#x63CF;&#x8FF0;&#x955C;&#x50CF;&#x7684;&#x521B;&#x5EFA;&#x8005;&#xFF0C;&#x540D;&#x79F0;&#x548C;&#x90AE;&#x7BB1;</p>
-<h2 id="run">RUN</h2>
-<p>&#x7528;&#x6CD5;&#xFF1A;RUN &quot;command&quot; &quot;param1&quot; &quot;param2&quot;</p>
-<p>&#x8BF4;&#x660E;&#xFF1A;RUN&#x547D;&#x4EE4;&#x662F;&#x4E00;&#x4E2A;&#x5E38;&#x7528;&#x7684;&#x547D;&#x4EE4;&#xFF0C;RUN&#x547D;&#x4EE4;&#x53EF;&#x4EE5;&#x6267;&#x884C;&#x591A;&#x6B21;&#xFF0C;&#x6267;&#x884C;&#x5B8C;&#x6210;&#x4E4B;&#x540E;&#x4F1A;&#x6210;&#x4E3A;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x955C;&#x50CF;&#xFF0C;&#x8FD9;&#x91CC;&#x4E5F;&#x662F;&#x6307;&#x955C;&#x50CF;&#x7684;&#x5206;&#x5C42;&#x6784;&#x5EFA;&#x3002;&#x4E00;&#x53E5;RUN&#x5C31;&#x662F;&#x4E00;&#x5C42;&#xFF0C;&#x4E5F;&#x76F8;&#x5F53;&#x4E8E;&#x4E00;&#x4E2A;&#x7248;&#x672C;&#x3002;&#x8FD9;&#x5C31;&#x662F;&#x4E4B;&#x524D;&#x8BF4;&#x7684;&#x7F13;&#x5B58;&#x7684;&#x539F;&#x7406;&#x3002;&#x6211;&#x4EEC;&#x77E5;&#x9053;docker&#x662F;&#x955C;&#x50CF;&#x5C42;&#x662F;&#x53EA;&#x8BFB;&#x7684;&#xFF0C;&#x6240;&#x4EE5;&#x4F60;&#x5982;&#x679C;&#x7B2C;&#x4E00;&#x53E5;&#x5B89;&#x88C5;&#x4E86;&#x8F6F;&#x4EF6;&#xFF0C;&#x7528;&#x5B8C;&#x5728;&#x540E;&#x9762;&#x4E00;&#x53E5;&#x5220;&#x9664;&#x662F;&#x4E0D;&#x53EF;&#x80FD;&#x7684;&#x3002;&#x6240;&#x4EE5;&#x8FD9;&#x79CD;&#x60C5;&#x51B5;&#x8981;&#x5728;&#x4E00;&#x53E5;RUN&#x547D;&#x4EE4;&#x4E2D;&#x5B8C;&#x6210;&#xFF0C;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&amp;&#x7B26;&#x53F7;&#x8FDE;&#x63A5;&#x591A;&#x4E2A;RUN&#x8BED;&#x53E5;&#x3002;RUN&#x540E;&#x9762;&#x7684;&#x5FC5;&#x987B;&#x662F;&#x53CC;&#x5F15;&#x53F7;&#x4E0D;&#x80FD;&#x662F;&#x5355;&#x5F15;&#x53F7;&#xFF08;&#x6CA1;&#x5F15;&#x53F7;&#x8C8C;&#x4F3C;&#x4E5F;&#x4E0D;&#x8981;&#x7D27;&#xFF09;&#xFF0C;command&#x662F;&#x4E0D;&#x4F1A;&#x8C03;&#x7528;shell&#x7684;&#xFF0C;&#x6240;&#x4EE5;&#x4E5F;&#x4E0D;&#x4F1A;&#x7EE7;&#x627F;&#x76F8;&#x5E94;&#x53D8;&#x91CF;&#xFF0C;&#x8981;&#x67E5;&#x770B;&#x8F93;&#x5165;RUN &quot;sh&quot; &quot;-c&quot; &quot;echo&quot; &quot;$HOME&quot;&#xFF0C;&#x800C;&#x4E0D;&#x662F;RUN &quot;echo&quot; &quot;$HOME&quot;&#x3002;</p>
-<h2 id="cmd">CMD</h2>
-<p>&#x7528;&#x6CD5;&#xFF1A;CMD command param1 param2</p>
-<p>&#x8BF4;&#x660E;&#xFF1A;CMD&#x5728;Dockerfile&#x4E2D;&#x53EA;&#x80FD;&#x51FA;&#x73B0;&#x4E00;&#x6B21;&#xFF0C;&#x6709;&#x591A;&#x4E2A;&#xFF0C;&#x53EA;&#x6709;&#x6700;&#x540E;&#x4E00;&#x4E2A;&#x4F1A;&#x6709;&#x6548;&#x3002;&#x5176;&#x4F5C;&#x7528;&#x662F;&#x5728;&#x542F;&#x52A8;&#x5BB9;&#x5668;&#x7684;&#x65F6;&#x5019;&#x63D0;&#x4F9B;&#x4E00;&#x4E2A;&#x9ED8;&#x8BA4;&#x7684;&#x547D;&#x4EE4;&#x9879;&#x3002;&#x5982;&#x679C;&#x7528;&#x6237;&#x6267;&#x884C;docker run&#x7684;&#x65F6;&#x5019;&#x63D0;&#x4F9B;&#x4E86;&#x547D;&#x4EE4;&#x9879;&#xFF0C;&#x5C31;&#x4F1A;&#x8986;&#x76D6;&#x6389;&#x8FD9;&#x4E2A;&#x547D;&#x4EE4;&#x3002;&#x6CA1;&#x63D0;&#x4F9B;&#x5C31;&#x4F1A;&#x4F7F;&#x7528;&#x6784;&#x5EFA;&#x65F6;&#x7684;&#x547D;&#x4EE4;&#x3002;</p>
-<h2 id="expose">EXPOSE</h2>
-<p>&#x7528;&#x6CD5;&#xFF1A;EXPOSE <port> [<port>...]</port></port></p>
-<p>&#x8BF4;&#x660E;&#xFF1A;&#x544A;&#x8BC9;Docker&#x670D;&#x52A1;&#x5668;&#x5BB9;&#x5668;&#x5BF9;&#x5916;&#x6620;&#x5C04;&#x7684;&#x5BB9;&#x5668;&#x7AEF;&#x53E3;&#x53F7;&#xFF0C;&#x5728;docker run -p&#x7684;&#x65F6;&#x5019;&#x751F;&#x6548;&#x3002;</p>
-<h2 id="env">ENV</h2>
-<p>&#x7528;&#x6CD5;&#xFF1A;EVN <key> <value> &#x53EA;&#x80FD;&#x8BBE;&#x7F6E;&#x4E00;&#x4E2A;</value></key></p>
-<p>&#x3000;&#x3000;&#x3000;EVN <key>=<value>&#x5141;&#x8BB8;&#x4E00;&#x6B21;&#x8BBE;&#x7F6E;&#x591A;&#x4E2A;</value></key></p>
-<p>&#x8BF4;&#x660E;&#xFF1A;&#x8BBE;&#x7F6E;&#x5BB9;&#x5668;&#x7684;&#x73AF;&#x5883;&#x53D8;&#x91CF;&#xFF0C;&#x53EF;&#x4EE5;&#x8BA9;&#x5176;&#x540E;&#x9762;&#x7684;RUN&#x547D;&#x4EE4;&#x4F7F;&#x7528;&#xFF0C;&#x5BB9;&#x5668;&#x8FD0;&#x884C;&#x7684;&#x65F6;&#x5019;&#x8FD9;&#x4E2A;&#x53D8;&#x91CF;&#x4E5F;&#x4F1A;&#x4FDD;&#x7559;&#x3002;</p>
-<h2 id="add">ADD</h2>
-<p>&#x7528;&#x6CD5;&#xFF1A;ADD <src>   <dest></dest></src></p>
-<p>&#x8BF4;&#x660E;&#xFF1A;&#x590D;&#x5236;&#x672C;&#x673A;&#x6587;&#x4EF6;&#x6216;&#x76EE;&#x5F55;&#x6216;&#x8FDC;&#x7A0B;&#x6587;&#x4EF6;&#xFF0C;&#x6DFB;&#x52A0;&#x5230;&#x6307;&#x5B9A;&#x7684;&#x5BB9;&#x5668;&#x76EE;&#x5F55;&#xFF0C;&#x652F;&#x6301;GO&#x7684;&#x6B63;&#x5219;&#x6A21;&#x7CCA;&#x5339;&#x914D;&#x3002;&#x8DEF;&#x5F84;&#x662F;&#x7EDD;&#x5BF9;&#x8DEF;&#x5F84;&#xFF0C;&#x4E0D;&#x5B58;&#x5728;&#x4F1A;&#x81EA;&#x52A8;&#x521B;&#x5EFA;&#x3002;&#x5982;&#x679C;&#x6E90;&#x662F;&#x4E00;&#x4E2A;&#x76EE;&#x5F55;&#xFF0C;&#x53EA;&#x4F1A;&#x590D;&#x5236;&#x76EE;&#x5F55;&#x4E0B;&#x7684;&#x5185;&#x5BB9;&#xFF0C;&#x76EE;&#x5F55;&#x672C;&#x8EAB;&#x4E0D;&#x4F1A;&#x590D;&#x5236;&#x3002;ADD&#x547D;&#x4EE4;&#x4F1A;&#x5C06;&#x590D;&#x5236;&#x7684;&#x538B;&#x7F29;&#x6587;&#x4EF6;&#x5939;&#x81EA;&#x52A8;&#x89E3;&#x538B;&#xFF0C;&#x8FD9;&#x4E5F;&#x662F;&#x4E0E;COPY&#x547D;&#x4EE4;&#x6700;&#x5927;&#x7684;&#x4E0D;&#x540C;&#x3002;</p>
-<h2 id="copy">COPY</h2>
-<p>&#x7528;&#x6CD5;&#xFF1A;COPY <src> <dest></dest></src></p>
-<p>&#x8BF4;&#x660E;&#xFF1A;COPY&#x9664;&#x4E86;&#x4E0D;&#x80FD;&#x81EA;&#x52A8;&#x89E3;&#x538B;&#xFF0C;&#x4E5F;&#x4E0D;&#x80FD;&#x590D;&#x5236;&#x7F51;&#x7EDC;&#x6587;&#x4EF6;&#x3002;&#x5176;&#x5B83;&#x529F;&#x80FD;&#x548C;ADD&#x76F8;&#x540C;&#x3002;</p>
-<h2 id="entrypoint&#x63A8;&#x8350;&#x4F7F;&#x7528;&#x8FD9;&#x4E2A;&#x4F5C;&#x4E3A;&#x542F;&#x52A8;&#x547D;&#x4EE4;">ENTRYPOINT(&#x63A8;&#x8350;&#x4F7F;&#x7528;&#x8FD9;&#x4E2A;&#x4F5C;&#x4E3A;&#x542F;&#x52A8;&#x547D;&#x4EE4;)</h2>
-<p>&#x7528;&#x6CD5;&#xFF1A;ENTRYPOINT &quot;command&quot; &quot;param1&quot; &quot;param2&quot;</p>
-<p>&#x8BF4;&#x660E;&#xFF1A;&#x8FD9;&#x4E2A;&#x547D;&#x4EE4;&#x548C;CMD&#x547D;&#x4EE4;&#x4E00;&#x6837;&#xFF0C;&#x552F;&#x4E00;&#x7684;&#x533A;&#x522B;&#x662F;&#x4E0D;&#x80FD;&#x88AB;docker run&#x547D;&#x4EE4;&#x7684;&#x6267;&#x884C;&#x547D;&#x4EE4;&#x8986;&#x76D6;&#xFF0C;&#x5982;&#x679C;&#x8981;&#x8986;&#x76D6;&#x9700;&#x8981;&#x5E26;&#x4E0A;&#x9009;&#x9879;--entrypoint&#xFF0C;&#x5982;&#x679C;&#x6709;&#x591A;&#x4E2A;&#x9009;&#x9879;&#xFF0C;&#x53EA;&#x6709;&#x6700;&#x540E;&#x4E00;&#x4E2A;&#x4F1A;&#x751F;&#x6548;&#x3002;</p>
-<h2 id="volume">VOLUME</h2>
-<p>&#x7528;&#x6CD5;&#xFF1A;VOLUME [&quot;path&quot;]</p>
-<p>&#x8BF4;&#x660E;&#xFF1A;&#x5728;&#x4E3B;&#x673A;&#x4E0A;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x6302;&#x8F7D;&#xFF0C;&#x6302;&#x8F7D;&#x5230;&#x5BB9;&#x5668;&#x7684;&#x6307;&#x5B9A;&#x8DEF;&#x5F84;&#x3002;docker run -v&#x547D;&#x4EE4;&#x4E5F;&#x80FD;&#x5B8C;&#x6210;&#x8FD9;&#x4E2A;&#x64CD;&#x4F5C;&#xFF0C;&#x800C;&#x4E14;&#x66F4;&#x5F3A;&#x5927;&#x3002;&#x8FD9;&#x4E2A;&#x547D;&#x4EE4;&#x4E0D;&#x80FD;&#x6307;&#x5B9A;&#x5BBF;&#x4E3B;&#x673A;&#x7684;&#x9700;&#x8981;&#x6302;&#x8F7D;&#x5230;&#x5BB9;&#x5668;&#x7684;&#x6587;&#x4EF6;&#x5939;&#x8DEF;&#x5F84;&#x3002;&#x4F46;docker run -v&#x53EF;&#x4EE5;&#xFF0C;&#x800C;&#x4E14;&#x5176;&#x8FD8;&#x53EF;&#x4EE5;&#x6302;&#x8F7D;&#x6570;&#x636E;&#x5BB9;&#x5668;&#x3002;</p>
-<h2 id="user">USER</h2>
-<p>&#x7528;&#x6CD5;&#xFF1A;USER daemon</p>
-<p>&#x8BF4;&#x660E;&#xFF1A;&#x6307;&#x5B9A;&#x8FD0;&#x884C;&#x5BB9;&#x5668;&#x65F6;&#x7684;&#x7528;&#x6237;&#x540D;&#x6216;UID&#xFF0C;&#x540E;&#x7EED;&#x7684;RUN&#x3001;CMD&#x3001;ENTRYPOINT&#x4E5F;&#x4F1A;&#x4F7F;&#x7528;&#x6307;&#x5B9A;&#x7684;&#x7528;&#x6237;&#x8FD0;&#x884C;&#x547D;&#x4EE4;&#x3002;</p>
-<h2 id="workdir">WORKDIR</h2>
-<p>&#x7528;&#x6CD5;:WORKDIR path</p>
-<p>&#x8BF4;&#x660E;&#xFF1A;&#x4E3A;RUN&#x3001;CMD&#x3001;ENTRYPOINT&#x6307;&#x4EE4;&#x914D;&#x7F6E;&#x5DE5;&#x4F5C;&#x76EE;&#x5F55;&#x3002;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x591A;&#x4E2A;WORKDIR&#x6307;&#x4EE4;&#xFF0C;&#x540E;&#x7EED;&#x53C2;&#x6570;&#x5982;&#x679C;&#x662F;&#x76F8;&#x5BF9;&#x8DEF;&#x5F84;&#xFF0C;&#x5219;&#x4F1A;&#x57FA;&#x4E8E;&#x4E4B;&#x524D;&#x7684;&#x547D;&#x4EE4;&#x6307;&#x5B9A;&#x7684;&#x8DEF;&#x5F84;&#x3002;&#x5982;&#xFF1A;WORKDIR  /home&#x3000;&#x3000;WORKDIR test &#x3002;&#x6700;&#x7EC8;&#x7684;&#x8DEF;&#x5F84;&#x5C31;&#x662F;/home/test&#x3002;path&#x8DEF;&#x5F84;&#x4E5F;&#x53EF;&#x4EE5;&#x662F;&#x73AF;&#x5883;&#x53D8;&#x91CF;&#xFF0C;&#x6BD4;&#x5982;&#x6709;&#x73AF;&#x5883;&#x53D8;&#x91CF;HOME=/home&#xFF0C;WORKDIR $HOME/test&#x4E5F;&#x5C31;&#x662F;/home/test&#x3002;</p>
-<h2 id="onbuild">ONBUILD</h2>
-<p>&#x7528;&#x6CD5;&#xFF1A;ONBUILD [INSTRUCTION]</p>
-<p>&#x8BF4;&#x660E;&#xFF1A;&#x914D;&#x7F6E;&#x5F53;&#x524D;&#x6240;&#x521B;&#x5EFA;&#x7684;&#x955C;&#x50CF;&#x4F5C;&#x4E3A;&#x5176;&#x5B83;&#x65B0;&#x521B;&#x5EFA;&#x955C;&#x50CF;&#x7684;&#x57FA;&#x7840;&#x955C;&#x50CF;&#x65F6;&#xFF0C;&#x6240;&#x6267;&#x884C;&#x7684;&#x64CD;&#x4F5C;&#x6307;&#x4EE4;&#x3002;&#x610F;&#x601D;&#x5C31;&#x662F;&#xFF0C;&#x8FD9;&#x4E2A;&#x955C;&#x50CF;&#x521B;&#x5EFA;&#x540E;&#xFF0C;&#x5982;&#x679C;&#x5176;&#x5B83;&#x955C;&#x50CF;&#x4EE5;&#x8FD9;&#x4E2A;&#x955C;&#x50CF;&#x4E3A;&#x57FA;&#x7840;&#xFF0C;&#x4F1A;&#x5148;&#x6267;&#x884C;&#x8FD9;&#x4E2A;&#x955C;&#x50CF;&#x7684;ONBUILD&#x547D;&#x4EE4;&#x3002;</p>
-<h2 id="arg">ARG</h2>
-<p>&#x8BED;&#x6CD5;&#xFF1A;ARG <name>[=<default value="">]</default></name></p>
-<p>&#x8BBE;&#x7F6E;&#x53D8;&#x91CF;&#x547D;&#x4EE4;&#xFF0C;ARG&#x547D;&#x4EE4;&#x5B9A;&#x4E49;&#x4E86;&#x4E00;&#x4E2A;&#x53D8;&#x91CF;&#xFF0C;&#x5728;docker build&#x521B;&#x5EFA;&#x955C;&#x50CF;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x4F7F;&#x7528; --build-arg <varname>=<value>&#x6765;&#x6307;&#x5B9A;&#x53C2;&#x6570;</value></varname></p>
-<p>&#x5982;&#x679C;&#x7528;&#x6237;&#x5728;build&#x955C;&#x50CF;&#x65F6;&#x6307;&#x5B9A;&#x4E86;&#x4E00;&#x4E2A;&#x53C2;&#x6570;&#x6CA1;&#x6709;&#x5B9A;&#x4E49;&#x5728;Dockerfile&#x79CD;&#xFF0C;&#x90A3;&#x4E48;&#x5C06;&#x6709;&#x4E00;&#x4E2A;Warning</p>
+                                <h1 id="k8s&#x90E8;&#x7F72;hostport&#x6A21;&#x5F0F;pod&#x62A5;&#x9519;&#x7AEF;&#x53E3;&#x51B2;&#x7A81;">k8s&#x90E8;&#x7F72;hostport&#x6A21;&#x5F0F;pod&#x62A5;&#x9519;&#x7AEF;&#x53E3;&#x51B2;&#x7A81;</h1>
+<p>&#x6700;&#x8FD1;&#x6709;&#x5BA2;&#x6237;&#x5728;&#x4F7F;&#x7528;hostport&#x7684;&#x6A21;&#x5F0F;&#x90E8;&#x7F72;deployment&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x6709;&#x51FA;&#x73B0;&#x8FD9;&#x4E2A;&#x9519;&#x8BEF;0/4 nodes are available: 4 node(s) didn&apos;t have free ports for the requested pod ports&#xFF0C;&#x5BFC;&#x81F4;deployment&#x90E8;&#x7F72;&#x5931;&#x8D25;&#xFF0C;&#x4ECE;&#x62A5;&#x9519;&#x770B;&#x662F;&#x7AEF;&#x53E3;&#x51B2;&#x7A81;&#x4E86;&#x3002;</p>
+<p>&#x56E0;&#x4E3A;hostport&#x662F;&#x7528;&#x7684;&#x5360;&#x7528;&#x7684;node&#x8282;&#x70B9;&#x7684;&#x7AEF;&#x53E3;&#xFF0C;&#x65E2;&#x7136;&#x662F;&#x7AEF;&#x53E3;&#x51B2;&#x7A81;&#xFF0C;&#x6211;&#x4EEC;&#x5230;&#x8282;&#x70B9;&#x4E0A;&#x67E5;&#x770B;&#x4E0B;&#x5BF9;&#x5E94;&#x7AEF;&#x53E3;&#x662F;&#x5426;&#x6709;&#x76D1;&#x542C;&#xFF0C;&#x767B;&#x5F55;&#x8282;&#x70B9;&#x7528;netstat&#x67E5;&#x770B;&#x5BF9;&#x5E94;&#x7AEF;&#x53E3;&#x7684;&#x76D1;&#x542C;&#xFF0C;&#x53D1;&#x73B0;&#x5E76;&#x6CA1;&#x6709;&#x88AB;&#x5360;&#x7528;&#xFF0C;&#x7AEF;&#x53E3;&#x6CA1;&#x6709;&#x88AB;&#x5360;&#x7528;&#xFF0C;&#x4E3A;&#x4EC0;&#x4E48;&#x4F1A;&#x51FA;&#x73B0;&#x90E8;&#x7F72;&#x5931;&#x8D25;&#x62A5;&#x9519;&#x7AEF;&#x53E3;&#x88AB;&#x5360;&#x7528;&#x7684;&#x95EE;&#x9898;&#x3002;</p>
+<p>&#x540E;&#x9762;&#x6211;&#x6839;&#x636E;&#x62A5;&#x9519;&#x7684;yaml&#x8FDB;&#x884C;&#x6D4B;&#x8BD5;&#x4E0B;&#xFF0C;&#x5177;&#x4F53;&#x73B0;&#x8C61;&#x5982;&#x4E0B;</p>
+<pre><code>apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    k8s-app: hostport-test
+    qcloud-app: hostport-test
+  name: hostport-test
+  namespace: tke-test
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      k8s-app: hostport-test
+      qcloud-app: hostport-test
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        k8s-app: hostport-test
+        qcloud-app: hostport-test
+    spec:
+      containers:
+      - image: nginx
+        imagePullPolicy: Always
+        name: hostport-test
+        ports:
+        - containerPort: 80
+          hostPort: 80
+          name: http
+          protocol: TCP
+        resources:
+          limits:
+            cpu: 500m
+            memory: 1Gi
+          requests:
+            cpu: 250m
+            memory: 256Mi
+        securityContext:
+          privileged: false
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      imagePullSecrets:
+      - name: qcloudregistrykey
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+</code></pre><p>&#x90E8;&#x7F72;&#x4E86;hostPort&#x7684;pod&#x540E;&#xFF0C;&#x6211;&#x4EEC;&#x767B;&#x5F55;&#x8282;&#x70B9;&#x67E5;&#x770B;80&#x7AEF;&#x53E3;&#x7684;&#x76D1;&#x542C;&#xFF0C;&#x53D1;&#x73B0;&#x5E76;&#x6CA1;&#x6709;&#x88AB;&#x76D1;&#x542C;</p>
+<pre><code>[root@VM-0-10-centos ~]# netstat -an | grep tcp | grep 80
+tcp        0      0 0.0.0.0:30080           0.0.0.0:*               LISTEN
+tcp        0      0 0.0.0.0:32580           0.0.0.0:*               LISTEN
+tcp        0      0 10.0.0.10:46548         169.254.0.71:80         ESTABLISHED
+tcp        0      0 10.0.0.10:33762         169.254.0.71:80         ESTABLISHED
+</code></pre><p>&#x63A5;&#x4E0B;&#x6765;&#x6211;&#x4EEC;&#x63A5;&#x7740;&#x5F80;hostport-test&#x6240;&#x5728;&#x7684;&#x8282;&#x70B9;&#x90E8;&#x7F72;&#x4E00;&#x4E2A;hostport&#x6A21;&#x5F0F;&#x7684;pod&#x770B;&#x770B;</p>
+<pre><code>apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    k8s-app: hostport-new
+    qcloud-app: hostport-new
+  name: hostport-new
+  namespace: tke-test
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      k8s-app: hostport-new
+      qcloud-app: hostport-new
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        k8s-app: hostport-new
+        qcloud-app: hostport-new
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.io/hostname
+                operator: In
+                values:
+                - 10.0.0.10
+      containers:
+      - image: nginx
+        imagePullPolicy: Always
+        name: hostport-new
+        ports:
+        - containerPort: 80
+          hostPort: 80
+          name: http
+          protocol: TCP
+        resources:
+          limits:
+            cpu: 500m
+            memory: 1Gi
+          requests:
+            cpu: 250m
+            memory: 256Mi
+        securityContext:
+          privileged: false
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      hostNetwork: true
+      imagePullSecrets:
+      - name: qcloudregistrykey
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+</code></pre><p>&#x6211;&#x4EEC;&#x770B;&#x4E0B;hostport-new&#x7684;&#x4E8B;&#x4EF6;&#xFF0C;&#x770B;&#x4E0B;&#x662F;&#x5426;&#x6709;&#x51FA;&#x73B0;&#x62A5;&#x9519;</p>
+<pre><code>[root@VM-0-10-centos ~]# kubectl describe  pod -n tke-test hostport-new-86786bc46f-kl8ph
+Name:           hostport-new-86786bc46f-kl8ph
+Namespace:      tke-test
+.................
+Events:
+  Type     Reason                        Age                   From                  Message
+  ----     ------                        ----                  ----                  -------
+  Normal   FailedSchedulingOnEkletNodes  7m49s (x16 over 12m)  admission-controller  node(s) didn&apos;t match node selector
+  Warning  FailedScheduling              65s (x10 over 12m)    default-scheduler     0/5 nodes are available: 1 Too many pods, 2 node(s) didn&apos;t have free ports for the requested pod ports, 2 node(s) didn&apos;t match node selector.
+</code></pre><p>&#x4ECE;&#x4E8B;&#x4EF6;&#x65E5;&#x5FD7;&#x770B;&#xFF0C;&#x90E8;&#x7F72;&#x62A5;&#x9519;&#xFF0C;&#x4E5F;&#x662F;&#x62A5;&#x9519;&#x7AEF;&#x53E3;&#x6CA1;&#x6CD5;&#x4F7F;&#x7528;&#xFF0C;&#x4F46;&#x662F;&#x6211;&#x4EEC;&#x5230;&#x8282;&#x70B9;&#x67E5;&#x770B;80&#x7AEF;&#x53E3;&#x7684;&#x786E;&#x6CA1;&#x6709;&#x88AB;&#x76D1;&#x542C;&#xFF0C;&#x8FD9;&#x662F;&#x600E;&#x4E48;&#x56DE;&#x4E8B;&#x5462;&#xFF1F;</p>
+<p>&#x8FD9;&#x91CC;&#x80AF;&#x5B9A;&#x662F;&#x54EA;&#x91CC;&#x914D;&#x7F6E;&#x4E0D;&#x6B63;&#x5E38;&#x5BFC;&#x81F4;&#xFF0C;&#x6211;&#x4EEC;&#x4ED4;&#x7EC6;&#x5206;&#x6790;&#x4E86;&#x4E0B;&#x90E8;&#x7F72;&#x7684;yaml&#x6587;&#x4EF6;&#xFF0C;&#x53D1;&#x73B0;hostport-test&#x914D;&#x7F6E;&#x7684;hostport&#xFF0C;&#x4F46;&#x662F;&#x6CA1;&#x6709;&#x914D;&#x7F6E;hostNetwork&#xFF0C;&#x5728;k8s&#x91CC;&#x9762;&#x5982;&#x679C;&#x8981;hostport&#x751F;&#x6548;&#xFF0C;&#x9700;&#x8981;&#x914D;&#x7F6E;hostNetwork&#x4E3A;true&#x624D;&#x884C;&#xFF0C;hostport-test&#x6CA1;&#x6709;&#x914D;&#x7F6E;hostNetwork&#xFF0C;&#x6240;&#x4EE5;&#x5230;&#x8282;&#x70B9;&#x4E0A;&#x67E5;&#x770B;80&#x7AEF;&#x53E3;&#x6CA1;&#x6709;&#x88AB;&#x76D1;&#x542C;&#x3002;</p>
+<p>&#x65E2;&#x7136;&#x8282;&#x70B9;&#x7AEF;&#x53E3;&#x6CA1;&#x88AB;&#x76D1;&#x542C;&#xFF0C;&#x4E3A;&#x4EC0;&#x4E48;&#x90E8;&#x7F72;hostport-new&#x8FD9;&#x4E2A;pod&#x65F6;&#x5019;&#x8FD8;&#x662F;&#x4F1A;&#x62A5;&#x9519;&#x5462;&#xFF1F;hostport-new&#x662F;&#x6709;&#x914D;&#x7F6E;hostNetwork&#xFF0C;&#x5176;&#x5B9E;&#x4ECE;&#x4E8B;&#x4EF6;&#x53EF;&#x4EE5;&#x770B;&#x51FA;pod&#x662F;&#x8C03;&#x5EA6;&#x5931;&#x8D25;&#xFF0C;pod&#x7684;&#x8C03;&#x5EA6;&#x662F;&#x4ECE;etcd&#x91CC;&#x9762;&#x83B7;&#x53D6;&#x4FE1;&#x606F;&#x53BB;&#x5224;&#x65AD;&#x8282;&#x70B9;&#x662F;&#x5426;&#x5B58;&#x5728;&#x76F8;&#x540C;&#x7AEF;&#x53E3;&#x7684;pod&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x8BF4;&#x5F53;&#x4F60;&#x6709;&#x4E00;&#x4E2A;deployment&#x5B58;&#x5728;hostport&#x4E3A;80&#x7684;&#x5B57;&#x6BB5;&#x65F6;&#xFF0C;Scheduler&#x5C31;&#x4F1A;&#x8BA4;&#x4E3A;&#x8282;&#x70B9;80&#x7AEF;&#x53E3;&#x5DF2;&#x7ECF;&#x88AB;&#x5360;&#x7528;&#x4E86;&#xFF0C;Scheduler&#x4E0D;&#x4F1A;&#x5B9E;&#x9645;&#x53BB;&#x68C0;&#x67E5;&#x4F60;&#x7684;&#x8282;&#x70B9;&#x662F;&#x5426;&#x6709;&#x8FD9;&#x4E2A;&#x7AEF;&#x53E3;&#x7684;&#x76D1;&#x542C;&#x3002;</p>
+<p>&#x4ECE;&#x4E0A;&#x9762;&#x7684;&#x5206;&#x6790;&#xFF0C;&#x5C31;&#x53EF;&#x4EE5;&#x770B;&#x51FA;&#x4E3A;&#x4EC0;&#x4E48;&#x8282;&#x70B9;&#x6CA1;&#x6709;&#x8D77;80&#x7AEF;&#x53E3;&#x7684;&#x76D1;&#x542C;&#xFF0C;&#x4F46;&#x662F;&#x90E8;&#x7F72;hostport&#x4F1A;&#x62A5;&#x9519;&#x7AEF;&#x53E3;&#x88AB;&#x5360;&#x7528;&#x7684;&#x62A5;&#x9519;&#x3002; </p>
 <p><footer class="page-footer"><span class="copyright">&#xA9; vishon all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">Updated at
-2021-06-01 12:49:46
+2021-07-19 11:44:58
 </span></footer></p>
 <div id="gitalk-container"></div>
 <script>console.log("plugin-popup....");document.onclick = function(e){ e.target.tagName === "IMG" && window.open(e.target.src,e.target.src)}</script><style>img{cursor:pointer}</style>
@@ -829,12 +915,12 @@ CMD [&quot;/opt/tomcat/bin/catalina.sh&quot;,&quot;run&quot;]
 
             
                 
-                <a href="../database/redis-devops-note.html" class="navigation navigation-prev " aria-label="Previous page: 【datebase】redis运维笔记">
+                <a href="getting-started-with-kustomize-actually.html" class="navigation navigation-prev " aria-label="Previous page: 【k8s】kustomize入门实践">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="docker-compose-study.html" class="navigation navigation-next " aria-label="Next page: 【docker】docker-compose学习笔记">
+                <a href="../tke/tke-used-docker-in-docker.html" class="navigation navigation-next " aria-label="Next page: 【tke】tke上使用docker-in-docker">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -845,7 +931,7 @@ CMD [&quot;/opt/tomcat/bin/catalina.sh&quot;,&quot;run&quot;]
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"【docker】dockerfile学习笔记","level":"5.1","depth":1,"next":{"title":"【docker】docker-compose学习笔记","level":"5.2","depth":1,"path":"docker/docker-compose-study.md","ref":"docker/docker-compose-study.md","articles":[]},"previous":{"title":"【datebase】redis运维笔记","level":"4.3","depth":1,"path":"database/redis-devops-note.md","ref":"database/redis-devops-note.md","articles":[]},"dir":"ltr"},"config":{"plugins":["github","editlink","-lunr","-search","search-plus","tbfed-pagefooter","splitter","page-toc-button","back-to-top-button","-lunr","-search","search-plus","github-buttons@2.1.0","favicon@^0.0.2","3-ba","theme-default","pageview-count","auto-scroll-table","popup","code","mygitalk"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"&copy vishon","modify_label":"Updated at","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-okaidia.css"]},"disqus":{"shortName":"nieweixing-github-io"},"github":{"url":"https://github.com/nieweixing"},"editlink":{"label":"编辑本页","multilingual":false,"base":"https://github.com/nieweixing/mybook/tree/gh-pages"},"splitter":{},"auto-scroll-table":{},"popup":{},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"favicon":{"shortcut":"favicon.ico","bookmark":"favicon.ico"},"page-toc-button":{},"back-to-top-button":{},"pageview-count":{},"github-buttons":{"repo":"nieweixing/mybook","types":["star"],"size":"small"},"3-ba":{"configuration":"auto","token":"c03bec8e82bc53c064e0e648ffa54d88"},"mygitalk":{"flipMoveOptions":{},"clientID":"5976cd3d9cc251569467","number":-1,"perPage":10,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","admin":["nieweixing"],"createIssueManually":false,"distractionFreeMode":false,"repo":"gitalk-comment","owner":"nieweixing","enableHotKey":true,"clientSecret":"74117131a57324d4d616267265a94f4a1ac293ec","pagerDirection":"last","labels":["Gitalk"]},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{},"image-captions":{"caption":"图片 - _CAPTION_"}},"theme":"default","author":"vishon","pdf":{"pageNumbers":true,"fontSize":11,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"toc":true},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"运维操作指南","language":"zh-hans","links":{"sidebar":{"聂伟星个人博客":"https://www.niewx.cn","TKE使用操作文档":"https://cloud.tencent.com/developer/column/87421"}},"gitbook":">= 3.2.2","description":"运维操作指南"},"file":{"path":"docker/dockerfile-study.md","mtime":"2021-06-01T04:49:46.698Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-07-19T03:46:21.271Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"【k8s】k8s部署hostport模式pod报错端口冲突","level":"6.7","depth":1,"next":{"title":"【tke】tke上使用docker-in-docker","level":"7.1","depth":1,"path":"tke/tke-used-docker-in-docker.md","ref":"tke/tke-used-docker-in-docker.md","articles":[]},"previous":{"title":"【k8s】kustomize入门实践","level":"6.6","depth":1,"path":"k8s/getting-started-with-kustomize-actually.md","ref":"k8s/getting-started-with-kustomize-actually.md","articles":[]},"dir":"ltr"},"config":{"plugins":["github","editlink","-lunr","-search","search-plus","tbfed-pagefooter","splitter","page-toc-button","back-to-top-button","-lunr","-search","search-plus","github-buttons@2.1.0","favicon@^0.0.2","3-ba","theme-default","pageview-count","auto-scroll-table","popup","code","mygitalk"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"&copy vishon","modify_label":"Updated at","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-okaidia.css"]},"disqus":{"shortName":"nieweixing-github-io"},"github":{"url":"https://github.com/nieweixing"},"editlink":{"label":"编辑本页","multilingual":false,"base":"https://github.com/nieweixing/mybook/tree/gh-pages"},"splitter":{},"auto-scroll-table":{},"popup":{},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"favicon":{"shortcut":"favicon.ico","bookmark":"favicon.ico"},"page-toc-button":{},"back-to-top-button":{},"pageview-count":{},"github-buttons":{"repo":"nieweixing/mybook","types":["star"],"size":"small"},"3-ba":{"configuration":"auto","token":"c03bec8e82bc53c064e0e648ffa54d88"},"mygitalk":{"flipMoveOptions":{},"clientID":"5976cd3d9cc251569467","number":-1,"perPage":10,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","admin":["nieweixing"],"createIssueManually":false,"distractionFreeMode":false,"repo":"gitalk-comment","owner":"nieweixing","enableHotKey":true,"clientSecret":"74117131a57324d4d616267265a94f4a1ac293ec","pagerDirection":"last","labels":["Gitalk"]},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{},"image-captions":{"caption":"图片 - _CAPTION_"}},"theme":"default","author":"vishon","pdf":{"pageNumbers":true,"fontSize":11,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"toc":true},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"运维操作指南","language":"zh-hans","links":{"sidebar":{"聂伟星个人博客":"https://www.niewx.cn","TKE使用操作文档":"https://cloud.tencent.com/developer/column/87421"}},"gitbook":">= 3.2.2","description":"运维操作指南"},"file":{"path":"k8s/k8s-deploys-hostport-mode-pod-error-report.md","mtime":"2021-07-19T03:44:58.258Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-07-19T03:46:21.271Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
