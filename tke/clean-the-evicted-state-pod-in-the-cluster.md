@@ -3,13 +3,18 @@
 ```
 #!/bin/bash
 
-for ns in `kubectl get ns | awk 'NR>1{print $1}'`
+basepath=$(cd `dirname $0`; pwd)
+
+kubectl get pods -A | grep Evited | awk -F " " '{print $1,$2}'  >> $basepath/tmp.file
+
+while read line
 do
-     for po in `kubectl get pods -n ${ns} | grep Evited | awk '{print $1}'`
-     do
-          kubectl delete pod $po -n ${ns}
-     done
-done
+    ns=`echo $line | awk -F " " '{print $1}'`
+    podname=`echo $line | awk -F " " '{print $2}'`
+    kubectl delete pod $podname -n $ns
+done < $basepath/tmp.file
+
+rm $basepath/tmp.file
 ```
 
 复制上面脚本，直接执行即可，如果想清除其他状态的pod，可以将grep Evited改成其他的，比如说grep Pending
