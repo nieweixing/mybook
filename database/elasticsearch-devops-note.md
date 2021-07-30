@@ -84,8 +84,9 @@ network_mode: "host"
 
 ## 命令格式
 
-
+```
 curl -X<REST Verb> <Node>:<Port>/<Index>/<Type>/<ID>
+```
 
 * <REST Verb>：REST风格的语法谓词
 * <Node>:节点ip
