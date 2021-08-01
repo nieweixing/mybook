@@ -1,0 +1,32 @@
+{
+  "name": "gitbook",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "gitbook serve ./content ./gh-pages",
+    "build": "gitbook build ./content ./gh-pages",
+    "deploy": "node ./scripts/deploy-gh-pages.js",
+    "publish": "npm run build&&npm run deploy"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nieweixing/mybook.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nieweixing/mybook/issues"
+  },
+  "homepage": "https://github.com/nieweixing/mybook#readme",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.9",
+    "gh-pages": "^3.1.0",
+    "gitbook-plugin-code": "^0.1.0",
+    "gitbook-plugin-mygitalk": "^0.2.6",
+    "gitbook-plugin-prism": "^2.4.0",
+    "gitbook-plugin-prism-themes": "0.0.2",
+    "prismjs": "^1.23.0"
+  }
+}

@@ -1,0 +1,1039 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>【aws】awscli命令行操作 · 运维操作指南</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="vishon">
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-splitter/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-page-toc-button/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-back-to-top-button/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-pageview-count/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-auto-scroll-table/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-code/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    
+
+    
+        <link rel="shortcut icon" href='../../favicon.ico' type="image/x-icon">
+    
+    
+        <link rel="bookmark" href='../../favicon.ico' type="image/x-icon">
+    
+    
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"repo":"nieweixing/mybook","types":["star"],"size":"small"};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="https://www.niewx.cn" target="_blank" class="custom-link">聂伟星个人博客</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://cloud.tencent.com/developer/column/87421" target="_blank" class="custom-link">TKE使用操作文档</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                    简介
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">如何搭建属于自己的gitbook</li>
+        
+        
+    
+        <li class="chapter " data-level="2.1" data-path="../../gitbook/install-gitbook.html">
+            
+                <a href="../../gitbook/install-gitbook.html">
+            
+                    
+                    【gitbook】本地机器安装gitbook
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2" data-path="../../gitbook/gitbook-add-note.html">
+            
+                <a href="../../gitbook/gitbook-add-note.html">
+            
+                    
+                    【gitbook】gitbook添加笔记
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3" data-path="../../gitbook/gitbook-upload-github.html">
+            
+                <a href="../../gitbook/gitbook-upload-github.html">
+            
+                    
+                    【gitbook】gitbook上传到github托管
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.4" data-path="../../gitbook/gitbook-plugin-usage.html">
+            
+                <a href="../../gitbook/gitbook-plugin-usage.html">
+            
+                    
+                    【gitbook】gitbook插件使用
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">linux运维笔记</li>
+        
+        
+    
+        <li class="chapter " data-level="3.1" data-path="../../linux/shell-script-template.html">
+            
+                <a href="../../linux/shell-script-template.html">
+            
+                    
+                    【linux】shell脚本模板
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.2" data-path="../../linux/cvm-build-openvpn.html">
+            
+                <a href="../../linux/cvm-build-openvpn.html">
+            
+                    
+                    【linux】腾讯云cvm上搭建openvpn
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.3" data-path="../../linux/vmware-install-centos-set-static-ip-address.html">
+            
+                <a href="../../linux/vmware-install-centos-set-static-ip-address.html">
+            
+                    
+                    【linux】vmware安装centos环境设置静态的ip地址
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.4" data-path="../../linux/Use-awk-to-extract-field-information.html">
+            
+                <a href="../../linux/Use-awk-to-extract-field-information.html">
+            
+                    
+                    【linux】使用awk处理字段信息
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">数据库运维笔记</li>
+        
+        
+    
+        <li class="chapter " data-level="4.1" data-path="../../database/mysql-devops-note.html">
+            
+                <a href="../../database/mysql-devops-note.html">
+            
+                    
+                    【datebase】mysql运维笔记
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.2" data-path="../../database/mongodb-devops-note.html">
+            
+                <a href="../../database/mongodb-devops-note.html">
+            
+                    
+                    【datebase】mongodb运维笔记
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.3" data-path="../../database/redis-devops-note.html">
+            
+                <a href="../../database/redis-devops-note.html">
+            
+                    
+                    【datebase】redis运维笔记
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.4" data-path="../../database/elasticsearch-devops-note.html">
+            
+                <a href="../../database/elasticsearch-devops-note.html">
+            
+                    
+                    【datebase】elasticsearch运维笔记
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">docker运维笔记</li>
+        
+        
+    
+        <li class="chapter " data-level="5.1" data-path="../../docker/dockerfile-study.html">
+            
+                <a href="../../docker/dockerfile-study.html">
+            
+                    
+                    【docker】dockerfile学习笔记
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.2" data-path="../../docker/docker-compose-study.html">
+            
+                <a href="../../docker/docker-compose-study.html">
+            
+                    
+                    【docker】docker-compose学习笔记
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">kubernetes运维笔记</li>
+        
+        
+    
+        <li class="chapter " data-level="6.1" data-path="../../k8s/k8s-common-commands.html">
+            
+                <a href="../../k8s/k8s-common-commands.html">
+            
+                    
+                    【k8s】k8s常用命令总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.2" data-path="../../k8s/k8s-force-delete-terminating-ns.html">
+            
+                <a href="../../k8s/k8s-force-delete-terminating-ns.html">
+            
+                    
+                    【k8s】强制删除Terminating状态ns
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.3" data-path="../../k8s/userd-filebeat-as-sidecar-collect-log.html">
+            
+                <a href="../../k8s/userd-filebeat-as-sidecar-collect-log.html">
+            
+                    
+                    【k8s】k8s中filebeat作为sidecar采集容器日志
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.4" data-path="../../k8s/k8s-generate-kubeonfig.html">
+            
+                <a href="../../k8s/k8s-generate-kubeonfig.html">
+            
+                    
+                    【k8s】k8s中生成自定义用户kubeconfig
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.5" data-path="../../k8s/kubecm-manages-k8s-clusters.html">
+            
+                <a href="../../k8s/kubecm-manages-k8s-clusters.html">
+            
+                    
+                    【k8s】kubecm管理多k8s集群
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.6" data-path="../../k8s/getting-started-with-kustomize-actually.html">
+            
+                <a href="../../k8s/getting-started-with-kustomize-actually.html">
+            
+                    
+                    【k8s】kustomize入门实践
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.7" data-path="../../k8s/k8s-deploys-hostport-mode-pod-error-report.html">
+            
+                <a href="../../k8s/k8s-deploys-hostport-mode-pod-error-report.html">
+            
+                    
+                    【k8s】k8s部署hostport模式pod报错端口冲突
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.8" data-path="../../k8s/pod-mounting-nfs-data-volume-error-report-insufficient-permissions.html">
+            
+                <a href="../../k8s/pod-mounting-nfs-data-volume-error-report-insufficient-permissions.html">
+            
+                    
+                    【k8s】pod挂载nfs数据卷报错权限不足
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.9" data-path="../../k8s/The-prestop-configuration-in-k8s-does-not-take-effect.html">
+            
+                <a href="../../k8s/The-prestop-configuration-in-k8s-does-not-take-effect.html">
+            
+                    
+                    【k8s】k8s中配置prestop不生效
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">TKE运维笔记</li>
+        
+        
+    
+        <li class="chapter " data-level="7.1" data-path="../../tke/tke-used-docker-in-docker.html">
+            
+                <a href="../../tke/tke-used-docker-in-docker.html">
+            
+                    
+                    【tke】tke上使用docker-in-docker
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.2" data-path="../../tke/tke-deploy-jumpserver.html">
+            
+                <a href="../../tke/tke-deploy-jumpserver.html">
+            
+                    
+                    【tke】tke上部署Jumpserver跳板机
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.3" data-path="../../tke/get-the-cbsId-of-pvc-in-the-tke-cluster.html">
+            
+                <a href="../../tke/get-the-cbsId-of-pvc-in-the-tke-cluster.html">
+            
+                    
+                    【tke】获取pvc对应的cbs-id
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.4" data-path="../../tke/clean-the-evicted-state-pod-in-the-cluster.html">
+            
+                <a href="../../tke/clean-the-evicted-state-pod-in-the-cluster.html">
+            
+                    
+                    【tke】清除集群中所有的evited状态pod
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.5" data-path="../../tke/adjust-workload-replicas-under-the-namespace.html">
+            
+                <a href="../../tke/adjust-workload-replicas-under-the-namespace.html">
+            
+                    
+                    【tke】调整命名空间所有deploy和sts的副本数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.6" data-path="../../tke/modify-the-permissions-of-the-container-mount-directory.html">
+            
+                <a href="../../tke/modify-the-permissions-of-the-container-mount-directory.html">
+            
+                    
+                    【tke】如何在非root用户启动的镜像中设置挂载目录权限
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.7" data-path="../../tke/The-domain-name-resolved-in-the-alpine-container-exceeds-5s.html">
+            
+                <a href="../../tke/The-domain-name-resolved-in-the-alpine-container-exceeds-5s.html">
+            
+                    
+                    【tke】alpine镜像内解析域名超5s
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">云计算运维笔记</li>
+        
+        
+    
+        <li class="chapter " data-level="8.1" data-path="../1.md">
+            
+                <span>
+            
+                    
+                    云计算简介
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="8.2" >
+            
+                <span>
+            
+                    
+                    aws
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="8.2.1" data-path="awscli-command-operation.html">
+            
+                <a href="awscli-command-operation.html">
+            
+                    
+                    【aws】awscli命令行操作
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="8.3" >
+            
+                <span>
+            
+                    
+                    腾讯云
+            
+                </span>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">prometheus运维笔记</li>
+        
+        
+    
+        <li class="chapter " data-level="9.1" data-path="../../prometheus/basic-knowledge-of-prometheus.html">
+            
+                <a href="../../prometheus/basic-knowledge-of-prometheus.html">
+            
+                    
+                    【prometheus】prometheus入门知识概念
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">istio运维笔记</li>
+        
+        
+    
+        <li class="chapter " data-level="10.1" data-path="../../istio/Sidecar-startup-sequence-problem-in-istio.html">
+            
+                <a href="../../istio/Sidecar-startup-sequence-problem-in-istio.html">
+            
+                    
+                    【istio】istio中sidecar启动顺序问题
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="10.2" data-path="../../istio/istio-traffic-shift.html">
+            
+                <a href="../../istio/istio-traffic-shift.html">
+            
+                    
+                    【istio】istio流量转移实践
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="10.3" data-path="../../istio/istio-multi-cluster-nearby-access.html">
+            
+                <a href="../../istio/istio-multi-cluster-nearby-access.html">
+            
+                    
+                    【istio】istio多集群就近接入
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            本书使用 GitBook 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >【aws】awscli命令行操作</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="aws-cli&#x547D;&#x4EE4;&#x884C;&#x64CD;&#x4F5C;">aws cli&#x547D;&#x4EE4;&#x884C;&#x64CD;&#x4F5C;</h1>
+<h2 id="&#x9996;&#x5148;&#x83B7;&#x53D6;&#x8D26;&#x53F7;&#x7684;access">&#x9996;&#x5148;&#x83B7;&#x53D6;&#x8D26;&#x53F7;&#x7684;access</h2>
+<pre><code>Access key ID,Secret access key
+AKIATRxxxxxxxxJX5WL,ZP2enHUH3XegoGhZxxxxxxxxfDMZo43ohz
+</code></pre><h2 id="&#x767B;&#x5F55;ec2&#x7684;&#x5B9E;&#x4F8B;&#x4E0B;&#x8F7D;awscli">&#x767B;&#x5F55;ec2&#x7684;&#x5B9E;&#x4F8B;&#x4E0B;&#x8F7D;awscli</h2>
+<h3 id="pip&#x5B89;&#x88C5;awscli">pip&#x5B89;&#x88C5;awscli</h3>
+<pre><code>ssh -i xxxxx.pem ec2-user@10.0.64.11
+sudo -i
+yum -y install python-pip
+pip install awscli
+</code></pre><h3 id="2&#x8FDB;&#x5236;&#x5305;&#x5B89;&#x88C5;awscli">2&#x8FDB;&#x5236;&#x5305;&#x5B89;&#x88C5;awscli</h3>
+<pre><code>curl &quot;https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip&quot; -o &quot;awscliv2.zip&quot;
+unzip awscliv2.zip
+sudo ./aws/install
+</code></pre><h2 id="&#x767B;&#x5F55;awscli">&#x767B;&#x5F55;awscli</h2>
+<pre><code>[root@ip-10-0-64-11 ~]# aws configure
+AWS Access Key ID [None]: AKIATRMLTGCFIY5WRHGG
+AWS Secret Access Key [None]: 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
+Default region name [None]: cn-northwest-1
+Default output format [None]:   &#x53EF;&#x4EE5;&#x4E0D;&#x8F93;&#x5165;
+</code></pre><h2 id="&#x4ECE;s3&#x6876;&#x4E0B;&#x8F7D;&#x5BF9;&#x5E94;&#x7684;&#x6587;&#x4EF6;">&#x4ECE;S3&#x6876;&#x4E0B;&#x8F7D;&#x5BF9;&#x5E94;&#x7684;&#x6587;&#x4EF6;</h2>
+<pre><code>aws s3 ls
+aws s3 cp s3://xxxx/jobs.tgz /root
+</code></pre><h2 id="&#x5176;&#x4ED6;&#x7684;awscli&#x547D;&#x4EE4;">&#x5176;&#x4ED6;&#x7684;awscli&#x547D;&#x4EE4;</h2>
+<h3 id="ec2">EC2</h3>
+<h4 id="&#x6302;&#x8F7D;-ebs">&#x6302;&#x8F7D; EBS</h4>
+<ul>
+<li>linux </li>
+</ul>
+<pre><code>&#x67E5;&#x770B;&#x5757;&#x8BBE;&#x5907;&#xFF1A; lsblk
+&#x683C;&#x5F0F;&#x5316;&#x78C1;&#x76D8;&#xFF1A; sudo mkfs -t ext4 /dev/xvdb
+&#x6302;&#x8F7D;&#x5377;&#xFF1A; sudo mount /dev/xvdb /mnt/mydir
+&#x5378;&#x8F7D;&#x5377;&#xFF1A; sudo umount /dev/xvdb
+</code></pre><ul>
+<li>windows </li>
+</ul>
+<pre><code>diskpart
+san policy=onlineall
+list disk
+disk yourdiskid
+attributes disk clear readonly
+online disk
+</code></pre><h4 id="ec2&#x64CD;&#x4F5C;">ec2&#x64CD;&#x4F5C;</h4>
+<pre><code>aws ec2 describe-instances
+aws ec2 describe-instances --instance-ids &quot;instanceid1&quot; &quot;instanceid2&quot;
+aws ec2 start-instances --instance-ids &quot;instanceid1&quot; &quot;instanceid2&quot;
+aws ec2 stop-intances --instance-ids &quot;instanceid1&quot; &quot;instanceid2&quot;
+aws ec2 run-instances --image-id ami-b6b62b8f --security-group-ids sg-xxxxxxxx --key-name mytestkey --block-device-mappings &quot;[{\&quot;DeviceName\&quot;: \&quot;/dev/sdh\&quot;,\&quot;Ebs\&quot;:{\&quot;VolumeSize\&quot;:100}}]&quot; --instance-type t2.medium --count 1 --subnet-id subnet-e8330c9c --associate-public-ip-address 
+(Note: &#x82E5;&#x4E0D;&#x6307;&#x5B9A;subnet-id&#x5219;&#x4F1A;&#x5728;&#x9ED8;&#x8BA4;vpc&#x4E2D;&#x53BB;&#x9009;&#xFF0C;&#x6B64;&#x65F6;&#x82E5;&#x6307;&#x5B9A;&#x4E86;&#x975E;&#x9ED8;&#x8BA4;vpc&#x7684;&#x5B89;&#x5168;&#x7EC4;&#x4F1A;&#x51FA;&#x73B0;&#x8BF7;&#x6C42;&#x9519;&#x8BEF;&#x3002;&#x5982;&#x65E0;&#x7279;&#x6B8A;&#x8981;&#x6C42;&#xFF0C;&#x5EFA;&#x8BAE;&#x5B89;&#x5168;&#x7EC4;&#x548C;&#x5B50;&#x7F51;&#x90FD;&#x4E0D;&#x6307;&#x5B9A;&#xFF0C;&#x5C31;&#x4E0D;&#x4F1A;&#x51FA;&#x73B0;&#x8FD9;&#x79CD;&#x95EE;&#x9898;&#x3002;)
+&#x67E5;&#x770B;region&#x4E0E;AZ
+
+
+aws ec2 describe-region
+aws ec2 describe-availability-zones --region region-name
+</code></pre><h4 id="&#x67E5;&#x770B;ami">&#x67E5;&#x770B;ami</h4>
+<pre><code>aws ec2 describe-images
+</code></pre><h4 id="key-pair">key-pair</h4>
+<pre><code>aws ec2 create-key-pair --key-name mykeyname
+</code></pre><h4 id="&#x5B89;&#x5168;&#x7EC4;">&#x5B89;&#x5168;&#x7EC4;</h4>
+<pre><code>aws ec2 create-security-group --group-name mygroupname --description mydescription --vpc-id vpc-id (&#x82E5;&#x4E0D;&#x6307;&#x5B9A;vpc&#xFF0C;&#x5219;&#x5728;&#x9ED8;&#x8BA4;vpc&#x4E2D;&#x521B;&#x5EFA;&#x5B89;&#x5168;&#x7EC4;)
+aws ec2 authorize-security-group-ingress --group-id sg-xxxxyyyy --protocol tcp --port 22 --cidr 0.0.0.0/0
+aws ec2 authorize-security-group-ingress --group-id sg-xxxxyyyy --protocol tcp --port 9999 --source-group sg-xxxxxxxx
+</code></pre><h3 id="autoscaling">AutoScaling</h3>
+<pre><code>&#x5217;&#x51FA;AS&#x7EC4; 
+aws autoscaling describe-auto-scaling-groups
+&#x5217;&#x51FA;AS&#x5B9E;&#x4F8B; 
+aws autoscaling describe-auto-scaling-instances --instance-ids [instance-id-1 instance-id-2 ...]
+&#x4ECE;&#x7EC4;&#x4E2D;&#x5206;&#x79BB;&#x5B9E;&#x4F8B; 
+aws autoscaling detach-instances --auto-scaling-group-name myasgroup --instance-ids instanceid1 instanceid2 [--should-decrement-desired-capacity|--no-should-decrement-desired-capacity]
+&#x9644;&#x52A0;&#x5B9E;&#x4F8B;&#x5230;&#x7EC4; 
+aws autoscaling attach-instances --auto-scaling-group-name myasgroup --instance-ids instanceid1 instanceid2
+&#x6302;&#x8D77;AS&#x6D41;&#x7A0B; 
+aws autoscaling suspend-process --auto-scaling-group-name myasgroup --scaling-processes AZRebalance|AlarmNotification|...
+&#x5220;&#x9664;AS&#x7EC4; 
+aws autoscaling delete-auto-scaling-group --auto-scaling-group-name myasgroup
+</code></pre><h3 id="s3">S3</h3>
+<h4 id="&#x67E5;&#x770B;">&#x67E5;&#x770B;</h4>
+<pre><code>aws s3 ls
+aws s3 ls s3://bucket
+aws s3 ls s3://bucket/prefix
+</code></pre><h4 id="&#x62F7;&#x8D1D;">&#x62F7;&#x8D1D;</h4>
+<pre><code>aws s3 cp /to/local/path s3://bucket/prefix
+aws s3 cp s3://bucket/prefix /to/local/path
+aws s3 cp s3://bucket1/prefix1 s3://bucket2/prefix2
+</code></pre><h4 id="&#x540C;&#x6B65;">&#x540C;&#x6B65;</h4>
+<pre><code>aws sync [--delete] /to/local/dir s3://bucket/prefixdir
+aws sync [--delete] s3://bucket/prefixdir /to/local/dir
+aws sync [--delete] s3://bucket1/prefixdir1 s3://bucket2/prefixdir2
+</code></pre><h4 id="&#x624B;&#x52A8;&#x5206;&#x7247;&#x4E0A;&#x4F20;">&#x624B;&#x52A8;&#x5206;&#x7247;&#x4E0A;&#x4F20;</h4>
+<p>&#x6587;&#x4EF6;&#x5206;&#x7247; </p>
+<pre><code>split -b 40m myfile myfile-part-
+</code></pre><p>&#x521B;&#x5EFA;&#x5206;&#x7247;&#x4E0A;&#x4F20;&#x4EFB;&#x52A1; </p>
+<pre><code>aws s3api create-multipart-upload --bucket bucketname --key prefix
+&#x8BB0;&#x5F55;&#x8FD4;&#x56DE;&#x503C;
+
+{
+    &quot;Bucket&quot;: &quot;bucketname&quot;, 
+    &quot;UploadId&quot;: &quot;uploadeid&quot;, 
+    &quot;Key&quot;: &quot;prefix&quot;
+}
+</code></pre><p>&#x4E0A;&#x4F20;&#x5206;&#x7247;</p>
+<pre><code>aws s3api upload-part --bucket bucketname --key prefix --part-number [&#x5206;&#x7247;&#x4E0A;&#x4F20;&#x7F16;&#x53F7;(e.g. 1,2,3...)] --body myfile-[x] --upload-id uploadid
+</code></pre><p>&#x5217;&#x51FA;&#x5DF2;&#x4E0A;&#x4F20;&#x5206;&#x7247;&#xFF0C;&#x521B;&#x5EFA;&#x5206;&#x7247;&#x7ED3;&#x6784;&#x6587;&#x4EF6; </p>
+<pre><code>aws s3api list-parts --bucket bucketname --key prefix --upload-id uploadid
+</code></pre><p>&#x5C06;&#x4E0A;&#x547D;&#x4EE4;&#x7ED3;&#x679C;&#x4E2D;&#x7684;parts&#x90E8;&#x5206;&#x4FDD;&#x5B58;&#x4E3A; temp &#x6587;&#x4EF6; </p>
+<pre><code>{&quot;Parts&quot;: [ 
+{ 
+&quot;PartNumber&quot;: 1, 
+&quot;ETag&quot;: &quot;\&quot;xxxxxxx\&quot;&quot; 
+}, 
+{ 
+&quot;PartNumber&quot;: 2, 
+&quot;ETag&quot;: &quot;\&quot;xxxxxxxx\&quot;&quot; 
+} 
+] 
+}
+</code></pre><p>&#x7ED3;&#x675F;&#x5206;&#x7247;&#x4E0A;&#x4F20;&#x4EFB;&#x52A1; </p>
+<pre><code>aws s3api complete-multipart-upload --multipart-upload file://temp --bucket bucketname --key prefix --upload-id uploadid
+</code></pre><h3 id="awscli&#x8BBF;&#x95EE;&#x963F;&#x91CC;&#x4E91;oss">AWSCLI&#x8BBF;&#x95EE;&#x963F;&#x91CC;&#x4E91;OSS</h3>
+<pre><code>aws configure --p aliyun #&#x8BBE;&#x7F6E;key&#x4E0E;secret,&#x5176;&#x4ED6;&#x9ED8;&#x8BA4;
+aws configure set s3.addressing_style virtual --p aliyun
+aws s3 ls --endpoint-url [url/(e.g. http://oss-cn-hangzhou.aliyuncs.com)] --p aliyun
+</code></pre><h3 id="iam">IAM</h3>
+<h4 id="role&#x64CD;&#x4F5C;">Role&#x64CD;&#x4F5C;</h4>
+<pre><code>aws iam create-role MY-ROLE-NAME --assum-role-policy-document file://path/to/trustpolicy.json
+aws iam put-role-policy --role-name MY-ROLE-NAME --policy-name MY-PERM-POLICY --policy-document file://path/to/permissionpolicy.json
+aws iam create-instance-profile --instance-profile-name MY-INSTANCE-PROFILE
+aws iam add-role-to-instance-profile --instance-profile-name MY-INSTANCE-PROFILE --role-name MY-ROLE-NAME
+</code></pre><h3 id="auto-scaling">AUTO-SCALING</h3>
+<h5 id="&#x67E5;&#x770B;&#x4FE1;&#x606F;">&#x67E5;&#x770B;&#x4FE1;&#x606F;</h5>
+<pre><code>aws autoscaling describe-auto-scaling-groups
+aws autoscaling describe-auto-scaling-instances
+</code></pre><h3 id="kinesis">kinesis</h3>
+<h4 id="&#x521B;&#x5EFA;&#x6D41;">&#x521B;&#x5EFA;&#x6D41;</h4>
+<pre><code>aws kinesis create-stream &#x2013;stream-name mystream &#x2013;shard-count
+</code></pre><h4 id="&#x5217;&#x51FA;&#x6D41;">&#x5217;&#x51FA;&#x6D41;</h4>
+<pre><code>aws kinesis list-streams
+</code></pre><h4 id="&#x83B7;&#x53D6;&#x6307;&#x5B9A;&#x6D41;&#x7684;&#x5206;&#x7247;&#x8FED;&#x4EE3;&#x5668;">&#x83B7;&#x53D6;&#x6307;&#x5B9A;&#x6D41;&#x7684;&#x5206;&#x7247;&#x8FED;&#x4EE3;&#x5668;</h4>
+<pre><code>aws kinesis get-shard-iterator &#x2013;stream-name mystream &#x2013;shard-id shard-1 &#x2013;shard-iterator-type TRIM_HORIZON
+</code></pre><h4 id="&#x53D1;&#x9001;&#x6570;&#x636E;&#x5230;&#x6D41;">&#x53D1;&#x9001;&#x6570;&#x636E;&#x5230;&#x6D41;</h4>
+<pre><code>aws kinesis put-record &#x2013;stream-name mystream &#x2013;partition-key mykey &#x2013;data test
+</code></pre><h4 id="&#x83B7;&#x53D6;&#x6D41;&#x6570;&#x636E;">&#x83B7;&#x53D6;&#x6D41;&#x6570;&#x636E;</h4>
+<pre><code>aws kinesis get-records &#x2013;shard-iterator myiterator
+</code></pre><p><footer class="page-footer"><span class="copyright">&#xA9; vishon all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">Updated at
+2021-05-22 11:05:01
+</span></footer></p>
+<div id="gitalk-container"></div>
+<script>console.log("plugin-popup....");document.onclick = function(e){ e.target.tagName === "IMG" && window.open(e.target.src,e.target.src)}</script><style>img{cursor:pointer}</style>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"【aws】awscli命令行操作","level":"8.2.1","depth":2,"next":{"title":"腾讯云","level":"8.3","depth":1,"ref":"","articles":[]},"previous":{"title":"aws","level":"8.2","depth":1,"ref":"","articles":[{"title":"【aws】awscli命令行操作","level":"8.2.1","depth":2,"path":"cloud/aws/awscli-command-operation.md","ref":"cloud/aws/awscli-command-operation.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["github","editlink","-lunr","-search","search-plus","tbfed-pagefooter","splitter","page-toc-button","back-to-top-button","-lunr","-search","search-plus","github-buttons@2.1.0","favicon@^0.0.2","3-ba","theme-default","pageview-count","auto-scroll-table","popup","code","mygitalk"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"&copy vishon","modify_label":"Updated at","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-okaidia.css"]},"disqus":{"shortName":"nieweixing-github-io"},"github":{"url":"https://github.com/nieweixing"},"editlink":{"label":"编辑本页","multilingual":false,"base":"https://github.com/nieweixing/mybook/tree/gh-pages"},"splitter":{},"auto-scroll-table":{},"popup":{},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"favicon":{"shortcut":"favicon.ico","bookmark":"favicon.ico"},"page-toc-button":{},"back-to-top-button":{},"pageview-count":{},"github-buttons":{"repo":"nieweixing/mybook","types":["star"],"size":"small"},"3-ba":{"configuration":"auto","token":"c03bec8e82bc53c064e0e648ffa54d88"},"mygitalk":{"flipMoveOptions":{},"clientID":"5976cd3d9cc251569467","number":-1,"perPage":10,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","admin":["nieweixing"],"createIssueManually":false,"distractionFreeMode":false,"repo":"gitalk-comment","owner":"nieweixing","enableHotKey":true,"clientSecret":"74117131a57324d4d616267265a94f4a1ac293ec","pagerDirection":"last","labels":["Gitalk"]},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{},"image-captions":{"caption":"图片 - _CAPTION_"}},"theme":"default","author":"vishon","pdf":{"pageNumbers":true,"fontSize":11,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"toc":true},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"运维操作指南","language":"zh-hans","links":{"sidebar":{"聂伟星个人博客":"https://www.niewx.cn","TKE使用操作文档":"https://cloud.tencent.com/developer/column/87421"}},"gitbook":">= 3.2.2","description":"运维操作指南"},"file":{"path":"cloud/aws/awscli-command-operation.md","mtime":"2021-05-22T03:05:01.041Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-08-01T02:05:07.470Z"},"basePath":"../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-github/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-editlink/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-splitter/splitter.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-page-toc-button/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-back-to-top-button/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-3-ba/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-pageview-count/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-auto-scroll-table/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-code/plugin.js"></script>
+        
+    
+        
+        <script src="https://cdn.bootcss.com/blueimp-md5/2.12.0/js/md5.min.js"></script>
+        
+    
+        
+        <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-mygitalk/mygitalk.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
