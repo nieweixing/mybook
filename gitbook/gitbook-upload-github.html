@@ -842,13 +842,39 @@ function main() {
     ghpages.publish(&apos;./gh-pages&apos;, console.error.bind(console));
 }
 </code></pre><p>&#x4E0A;&#x9762;&#x7684;&#x811A;&#x672C;&#x7684;&#x4F5C;&#x7528;&#xFF0C;&#x5C31;&#x662F;&#x628A;&#x5F53;&#x524D;&#x6587;&#x4EF6;&#x5939;&#x4E0B;&#x7684; gh-pages &#x6587;&#x4EF6;&#x5939;&#x4E2D;&#x7684;&#x6240;&#x6709;&#x5185;&#x5BB9;&#xFF0C;push &#x5230;&#x672C;&#x4ED3;&#x5E93;&#x7684; gh-pages &#x5206;&#x652F;&#x3002;</p>
-<p>&#x7136;&#x540E;&#x6DFB;&#x52A0;&#x51E0;&#x4E2A; npm &#x811A;&#x672C; deploy &#xFF08; deploy &#x5C31;&#x662F;&#x90E8;&#x7F72;&#x7684;&#x610F;&#x601D;&#xFF09;&#xFF0C;&#x8FD8;&#x6709; build &#xFF08;&#x610F;&#x601D;&#x662F;&#x7F16;&#x8BD1;&#xFF09;&#xFF0C;&#x8FD8;&#x6709; publish&#xFF08;&#x610F;&#x601D;&#x662F;&#x53D1;&#x5E03;&#xFF09;&#xFF0C;&#x5982;&#x4E0B;&#xFF1A;</p>
-<pre><code>&quot;scripts&quot;: {
- &quot;start&quot;: &quot;gitbook serve ./content ./gh-pages&quot;,
- &quot;build&quot;: &quot;gitbook build ./content ./gh-pages&quot;,
- &quot;deploy&quot;: &quot;node ./scripts/deploy-gh-pages.js&quot;,
- &quot;publish&quot;: &quot;npm run build&amp;&amp;npm run deploy&quot;
-},
+<p>&#x7136;&#x540E;&#x5728;&#x6839;&#x76EE;&#x5F55;&#x4E0B;package.json&#x6587;&#x4EF6;&#x6DFB;&#x52A0;&#x51E0;&#x4E2A;npm&#x811A;&#x672C; deploy &#xFF08; deploy &#x5C31;&#x662F;&#x90E8;&#x7F72;&#x7684;&#x610F;&#x601D;&#xFF09;&#xFF0C;&#x8FD8;&#x6709; build &#xFF08;&#x610F;&#x601D;&#x662F;&#x7F16;&#x8BD1;&#xFF09;&#xFF0C;&#x8FD8;&#x6709; publish&#xFF08;&#x610F;&#x601D;&#x662F;&#x53D1;&#x5E03;&#xFF09;&#xFF0C;&#x5982;&#x4E0B;&#xFF1A;</p>
+<pre><code>{
+  &quot;name&quot;: &quot;gitbook&quot;,
+  &quot;version&quot;: &quot;1.0.0&quot;,
+  &quot;description&quot;: &quot;&quot;,
+  &quot;main&quot;: &quot;index.js&quot;,
+  &quot;scripts&quot;: {
+    &quot;start&quot;: &quot;gitbook serve ./content ./gh-pages&quot;,
+    &quot;build&quot;: &quot;gitbook build ./content ./gh-pages&quot;,
+    &quot;deploy&quot;: &quot;node ./scripts/deploy-gh-pages.js&quot;,
+    &quot;publish&quot;: &quot;npm run build&amp;&amp;npm run deploy&quot;
+  },
+  &quot;repository&quot;: {
+    &quot;type&quot;: &quot;git&quot;,
+    &quot;url&quot;: &quot;git+://github.com/nieweixing/mybook.git&quot;
+  },
+  &quot;keywords&quot;: [],
+  &quot;author&quot;: &quot;&quot;,
+  &quot;license&quot;: &quot;ISC&quot;,
+  &quot;bugs&quot;: {
+    &quot;url&quot;: &quot;https://github.com/nieweixing/mybook/issues&quot;
+  },
+  &quot;homepage&quot;: &quot;https://github.com/nieweixing/mybook#readme&quot;,
+  &quot;dependencies&quot;: {
+    &quot;cheerio&quot;: &quot;^1.0.0-rc.9&quot;,
+    &quot;gh-pages&quot;: &quot;^3.1.0&quot;,
+    &quot;gitbook-plugin-code&quot;: &quot;^0.1.0&quot;,
+    &quot;gitbook-plugin-mygitalk&quot;: &quot;^0.2.6&quot;,
+    &quot;gitbook-plugin-prism&quot;: &quot;^2.4.0&quot;,
+    &quot;gitbook-plugin-prism-themes&quot;: &quot;0.0.2&quot;,
+    &quot;prismjs&quot;: &quot;^1.23.0&quot;
+  }
+}
 </code></pre><p>&#x8FD9;&#x6837;&#xFF0C;&#x4EE5;&#x540E;&#x6211;&#x4FEE;&#x6539;&#x4E86;&#x4E66;&#x7A3F;&#xFF0C;&#x53EA;&#x9700;&#x8FD0;&#x884C;</p>
 <pre><code>npm run publish
 </code></pre><p>&#x5982;&#x679C;&#x547D;&#x4EE4;&#x8FD4;&#x56DE; undefined &#x5B57;&#x6837;&#xFF0C;&#x8868;&#x793A;&#x6CA1;&#x6709;&#x51FA;&#x73B0;&#x9519;&#x8BEF;&#xFF0C;&#x90E8;&#x7F72;&#x6210;&#x529F;&#x3002; &#x5C31;&#x53EF;&#x4EE5;&#x628A;&#x6700;&#x65B0;&#x7684;&#x4E66;&#x7A3F; push &#x5230;&#x8FDC;&#x7AEF;&#x4ED3;&#x5E93;&#x7684; gh-pages &#x5206;&#x652F;&#x4E86;&#x3002;</p>
@@ -859,7 +885,7 @@ function main() {
 <p>&#x6D4F;&#x89C8;&#x5668;&#x8F93;&#x5165;<a href="https://www.niewx.cn/mybook" target="_blank">https://www.niewx.cn/mybook</a>&#xFF0C;&#x5C31;&#x53EF;&#x4EE5;&#x67E5;&#x770B;gitbook&#x4E86;</p>
 <p><img src="image/Snipaste_2021-05-19_20-21-36.png" alt="upload-image">  </p>
 <p><footer class="page-footer"><span class="copyright">&#xA9; vishon all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">Updated at
-2021-05-19 20:21:53
+2021-08-14 10:40:55
 </span></footer></p>
 <div id="gitalk-container"></div>
 <script>console.log("plugin-popup....");document.onclick = function(e){ e.target.tagName === "IMG" && window.open(e.target.src,e.target.src)}</script><style>img{cursor:pointer}</style>
@@ -905,7 +931,7 @@ function main() {
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"【gitbook】gitbook上传到github托管","level":"2.3","depth":1,"next":{"title":"【gitbook】gitbook插件使用","level":"2.4","depth":1,"path":"gitbook/gitbook-plugin-usage.md","ref":"gitbook/gitbook-plugin-usage.md","articles":[]},"previous":{"title":"【gitbook】gitbook添加笔记","level":"2.2","depth":1,"path":"gitbook/gitbook-add-note.md","ref":"gitbook/gitbook-add-note.md","articles":[]},"dir":"ltr"},"config":{"plugins":["github","editlink","-lunr","-search","search-plus","tbfed-pagefooter","splitter","page-toc-button","back-to-top-button","-lunr","-search","search-plus","github-buttons@2.1.0","favicon@^0.0.2","3-ba","theme-default","pageview-count","auto-scroll-table","popup","code","mygitalk"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"&copy vishon","modify_label":"Updated at","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-okaidia.css"]},"disqus":{"shortName":"nieweixing-github-io"},"github":{"url":"https://github.com/nieweixing"},"editlink":{"label":"编辑本页","multilingual":false,"base":"https://github.com/nieweixing/mybook/tree/gh-pages"},"splitter":{},"auto-scroll-table":{},"popup":{},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"favicon":{"shortcut":"favicon.ico","bookmark":"favicon.ico"},"page-toc-button":{},"back-to-top-button":{},"pageview-count":{},"github-buttons":{"repo":"nieweixing/mybook","types":["star"],"size":"small"},"3-ba":{"configuration":"auto","token":"c03bec8e82bc53c064e0e648ffa54d88"},"mygitalk":{"flipMoveOptions":{},"clientID":"5976cd3d9cc251569467","number":-1,"perPage":10,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","admin":["nieweixing"],"createIssueManually":false,"distractionFreeMode":false,"repo":"gitalk-comment","owner":"nieweixing","enableHotKey":true,"clientSecret":"74117131a57324d4d616267265a94f4a1ac293ec","pagerDirection":"last","labels":["Gitalk"]},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{},"image-captions":{"caption":"图片 - _CAPTION_"}},"theme":"default","author":"vishon","pdf":{"pageNumbers":true,"fontSize":11,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"toc":true},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"运维操作指南","language":"zh-hans","links":{"sidebar":{"聂伟星个人博客":"https://www.niewx.cn","TKE使用操作文档":"https://cloud.tencent.com/developer/column/87421"}},"gitbook":">= 3.2.2","description":"运维操作指南"},"file":{"path":"gitbook/gitbook-upload-github.md","mtime":"2021-05-19T12:21:53.506Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-08-14T02:37:13.900Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"【gitbook】gitbook上传到github托管","level":"2.3","depth":1,"next":{"title":"【gitbook】gitbook插件使用","level":"2.4","depth":1,"path":"gitbook/gitbook-plugin-usage.md","ref":"gitbook/gitbook-plugin-usage.md","articles":[]},"previous":{"title":"【gitbook】gitbook添加笔记","level":"2.2","depth":1,"path":"gitbook/gitbook-add-note.md","ref":"gitbook/gitbook-add-note.md","articles":[]},"dir":"ltr"},"config":{"plugins":["github","editlink","-lunr","-search","search-plus","tbfed-pagefooter","splitter","page-toc-button","back-to-top-button","-lunr","-search","search-plus","github-buttons@2.1.0","favicon@^0.0.2","3-ba","theme-default","pageview-count","auto-scroll-table","popup","code","mygitalk"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"&copy vishon","modify_label":"Updated at","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-okaidia.css"]},"disqus":{"shortName":"nieweixing-github-io"},"github":{"url":"https://github.com/nieweixing"},"editlink":{"label":"编辑本页","multilingual":false,"base":"https://github.com/nieweixing/mybook/tree/gh-pages"},"splitter":{},"auto-scroll-table":{},"popup":{},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"favicon":{"shortcut":"favicon.ico","bookmark":"favicon.ico"},"page-toc-button":{},"back-to-top-button":{},"pageview-count":{},"github-buttons":{"repo":"nieweixing/mybook","types":["star"],"size":"small"},"3-ba":{"configuration":"auto","token":"c03bec8e82bc53c064e0e648ffa54d88"},"mygitalk":{"flipMoveOptions":{},"clientID":"5976cd3d9cc251569467","number":-1,"perPage":10,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","admin":["nieweixing"],"createIssueManually":false,"distractionFreeMode":false,"repo":"gitalk-comment","owner":"nieweixing","enableHotKey":true,"clientSecret":"74117131a57324d4d616267265a94f4a1ac293ec","pagerDirection":"last","labels":["Gitalk"]},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{},"image-captions":{"caption":"图片 - _CAPTION_"}},"theme":"default","author":"vishon","pdf":{"pageNumbers":true,"fontSize":11,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"toc":true},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"运维操作指南","language":"zh-hans","links":{"sidebar":{"聂伟星个人博客":"https://www.niewx.cn","TKE使用操作文档":"https://cloud.tencent.com/developer/column/87421"}},"gitbook":">= 3.2.2","description":"运维操作指南"},"file":{"path":"gitbook/gitbook-upload-github.md","mtime":"2021-08-14T02:40:55.672Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-08-14T02:41:05.094Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
