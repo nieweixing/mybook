@@ -5,7 +5,7 @@
 
 basepath=$(cd `dirname $0`; pwd)
 
-kubectl get pods -A | grep Evited | awk -F " " '{print $1,$2}'  >> $basepath/tmp.file
+kubectl get pods -A | grep Evicted | awk -F " " '{print $1,$2}'  >> $basepath/tmp.file
 
 while read line
 do
