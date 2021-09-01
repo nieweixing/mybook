@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>【istio】istio流量转移实践 · 运维操作指南</title>
+        <title>【prometheus】使用Blackbox_exporter服务探测 · 运维操作指南</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -91,10 +91,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="istio-multi-cluster-nearby-access.html" />
+    <link rel="next" href="../istio/Sidecar-startup-sequence-problem-in-istio.html" />
     
     
-    <link rel="prev" href="Sidecar-startup-sequence-problem-in-istio.html" />
+    <link rel="prev" href="Prometheus-collects-Docker-Engine-Metrics.html" />
     
 
     
@@ -726,9 +726,9 @@
         
         
     
-        <li class="chapter " data-level="9.1" data-path="../prometheus/basic-knowledge-of-prometheus.html">
+        <li class="chapter " data-level="9.1" data-path="basic-knowledge-of-prometheus.html">
             
-                <a href="../prometheus/basic-knowledge-of-prometheus.html">
+                <a href="basic-knowledge-of-prometheus.html">
             
                     
                     【prometheus】prometheus入门知识概念
@@ -739,9 +739,9 @@
             
         </li>
     
-        <li class="chapter " data-level="9.2" data-path="../prometheus/Prometheus-collects-Docker-Engine-Metrics.html">
+        <li class="chapter " data-level="9.2" data-path="Prometheus-collects-Docker-Engine-Metrics.html">
             
-                <a href="../prometheus/Prometheus-collects-Docker-Engine-Metrics.html">
+                <a href="Prometheus-collects-Docker-Engine-Metrics.html">
             
                     
                     【prometheus】Prometheus采集Docker Engine Metrics
@@ -752,9 +752,9 @@
             
         </li>
     
-        <li class="chapter " data-level="9.3" data-path="../prometheus/Blackbox_exporter-monitoring-url.html">
+        <li class="chapter active" data-level="9.3" data-path="Blackbox_exporter-monitoring-url.html">
             
-                <a href="../prometheus/Blackbox_exporter-monitoring-url.html">
+                <a href="Blackbox_exporter-monitoring-url.html">
             
                     
                     【prometheus】使用Blackbox_exporter服务探测
@@ -772,9 +772,9 @@
         
         
     
-        <li class="chapter " data-level="10.1" data-path="Sidecar-startup-sequence-problem-in-istio.html">
+        <li class="chapter " data-level="10.1" data-path="../istio/Sidecar-startup-sequence-problem-in-istio.html">
             
-                <a href="Sidecar-startup-sequence-problem-in-istio.html">
+                <a href="../istio/Sidecar-startup-sequence-problem-in-istio.html">
             
                     
                     【istio】istio中sidecar启动顺序问题
@@ -785,9 +785,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="10.2" data-path="istio-traffic-shift.html">
+        <li class="chapter " data-level="10.2" data-path="../istio/istio-traffic-shift.html">
             
-                <a href="istio-traffic-shift.html">
+                <a href="../istio/istio-traffic-shift.html">
             
                     
                     【istio】istio流量转移实践
@@ -798,9 +798,9 @@
             
         </li>
     
-        <li class="chapter " data-level="10.3" data-path="istio-multi-cluster-nearby-access.html">
+        <li class="chapter " data-level="10.3" data-path="../istio/istio-multi-cluster-nearby-access.html">
             
-                <a href="istio-multi-cluster-nearby-access.html">
+                <a href="../istio/istio-multi-cluster-nearby-access.html">
             
                     
                     【istio】istio多集群就近接入
@@ -841,7 +841,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >【istio】istio流量转移实践</a>
+        <a href=".." >【prometheus】使用Blackbox_exporter服务探测</a>
     </h1>
 </div>
 
@@ -856,207 +856,145 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <p>&#x6709;&#x65F6;&#x5019;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x5C06;&#x670D;&#x52A1;&#x7684;&#x90E8;&#x5206;&#x6D41;&#x91CF;&#x8F6C;&#x79FB;&#x5230;&#x53E6;&#x5916;&#x4E00;&#x4E2A;&#x670D;&#x52A1;&#xFF0C;&#x7070;&#x5EA6;&#x6D4B;&#x8BD5;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x4E3A;&#x4E86;&#x6D4B;&#x8BD5;&#x65B0;&#x7248;&#x672C;&#x662F;&#x5426;&#x6709;&#x95EE;&#x9898;&#xFF0C;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x5C06;&#x90E8;&#x5206;&#x6D41;&#x91CF;&#x6253;&#x5230;&#x65B0;&#x7248;&#x672C;&#x4E0A;&#xFF0C;&#x672C;&#x6B21;&#x4EFB;&#x52A1;&#xFF0C;&#x6211;&#x4EEC;&#x5B9E;&#x73B0;&#x5C06;&#x8BF7;&#x6C42;&#x6D41;&#x91CF;20%&#x6253;&#x5230;v1&#x7248;&#x672C;&#xFF0C;80%&#x7684;&#x6D41;&#x91CF;&#x6253;&#x5230;v2&#x7248;&#x672C;&#x3002;</p>
-<h1 id="&#x90E8;&#x7F72;nginx&#x7684;v1&#x548C;v2&#x7248;&#x672C;">&#x90E8;&#x7F72;nginx&#x7684;v1&#x548C;v2&#x7248;&#x672C;</h1>
-<pre><code>apiVersion: v1
-data:
-  index.html: I am v1 version
-kind: ConfigMap
-metadata:
-  name: index-v1
-  namespace: mesh
-
----
-
-apiVersion: v1
-data:
-  index.html: I am v2 version
-kind: ConfigMap
-metadata:
-  name: index-v2
-  namespace: mesh
-
----
-
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  labels:
-    app: nginx
-    version: v1
-  name: nginx-v1
-  namespace: mesh
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: nginx
-      version: v1
-  template:
-    metadata:
-      labels:
-        app: nginx
-        version: v1
-    spec:
-      containers:
-      - image: nginx
-        imagePullPolicy: Always
-        name: nginx-v1
-        resources:
-          limits:
-            cpu: 500m
-            memory: 1Gi
-          requests:
-            cpu: 250m
-            memory: 256Mi
-        volumeMounts:
-        - mountPath: /usr/share/nginx/html/index.html
-          name: vol
-          subPath: index.html
-      dnsPolicy: ClusterFirst
-      imagePullSecrets:
-      - name: qcloudregistrykey
-      restartPolicy: Always
-      volumes:
-      - configMap:
-          defaultMode: 420
-          name: index-v1
-        name: vol
-
----
-
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  labels:
-    app: nginx
-    version: v2
-  name: nginx-v2
-  namespace: mesh
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: nginx
-      version: v2
-  template:
-    metadata:
-      labels:
-        app: nginx
-        version: v2
-    spec:
-      containers:
-      - image: nginx
-        imagePullPolicy: Always
-        name: nginx-v2
-        resources:
-          limits:
-            cpu: 500m
-            memory: 1Gi
-          requests:
-            cpu: 250m
-            memory: 256Mi
-        volumeMounts:
-        - mountPath: /usr/share/nginx/html/index.html
-          name: vol
-          subPath: index.html
-      dnsPolicy: ClusterFirst
-      imagePullSecrets:
-      - name: qcloudregistrykey
-      restartPolicy: Always
-      volumes:
-      - configMap:
-          defaultMode: 420
-          name: index-v2
-        name: vol
-
----
-
-apiVersion: v1
-kind: Service
-metadata:
-  name: nginx-v1
-  labels:
-    app: nginx
-    service: nginx
-spec:
-  ports:
-  - port: 80
-    name: http
-  selector:
-    app: nginx
-</code></pre><p>&#x8FD9;&#x91CC;&#x90E8;&#x7F72;&#x4E86;&#x4E00;&#x4E2A;&#x7EDF;&#x4E00;&#x7684;&#x5165;&#x53E3;service&#x5173;&#x8054;&#x5230;&#x540E;&#x7AEF;&#x7684;v1&#x548C;v2&#x7248;&#x672C;pod&#x91CC;&#x9762;</p>
-<h1 id="&#x521B;&#x5EFA;destinationrule">&#x521B;&#x5EFA;DestinationRule</h1>
-<pre><code>apiVersion: networking.istio.io/v1alpha3
-kind: DestinationRule
-metadata:
-  name: nginx
-  namespace: mesh
-spec:
-  host: nginx
-  subsets:
-  - name: v1
+                                <h1 id="blackboxexporter&#x76D1;&#x63A7;url">Blackbox_exporter&#x76D1;&#x63A7;url</h1>
+<p>&#x6709;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x5BF9;&#x57DF;&#x540D;&#x6216;&#x8005;&#x4E00;&#x4E9B;&#x63A5;&#x53E3;url&#x8FDB;&#x884C;&#x68C0;&#x6D4B;&#xFF0C;&#x770B;&#x4E0B;&#x662F;&#x5426;&#x53EF;&#x4EE5;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x90E8;&#x7F72;Blackbox_exporter&#x6765;&#x91C7;&#x96C6;&#x8FD9;&#x4E9B;&#x76D1;&#x63A7;&#x6570;&#x636E;&#x5230;prometheus</p>
+<p>Blackbox_exporter&#x662F;Prometheus&#x5B98;&#x65B9;&#x63D0;&#x4F9B;&#x7684;exporter&#x4E4B;&#x4E00;&#xFF0C;&#x53EF;&#x4EE5;&#x63D0;&#x4F9B; http&#x3001;dns&#x3001;tcp&#x3001;icmp&#x7684;&#x76D1;&#x63A7;&#x6570;&#x636E;&#x91C7;&#x96C6;&#xFF0C;&#x5177;&#x4F53;&#x90E8;&#x7F72;&#x53EF;&#x4EE5;&#x53C2;&#x8003;&#x6587;&#x6863;<a href="https://cloud.tencent.com/developer/article/1808998" target="_blank">https://cloud.tencent.com/developer/article/1808998</a></p>
+<h2 id="blackbox&#x6A21;&#x5757;&#x914D;&#x7F6E;">blackbox&#x6A21;&#x5757;&#x914D;&#x7F6E;</h2>
+<p>&#x4E0B;&#x9762;&#x6211;&#x4EEC;&#x8BF4;&#x8BF4;&#x600E;&#x4E48;&#x914D;&#x7F6E;&#x5404;&#x79CD;&#x534F;&#x8BAE;&#x7684;&#x63A2;&#x6D4B;&#xFF0C;&#x9996;&#x5148;&#x9700;&#x8981;&#x5728;blackbox&#x7684;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x8BBE;&#x7F6E;&#x6A21;&#x5757;</p>
+<pre><code>modules:
+  http_2xx:
+    prober: http
+    timeout: 15s
+    http:
+      prober: http
+      timeout: 2s
+      http:
+        valid_http_versions: [&quot;HTTP/1.1&quot;, &quot;HTTP/2&quot;]
+        valid_status_codes: [200,301,302]
+        method: GET
+        preferred_ip_protocol: &quot;ip4&quot;
+  tcp_connect:
+    prober: tcp
+  ssh:
+    prober: tcp
+    tcp:
+      query_response:
+      - expect: &quot;^SSH-2.0-&quot;
+  icmp:
+    prober: icmp
+    timeout: 5s
+    icmp:
+</code></pre><p>&#x4E0A;&#x9762;&#x6211;&#x4EEC;&#x5B9A;&#x4E49;&#x4E86;4&#x4E2A;&#x6A21;&#x5757;&#xFF0C;&#x4E0B;&#x9762;&#x6211;&#x4EEC;&#x53EA;&#x9700;&#x8981;&#x5728;job&#x4E2D;&#x914D;&#x7F6E;&#x4E0B;&#x6A21;&#x5757;&#x7684;&#x68C0;&#x67E5;&#x5185;&#x5BB9;</p>
+<h2 id="http&#x6D4B;&#x8BD5;job&#x914D;&#x7F6E;">http&#x6D4B;&#x8BD5;job&#x914D;&#x7F6E;</h2>
+<pre><code>scrape_configs:
+- job_name: http-blackbox
+  honor_timestamps: true
+  params:
+    module:
+    - http_2xx
+  metrics_path: /probe
+  scheme: http
+  static_configs:
+  - targets:
+    - https://www.niewx.cn/
     labels:
-      version: v1
-  - name: v2
+      domain: www.niewx.cn
+      instance: https://www.niewx.cn/
+      ip: githubpage
+      port: &quot;443&quot;
+      project: blog
+      service: none
+  - targets:
+    - https://www.niewx.cn/mybook/
     labels:
-      version: v2
-</code></pre><h1 id="&#x521B;&#x5EFA;gateway">&#x521B;&#x5EFA;gateway</h1>
-<pre><code>apiVersion: networking.istio.io/v1alpha3
-kind: Gateway
-metadata:
-  name: nginx-gw
-  namespace: mesh
-spec:
-  servers:
-    - port:
-        number: 88
-        name: HTTP-88-ebsi
-        protocol: HTTP
-      hosts:
-        - &apos;*&apos;
-  selector:
-    app: istio-ingressgateway
-    istio: ingressgateway
-</code></pre><p>&#x6302;&#x8F7D;ingressgateway&#x4F5C;&#x4E3A;&#x7EDF;&#x4E00;&#x7684;&#x8BBF;&#x95EE;&#x5165;&#x53E3;</p>
-<h1 id="&#x521B;&#x5EFA;virtualservice">&#x521B;&#x5EFA;VirtualService</h1>
-<pre><code>apiVersion: networking.istio.io/v1alpha3
-kind: VirtualService
-metadata:
-  name: nginx
-  namespace: mesh
-spec:
-  hosts:
-    - &apos;*&apos;
-  gateways:
-    - mesh/nginx-gw
-  http:
-    - route:
-      - destination:
-          host: nginx
-          subset: v1
-        weight: 20
-      - destination:
-          host: nginx
-          subset: v2
-        weight: 80
-</code></pre><p>VirtualService&#x91CC;&#x9762;&#x7684;weight&#x5B57;&#x6BB5;&#x4EE3;&#x8868;&#x7684;&#x662F;&#x6D41;&#x91CF;&#x8F6C;&#x53D1;&#x7684;&#x6BD4;&#x4F8B;&#xFF0C;&#x8FD9;&#x91CC;&#x5C06;&#x6D41;&#x91CF;20%&#x8F6C;&#x53D1;&#x5230;v1&#xFF0C;&#x6D41;&#x91CF;80%&#x8F6C;&#x5230;v2</p>
-<h1 id="&#x8BBF;&#x95EE;&#x6D4B;&#x8BD5;">&#x8BBF;&#x95EE;&#x6D4B;&#x8BD5;</h1>
-<p>&#x6211;&#x4EEC;&#x76F4;&#x63A5;&#x7528;ingress&#x7684;LoadBalancer&#x7684;vip&#x548C;88&#x7AEF;&#x53E3;&#x8BBF;&#x95EE;10&#x6B21;&#x770B;&#x4E0B;</p>
-<pre><code>[root@VM-0-13-centos ~]# for i in {1..10};do curl 106.xx.xx.93:88 ; echo &quot;&quot; ;done
-I am v2 version
-I am v2 version
-I am v2 version
-I am v2 version
-I am v2 version
-I am v2 version
-I am v2 version
-I am v2 version
-I am v1 version
-I am v1 version
-</code></pre><p>&#x4ECE;&#x4E0A;&#x9762;&#x7684;&#x6D4B;&#x8BD5;&#x7ED3;&#x679C;&#x770B;&#xFF0C;&quot;I am v1 version&quot;&#x51FA;&#x73B0;&#x4E86;2&#x6B21;&#xFF0C;&quot;I am v2 version&quot;&#x51FA;&#x73B0;&#x4E86;8&#x6B21;&#xFF0C;&#x8BF4;&#x660E;&#x8BF7;&#x6C42;&#x7684;&#x6D41;&#x91CF;&#x662F;&#x7B26;&#x5408;VirtualService&#x7684;&#x5206;&#x914D;&#x6BD4;&#x4F8B;&#x7684; </p>
+      domain: www.niewx.cn
+      instance: https://www.niewx.cn/mybook/
+      ip: githubpage
+      port: &quot;443&quot;
+      project: mybook
+      service: none
+  relabel_configs:
+  - source_labels: [__address__]
+    separator: ;
+    regex: (.*)
+    target_label: __param_target
+    replacement: $1
+    action: replace
+  - separator: ;
+    regex: (.*)
+    target_label: __address__
+    replacement: blackbox-exporter.monitor.svc.cluster.local:9115
+    action: replace
+</code></pre><h2 id="tcp&#x6D4B;&#x8BD5;job&#x914D;&#x7F6E;">tcp&#x6D4B;&#x8BD5;job&#x914D;&#x7F6E;</h2>
+<pre><code>scrape_configs:
+- job_name: tcp-blackbox
+  honor_timestamps: true
+  params:
+    module:
+    - tcp_connect
+  metrics_path: /probe
+  static_configs:
+  - targets:
+    - xxx.xxx.xxx.xxx:80
+    labels:
+      instance: xxx.xxx.xxx.xxx:80
+      ip: xxx.xxx.xxx.xxx
+      port: &quot;80&quot;
+  - targets:
+    - xxx.xxx.xxx.xxx:8080
+    labels:
+      instance: xxx.xxx.xxx.xxx:8080
+      ip: xxx.xxx.xxx.xxx
+      port: &quot;8080&quot;
+  relabel_configs:
+  - source_labels: [__address__]
+    separator: ;
+    regex: (.*)
+    target_label: __param_target
+    replacement: $1
+    action: replace
+  - separator: ;
+    regex: (.*)
+    target_label: __address__
+    replacement: blackbox-exporter.monitor.svc.cluster.local:9115
+    action: replace
+</code></pre><h2 id="icmp&#x6D4B;&#x8BD5;job&#x914D;&#x7F6E;">icmp&#x6D4B;&#x8BD5;job&#x914D;&#x7F6E;</h2>
+<pre><code>scrape_configs:
+- job_name: icmp-blackbox
+  honor_timestamps: true
+  params:
+    module:
+    - icmp
+  metrics_path: /probe
+  static_configs:
+  - targets:
+    - xx.xx.xx.xx
+    labels:
+      instance: xx.xx.xx.xx
+      ip: xx.xx.xx.xx
+  - targets:
+    - xxx.xxx.xxx.xxx
+    labels:
+      instance: xxx.xxx.xxx.xxx
+      ip: xxx.xxx.xxx.xxx
+  relabel_configs:
+  - source_labels: [__address__]
+    separator: ;
+    regex: (.*)
+    target_label: __param_target
+    replacement: $1
+    action: replace
+  - separator: ;
+    regex: (.*)
+    target_label: __address__
+    replacement: blackbox-exporter.monitor.svc.cluster.local:9115
+    action: replace
+</code></pre><p>&#x914D;&#x7F6E;&#x597D;&#x4E4B;&#x540E;&#xFF0C;&#x6570;&#x636E;&#x5C31;&#x53EF;&#x4EE5;&#x91C7;&#x96C6;&#x5230;prometheus&#x4E86;&#xFF0C;&#x7136;&#x540E;&#x914D;&#x7F6E;&#x4E0B;grafana&#x9762;&#x677F;&#x67E5;&#x770B;&#x6211;&#x4EEC;&#x7684;&#x76D1;&#x63A7;&#x4FE1;&#x606F;&#x5373;&#x53EF;&#x3002;</p>
+<h2 id="&#x95EE;&#x9898;">&#x95EE;&#x9898;</h2>
+<p>&#x95EE;&#x9898;&#xFF1A;&#x5F53;http&#x63A2;&#x6D4B;&#x57DF;&#x540D;&#x7684;&#x662F;&#x65F6;&#x5019;&#x53D1;&#x73B0;&#x9762;&#x677F;&#x7684;&#x8FDE;&#x901A;&#x6027;&#x662F;&#x79BB;&#x7EBF;&#xFF0C;&#x4F46;&#x662F;http&#x7684;&#x72B6;&#x6001;&#x5374;&#x662F;200</p>
+<p>&#x89E3;&#x51B3;&#x65B9;&#x6848;&#xFF1A;&#x53EF;&#x4EE5;&#x5C06;http&#x6A21;&#x5757;&#x4E2D;&#x914D;&#x7F6E;&#x7684;&#x534F;&#x8BAE;HTTP/2&#x6539;&#x6210;HTTP/2.0&#xFF0C;&#x7136;&#x540E;&#x518D;&#x91CD;&#x542F;blackbox&#x5373;&#x53EF;</p>
 <p><footer class="page-footer"><span class="copyright">&#xA9; vishon all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">Updated at
-2021-06-04 10:59:22
+2021-09-01 13:46:48
 </span></footer></p>
 <div id="gitalk-container"></div>
 <script>console.log("plugin-popup....");document.onclick = function(e){ e.target.tagName === "IMG" && window.open(e.target.src,e.target.src)}</script><style>img{cursor:pointer}</style>
@@ -1086,12 +1024,12 @@ I am v1 version
 
             
                 
-                <a href="Sidecar-startup-sequence-problem-in-istio.html" class="navigation navigation-prev " aria-label="Previous page: 【istio】istio中sidecar启动顺序问题">
+                <a href="Prometheus-collects-Docker-Engine-Metrics.html" class="navigation navigation-prev " aria-label="Previous page: 【prometheus】Prometheus采集Docker Engine Metrics">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="istio-multi-cluster-nearby-access.html" class="navigation navigation-next " aria-label="Next page: 【istio】istio多集群就近接入">
+                <a href="../istio/Sidecar-startup-sequence-problem-in-istio.html" class="navigation navigation-next " aria-label="Next page: 【istio】istio中sidecar启动顺序问题">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -1102,7 +1040,7 @@ I am v1 version
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"【istio】istio流量转移实践","level":"10.2","depth":1,"next":{"title":"【istio】istio多集群就近接入","level":"10.3","depth":1,"path":"istio/istio-multi-cluster-nearby-access.md","ref":"istio/istio-multi-cluster-nearby-access.md","articles":[]},"previous":{"title":"【istio】istio中sidecar启动顺序问题","level":"10.1","depth":1,"path":"istio/Sidecar-startup-sequence-problem-in-istio.md","ref":"istio/Sidecar-startup-sequence-problem-in-istio.md","articles":[]},"dir":"ltr"},"config":{"plugins":["github","editlink","-lunr","-search","search-plus","tbfed-pagefooter","splitter","page-toc-button","back-to-top-button","-lunr","-search","search-plus","github-buttons@2.1.0","favicon@^0.0.2","3-ba","theme-default","pageview-count","auto-scroll-table","popup","code","mygitalk","-sharing"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"&copy vishon","modify_label":"Updated at","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-okaidia.css"]},"disqus":{"shortName":"nieweixing-github-io"},"github":{"url":"https://github.com/nieweixing"},"editlink":{"label":"编辑本页","multilingual":false,"base":"https://github.com/nieweixing/mybook/tree/gh-pages"},"splitter":{},"auto-scroll-table":{},"popup":{},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"favicon":{"shortcut":"favicon.ico","bookmark":"favicon.ico"},"page-toc-button":{},"back-to-top-button":{},"pageview-count":{},"github-buttons":{"repo":"nieweixing/mybook","types":["star"],"size":"small"},"3-ba":{"configuration":"auto","token":"c03bec8e82bc53c064e0e648ffa54d88"},"mygitalk":{"flipMoveOptions":{},"clientID":"5976cd3d9cc251569467","number":-1,"perPage":10,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","admin":["nieweixing"],"createIssueManually":false,"distractionFreeMode":false,"repo":"gitalk-comment","owner":"nieweixing","enableHotKey":true,"clientSecret":"74117131a57324d4d616267265a94f4a1ac293ec","pagerDirection":"last","labels":["Gitalk"]},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{},"image-captions":{"caption":"图片 - _CAPTION_"}},"theme":"default","author":"vishon","pdf":{"pageNumbers":true,"fontSize":11,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"toc":true},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"运维操作指南","language":"zh-hans","links":{"sidebar":{"聂伟星个人博客":"https://www.niewx.cn","TKE使用操作文档":"https://cloud.tencent.com/developer/column/87421"}},"gitbook":">= 3.2.2","description":"运维操作指南"},"file":{"path":"istio/istio-traffic-shift.md","mtime":"2021-06-04T02:59:22.282Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-09-01T05:48:40.389Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"【prometheus】使用Blackbox_exporter服务探测","level":"9.3","depth":1,"next":{"title":"【istio】istio中sidecar启动顺序问题","level":"10.1","depth":1,"path":"istio/Sidecar-startup-sequence-problem-in-istio.md","ref":"istio/Sidecar-startup-sequence-problem-in-istio.md","articles":[]},"previous":{"title":"【prometheus】Prometheus采集Docker Engine Metrics","level":"9.2","depth":1,"path":"prometheus/Prometheus-collects-Docker-Engine-Metrics.md","ref":"prometheus/Prometheus-collects-Docker-Engine-Metrics.md","articles":[]},"dir":"ltr"},"config":{"plugins":["github","editlink","-lunr","-search","search-plus","tbfed-pagefooter","splitter","page-toc-button","back-to-top-button","-lunr","-search","search-plus","github-buttons@2.1.0","favicon@^0.0.2","3-ba","theme-default","pageview-count","auto-scroll-table","popup","code","mygitalk","-sharing"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"&copy vishon","modify_label":"Updated at","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-okaidia.css"]},"disqus":{"shortName":"nieweixing-github-io"},"github":{"url":"https://github.com/nieweixing"},"editlink":{"label":"编辑本页","multilingual":false,"base":"https://github.com/nieweixing/mybook/tree/gh-pages"},"splitter":{},"auto-scroll-table":{},"popup":{},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"favicon":{"shortcut":"favicon.ico","bookmark":"favicon.ico"},"page-toc-button":{},"back-to-top-button":{},"pageview-count":{},"github-buttons":{"repo":"nieweixing/mybook","types":["star"],"size":"small"},"3-ba":{"configuration":"auto","token":"c03bec8e82bc53c064e0e648ffa54d88"},"mygitalk":{"flipMoveOptions":{},"clientID":"5976cd3d9cc251569467","number":-1,"perPage":10,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","admin":["nieweixing"],"createIssueManually":false,"distractionFreeMode":false,"repo":"gitalk-comment","owner":"nieweixing","enableHotKey":true,"clientSecret":"74117131a57324d4d616267265a94f4a1ac293ec","pagerDirection":"last","labels":["Gitalk"]},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{},"image-captions":{"caption":"图片 - _CAPTION_"}},"theme":"default","author":"vishon","pdf":{"pageNumbers":true,"fontSize":11,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"toc":true},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"运维操作指南","language":"zh-hans","links":{"sidebar":{"聂伟星个人博客":"https://www.niewx.cn","TKE使用操作文档":"https://cloud.tencent.com/developer/column/87421"}},"gitbook":">= 3.2.2","description":"运维操作指南"},"file":{"path":"prometheus/Blackbox_exporter-monitoring-url.md","mtime":"2021-09-01T05:46:48.247Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-09-01T05:48:40.389Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
