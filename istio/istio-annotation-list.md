@@ -1,5 +1,26 @@
 # istio注解列表
 
+注解加在workload的spec.template.metadata.annotations字段下
+
+```
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      annotations:
+        sidecar.istio.io/status: xxxxx
+```
+
+Istio支持控制其行为的各种资源注释列表如下
+
+
 |Annotation Name|	Resource Types|	Description|
 |---|---|---|
 |kubernetes.io/ingress.class|	[Ingress]	|Ingress 资源上的注释，表示负责它的控制器类。|
