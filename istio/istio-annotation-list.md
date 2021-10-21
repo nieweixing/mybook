@@ -19,7 +19,7 @@
 |sidecar.istio.io/discoveryAddress|	[pod]	|指定特使sidecar使用的 XDS 发现地址。|
 |sidecar.istio.io/inject	|[pod]	|具体说明是否应自动将特使sidecar注入工作量。|
 |sidecar.istio.io/interceptionMode	|[pod]|	指定用于将入站连接重定向到特使（重定向或 TPROXY）的模式。|
-|sidecar.istio.io/logLevel|	[pod]|	指定特使的日志级别|。
+|sidecar.istio.io/logLevel|	[pod]|	指定特使的日志级别。|
 |sidecar.istio.io/proxyCPU|	[pod]	|指定特使sidecar的请求 CPU 设置。|
 |sidecar.istio.io/proxyImage|	[pod]	|指定特使sidecar使用的码头图像。|
 |sidecar.istio.io/proxyMemory	|[pod]	|指定特使sidecar的所要求记忆设置。|
