@@ -43,7 +43,7 @@ kubectl proxy --port=8081
 ## 新开窗口执行删除操作
 
 ```
-curl -k -H "Content-Type: application/json" -X PUT --data-binary @tmp.json http://127.0.0.1:8081/api/v1/namespaces
+curl -k -H "Content-Type: application/json" -X PUT --data-binary @tmp.json http://127.0.0.1:8081/api/v1/namespaces/testns/finalize
 ```
 
 如果上面方法无法删除namespace，可以通过如下方法看下namespace是不是还有什么资源没有清理
