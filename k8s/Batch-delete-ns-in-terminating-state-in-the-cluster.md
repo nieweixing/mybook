@@ -7,6 +7,16 @@
 ```
 #!/bin/bash
 
+set -euxo pipefail
+
+if [ -f "/etc/redhat-release" ]; then
+   yum install jq -y
+fi
+
+if [ -f "/etc/lsb-release" ]; then
+   apt-get install jq -y
+fi
+
 kubectl proxy &
 
 PID=$!
