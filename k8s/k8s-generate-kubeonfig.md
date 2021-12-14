@@ -36,10 +36,10 @@ kubectl config set-context kubernetes \
   --kubeconfig=niewx.kubeconfig
 
 # 设置默认上下文
-kubectl config use-context kubernetes
+kubectl config --kubeconfig=niewx.kubeconfig  use-context kubernetes
 ```
 
-执行完上述命令就发现会生成一个user为niewx的kubeconfig文件，然后我们可以指定这个kubeconfig来访问集群
+执行完上述命令就发现会生成一个user为niewx的kubeconfig文件，然后我们可以指定这个kubeconfig来访问集群，设置上下文非必须设置，不设置直接指定kubeconfg访问即可，或者将niewx.kubeconfig拷贝到$HOME/.kube/config这个文件，进行访问。
 
 ```
 [root@VM-0-3-centos kubernetes]# ll | grep niewx
