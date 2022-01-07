@@ -1028,8 +1028,34 @@ spec:
       tolerations:
       - operator: Exists
       dnsPolicy: ClusterFirst
+</code></pre><h3 id="&#x6253;label&#x7ED9;&#x5355;&#x4E2A;deployment&#x7684;pod&#x6CE8;&#x5165;sidecar">&#x6253;label&#x7ED9;&#x5355;&#x4E2A;deployment&#x7684;pod&#x6CE8;&#x5165;sidecar</h3>
+<p>&#x5982;&#x679C;&#x4F60;&#x7528;&#x7684;istio&#x662F;&#x817E;&#x8BAF;&#x4E91;&#x6258;&#x7BA1;&#x7684;&#x670D;&#x52A1;&#x7F51;&#x683C;&#xFF0C;&#x5E76;&#x4E14;&#x7248;&#x672C;&#x662F;1.10.3&#xFF0C;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x7ED9;deployment&#x7684;.spec.template.metadata.labels&#x4E2D;&#x52A0;istio.io/rev: 1-10-3&#x8FD9;&#x4E2A;label&#xFF0C;&#x6765;&#x5B9E;&#x73B0;sidecar&#x7684;&#x81EA;&#x52A8;&#x6CE8;&#x5165;&#xFF0C;&#x8FD9;&#x91CC;&#x4E0D;&#x9700;&#x8981;&#x4F60;&#x7684;namespace&#x662F;&#x5426;&#x6709;&#x52A0;&#x4E0A;istio.io/rev&#x8FD9;&#x4E2A;label&#x3002;&#x5177;&#x4F53;&#x7684;yaml&#x5982;&#x4E0B;</p>
+<pre><code>apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tke-debug
+  namespace: tke-test
+  labels:
+    app: debug
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: debug
+  template:
+    metadata:
+      labels:
+        app: debug
+        istio.io/rev: 1-10-3
+    spec:
+      containers:
+      - name: debug
+        image: ccr.ccs.tencentyun.com/nwx_registry/troubleshooting:latest
+      tolerations:
+      - operator: Exists
+      dnsPolicy: ClusterFirst
 </code></pre><p><footer class="page-footer"><span class="copyright">&#xA9; vishon all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">Updated at
-2022-01-07 14:16:02
+2022-01-07 16:46:12
 </span></footer></p>
 <div id="gitalk-container"></div>
 <script>console.log("plugin-popup....");document.onclick = function(e){ e.target.tagName === "IMG" && window.open(e.target.src,e.target.src)}</script><style>img{cursor:pointer}</style>
@@ -1071,7 +1097,7 @@ spec:
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"【istio】istio sidecar注入","level":"10.7","depth":1,"previous":{"title":"【istio】gateway配置http强转https","level":"10.6","depth":1,"path":"istio/Gateway-configuration-http-forced-to-https.md","ref":"istio/Gateway-configuration-http-forced-to-https.md","articles":[]},"dir":"ltr"},"config":{"plugins":["github","editlink","-lunr","-search","search-plus","tbfed-pagefooter","splitter","page-toc-button","back-to-top-button","-lunr","-search","search-plus","github-buttons@2.1.0","favicon@^0.0.2","3-ba","theme-default","pageview-count","auto-scroll-table","popup","code","mygitalk","-sharing"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"&copy vishon","modify_label":"Updated at","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-okaidia.css"]},"disqus":{"shortName":"nieweixing-github-io"},"github":{"url":"https://github.com/nieweixing"},"editlink":{"label":"编辑本页","multilingual":false,"base":"https://github.com/nieweixing/mybook/tree/gh-pages"},"splitter":{},"auto-scroll-table":{},"popup":{},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"favicon":{"shortcut":"favicon.ico","bookmark":"favicon.ico"},"page-toc-button":{},"back-to-top-button":{},"pageview-count":{},"github-buttons":{"repo":"nieweixing/mybook","types":["star"],"size":"small"},"3-ba":{"configuration":"auto","token":"c03bec8e82bc53c064e0e648ffa54d88"},"mygitalk":{"flipMoveOptions":{},"clientID":"5976cd3d9cc251569467","number":-1,"perPage":10,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","admin":["nieweixing"],"createIssueManually":false,"distractionFreeMode":false,"repo":"gitalk-comment","owner":"nieweixing","enableHotKey":true,"clientSecret":"74117131a57324d4d616267265a94f4a1ac293ec","pagerDirection":"last","labels":["Gitalk"]},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{},"image-captions":{"caption":"图片 - _CAPTION_"}},"theme":"default","author":"vishon","pdf":{"pageNumbers":true,"fontSize":11,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"toc":true},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"运维操作指南","language":"zh-hans","links":{"sidebar":{"聂伟星个人博客":"https://www.niewx.cn","云+社区TKE运维笔记":"https://cloud.tencent.com/developer/column/87421","运维操作宝典":"https://www.niewx.cn/mybook","运维问题集锦":"https://www.niewx.cn/question"}},"gitbook":">= 3.2.2","description":"运维操作指南"},"file":{"path":"istio/istio-sidecar-injection.md","mtime":"2022-01-07T06:16:02.370Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-01-07T06:17:54.096Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"【istio】istio sidecar注入","level":"10.7","depth":1,"previous":{"title":"【istio】gateway配置http强转https","level":"10.6","depth":1,"path":"istio/Gateway-configuration-http-forced-to-https.md","ref":"istio/Gateway-configuration-http-forced-to-https.md","articles":[]},"dir":"ltr"},"config":{"plugins":["github","editlink","-lunr","-search","search-plus","tbfed-pagefooter","splitter","page-toc-button","back-to-top-button","-lunr","-search","search-plus","github-buttons@2.1.0","favicon@^0.0.2","3-ba","theme-default","pageview-count","auto-scroll-table","popup","code","mygitalk","-sharing"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"&copy vishon","modify_label":"Updated at","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-okaidia.css"]},"disqus":{"shortName":"nieweixing-github-io"},"github":{"url":"https://github.com/nieweixing"},"editlink":{"label":"编辑本页","multilingual":false,"base":"https://github.com/nieweixing/mybook/tree/gh-pages"},"splitter":{},"auto-scroll-table":{},"popup":{},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"favicon":{"shortcut":"favicon.ico","bookmark":"favicon.ico"},"page-toc-button":{},"back-to-top-button":{},"pageview-count":{},"github-buttons":{"repo":"nieweixing/mybook","types":["star"],"size":"small"},"3-ba":{"configuration":"auto","token":"c03bec8e82bc53c064e0e648ffa54d88"},"mygitalk":{"flipMoveOptions":{},"clientID":"5976cd3d9cc251569467","number":-1,"perPage":10,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","admin":["nieweixing"],"createIssueManually":false,"distractionFreeMode":false,"repo":"gitalk-comment","owner":"nieweixing","enableHotKey":true,"clientSecret":"74117131a57324d4d616267265a94f4a1ac293ec","pagerDirection":"last","labels":["Gitalk"]},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{},"image-captions":{"caption":"图片 - _CAPTION_"}},"theme":"default","author":"vishon","pdf":{"pageNumbers":true,"fontSize":11,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"toc":true},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"运维操作指南","language":"zh-hans","links":{"sidebar":{"聂伟星个人博客":"https://www.niewx.cn","云+社区TKE运维笔记":"https://cloud.tencent.com/developer/column/87421","运维操作宝典":"https://www.niewx.cn/mybook","运维问题集锦":"https://www.niewx.cn/question"}},"gitbook":">= 3.2.2","description":"运维操作指南"},"file":{"path":"istio/istio-sidecar-injection.md","mtime":"2022-01-07T08:46:12.272Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-01-07T08:46:36.852Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

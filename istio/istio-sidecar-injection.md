@@ -125,3 +125,34 @@ spec:
       - operator: Exists
       dnsPolicy: ClusterFirst
 ```
+
+### 打label给单个deployment的pod注入sidecar
+
+如果你用的istio是腾讯云托管的服务网格，并且版本是1.10.3，可以通过给deployment的.spec.template.metadata.labels中加istio.io/rev: 1-10-3这个label，来实现sidecar的自动注入，这里不需要你的namespace是否有加上istio.io/rev这个label。具体的yaml如下
+
+```
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tke-debug
+  namespace: tke-test
+  labels:
+    app: debug
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: debug
+  template:
+    metadata:
+      labels:
+        app: debug
+        istio.io/rev: 1-10-3
+    spec:
+      containers:
+      - name: debug
+        image: ccr.ccs.tencentyun.com/nwx_registry/troubleshooting:latest
+      tolerations:
+      - operator: Exists
+      dnsPolicy: ClusterFirst
+```
