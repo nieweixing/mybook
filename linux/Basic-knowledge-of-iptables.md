@@ -209,7 +209,7 @@ iptables -t filter -I INPUT -p tcp --sport 80 -m string --algo bm --string "OOXX
 iptables -t filter -I INPUT -p tcp --sport 80 -m string --algo bm --string "OOXX" -j REJECT
 ```
 
-# time模块
+## time模块
 
 常用扩展匹配条件如下
 
@@ -226,7 +226,6 @@ iptables -t filter -I INPUT -p tcp --sport 80 -m string --algo bm --string "OOXX
 --datestop：用于指定日期范围的结束时间，不可取反
 
 ```
-#示例
 iptables -t filter -I OUTPUT -p tcp --dport 80 -m time --timestart 09:00:00 --timestop 19:00:00 -j REJECT
 iptables -t filter -I OUTPUT -p tcp --dport 443 -m time --timestart 09:00:00 --timestop 19:00:00 -j REJECT
 iptables -t filter -I OUTPUT -p tcp --dport 80  -m time --weekdays 6,7 -j REJECT
@@ -237,30 +236,35 @@ iptables -t filter -I OUTPUT -p tcp --dport 80  -m time --weekdays 5 --monthdays
 iptables -t filter -I OUTPUT -p tcp --dport 80  -m time --datestart 2017-12-24 --datestop 2017-12-27 -j REJECT
 ``` 
 
-connlimit 模块
+## connlimit 模块
 常用的扩展匹配条件如下
 
 --connlimit-above：单独使用此选项时，表示限制每个IP的链接数量。
 
 --connlimit-mask：此选项不能单独使用，在使用--connlimit-above选项时，配合此选项，则可以针对”某类IP段内的一定数量的IP”进行连接数量的限制，如果不明白可以参考上文的详细解释。
 
-#示例
+示例
+
+```
 iptables -I INPUT -p tcp --dport 22 -m connlimit --connlimit-above 2 -j REJECT
 iptables -I INPUT -p tcp --dport 22 -m connlimit --connlimit-above 20 --connlimit-mask 24 -j REJECT
 iptables -I INPUT -p tcp --dport 22 -m connlimit --connlimit-above 10 --connlimit-mask 27 -j REJECT
- 
+```
 
-limit模块
+## limit模块
+
 常用的扩展匹配条件如下
 
 --limit-burst：类比”令牌桶”算法，此选项用于指定令牌桶中令牌的最大数量，上文中已经详细的描述了”令牌桶”的概念，方便回顾。
 
 --limit：类比”令牌桶”算法，此选项用于指定令牌桶中生成新令牌的频率，可用时间单位有second、minute 、hour、day。
 
-#示例 #注意，如下两条规则需配合使用，具体原因上文已经解释过，忘记了可以回顾。
+示例 
+
+```
 iptables -t filter -I INPUT -p icmp -m limit --limit-burst 3 --limit 10/minute -j ACCEPT
 iptables -t filter -A INPUT -p icmp -j REJECT
-
+```
 
 # 自定义链
 
@@ -307,7 +311,7 @@ iptables -I FORWARD -s 10.1.0.0/16 -p tcp --dport 22 -j ACCEPT
 iptables -I FORWARD -d 10.1.0.0/16 -p tcp --sport 22 -j ACCEPT
 ```
 
-## 注意事项
+# 注意事项
 
 1. 规则的顺序，相同服务的规则，更严格的规则应该放在前面。
 2. 当规则中有多个匹配条件时，条件之间默认存在”与”的关系。
