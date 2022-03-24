@@ -42,8 +42,10 @@ Istio支持控制其行为的各种资源注释列表如下
 |sidecar.istio.io/interceptionMode	|[pod]|	指定用于将入站连接重定向到 Envoy（REDIRECT 或 TPROXY）的模式。|
 |sidecar.istio.io/logLevel|	[pod]|	指定 Envoy 的日志级别。|
 |sidecar.istio.io/proxyCPU|	[pod]	|为 Envoy sidecar 指定请求的 CPU 设置。|
+|sidecar.istio.io/proxyCPULimit|	[pod]	|为 Envoy sidecar 指定limit的 CPU 设置。|
 |sidecar.istio.io/proxyImage|	[pod]	|指定 Envoy sidecar 使用的 Docker 镜像。|
 |sidecar.istio.io/proxyMemory	|[pod]	|指定 Envoy sidecar 请求的内存设置。|
+|sidecar.istio.io/proxyMemoryLimit	|[pod]	|指定 Envoy sidecar limit的内存设置。|
 |sidecar.istio.io/rewriteAppHTTPProbers	|[pod]|	重写 HTTP 准备和活动探测器以重定向到 Envoy sidecar。|
 |sidecar.istio.io/statsInclusionPrefixes|	[pod]	|指定由 Envoy 发出的统计信息前缀的逗号分隔列表。|
 |sidecar.istio.io/statsInclusionRegexps|	[pod]|	指定要由 Envoy 发出的统计信息应匹配的逗号分隔的正则表达式列表。|
