@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>【面试】面试之redis篇 · 运维操作指南</title>
+        <title>【prometheus】prometheus常用告警promsql · 运维操作指南</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -91,8 +91,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
+    <link rel="next" href="../istio/istio-annotation-list.html" />
     
-    <link rel="prev" href="../istio/How-to-modify-the-sidecar-resource-configuration.html" />
+    
+    <link rel="prev" href="prometheus-monitors-k8s-cluster-coredns.html" />
     
 
     
@@ -760,9 +762,9 @@
         
         
     
-        <li class="chapter " data-level="9.1" data-path="../prometheus/basic-knowledge-of-prometheus.html">
+        <li class="chapter " data-level="9.1" data-path="basic-knowledge-of-prometheus.html">
             
-                <a href="../prometheus/basic-knowledge-of-prometheus.html">
+                <a href="basic-knowledge-of-prometheus.html">
             
                     
                     【prometheus】prometheus入门知识概念
@@ -773,9 +775,9 @@
             
         </li>
     
-        <li class="chapter " data-level="9.2" data-path="../prometheus/Prometheus-collects-Docker-Engine-Metrics.html">
+        <li class="chapter " data-level="9.2" data-path="Prometheus-collects-Docker-Engine-Metrics.html">
             
-                <a href="../prometheus/Prometheus-collects-Docker-Engine-Metrics.html">
+                <a href="Prometheus-collects-Docker-Engine-Metrics.html">
             
                     
                     【prometheus】Prometheus采集Docker Engine Metrics
@@ -786,9 +788,9 @@
             
         </li>
     
-        <li class="chapter " data-level="9.3" data-path="../prometheus/Blackbox_exporter-monitoring-url.html">
+        <li class="chapter " data-level="9.3" data-path="Blackbox_exporter-monitoring-url.html">
             
-                <a href="../prometheus/Blackbox_exporter-monitoring-url.html">
+                <a href="Blackbox_exporter-monitoring-url.html">
             
                     
                     【prometheus】使用Blackbox_exporter服务探测
@@ -799,9 +801,9 @@
             
         </li>
     
-        <li class="chapter " data-level="9.4" data-path="../prometheus/prometheus-monitors-k8s-cluster-coredns.html">
+        <li class="chapter " data-level="9.4" data-path="prometheus-monitors-k8s-cluster-coredns.html">
             
-                <a href="../prometheus/prometheus-monitors-k8s-cluster-coredns.html">
+                <a href="prometheus-monitors-k8s-cluster-coredns.html">
             
                     
                     【prometheus】prometheus监控k8s集群coredns
@@ -812,9 +814,9 @@
             
         </li>
     
-        <li class="chapter " data-level="9.5" data-path="../prometheus/Prometheus-common-alarm-promsql.html">
+        <li class="chapter active" data-level="9.5" data-path="Prometheus-common-alarm-promsql.html">
             
-                <a href="../prometheus/Prometheus-common-alarm-promsql.html">
+                <a href="Prometheus-common-alarm-promsql.html">
             
                     
                     【prometheus】prometheus常用告警promsql
@@ -943,9 +945,9 @@
         
         
     
-        <li class="chapter active" data-level="11.1" data-path="redis.html">
+        <li class="chapter " data-level="11.1" data-path="../interview/redis.html">
             
-                <a href="redis.html">
+                <a href="../interview/redis.html">
             
                     
                     【面试】面试之redis篇
@@ -986,7 +988,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >【面试】面试之redis篇</a>
+        <a href=".." >【prometheus】prometheus常用告警promsql</a>
     </h1>
 </div>
 
@@ -1001,50 +1003,65 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="&#x9762;&#x8BD5;&#x9898;&#x4E4B;redis&#x7BC7;">&#x9762;&#x8BD5;&#x9898;&#x4E4B;redis&#x7BC7;</h1>
-<h2 id="&#x4EC0;&#x4E48;&#x662F;redis&#xFF1F;">&#x4EC0;&#x4E48;&#x662F;redis&#xFF1F;</h2>
-<p>Redis &#x662F;&#x4E00;&#x4E2A;&#x5F00;&#x6E90;&#xFF08;BSD &#x8BB8;&#x53EF;&#xFF09;&#x3001;&#x57FA;&#x4E8E;&#x5185;&#x5B58;&#x3001;&#x652F;&#x6301;&#x591A;&#x79CD;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x7684;&#x5B58;&#x50A8;&#x7CFB;&#x7EDF;&#xFF0C;&#x53EF;&#x4EE5;&#x4F5C;&#x4E3A;&#x6570;&#x636E;&#x5E93;&#x3001;&#x7F13;&#x5B58;&#x548C;&#x6D88;&#x606F;&#x4E2D;&#x95F4;&#x4EF6;&#x3002;&#x5B83;&#x652F;&#x6301;&#x7684;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x6709;&#x5B57;&#x7B26;&#x4E32;&#xFF08;strings&#xFF09;&#x3001;&#x54C8;&#x5E0C;&#xFF08;hashes&#xFF09;&#x3001;&#x5217;&#x8868;&#xFF08;lists&#xFF09;&#x3001;&#x96C6;&#x5408;&#xFF08;sets&#xFF09;&#x3001;&#x6709;&#x5E8F;&#x96C6;&#x5408;&#xFF08;sorted sets&#xFF09;&#x7B49;&#xFF0C;&#x9664;&#x6B64;&#x4E4B;&#x5916;&#x8FD8;&#x652F;&#x6301; bitmaps&#x3001;hyperloglogs &#x548C;&#x5730;&#x7406;&#x7A7A;&#x95F4;&#xFF08; geospatial &#xFF09;&#x7D22;&#x5F15;&#x534A;&#x5F84;&#x67E5;&#x8BE2;&#x7B49;&#x529F;&#x80FD;</p>
-<h2 id="redis&#x7684;&#x6570;&#x636E;&#x7C7B;&#x578B;&#x6709;&#x54EA;&#x4E9B;&#xFF1F;">Redis&#x7684;&#x6570;&#x636E;&#x7C7B;&#x578B;&#x6709;&#x54EA;&#x4E9B;&#xFF1F;</h2>
-<p>string&#x3001;hash&#x3001;list&#x3001;set&#x3001;sorted set</p>
-<h2 id="redis&#x7684;&#x6570;&#x636E;&#x540C;&#x6B65;&#x673A;&#x5236;&#xFF1F;">Redis&#x7684;&#x6570;&#x636E;&#x540C;&#x6B65;&#x673A;&#x5236;&#xFF1F;</h2>
-<p>Redis &#x652F;&#x6301;&#x4E3B;&#x4ECE;&#x540C;&#x6B65;&#x3001;&#x4ECE;&#x4ECE;&#x540C;&#x6B65;&#x3002;&#x5982;&#x679C;&#x662F;&#x7B2C;&#x4E00;&#x6B21;&#x8FDB;&#x884C;&#x4E3B;&#x4ECE;&#x540C;&#x6B65;&#xFF0C;&#x4E3B;&#x8282;&#x70B9;&#x9700;&#x8981;&#x4F7F;&#x7528; bgsave &#x547D;&#x4EE4;&#xFF0C;&#x518D;&#x5C06;&#x540E;&#x7EED;&#x4FEE;&#x6539;&#x64CD;&#x4F5C;&#x8BB0;&#x5F55;&#x5230;&#x5185;&#x5B58;&#x7684;&#x7F13;&#x51B2;&#x533A;&#xFF0C;&#x7B49; RDB &#x6587;&#x4EF6;&#x5168;&#x90E8;&#x540C;&#x6B65;&#x5230;&#x590D;&#x5236;&#x8282;&#x70B9;&#xFF0C;&#x590D;&#x5236;&#x8282;&#x70B9;&#x63A5;&#x53D7;&#x5B8C;&#x6210;&#x540E;&#x5C06; RDB &#x955C;&#x50CF;&#x8BB0;&#x8F7D;&#x5230;&#x5185;&#x5B58;&#x4E2D;&#x3002;&#x7B49;&#x52A0;&#x8F7D;&#x5B8C;&#x6210;&#x540E;&#xFF0C;&#x590D;&#x5236;&#x8282;&#x70B9;&#x901A;&#x77E5;&#x4E3B;&#x8282;&#x70B9;&#x5C06;&#x590D;&#x5236;&#x671F;&#x95F4;&#x4FEE;&#x6539;&#x7684;&#x64CD;&#x4F5C;&#x8BB0;&#x5F55;&#x540C;&#x6B65;&#x5230;&#x590D;&#x5236;&#x8282;&#x70B9;&#xFF0C;&#x5373;&#x53EF;&#x5B8C;&#x6210;&#x540C;&#x6B65;&#x8FC7;&#x7A0B;&#x3002;</p>
-<h2 id="redis&#x5982;&#x4F55;&#x8BBE;&#x7F6E;&#x5BC6;&#x7801;&#xFF1F;">Redis&#x5982;&#x4F55;&#x8BBE;&#x7F6E;&#x5BC6;&#x7801;&#xFF1F;</h2>
-<p>&#x6C38;&#x4E45;&#x751F;&#x6548;&#xFF1A;&#x4FEE;&#x6539;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#xFF0C;&#x9700;&#x8981;&#x91CD;&#x542F; Redis&#x3002;&#x5728; redis.conf &#x4E2D;&#x53EF;&#x4EE5;&#x627E;&#x5230; requirepass &#x53C2;&#x6570;&#xFF0C;&#x8BBE;&#x7F6E; Redis &#x7684;&#x8BBF;&#x95EE;&#x5BC6;&#x7801;&#x3002;&#x914D;&#x7F6E;&#x65B9;&#x6CD5;&#x4E3A;&#xFF1A;requirepass &#x8BBF;&#x95EE;&#x5BC6;&#x7801;</p>
-<p>&#x4E34;&#x65F6;&#x751F;&#x6548;&#xFF1A;&#x4F7F;&#x7528;&#x547D;&#x4EE4;&#x8BBE;&#x7F6E;&#xFF0C;&#x4E0D;&#x9700;&#x8981;&#x91CD;&#x542F; Redis&#x3002;&#x4F7F;&#x7528;&#x547D;&#x4EE4;&#x8BBE;&#x7F6E;&#x7684;&#x65B9;&#x6CD5;&#x4E3A;&#xFF1A;config set requirepass &#x8BBF;&#x95EE;&#x5BC6;&#x7801;&#xFF0C;redis&#x91CD;&#x542F;&#x540E;&#xFF0C;&#x5BC6;&#x7801;&#x5931;&#x6548;</p>
-<h2 id="redis&#x7684;&#x4E00;&#x4E2A;&#x5B57;&#x7B26;&#x4E32;&#x7C7B;&#x578B;&#x7684;&#x503C;&#x80FD;&#x5B58;&#x50A8;&#x6700;&#x5927;&#x5BB9;&#x91CF;&#x662F;&#x591A;&#x5C11;&#xFF1F;">Redis&#x7684;&#x4E00;&#x4E2A;&#x5B57;&#x7B26;&#x4E32;&#x7C7B;&#x578B;&#x7684;&#x503C;&#x80FD;&#x5B58;&#x50A8;&#x6700;&#x5927;&#x5BB9;&#x91CF;&#x662F;&#x591A;&#x5C11;&#xFF1F;</h2>
-<p>&#x5B57;&#x7B26;&#x4E32;&#x7C7B;&#x578B;&#x662F;&#x6700;&#x57FA;&#x672C;&#x7684;&#x6570;&#x636E;&#x7C7B;&#x578B;&#xFF0C;&#x662F;&#x4E8C;&#x8FDB;&#x5236;&#x5B89;&#x5168;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#xFF0C;&#x6700;&#x5927; 512M&#x3002;</p>
-<h2 id="redis-key&#x7684;&#x8FC7;&#x671F;&#x65F6;&#x95F4;&#x548C;&#x6C38;&#x4E45;&#x6709;&#x6548;&#x5206;&#x522B;&#x600E;&#x4E48;&#x8BBE;&#x7F6E;&#xFF1F;">Redis key&#x7684;&#x8FC7;&#x671F;&#x65F6;&#x95F4;&#x548C;&#x6C38;&#x4E45;&#x6709;&#x6548;&#x5206;&#x522B;&#x600E;&#x4E48;&#x8BBE;&#x7F6E;&#xFF1F;</h2>
-<p>&#x53EF;&#x4EE5;&#x4F7F;&#x7528; EXPIRE &#x548C; PERSIST &#x547D;&#x4EE4;&#x3002;&#x5BF9;&#x4E00;&#x4E2A;&#x5DF2;&#x7ECF;&#x5E26;&#x6709;&#x751F;&#x5B58;&#x65F6;&#x95F4;&#x7684; key &#x6267;&#x884C; EXPIRE &#x547D;&#x4EE4;&#xFF0C;&#x65B0;&#x6307;&#x5B9A;&#x7684;&#x751F;&#x5B58;&#x65F6;&#x95F4;&#x4F1A;&#x53D6;&#x4EE3;&#x65E7;&#x7684;&#x751F;&#x5B58;&#x65F6;&#x95F4;&#x3002;PERSIST &#x547D;&#x4EE4;&#x53EF;&#x4EE5;&#x79FB;&#x9664;&#x7ED9;&#x5B9A; key &#x7684;&#x751F;&#x5B58;&#x65F6;&#x95F4;&#xFF0C;&#x5C06;&#x8FD9;&#x4E2A; key &#x4ECE;&#x5E26;&#x751F;&#x5B58;&#x65F6;&#x95F4;&#x8F6C;&#x6362;&#x6210;&#x6301;&#x4E45;&#x7684;&#x3002;</p>
-<h2 id="&#x5982;&#x4F55;&#x8BBE;&#x7F6E;-redis-&#x7684;&#x6700;&#x5927;&#x8FDE;&#x63A5;&#x6570;&#xFF1F;">&#x5982;&#x4F55;&#x8BBE;&#x7F6E; Redis &#x7684;&#x6700;&#x5927;&#x8FDE;&#x63A5;&#x6570;&#xFF1F;</h2>
-<pre><code>redis-server -maxclients 100000&#xFF08;&#x8FDE;&#x63A5;&#x6570;&#xFF09;;
-</code></pre><h2 id="&#x4EC0;&#x4E48;&#x662F;bigkey&#xFF0C;&#x600E;&#x4E48;&#x67E5;&#x627E;redis&#x7684;bigkey">&#x4EC0;&#x4E48;&#x662F;bigkey&#xFF0C;&#x600E;&#x4E48;&#x67E5;&#x627E;redis&#x7684;bigkey?</h2>
-<p>bigkey &#x662F;&#x6307;&#x952E;&#x503C;&#x5360;&#x7528;&#x5185;&#x5B58;&#x7A7A;&#x95F4;&#x975E;&#x5E38;&#x5927;&#x7684;key&#xFF0C;&#x67E5;&#x627E;bigkey&#x53EF;&#x4EE5;&#x7528;&#x4E0B;&#x9762;&#x547D;&#x4EE4;</p>
-<pre><code>redis-cli &#x2013;bigkeys
-</code></pre><h2 id="&#x4EC0;&#x4E48;&#x662F;&#x7F13;&#x5B58;&#x7A7F;&#x900F;&#xFF1F;&#x600E;&#x4E48;&#x89E3;&#x51B3;&#xFF1F;">&#x4EC0;&#x4E48;&#x662F;&#x7F13;&#x5B58;&#x7A7F;&#x900F;&#xFF1F;&#x600E;&#x4E48;&#x89E3;&#x51B3;&#xFF1F;</h2>
-<p>&#x5927;&#x91CF;&#x7684;&#x8BF7;&#x6C42;&#x77AC;&#x65F6;&#x6D8C;&#x5165;&#x7CFB;&#x7EDF;&#xFF0C;&#x800C;&#x8FD9;&#x4E2A;&#x6570;&#x636E;&#x5728; Redis &#x4E2D;&#x4E0D;&#x5B58;&#x5728;&#xFF0C;&#x6240;&#x6709;&#x7684;&#x8BF7;&#x6C42;&#x90FD;&#x843D;&#x5230;&#x4E86;&#x6570;&#x636E;&#x5E93;&#x4E0A;&#x628A;&#x6570;&#x636E;&#x5E93;&#x6253;&#x6B7B;&#x3002;&#x9020;&#x6210;&#x8FD9;&#x79CD;&#x60C5;&#x51B5;&#x7684;&#x539F;&#x56E0;&#x6709;&#x7CFB;&#x7EDF;&#x8BBE;&#x8BA1;&#x4E0D;&#x5408;&#x7406;&#x3001;&#x7F13;&#x5B58;&#x6570;&#x636E;&#x66F4;&#x65B0;&#x4E0D;&#x53CA;&#x65F6;&#xFF0C;&#x6216;&#x722C;&#x866B;&#x7B49;&#x6076;&#x610F;&#x653B;&#x51FB;&#x3002;</p>
-<p>&#x89E3;&#x51B3;&#x529E;&#x6CD5;&#xFF1A;&#x5982;&#x679C;&#x4ECE;&#x6570;&#x636E;&#x5E93;&#x67E5;&#x8BE2;&#x7684;&#x7ED3;&#x679C;&#x4E3A;&#x7A7A;&#xFF0C;&#x4F9D;&#x7136;&#x628A;&#x8FD9;&#x4E2A;&#x7ED3;&#x679C;&#x8FDB;&#x884C;&#x7F13;&#x5B58;&#xFF0C;&#x90A3;&#x4E48;&#x5F53;&#x7528; key &#x83B7;&#x53D6;&#x6570;&#x636E;&#x65F6;&#xFF0C;&#x5373;&#x4F7F;&#x6570;&#x636E;&#x4E0D;&#x5B58;&#x5728;&#xFF0C;Redis &#x4E5F;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x8FD4;&#x56DE;&#x7ED3;&#x679C;&#xFF0C;&#x907F;&#x514D;&#x591A;&#x6B21;&#x8BBF;&#x95EE;&#x6570;&#x636E;&#x5E93;</p>
-<h2 id="&#x4EC0;&#x4E48;&#x662F;&#x7F13;&#x5B58;&#x96EA;&#x5D29;&#xFF1F;&#x600E;&#x4E48;&#x89E3;&#x51B3;&#xFF1F;">&#x4EC0;&#x4E48;&#x662F;&#x7F13;&#x5B58;&#x96EA;&#x5D29;&#xFF1F;&#x600E;&#x4E48;&#x89E3;&#x51B3;&#xFF1F;</h2>
-<p>&#x7F13;&#x5B58;&#x96EA;&#x5D29;&#x662F;&#x6307;&#x5F53;&#x5927;&#x91CF;&#x7F13;&#x5B58;&#x5931;&#x6548;&#x65F6;&#xFF0C;&#x5927;&#x91CF;&#x7684;&#x8BF7;&#x6C42;&#x8BBF;&#x95EE;&#x76F4;&#x63A5;&#x8BF7;&#x6C42;&#x6570;&#x636E;&#x5E93;&#xFF0C;&#x5BFC;&#x81F4;&#x6570;&#x636E;&#x5E93;&#x670D;&#x52A1;&#x5668;&#x65E0;&#x6CD5;&#x6297;&#x4F4F;&#x8BF7;&#x6C42;&#x6216;&#x6302;&#x6389;&#x7684;&#x60C5;&#x51B5;&#x3002;&#x8FD9;&#x65F6;&#x7F51;&#x7AD9;&#x5E38;&#x5E38;&#x4F1A;&#x51FA;&#x73B0; 502 &#x9519;&#x8BEF;&#xFF0C;&#x5BFC;&#x81F4;&#x7F51;&#x7AD9;&#x4E0D;&#x53EF;&#x7528;&#x95EE;&#x9898;&#x3002;</p>
-<p>&#x89E3;&#x51B3;&#x529E;&#x6CD5;&#xFF1A;</p>
-<ol>
-<li>&#x5408;&#x7406;&#x89C4;&#x5212;&#x7F13;&#x5B58;&#x7684;&#x5931;&#x6548;&#x65F6;&#x95F4;&#xFF0C;&#x53EF;&#x4EE5;&#x7ED9;&#x7F13;&#x5B58;&#x65F6;&#x95F4;&#x52A0;&#x4E00;&#x4E2A;&#x968F;&#x673A;&#x6570;&#xFF0C;&#x9632;&#x6B62;&#x7EDF;&#x4E00;&#x65F6;&#x95F4;&#x8FC7;&#x671F;&#x3002;</li>
-<li>&#x5BF9;&#x6570;&#x636E;&#x5E93;&#x8FDB;&#x884C;&#x8FC7;&#x8F7D;&#x4FDD;&#x62A4;&#x6216;&#x5E94;&#x7528;&#x5C42;&#x9650;&#x6D41;&#xFF0C;&#x8FD9;&#x79CD;&#x60C5;&#x51B5;&#x4E0B;&#x4E00;&#x822C;&#x662F;&#x5728;&#x7F51;&#x7AD9;&#x5904;&#x4E8E;&#x5927;&#x6D41;&#x91CF;&#x3001;&#x9AD8;&#x5E76;&#x53D1;&#x65F6;&#xFF0C;&#x670D;&#x52A1;&#x5668;&#x6574;&#x4F53;&#x4E0D;&#x80FD;&#x627F;&#x53D7;&#x65F6;&#xFF0C;&#x53EF;&#x4EE5;&#x91C7;&#x7528;&#x7684;&#x4E00;&#x79CD;&#x9650;&#x6D41;&#x4FDD;&#x62A4;&#x63AA;&#x65BD;</li>
-<li>&#x6700;&#x540E;&#x8FD8;&#x53EF;&#x4EE5;&#x8003;&#x8651;&#x591A;&#x7EA7;&#x7F13;&#x5B58;&#x8BBE;&#x8BA1;&#xFF0C;&#x5B9E;&#x73B0;&#x7F13;&#x5B58;&#x7684;&#x9AD8;&#x53EF;&#x7528;&#x3002;</li>
-</ol>
-<h2 id="&#x4EC0;&#x4E48;&#x662F;redis&#x7684;&#x54E8;&#x5175;&#x6A21;&#x5F0F;">&#x4EC0;&#x4E48;&#x662F;redis&#x7684;&#x54E8;&#x5175;&#x6A21;&#x5F0F;?</h2>
-<p>Redis &#x7684;&#x54E8;&#x5175;&#x4F5C;&#x7528;&#x662F;&#x7BA1;&#x7406;&#x591A;&#x4E2A; Redis &#x670D;&#x52A1;&#x5668;&#xFF0C;&#x63D0;&#x4F9B;&#x4E86;&#x76D1;&#x63A7;&#x3001;&#x63D0;&#x9192;&#x4EE5;&#x53CA;&#x81EA;&#x52A8;&#x7684;&#x6545;&#x969C;&#x8F6C;&#x79FB;&#x7684;&#x529F;&#x80FD;&#x3002;&#x54E8;&#x5175;&#x53EF;&#x4EE5;&#x4FDD;&#x8BC1;&#x5F53;&#x4E3B;&#x670D;&#x52A1;&#x5668;&#x6302;&#x4E86;&#x540E;&#xFF0C;&#x53EF;&#x4EE5;&#x4ECE;&#x4ECE;&#x670D;&#x52A1;&#x5668;&#x9009;&#x62E9;&#x4E00;&#x53F0;&#x5F53;&#x4E3B;&#x670D;&#x52A1;&#x5668;&#xFF0C;&#x628A;&#x522B;&#x7684;&#x4ECE;&#x670D;&#x52A1;&#x5668;&#x8F6C;&#x79FB;&#x5230;&#x8BFB;&#x65B0;&#x7684;&#x4E3B;&#x673A;&#x3002;</p>
-<h2 id="redis&#x6301;&#x4E45;&#x5316;&#x673A;&#x5236;&#x6709;&#x54EA;&#x4E9B;&#xFF1F;">Redis&#x6301;&#x4E45;&#x5316;&#x673A;&#x5236;&#x6709;&#x54EA;&#x4E9B;&#xFF1F;</h2>
-<p>Redis &#x4E3B;&#x8981;&#x652F;&#x6301;&#x7684;&#x6301;&#x4E45;&#x5316;&#x673A;&#x5236;&#x4E3A; RDB&#xFF08;&#x5FEB;&#x7167;&#xFF09;&#x548C; AOF&#xFF08;&#x8FFD;&#x52A0;&#x6587;&#x4EF6;&#xFF09;&#x3002;</p>
-<ul>
-<li><p>RDB &#x6301;&#x4E45;&#x5316;&#x662F;&#x5728;&#x6307;&#x5B9A;&#x65F6;&#x95F4;&#x95F4;&#x9694;&#x5185;&#x4FDD;&#x5B58;&#x6570;&#x636E;&#x5FEB;&#x7167;&#x5230;&#x786C;&#x76D8;&#x4E2D;&#x3002;&#x4F46; RDB &#x7684;&#x6301;&#x4E45;&#x5316;&#x65B9;&#x5F0F;&#x6CA1;&#x6709;&#x529E;&#x6CD5;&#x5B9E;&#x73B0;&#x5B9E;&#x65F6;&#x6027;&#x7684;&#x6301;&#x4E45;&#x5316;&#x3002;&#x5F53;&#x5E94;&#x7528;&#x4F7F;&#x7528; RDB &#x6301;&#x4E45;&#x5316;&#x540E;&#xFF0C;&#x5982;&#x679C; Redis &#x7CFB;&#x7EDF;&#x53D1;&#x751F;&#x5D29;&#x6E83;&#xFF0C;&#x90A3;&#x4E48;&#x4F7F;&#x7528; RDB &#x6062;&#x590D;&#x6570;&#x636E;&#x65F6;&#xFF0C;&#x6062;&#x590D;&#x540E;&#x7684;&#x6570;&#x636E;&#x4E2D;&#xFF0C;&#x5B58;&#x5728;&#x4E22;&#x5931;&#x6700;&#x8FD1;&#x4E00;&#x6B21;&#x751F;&#x6210;&#x5FEB;&#x7167;&#x4E4B;&#x540E;&#x66F4;&#x6539;&#x7684;&#x6240;&#x6709;&#x6570;&#x636E;&#x3002;&#x6240;&#x4EE5; RDB &#x6301;&#x4E45;&#x5316;&#x4E0D;&#x9002;&#x7528;&#x4E8E;&#x4E22;&#x5931;&#x4E00;&#x90E8;&#x5206;&#x6570;&#x636E;&#x4E5F;&#x4F1A;&#x5BF9;&#x5E94;&#x7528;&#x9020;&#x6210;&#x5F88;&#x5927;&#x5F71;&#x54CD;&#x7684;&#x5907;&#x4EFD;&#x4E2D;&#x3002;</p>
-</li>
-<li><p>AOF &#x6301;&#x4E45;&#x5316;&#x662F;&#x628A;&#x547D;&#x4EE4;&#x8FFD;&#x52A0;&#x5230;&#x64CD;&#x4F5C;&#x65E5;&#x5FD7;&#x7684;&#x5C3E;&#x90E8;&#xFF0C;&#x7136;&#x540E;&#x4FDD;&#x5B58;&#x6240;&#x6709;&#x5386;&#x53F2;&#x64CD;&#x4F5C;&#x3002;AOF &#x4E3B;&#x8981;&#x662F;&#x89E3;&#x51B3;&#x6570;&#x636E;&#x6301;&#x4E45;&#x5316;&#x7684;&#x5B9E;&#x65F6;&#x6027;&#x3002;Redis &#x670D;&#x52A1;&#x5668;&#x9ED8;&#x8BA4;&#x5F00;&#x542F; RDB&#xFF0C;&#x5173;&#x95ED; AOF&#xFF1B;&#x8981;&#x5F00;&#x542F; AOF&#xFF0C;&#x9700;&#x8981;&#x5728;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x4E2D;&#x914D;&#x7F6E;&#xFF1A;appendonly yes&#x3002;AOF &#x6301;&#x4E45;&#x5316;&#x76F8;&#x5BF9;&#x4E8E; RDB &#x6301;&#x4E45;&#x5316;&#x7684;&#x4F18;&#x70B9;&#x5728;&#x4E8E;&#x53EF;&#x4EE5;&#x5B9E;&#x65F6;&#x7684;&#x5BF9; Redis &#x7F13;&#x5B58;&#x8FDB;&#x884C;&#x5199;&#x5165;&#x8BB0;&#x5F55;&#xFF0C;&#x4FDD;&#x8BC1;&#x5FEB;&#x901F;&#x6062;&#x590D;&#x7F13;&#x5B58;&#x65F6;&#x7684;&#x5B8C;&#x6574;&#x6027;&#x3002;</p>
-</li>
-</ul>
-<h2 id="redis&#x96C6;&#x7FA4;&#x67B6;&#x6784;&#x6A21;&#x5F0F;&#x6709;&#x54EA;&#x51E0;&#x79CD;">Redis&#x96C6;&#x7FA4;&#x67B6;&#x6784;&#x6A21;&#x5F0F;&#x6709;&#x54EA;&#x51E0;&#x79CD;?</h2>
-<p>Redis &#x96C6;&#x7FA4;&#x67B6;&#x6784;&#x662F;&#x652F;&#x6301;&#x5355;&#x8282;&#x70B9;&#x5355;&#x673A;&#x6A21;&#x5F0F;&#x7684;&#xFF0C;&#x4E5F;&#x652F;&#x6301;&#x4E00;&#x4E3B;&#x591A;&#x4ECE;&#x7684;&#x4E3B;&#x4ECE;&#x7ED3;&#x6784;&#xFF0C;&#x8FD8;&#x652F;&#x6301;&#x5E26;&#x6709;&#x54E8;&#x5175;&#x7684;&#x96C6;&#x7FA4;&#x90E8;&#x7F72;&#x6A21;&#x5F0F; </p>
-<p><footer class="page-footer"><span class="copyright">&#xA9; vishon all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">Updated at
-2022-03-24 14:26:59
+                                <h1 id="prometheus&#x5E38;&#x7528;&#x544A;&#x8B66;promsql">prometheus&#x5E38;&#x7528;&#x544A;&#x8B66;promsql</h1>
+<p>k8s&#x4E2D;&#xFF0C;&#x544A;&#x8B66;&#x76D1;&#x63A7;&#x6211;&#x4EEC;&#x90FD;&#x662F;&#x901A;&#x8FC7;prometheus&#x52A0;&#x4E0A;alertmanager&#x6765;&#x5B9E;&#x73B0;&#x7684;&#xFF0C;&#x5728;alertmanager&#x91CC;&#x9762;&#x901A;&#x8FC7;&#x5199;promsql&#x6765;&#x8FDB;&#x884C;&#x544A;&#x8B66;&#x7684;&#x8BBE;&#x7F6E;&#xFF0C;&#x7136;&#x540E;&#x53D1;&#x751F;&#x5230;&#x4E0D;&#x540C;&#x7684;&#x544A;&#x8B66;&#x6E20;&#x9053;&#xFF0C;&#x4E0B;&#x9762;&#x6211;&#x4EEC;&#x6765;&#x8BF4;&#x8BF4;&#x5E38;&#x7528;&#x544A;&#x8B66;promsql&#x914D;&#x7F6E;&#x3002;</p>
+<h2 id="master&#x544A;&#x8B66;&#x914D;&#x7F6E;">master&#x544A;&#x8B66;&#x914D;&#x7F6E;</h2>
+<p>&#x8BC1;&#x4E66;&#x8FC7;&#x671F;&#x544A;&#x8B66;&#xFF0C;&#x8868;&#x793A;&#x8BC1;&#x4E66;&#x5C06;&#x5728;24&#x5C0F;&#x65F6;&#x540E;&#x5230;&#x671F;</p>
+<pre><code>apiserver_client_certificate_expiration_seconds_count{job=&quot;apiserver&quot;} &gt; 0 and on(job) histogram_quantile(0.01, sum by (job, le) (rate(apiserver_client_certificate_expiration_seconds_bucket{job=&quot;apiserver&quot;}[5m]))) &lt; 86400
+</code></pre><p>apiserver&#x72B6;&#x6001;&#x5F02;&#x5E38;&#x544A;&#x8B66;</p>
+<pre><code>sum(up{job=&quot;kube-apiserver&quot;}) == 0
+</code></pre><p>kube-scheduler&#x72B6;&#x6001;&#x5F02;&#x5E38;&#x544A;&#x8B66;</p>
+<pre><code>sum(up{job=&quot;kube-scheduler&quot;}) == 0
+</code></pre><p>kube-controller-manager&#x72B6;&#x6001;&#x5F02;&#x5E38;&#x544A;&#x8B66;</p>
+<pre><code>sum(up{job=&quot;kube-controller-manager&quot;}) == 0
+</code></pre><h2 id="&#x8282;&#x70B9;&#x544A;&#x8B66;&#x914D;&#x7F6E;">&#x8282;&#x70B9;&#x544A;&#x8B66;&#x914D;&#x7F6E;</h2>
+<p>&#x8282;&#x70B9;&#x72B6;&#x6001;&#x5F02;&#x5E38;&#x544A;&#x8B66;</p>
+<pre><code>kube_node_status_condition{condition=&quot;Ready&quot;,status=&quot;true&quot;} == 0
+</code></pre><p>&#x8282;&#x70B9;&#x5B58;&#x5728;MemoryPressure&#x544A;&#x8B66;</p>
+<pre><code>kube_node_status_condition{condition=&quot;MemoryPressure&quot;,status=&quot;true&quot;} == 1
+</code></pre><p>&#x8282;&#x70B9;&#x5B58;&#x5728;DiskPressure&#x544A;&#x8B66;</p>
+<pre><code>kube_node_status_condition{condition=&quot;DiskPressure&quot;,status=&quot;true&quot;} == 1
+</code></pre><p>&#x8282;&#x70B9;&#x5B58;&#x5728;OutOfDisk&#x544A;&#x8B66;</p>
+<pre><code>kube_node_status_condition{condition=&quot;OutOfDisk&quot;,status=&quot;true&quot;} == 1
+</code></pre><p>&#x8282;&#x70B9;pod&#x6570;&#x91CF;&#x8D85;&#x8FC7;&#x8282;&#x70B9;&#x5BB9;&#x7EB3;&#x6700;&#x5927;pod&#x6570;&#x91CF;&#x7684;90%&#x544A;&#x8B66;</p>
+<pre><code>sum by (node) ((kube_pod_status_phase{phase=&quot;Running&quot;} == 1) + on(uid) group_left(node) (0 * kube_pod_info{pod_template_hash=&quot;&quot;})) / sum by (node) (kube_node_status_allocatable{resource=&quot;pods&quot;}) * 100 &gt; 90
+</code></pre><p>&#x8282;&#x70B9;&#x7684;&#x65F6;&#x949F;&#x540C;&#x6B65;&#x5F02;&#x5E38;&#x544A;&#x8B66;</p>
+<pre><code>min_over_time(node_timex_sync_status[5m]) == 0 and node_timex_maxerror_seconds &gt;= 16
+</code></pre><p>&#x8282;&#x70B9;&#x7684;Conntrack&#x8D85;&#x8FC7;&#x4E0A;&#x9650;&#x8BBE;&#x7F6E;&#x7684;75%&#x544A;&#x8B66;</p>
+<pre><code>(node_nf_conntrack_entries / node_nf_conntrack_entries_limit) &gt; 0.75
+</code></pre><p>&#x8282;&#x70B9;&#x78C1;&#x76D8;&#x7A7A;&#x95F4;&#x4E0D;&#x8DB3;&#x544A;&#x8B66;</p>
+<pre><code>( node_filesystem_avail_bytes{job=&quot;node-exporter&quot;,fstype!=&quot;&quot;} / node_filesystem_size_bytes{job=&quot;node-exporter&quot;,fstype!=&quot;&quot;} * 100 &lt; 3 and node_filesystem_readonly{job=&quot;node-exporter&quot;,fstype!=&quot;&quot;} == 0 )
+</code></pre><h2 id="pod&#x544A;&#x8B66;&#x914D;&#x7F6E;">pod&#x544A;&#x8B66;&#x914D;&#x7F6E;</h2>
+<p>pod&#x7684;cpu&#x5360;limit&#x4F7F;&#x7528;&#x7387;&#x8D85;&#x8FC7;80%</p>
+<pre><code>sum(rate(container_cpu_usage_seconds_total{job=&quot;cadvisor&quot;, image!=&quot;&quot;, container!=&quot;POD&quot;}[1m])) by (namespace, pod, container) / sum(kube_pod_container_resource_limits_cpu_cores) by (namespace, pod, container) &gt; 0.8
+</code></pre><p>pod&#x7684;cpu&#x5360;request&#x4F7F;&#x7528;&#x7387;&#x8D85;&#x8FC7;80%</p>
+<pre><code>sum(rate(container_cpu_usage_seconds_total{job=&quot;cadvisor&quot;, image!=&quot;&quot;, container!=&quot;POD&quot;}[1m])) by (namespace, pod, container) / sum(kube_pod_container_resource_requests_cpu_cores) by (namespace, pod, container) &gt; 0.8
+</code></pre><p>pod&#x7684;&#x5185;&#x5B58;&#x5360;limit&#x4F7F;&#x7528;&#x7387;&#x8D85;&#x8FC7;80%</p>
+<pre><code>sum(rate(container_memory_working_set_bytes{job=&quot;cadvisor&quot;, image!=&quot;&quot;, container!=&quot;POD&quot;}[1m])) by (namespace, pod, container) / sum(kube_pod_container_resource_limits_memory_bytes) by (namespace, pod, container) &gt; 0.8
+</code></pre><p>pod&#x7684;&#x5185;&#x5B58;&#x5360;request&#x4F7F;&#x7528;&#x7387;&#x8D85;&#x8FC7;80%</p>
+<pre><code>sum(rate(container_memory_working_set_bytes{job=&quot;cadvisor&quot;, image!=&quot;&quot;, container!=&quot;POD&quot;}[1m])) by (namespace, pod, container) / sum(kube_pod_container_resource_requests_memory_bytes) by (namespace, pod, container) &gt; 0.8
+</code></pre><h2 id="workload&#x544A;&#x8B66;&#x914D;&#x7F6E;">workload&#x544A;&#x8B66;&#x914D;&#x7F6E;</h2>
+<p>deployment&#x7684;&#x526F;&#x672C;&#x6570;&#x4E0D;&#x5339;&#x914D;</p>
+<pre><code>kube_deployment_spec_replicas != kube_deployment_status_replicas_available
+</code></pre><p>StatefulSet&#x548C;&#x671F;&#x671B;&#x5B9E;&#x4F8B;&#x526F;&#x672C;&#x6570;&#x4E0D;&#x5339;&#x914D;</p>
+<pre><code>kube_statefulset_status_replicas_ready != kube_statefulset_status_replicas
+</code></pre><p>&#x8D1F;&#x8F7D;5&#x5206;&#x949F;&#x5185;&#x5BB9;&#x5668;&#x91CD;&#x542F;&#x6B21;&#x6570;</p>
+<pre><code>rate(kube_pod_container_status_restarts_total{job=&quot;kube-state-metrics&quot;}[5m]) * 60 * 5 &gt; 0
+</code></pre><p>job&#x6267;&#x884C;&#x5931;&#x8D25;</p>
+<pre><code>kube_job_failed{job=&quot;kube-state-metrics&quot;} &gt; 0
+</code></pre><p>hpa&#x7684;&#x526F;&#x672C;&#x6570;&#x548C;&#x9884;&#x671F;&#x4E0D;&#x4E00;&#x81F4;&#x544A;&#x8B66;</p>
+<pre><code>(kube_hpa_status_desired_replicas{job=&quot;kube-state-metrics&quot;} != kube_hpa_status_current_replicas{job=&quot;kube-state-metrics&quot;}) and changes(kube_hpa_status_current_replicas[15m]) == 0
+</code></pre><p>hpa&#x526F;&#x672C;&#x6570;&#x8FBE;&#x5230;&#x6700;&#x5927;&#x503C;&#x544A;&#x8B66;</p>
+<pre><code>kube_hpa_status_current_replicas{job=&quot;kube-state-metrics&quot;} == kube_hpa_spec_max_replicas{job=&quot;kube-state-metrics&quot;}
+</code></pre><h2 id="&#x5B58;&#x50A8;&#x544A;&#x8B66;&#x914D;&#x7F6E;">&#x5B58;&#x50A8;&#x544A;&#x8B66;&#x914D;&#x7F6E;</h2>
+<p>pv&#x78C1;&#x76D8;&#x5269;&#x4F59;&#x53EF;&#x7528;&#x7A7A;&#x95F4;&#x5C0F;&#x4E8E;3%</p>
+<pre><code>kubelet_volume_stats_available_bytes{job=&quot;kubelet&quot;} / kubelet_volume_stats_capacity_bytes{job=&quot;kubelet&quot;} &lt; 0.03
+</code></pre><p>&#x9884;&#x6D4B;&#x5377;&#x7684;&#x78C1;&#x76D8;&#x7A7A;&#x95F4;&#x662F;&#x5426;4&#x5929;&#x540E;&#x7528;&#x5C3D;</p>
+<pre><code>( kubelet_volume_stats_available_bytes{job=&quot;kubelet&quot;} / kubelet_volume_stats_capacity_bytes{job=&quot;kubelet&quot;} ) &lt; 0.15 and predict_linear(kubelet_volume_stats_available_bytes{job=&quot;kubelet&quot;}[6h], 4 * 24 * 3600) &lt; 0
+</code></pre><p>pv&#x72B6;&#x6001;&#x5F02;&#x5E38;&#x544A;&#x8B66;</p>
+<pre><code>kube_persistentvolume_status_phase{phase=~&quot;Failed|Pending&quot;,job=&quot;kube-state-metrics&quot;} &gt; 0
+</code></pre><p><footer class="page-footer"><span class="copyright">&#xA9; vishon all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">Updated at
+2022-04-19 16:07:13
 </span></footer></p>
 <div id="gitalk-container"></div>
 <script>console.log("plugin-popup....");document.onclick = function(e){ e.target.tagName === "IMG" && window.open(e.target.src,e.target.src)}</script><style>img{cursor:pointer}</style>
@@ -1074,10 +1091,14 @@
 
             
                 
-                <a href="../istio/How-to-modify-the-sidecar-resource-configuration.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: 【istio】如何修改istio的sidecar资源配置">
+                <a href="prometheus-monitors-k8s-cluster-coredns.html" class="navigation navigation-prev " aria-label="Previous page: 【prometheus】prometheus监控k8s集群coredns">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
+                
+                <a href="../istio/istio-annotation-list.html" class="navigation navigation-next " aria-label="Next page: 【istio】istio注解列表">
+                    <i class="fa fa-angle-right"></i>
+                </a>
                 
             
         
@@ -1086,7 +1107,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"【面试】面试之redis篇","level":"11.1","depth":1,"previous":{"title":"【istio】如何修改istio的sidecar资源配置","level":"10.8","depth":1,"path":"istio/How-to-modify-the-sidecar-resource-configuration.md","ref":"istio/How-to-modify-the-sidecar-resource-configuration.md","articles":[]},"dir":"ltr"},"config":{"plugins":["github","editlink","-lunr","-search","search-plus","tbfed-pagefooter","splitter","page-toc-button","back-to-top-button","-lunr","-search","search-plus","github-buttons@2.1.0","favicon@^0.0.2","3-ba","theme-default","pageview-count","auto-scroll-table","popup","code","mygitalk","-sharing"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"&copy vishon","modify_label":"Updated at","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-okaidia.css"]},"disqus":{"shortName":"nieweixing-github-io"},"github":{"url":"https://github.com/nieweixing"},"editlink":{"label":"编辑本页","multilingual":false,"base":"https://github.com/nieweixing/mybook/tree/gh-pages"},"splitter":{},"auto-scroll-table":{},"popup":{},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"favicon":{"shortcut":"favicon.ico","bookmark":"favicon.ico"},"page-toc-button":{},"back-to-top-button":{},"pageview-count":{},"github-buttons":{"repo":"nieweixing/mybook","types":["star"],"size":"small"},"3-ba":{"configuration":"auto","token":"c03bec8e82bc53c064e0e648ffa54d88"},"mygitalk":{"flipMoveOptions":{},"clientID":"5976cd3d9cc251569467","number":-1,"perPage":10,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","admin":["nieweixing"],"createIssueManually":false,"distractionFreeMode":false,"repo":"gitalk-comment","owner":"nieweixing","enableHotKey":true,"clientSecret":"74117131a57324d4d616267265a94f4a1ac293ec","pagerDirection":"last","labels":["Gitalk"]},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{},"image-captions":{"caption":"图片 - _CAPTION_"}},"theme":"default","author":"vishon","pdf":{"pageNumbers":true,"fontSize":11,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"toc":true},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"运维操作指南","language":"zh-hans","links":{"sidebar":{"聂伟星个人博客":"https://www.niewx.cn","云+社区TKE运维笔记":"https://cloud.tencent.com/developer/column/87421","运维操作宝典":"https://www.niewx.cn/mybook","运维问题集锦":"https://www.niewx.cn/question"}},"gitbook":">= 3.2.2","description":"运维操作指南"},"file":{"path":"interview/redis.md","mtime":"2022-03-24T06:26:59.519Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-04-21T08:02:27.752Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"【prometheus】prometheus常用告警promsql","level":"9.5","depth":1,"next":{"title":"【istio】istio注解列表","level":"10.1","depth":1,"path":"istio/istio-annotation-list.md","ref":"istio/istio-annotation-list.md","articles":[]},"previous":{"title":"【prometheus】prometheus监控k8s集群coredns","level":"9.4","depth":1,"path":"prometheus/prometheus-monitors-k8s-cluster-coredns.md","ref":"prometheus/prometheus-monitors-k8s-cluster-coredns.md","articles":[]},"dir":"ltr"},"config":{"plugins":["github","editlink","-lunr","-search","search-plus","tbfed-pagefooter","splitter","page-toc-button","back-to-top-button","-lunr","-search","search-plus","github-buttons@2.1.0","favicon@^0.0.2","3-ba","theme-default","pageview-count","auto-scroll-table","popup","code","mygitalk","-sharing"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"&copy vishon","modify_label":"Updated at","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-okaidia.css"]},"disqus":{"shortName":"nieweixing-github-io"},"github":{"url":"https://github.com/nieweixing"},"editlink":{"label":"编辑本页","multilingual":false,"base":"https://github.com/nieweixing/mybook/tree/gh-pages"},"splitter":{},"auto-scroll-table":{},"popup":{},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"favicon":{"shortcut":"favicon.ico","bookmark":"favicon.ico"},"page-toc-button":{},"back-to-top-button":{},"pageview-count":{},"github-buttons":{"repo":"nieweixing/mybook","types":["star"],"size":"small"},"3-ba":{"configuration":"auto","token":"c03bec8e82bc53c064e0e648ffa54d88"},"mygitalk":{"flipMoveOptions":{},"clientID":"5976cd3d9cc251569467","number":-1,"perPage":10,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","admin":["nieweixing"],"createIssueManually":false,"distractionFreeMode":false,"repo":"gitalk-comment","owner":"nieweixing","enableHotKey":true,"clientSecret":"74117131a57324d4d616267265a94f4a1ac293ec","pagerDirection":"last","labels":["Gitalk"]},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{},"image-captions":{"caption":"图片 - _CAPTION_"}},"theme":"default","author":"vishon","pdf":{"pageNumbers":true,"fontSize":11,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"toc":true},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"运维操作指南","language":"zh-hans","links":{"sidebar":{"聂伟星个人博客":"https://www.niewx.cn","云+社区TKE运维笔记":"https://cloud.tencent.com/developer/column/87421","运维操作宝典":"https://www.niewx.cn/mybook","运维问题集锦":"https://www.niewx.cn/question"}},"gitbook":">= 3.2.2","description":"运维操作指南"},"file":{"path":"prometheus/Prometheus-common-alarm-promsql.md","mtime":"2022-04-19T08:07:13.257Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-04-21T08:02:27.752Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
