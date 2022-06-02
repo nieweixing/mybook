@@ -1,0 +1,1254 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>【istio】istio sidecar注入 · 运维操作指南</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="vishon">
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-splitter/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-page-toc-button/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-back-to-top-button/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-pageview-count/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-auto-scroll-table/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-code/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="How-to-modify-the-sidecar-resource-configuration.html" />
+    
+    
+    <link rel="prev" href="Gateway-configuration-http-forced-to-https.html" />
+    
+
+    
+        <link rel="shortcut icon" href='../favicon.ico' type="image/x-icon">
+    
+    
+        <link rel="bookmark" href='../favicon.ico' type="image/x-icon">
+    
+    
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"repo":"nieweixing/mybook","types":["star"],"size":"small"};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="https://www.niewx.cn" target="_blank" class="custom-link">聂伟星个人博客</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://cloud.tencent.com/developer/column/87421" target="_blank" class="custom-link">云+社区TKE运维笔记</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://www.niewx.cn/mybook" target="_blank" class="custom-link">运维操作宝典</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://www.niewx.cn/question" target="_blank" class="custom-link">运维问题集锦</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    简介
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">如何搭建属于自己的gitbook</li>
+        
+        
+    
+        <li class="chapter " data-level="2.1" data-path="../gitbook/install-gitbook.html">
+            
+                <a href="../gitbook/install-gitbook.html">
+            
+                    
+                    【gitbook】本地机器安装gitbook
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2" data-path="../gitbook/gitbook-add-note.html">
+            
+                <a href="../gitbook/gitbook-add-note.html">
+            
+                    
+                    【gitbook】gitbook添加笔记
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3" data-path="../gitbook/gitbook-upload-github.html">
+            
+                <a href="../gitbook/gitbook-upload-github.html">
+            
+                    
+                    【gitbook】gitbook上传到github托管
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.4" data-path="../gitbook/gitbook-plugin-usage.html">
+            
+                <a href="../gitbook/gitbook-plugin-usage.html">
+            
+                    
+                    【gitbook】gitbook插件使用
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">linux运维笔记</li>
+        
+        
+    
+        <li class="chapter " data-level="3.1" data-path="../linux/shell-script-template.html">
+            
+                <a href="../linux/shell-script-template.html">
+            
+                    
+                    【linux】shell脚本模板
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.2" data-path="../linux/cvm-build-openvpn.html">
+            
+                <a href="../linux/cvm-build-openvpn.html">
+            
+                    
+                    【linux】腾讯云cvm上搭建openvpn
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.3" data-path="../linux/vmware-install-centos-set-static-ip-address.html">
+            
+                <a href="../linux/vmware-install-centos-set-static-ip-address.html">
+            
+                    
+                    【linux】vmware安装centos环境设置静态的ip地址
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.4" data-path="../linux/Use-awk-to-extract-field-information.html">
+            
+                <a href="../linux/Use-awk-to-extract-field-information.html">
+            
+                    
+                    【linux】使用awk处理字段信息
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.5" data-path="../linux/Installation-and-use-of-atop-monitoring-tool-in-Linux-system.html">
+            
+                <a href="../linux/Installation-and-use-of-atop-monitoring-tool-in-Linux-system.html">
+            
+                    
+                    【linux】Linux系统atop监控工具的安装和使用
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.6" data-path="../linux/Basic-knowledge-of-iptables.html">
+            
+                <a href="../linux/Basic-knowledge-of-iptables.html">
+            
+                    
+                    【linux】iptables基础知识
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">数据库运维笔记</li>
+        
+        
+    
+        <li class="chapter " data-level="4.1" data-path="../database/mysql-devops-note.html">
+            
+                <a href="../database/mysql-devops-note.html">
+            
+                    
+                    【datebase】mysql运维笔记
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.2" data-path="../database/mongodb-devops-note.html">
+            
+                <a href="../database/mongodb-devops-note.html">
+            
+                    
+                    【datebase】mongodb运维笔记
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.3" data-path="../database/redis-devops-note.html">
+            
+                <a href="../database/redis-devops-note.html">
+            
+                    
+                    【datebase】redis运维笔记
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.4" data-path="../database/elasticsearch-devops-note.html">
+            
+                <a href="../database/elasticsearch-devops-note.html">
+            
+                    
+                    【datebase】elasticsearch运维笔记
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">docker/containerd运维笔记</li>
+        
+        
+    
+        <li class="chapter " data-level="5.1" data-path="../docker/dockerfile-study.html">
+            
+                <a href="../docker/dockerfile-study.html">
+            
+                    
+                    【docker】dockerfile学习笔记
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.2" data-path="../docker/docker-compose-study.html">
+            
+                <a href="../docker/docker-compose-study.html">
+            
+                    
+                    【docker】docker-compose学习笔记
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.3" data-path="../docker/Installation-and-use-of-containerd.html">
+            
+                <a href="../docker/Installation-and-use-of-containerd.html">
+            
+                    
+                    【containerd】containerd的安装和使用
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.4" data-path="../docker/Docker-limits-the-disk-space-that-containers-can-occupy.html">
+            
+                <a href="../docker/Docker-limits-the-disk-space-that-containers-can-occupy.html">
+            
+                    
+                    【docker】docker限制容器可占用的磁盘空间
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.5" data-path="../docker/Getting-started-with-buildkit.html">
+            
+                <a href="../docker/Getting-started-with-buildkit.html">
+            
+                    
+                    【docker】buildkit入门使用
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">kubernetes运维笔记</li>
+        
+        
+    
+        <li class="chapter " data-level="6.1" data-path="../k8s/k8s-common-commands.html">
+            
+                <a href="../k8s/k8s-common-commands.html">
+            
+                    
+                    【k8s】k8s常用命令总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.2" data-path="../k8s/k8s-force-delete-terminating-ns.html">
+            
+                <a href="../k8s/k8s-force-delete-terminating-ns.html">
+            
+                    
+                    【k8s】强制删除Terminating状态ns
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.3" data-path="../k8s/userd-filebeat-as-sidecar-collect-log.html">
+            
+                <a href="../k8s/userd-filebeat-as-sidecar-collect-log.html">
+            
+                    
+                    【k8s】k8s中filebeat作为sidecar采集容器日志
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.4" data-path="../k8s/k8s-generate-kubeonfig.html">
+            
+                <a href="../k8s/k8s-generate-kubeonfig.html">
+            
+                    
+                    【k8s】k8s中生成自定义用户kubeconfig
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.5" data-path="../k8s/kubecm-manages-k8s-clusters.html">
+            
+                <a href="../k8s/kubecm-manages-k8s-clusters.html">
+            
+                    
+                    【k8s】kubecm管理多k8s集群
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.6" data-path="../k8s/getting-started-with-kustomize-actually.html">
+            
+                <a href="../k8s/getting-started-with-kustomize-actually.html">
+            
+                    
+                    【k8s】kustomize入门实践
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.7" data-path="../k8s/Use-scripts-to-perform-health-detection-on-pods.html">
+            
+                <a href="../k8s/Use-scripts-to-perform-health-detection-on-pods.html">
+            
+                    
+                    【k8s】用脚本对pod进行健康探测
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.8" data-path="../k8s/Batch-delete-ns-in-terminating-state-in-the-cluster.html">
+            
+                <a href="../k8s/Batch-delete-ns-in-terminating-state-in-the-cluster.html">
+            
+                    
+                    【k8s】批量删除集群内terminating状态的ns
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.9" data-path="../k8s/Modify-the-resources-configuration-of-the-container-under-the-namespace.html">
+            
+                <a href="../k8s/Modify-the-resources-configuration-of-the-container-under-the-namespace.html">
+            
+                    
+                    【k8s】批量修改命名空间下容器的resources配置
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">TKE运维笔记</li>
+        
+        
+    
+        <li class="chapter " data-level="7.1" data-path="../tke/tke-used-docker-in-docker.html">
+            
+                <a href="../tke/tke-used-docker-in-docker.html">
+            
+                    
+                    【tke】tke上使用docker-in-docker
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.2" data-path="../tke/tke-deploy-jumpserver.html">
+            
+                <a href="../tke/tke-deploy-jumpserver.html">
+            
+                    
+                    【tke】tke上部署Jumpserver跳板机
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.3" data-path="../tke/get-the-cbsId-of-pvc-in-the-tke-cluster.html">
+            
+                <a href="../tke/get-the-cbsId-of-pvc-in-the-tke-cluster.html">
+            
+                    
+                    【tke】获取pvc对应的cbs-id
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.4" data-path="../tke/clean-the-evicted-state-pod-in-the-cluster.html">
+            
+                <a href="../tke/clean-the-evicted-state-pod-in-the-cluster.html">
+            
+                    
+                    【tke】清除集群中所有的evited状态pod
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.5" data-path="../tke/adjust-workload-replicas-under-the-namespace.html">
+            
+                <a href="../tke/adjust-workload-replicas-under-the-namespace.html">
+            
+                    
+                    【tke】调整命名空间所有deploy和sts的副本数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.6" data-path="../tke/modify-the-permissions-of-the-container-mount-directory.html">
+            
+                <a href="../tke/modify-the-permissions-of-the-container-mount-directory.html">
+            
+                    
+                    【tke】如何在非root用户启动的镜像中设置挂载目录权限
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.7" data-path="../tke/The-domain-name-resolved-in-the-alpine-container-exceeds-5s.html">
+            
+                <a href="../tke/The-domain-name-resolved-in-the-alpine-container-exceeds-5s.html">
+            
+                    
+                    【tke】alpine镜像内解析域名超5s
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.8" data-path="../tke/TKE-redeploys-cert-manager-and-keeps-getting-stuck.html">
+            
+                <a href="../tke/TKE-redeploys-cert-manager-and-keeps-getting-stuck.html">
+            
+                    
+                    【tke】TKE重新部署cert-manager一直卡主
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">云计算运维笔记</li>
+        
+        
+    
+        <li class="chapter " data-level="8.1" data-path="../cloud/1.md">
+            
+                <span>
+            
+                    
+                    云计算简介
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="8.2" >
+            
+                <span>
+            
+                    
+                    aws
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="8.2.1" data-path="../cloud/aws/awscli-command-operation.html">
+            
+                <a href="../cloud/aws/awscli-command-operation.html">
+            
+                    
+                    【aws】awscli命令行操作
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="8.3" >
+            
+                <span>
+            
+                    
+                    腾讯云
+            
+                </span>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">prometheus运维笔记</li>
+        
+        
+    
+        <li class="chapter " data-level="9.1" data-path="../prometheus/basic-knowledge-of-prometheus.html">
+            
+                <a href="../prometheus/basic-knowledge-of-prometheus.html">
+            
+                    
+                    【prometheus】prometheus入门知识概念
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="9.2" data-path="../prometheus/Prometheus-collects-Docker-Engine-Metrics.html">
+            
+                <a href="../prometheus/Prometheus-collects-Docker-Engine-Metrics.html">
+            
+                    
+                    【prometheus】Prometheus采集Docker Engine Metrics
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="9.3" data-path="../prometheus/Blackbox_exporter-monitoring-url.html">
+            
+                <a href="../prometheus/Blackbox_exporter-monitoring-url.html">
+            
+                    
+                    【prometheus】使用Blackbox_exporter服务探测
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="9.4" data-path="../prometheus/prometheus-monitors-k8s-cluster-coredns.html">
+            
+                <a href="../prometheus/prometheus-monitors-k8s-cluster-coredns.html">
+            
+                    
+                    【prometheus】prometheus监控k8s集群coredns
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="9.5" data-path="../prometheus/Prometheus-common-alarm-promsql.html">
+            
+                <a href="../prometheus/Prometheus-common-alarm-promsql.html">
+            
+                    
+                    【prometheus】prometheus常用告警promsql
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">istio运维笔记</li>
+        
+        
+    
+        <li class="chapter " data-level="10.1" data-path="istio-annotation-list.html">
+            
+                <a href="istio-annotation-list.html">
+            
+                    
+                    【istio】istio注解列表
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="10.2" data-path="Sidecar-startup-sequence-problem-in-istio.html">
+            
+                <a href="Sidecar-startup-sequence-problem-in-istio.html">
+            
+                    
+                    【istio】istio中sidecar启动顺序问题
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="10.3" data-path="istio-traffic-shift.html">
+            
+                <a href="istio-traffic-shift.html">
+            
+                    
+                    【istio】istio流量转移实践
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="10.4" data-path="istio-multi-cluster-nearby-access.html">
+            
+                <a href="istio-multi-cluster-nearby-access.html">
+            
+                    
+                    【istio】istio多集群就近接入
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="10.5" data-path="VirtualService-host-configuration-and-use.html">
+            
+                <a href="VirtualService-host-configuration-and-use.html">
+            
+                    
+                    【istio】VirtualService中hosts字段的配置使用
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="10.6" data-path="Gateway-configuration-http-forced-to-https.html">
+            
+                <a href="Gateway-configuration-http-forced-to-https.html">
+            
+                    
+                    【istio】gateway配置http强转https
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="10.7" data-path="istio-sidecar-injection.html">
+            
+                <a href="istio-sidecar-injection.html">
+            
+                    
+                    【istio】istio sidecar注入
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="10.8" data-path="How-to-modify-the-sidecar-resource-configuration.html">
+            
+                <a href="How-to-modify-the-sidecar-resource-configuration.html">
+            
+                    
+                    【istio】如何修改istio的sidecar资源配置
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">面试问题</li>
+        
+        
+    
+        <li class="chapter " data-level="11.1" data-path="../interview/redis.html">
+            
+                <a href="../interview/redis.html">
+            
+                    
+                    【面试】面试之redis篇
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            本书使用 GitBook 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >【istio】istio sidecar注入</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="istio-sidecar&#x6CE8;&#x5165;">istio sidecar&#x6CE8;&#x5165;</h1>
+<p>istio&#x7F51;&#x683C;&#x4E2D;&#xFF0C; Pod&#x90FD;&#x5FC5;&#x987B;&#x4F34;&#x968F;&#x4E00;&#x4E2A;Istio&#x517C;&#x5BB9;&#x7684;Sidecar&#x4E00;&#x540C;&#x8FD0;&#x884C;&#xFF0C;sidecar&#x7684;&#x6CE8;&#x5165;&#x65B9;&#x5F0F;&#x6709;2&#x79CD;&#xFF0C;&#x4E00;&#x76F4;&#x662F;&#x81EA;&#x52A8;&#xFF0C;&#x8FD8;&#x6709;&#x4E00;&#x79CD;&#x662F;&#x624B;&#x52A8;&#x6CE8;&#x5165;&#xFF0C;&#x4E0B;&#x9762;&#x6211;&#x4EEC;&#x6765;&#x8BF4;&#x4E0B;&#x8FD9;2&#x79CD;&#x6CE8;&#x5165;&#x65B9;&#x5F0F;&#x8981;&#x600E;&#x4E48;&#x914D;&#x7F6E;&#x3002;</p>
+<h2 id="&#x81EA;&#x52A8;&#x6CE8;&#x5165;">&#x81EA;&#x52A8;&#x6CE8;&#x5165;</h2>
+<p>&#x81EA;&#x52A8;&#x6CE8;&#x5165;&#x7684;&#x539F;&#x7406;&#x662F;&#x901A;&#x8FC7;webhook&#x5B9E;&#x73B0;&#x7684;&#xFF0C;MutatingWebhookConfiguration &#x914D;&#x7F6E;&#x4E86;Webhook &#x4F55;&#x65F6;&#x4F1A;&#x88AB; Kubernetes&#x8C03;&#x7528;&#x3002;Isti&#x63D0;&#x4F9B;&#x7684;&#x7F3A;&#x7701;&#x914D;&#x7F6E;&#xFF0C;&#x4F1A;&#x5728;&#x5E26;&#x6709;istio-injection=enabled&#x6807;&#x7B7E;&#x7684;&#x547D;&#x540D;&#x7A7A;&#x95F4;&#x4E2D;&#x9009;&#x62E9;Pod&#x3002;&#x4F7F;&#x7528;kubectl edit mutatingwebhookconfiguration istio-sidecar-injector &#x547D;&#x4EE4;&#x53EF;&#x4EE5;&#x7F16;&#x8F91;&#x76EE;&#x6807;&#x547D;&#x540D;&#x7A7A;&#x95F4;&#x7684;&#x8303;&#x56F4;&#x3002;</p>
+<p>&#x5982;&#x679C;&#x662F;&#x7528;&#x7684;&#x817E;&#x8BAF;&#x4E91;&#x7684;&#x670D;&#x52A1;&#x7F51;&#x683C;&#xFF0C;&#x5219;&#x9700;&#x8981;&#x6539;&#x4E0B;&#x547D;&#x540D;&#x7A7A;&#x95F4;&#x7684;&#x6807;&#x7B7E;&#xFF0C;&#x5982;&#x679C;&#x7248;&#x672C;&#x662F;1.10.3&#xFF0C;&#x5219;label&#x662F;istio.io/rev=1-10-3&#xFF0C;&#x540E;&#x9762;&#x7684;&#x7248;&#x672C;&#x6839;&#x636E;&#x4F60;&#x7684;&#x670D;&#x52A1;&#x7F51;&#x683C;&#x7248;&#x672C;&#x786E;&#x8BA4;&#x3002;</p>
+<p>&#x6253;&#x4E0A;label&#x540E;&#xFF0C;&#x65B0;&#x521B;&#x5EFA;&#x7684;pod&#xFF0C;&#x90FD;&#x4F1A;&#x9ED8;&#x8BA4;&#x6CE8;&#x5165;&#x4E00;&#x4E2A;sidecar&#xFF0C;&#x5982;&#x679C;&#x6807;&#x7B7E;&#x662F;&#x65B0;&#x52A0;&#x7684;&#xFF0C;&#x5B58;&#x91CF;&#x7684;pod&#x5219;&#x9700;&#x8981;&#x91CD;&#x5EFA;&#x624D;&#x4F1A;&#x6CE8;&#x5165;sidecar&#x3002;</p>
+<pre><code>[root@vm-0-3-centos ~]# kubectl get ns mesh --show-labels
+NAME   STATUS   AGE    LABELS
+mesh   Active   292d   field.cattle.io/projectId=p-w6scm,istio.io/rev=1-10-3,kubesphere.io/namespace=mesh
+[root@vm-0-3-centos ~]# kubectl get pod -n mesh -o=custom-columns=pod_name:.metadata.name,container_name:.spec.containers[*].name
+pod_name                    container_name
+client-76cf54b466-bpprz     istio-proxy,client
+nginx-54cdc9d45c-f29wc      istio-proxy,nginx
+nginx-54cdc9d45c-sdnlb      istio-proxy,nginx
+nginx-v1-5b446c9fbc-8qtxv   istio-proxy,nginx-v1
+nginx-v1-5b446c9fbc-dlnnh   istio-proxy,nginx-v1
+nginx-v2-58455fc8d-4mnzr    istio-proxy,nginx-v2
+sleep-86b8f9575c-p56gv      istio-proxy,sleep
+</code></pre><p>&#x4ECE;&#x4E0A;&#x9762;&#x7684;&#x7ED3;&#x679C;&#x770B;&#xFF0C;mesh&#x547D;&#x540D;&#x7A7A;&#x95F4;&#x52A0;&#x4E86;istio.io/rev&#x8FD9;&#x4E2A;label&#x540E;&#xFF0C;pod&#x90FD;&#x81EA;&#x52A8;&#x6CE8;&#x5165;&#x4E86;sidecar&#x3002;</p>
+<h2 id="&#x624B;&#x52A8;&#x6CE8;&#x5165;">&#x624B;&#x52A8;&#x6CE8;&#x5165;</h2>
+<p>&#x901A;&#x5E38;&#x624B;&#x52A8;&#x6CE8;&#x5165;&#xFF0C;&#x4F1A;&#x6709;&#x4E0B;&#x9762;2&#x79CD;&#x573A;&#x666F;&#xFF1A;</p>
+<ul>
+<li>&#x5E0C;&#x671B;&#x67D0;&#x4E2A;deployment&#x4E0D;&#x6CE8;&#x5165;sidecar</li>
+<li>&#x53EA;&#x5E0C;&#x671B;&#x67D0;&#x4E2A;deployment&#x6CE8;&#x5165;sidecar</li>
+</ul>
+<p>&#x4E0B;&#x9762;&#x6211;&#x4EEC;&#x6765;&#x9488;&#x5BF9;&#x4E0A;&#x9762;&#x7684;&#x573A;&#x666F;&#x6765;&#x8BF4;&#x660E;&#x4E0B;&#xFF0C;&#x5982;&#x4F55;&#x5728;yaml&#x914D;&#x7F6E;&#x3002;</p>
+<h3 id="&#x67D0;&#x4E2A;pod&#x4E0D;&#x6CE8;&#x5165;sidecar">&#x67D0;&#x4E2A;pod&#x4E0D;&#x6CE8;&#x5165;sidecar</h3>
+<p>&#x4E00;&#x822C;&#x6211;&#x4EEC;&#x7ED9;&#x547D;&#x540D;&#x7A7A;&#x95F4;&#x6253;&#x4E0A;&#x4E86;&#x81EA;&#x52A8;&#x6CE8;&#x5165;&#x7684;label&#x540E;&#xFF0C;&#x65B0;&#x5EFA;&#x7684;pod&#x9ED8;&#x8BA4;&#x5C31;&#x4F1A;&#x6CE8;&#x5165;sidecar&#xFF0C;&#x4F46;&#x662F;&#x6709;&#x65F6;&#x5019;&#x6211;&#x4EEC;&#x5E0C;&#x671B;&#x67D0;&#x4E9B;pod&#x4E0D;&#x88AB;istio&#x7BA1;&#x7406;&#x3002;&#x8FD9;&#x91CC;&#x5219;&#x9700;&#x8981;&#x7ED9;&#x8FD9;&#x4E9B;pod&#x4E0D;&#x6CE8;&#x5165;sidecar&#xFF0C;&#x5176;&#x5B9E;&#x53EF;&#x4EE5;&#x5728;deploy&#x7684;yaml&#x914D;&#x7F6E;&#x4E0B;&#xFF0C;&#x662F;&#x5426;&#x6CE8;&#x5165;sidecar&#xFF0C;&#x6765;&#x5B9E;&#x73B0;&#x5355;&#x4E2A;pod&#x4E0D;&#x6CE8;&#x5165;sidecar&#xFF0C;&#x5177;&#x4F53;yaml&#x5982;&#x4E0B;</p>
+<pre><code>apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tke-debug
+  namespace: default
+  labels:
+    app: debug
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: debug
+  template:
+    metadata:
+      labels:
+        app: debug
+      annotations:
+        sidecar.istio.io/inject: &quot;false&quot;
+    spec:
+      containers:
+      - name: debug
+        image: ccr.ccs.tencentyun.com/nwx_registry/troubleshooting:latest
+      tolerations:
+      - operator: Exists
+      dnsPolicy: ClusterFirst
+</code></pre><p>&#x5728;Pod&#x6A21;&#x677F;&#x4E2D;&#x52A0;&#x5165; sidecar.istio.io/inject &#x6CE8;&#x89E3;&#x5E76;&#x8D4B;&#x503C;&#x4E3A;false&#x624D;&#x80FD;&#x8986;&#x76D6;&#x7F3A;&#x7701;&#x503C;&#x5E76;&#x963B;&#x6B62;&#x5BF9;&#x8FD9;&#x4E00; Pod &#x7684;sidecar&#x6CE8;&#x5165;&#x3002;</p>
+<h3 id="&#x53EA;&#x7ED9;&#x67D0;&#x4E2A;pod&#x6CE8;&#x5165;sidecar">&#x53EA;&#x7ED9;&#x67D0;&#x4E2A;pod&#x6CE8;&#x5165;sidecar</h3>
+<p>&#x53EA;&#x7ED9;&#x67D0;&#x4E2A;pod&#x6CE8;&#x5165;sidecar&#xFF0C;&#x8FD9;&#x91CC;&#x6709;2&#x79CD;&#x65B9;&#x6848;&#xFF0C;&#x4E00;&#x79CD;&#x5C31;&#x662F;&#x53C2;&#x8003;&#x4E0A;&#x9762;&#x7684;&#x65B9;&#x6848;&#xFF0C;&#x7ED9;&#x4E0D;&#x9700;&#x8981;&#x6CE8;&#x5165;&#x7684;sidecar&#x7684;pod&#x52A0;&#x4E0A;&#x6CE8;&#x89E3;&#xFF0C;&#x5269;&#x4E0B;&#x9700;&#x8981;&#x6CE8;&#x5165;sidecar&#x7684;pod&#x8BBE;&#x7F6E;&#x4E3A;true&#xFF0C;&#x6216;&#x8005;&#x4E0D;&#x914D;&#x7F6E;&#xFF0C;&#x91C7;&#x7528;namespace&#x81EA;&#x52A8;&#x6CE8;&#x5165;&#x5373;&#x53EF;&#x3002;</p>
+<p>&#x4E0A;&#x9762;&#x7684;&#x65B9;&#x6CD5;&#x6BD4;&#x8F83;&#x9EBB;&#x70E6;&#xFF0C;&#x5982;&#x679C;&#x4E00;&#x4E2A;&#x547D;&#x540D;&#x7A7A;&#x95F4;&#x4E0B;&#x6709;&#x8F83;&#x591A;&#x7684;deploy&#xFF0C;&#x9700;&#x8981;&#x4E00;&#x4E2A;&#x4E2A;&#x914D;&#x7F6E;&#x624D;&#x884C;&#xFF0C;&#x5176;&#x5B9E;istio-system &#x547D;&#x540D;&#x7A7A;&#x95F4;&#x4E2D;&#x7684;ConfigMap istio-sidecar-injector&#x4E2D;&#x5305;&#x542B;&#x4E86;&#x7F3A;&#x7701;&#x7684;&#x6CE8;&#x5165;&#x7B56;&#x7565;&#x4EE5;&#x53CA; Sidecar&#x7684;&#x6CE8;&#x5165;&#x6A21;&#x677F;&#xFF0C;&#x817E;&#x8BAF;&#x4E91;&#x7684;&#x670D;&#x52A1;&#x7F51;&#x683C;&#x662F;istio-sidecar-injector-1-10-3&#x8FD9;&#x4E2A;configmap&#x3002;</p>
+<pre><code>apiVersion: v1
+data:
+  config: |-
+    # defaultTemplates defines the default template to use for pods that do not explicitly specify a template
+    defaultTemplates: [sidecar]
+    policy: disabled
+    alwaysInjectSelector:
+      []
+    neverInjectSelector:
+      []
+    ........
+</code></pre><p>&#x914D;&#x7F6E;&#x4E2D;&#x6709;&#x4E2A;polocy&#x5B57;&#x6BB5;&#xFF0C;&#x91CC;&#x9762;&#x914D;&#x7F6E;&#x4E86;&#x662F;&#x5426;&#x81EA;&#x52A8;&#x6CE8;&#x5165;&#x7684;&#x7B56;&#x7565;</p>
+<ul>
+<li>disabled&#xFF1A;Sidecar&#x6CE8;&#x5165;&#x5668;&#x7F3A;&#x7701;&#x4E0D;&#x4F1A;&#x5411;Pod&#x8FDB;&#x884C;&#x6CE8;&#x5165;&#x3002;&#x5728;Pod&#x6A21;&#x677F;&#x4E2D;&#x52A0;&#x5165;sidecar.istio.io/inject&#x6CE8;&#x89E3;&#x5E76;&#x8D4B;&#x503C;&#x4E3A;true&#x624D;&#x80FD;&#x8986;&#x76D6;&#x7F3A;&#x7701;&#x503C;&#x5E76;&#x542F;&#x7528;&#x6CE8;&#x5165;&#x3002;</li>
+<li>enabled&#xFF1A;Sidecar&#x6CE8;&#x5165;&#x5668;&#x7F3A;&#x7701;&#x4F1A;&#x5BF9;Pod&#x8FDB;&#x884C;&#x6CE8;&#x5165;&#x3002;&#x5728;Pod&#x6A21;&#x677F;&#x4E2D;&#x52A0;&#x5165;sidecar.istio.io/inject&#x6CE8;&#x89E3;&#x5E76;&#x8D4B;&#x503C;&#x4E3A;false&#x624D;&#x80FD;&#x8986;&#x76D6;&#x7F3A;&#x7701;&#x503C;&#x5E76;&#x963B;&#x6B62;&#x5BF9;&#x8FD9;&#x4E00;Pod&#x7684;&#x6CE8;&#x5165;&#x3002;</li>
+</ul>
+<p>&#x8FD9;&#x91CC;&#x6211;&#x4EEC;&#x5C06;policy&#x6539;&#x6210;disabled&#xFF0C;&#x8FD9;&#x91CC;&#x6253;&#x4E0A;&#x4E86;label&#x7684;&#x547D;&#x540D;&#x7A7A;&#x95F4;&#x91CC;&#x9762;pod&#x4E5F;&#x4E0D;&#x4F1A;&#x81EA;&#x52A8;&#x6CE8;&#x5165;sidecar&#xFF0C;&#x6211;&#x4EEC;&#x53EA;&#x9700;&#x8981;&#x5C06;&#x9700;&#x8981;&#x6CE8;&#x5165;sidecar&#x7684;pod&#x5728;&#x6A21;&#x677F;&#x4E2D;&#x52A0;&#x5165;sidecar.istio.io/inject&#x6CE8;&#x89E3;&#x5E76;&#x8D4B;&#x503C;&#x4E3A;true&#x5373;&#x53EF;&#xFF0C;&#x8FD9;&#x6837;&#x5C31;&#x53EA;&#x6709;&#x914D;&#x7F6E;&#x4E86;&#x6CE8;&#x89E3;&#x7684;pod&#x624D;&#x6CE8;&#x5165;sidcar&#x3002;</p>
+<pre><code>apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tke-debug
+  namespace: default
+  labels:
+    app: debug
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: debug
+  template:
+    metadata:
+      labels:
+        app: debug
+      annotations:
+        sidecar.istio.io/inject: &quot;true&quot;
+    spec:
+      containers:
+      - name: debug
+        image: ccr.ccs.tencentyun.com/nwx_registry/troubleshooting:latest
+      tolerations:
+      - operator: Exists
+      dnsPolicy: ClusterFirst
+</code></pre><h3 id="&#x6253;label&#x7ED9;&#x5355;&#x4E2A;deployment&#x7684;pod&#x6CE8;&#x5165;sidecar">&#x6253;label&#x7ED9;&#x5355;&#x4E2A;deployment&#x7684;pod&#x6CE8;&#x5165;sidecar</h3>
+<p>&#x5982;&#x679C;&#x4F60;&#x7528;&#x7684;istio&#x662F;&#x817E;&#x8BAF;&#x4E91;&#x6258;&#x7BA1;&#x7684;&#x670D;&#x52A1;&#x7F51;&#x683C;&#xFF0C;&#x5E76;&#x4E14;&#x7248;&#x672C;&#x662F;1.10.3&#xFF0C;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x7ED9;deployment&#x7684;.spec.template.metadata.labels&#x4E2D;&#x52A0;istio.io/rev: 1-10-3&#x8FD9;&#x4E2A;label&#xFF0C;&#x6765;&#x5B9E;&#x73B0;sidecar&#x7684;&#x81EA;&#x52A8;&#x6CE8;&#x5165;&#xFF0C;&#x8FD9;&#x91CC;&#x4E0D;&#x9700;&#x8981;&#x4F60;&#x7684;namespace&#x662F;&#x5426;&#x6709;&#x52A0;&#x4E0A;istio.io/rev&#x8FD9;&#x4E2A;label&#x3002;&#x5177;&#x4F53;&#x7684;yaml&#x5982;&#x4E0B;</p>
+<pre><code>apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tke-debug
+  namespace: tke-test
+  labels:
+    app: debug
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: debug
+  template:
+    metadata:
+      labels:
+        app: debug
+        istio.io/rev: 1-10-3
+    spec:
+      containers:
+      - name: debug
+        image: ccr.ccs.tencentyun.com/nwx_registry/troubleshooting:latest
+      tolerations:
+      - operator: Exists
+      dnsPolicy: ClusterFirst
+</code></pre><p><footer class="page-footer"><span class="copyright">&#xA9; vishon all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">Updated at
+2022-01-07 16:46:12
+</span></footer></p>
+<div id="gitalk-container"></div>
+<script>console.log("plugin-popup....");document.onclick = function(e){ e.target.tagName === "IMG" && window.open(e.target.src,e.target.src)}</script><style>img{cursor:pointer}</style>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="Gateway-configuration-http-forced-to-https.html" class="navigation navigation-prev " aria-label="Previous page: 【istio】gateway配置http强转https">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="How-to-modify-the-sidecar-resource-configuration.html" class="navigation navigation-next " aria-label="Next page: 【istio】如何修改istio的sidecar资源配置">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"【istio】istio sidecar注入","level":"10.7","depth":1,"next":{"title":"【istio】如何修改istio的sidecar资源配置","level":"10.8","depth":1,"path":"istio/How-to-modify-the-sidecar-resource-configuration.md","ref":"istio/How-to-modify-the-sidecar-resource-configuration.md","articles":[]},"previous":{"title":"【istio】gateway配置http强转https","level":"10.6","depth":1,"path":"istio/Gateway-configuration-http-forced-to-https.md","ref":"istio/Gateway-configuration-http-forced-to-https.md","articles":[]},"dir":"ltr"},"config":{"plugins":["github","editlink","-lunr","-search","search-plus","tbfed-pagefooter","splitter","page-toc-button","back-to-top-button","-lunr","-search","search-plus","github-buttons@2.1.0","favicon@^0.0.2","3-ba","theme-default","pageview-count","auto-scroll-table","popup","code","mygitalk","-sharing"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"&copy vishon","modify_label":"Updated at","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-okaidia.css"]},"disqus":{"shortName":"nieweixing-github-io"},"github":{"url":"https://github.com/nieweixing"},"editlink":{"label":"编辑本页","multilingual":false,"base":"https://github.com/nieweixing/mybook/tree/gh-pages"},"splitter":{},"auto-scroll-table":{},"popup":{},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"favicon":{"shortcut":"favicon.ico","bookmark":"favicon.ico"},"page-toc-button":{},"back-to-top-button":{},"pageview-count":{},"github-buttons":{"repo":"nieweixing/mybook","types":["star"],"size":"small"},"3-ba":{"configuration":"auto","token":"c03bec8e82bc53c064e0e648ffa54d88"},"mygitalk":{"flipMoveOptions":{},"clientID":"5976cd3d9cc251569467","number":-1,"perPage":10,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","admin":["nieweixing"],"createIssueManually":false,"distractionFreeMode":false,"repo":"gitalk-comment","owner":"nieweixing","enableHotKey":true,"clientSecret":"74117131a57324d4d616267265a94f4a1ac293ec","pagerDirection":"last","labels":["Gitalk"]},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{},"image-captions":{"caption":"图片 - _CAPTION_"}},"theme":"default","author":"vishon","pdf":{"pageNumbers":true,"fontSize":11,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"toc":true},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"运维操作指南","language":"zh-hans","links":{"sidebar":{"聂伟星个人博客":"https://www.niewx.cn","云+社区TKE运维笔记":"https://cloud.tencent.com/developer/column/87421","运维操作宝典":"https://www.niewx.cn/mybook","运维问题集锦":"https://www.niewx.cn/question"}},"gitbook":">= 3.2.2","description":"运维操作指南"},"file":{"path":"istio/istio-sidecar-injection.md","mtime":"2022-01-07T08:46:12.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-06-02T01:51:35.971Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-github/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-editlink/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-splitter/splitter.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-page-toc-button/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-back-to-top-button/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-3-ba/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-pageview-count/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-auto-scroll-table/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-code/plugin.js"></script>
+        
+    
+        
+        <script src="https://cdn.bootcss.com/blueimp-md5/2.12.0/js/md5.min.js"></script>
+        
+    
+        
+        <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-mygitalk/mygitalk.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

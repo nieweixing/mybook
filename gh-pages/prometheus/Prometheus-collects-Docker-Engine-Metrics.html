@@ -1,0 +1,1678 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>【prometheus】Prometheus采集Docker Engine Metrics · 运维操作指南</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="vishon">
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-splitter/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-page-toc-button/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-back-to-top-button/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-pageview-count/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-auto-scroll-table/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-code/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="Blackbox_exporter-monitoring-url.html" />
+    
+    
+    <link rel="prev" href="basic-knowledge-of-prometheus.html" />
+    
+
+    
+        <link rel="shortcut icon" href='../favicon.ico' type="image/x-icon">
+    
+    
+        <link rel="bookmark" href='../favicon.ico' type="image/x-icon">
+    
+    
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"repo":"nieweixing/mybook","types":["star"],"size":"small"};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="https://www.niewx.cn" target="_blank" class="custom-link">聂伟星个人博客</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://cloud.tencent.com/developer/column/87421" target="_blank" class="custom-link">云+社区TKE运维笔记</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://www.niewx.cn/mybook" target="_blank" class="custom-link">运维操作宝典</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://www.niewx.cn/question" target="_blank" class="custom-link">运维问题集锦</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    简介
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">如何搭建属于自己的gitbook</li>
+        
+        
+    
+        <li class="chapter " data-level="2.1" data-path="../gitbook/install-gitbook.html">
+            
+                <a href="../gitbook/install-gitbook.html">
+            
+                    
+                    【gitbook】本地机器安装gitbook
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2" data-path="../gitbook/gitbook-add-note.html">
+            
+                <a href="../gitbook/gitbook-add-note.html">
+            
+                    
+                    【gitbook】gitbook添加笔记
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3" data-path="../gitbook/gitbook-upload-github.html">
+            
+                <a href="../gitbook/gitbook-upload-github.html">
+            
+                    
+                    【gitbook】gitbook上传到github托管
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.4" data-path="../gitbook/gitbook-plugin-usage.html">
+            
+                <a href="../gitbook/gitbook-plugin-usage.html">
+            
+                    
+                    【gitbook】gitbook插件使用
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">linux运维笔记</li>
+        
+        
+    
+        <li class="chapter " data-level="3.1" data-path="../linux/shell-script-template.html">
+            
+                <a href="../linux/shell-script-template.html">
+            
+                    
+                    【linux】shell脚本模板
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.2" data-path="../linux/cvm-build-openvpn.html">
+            
+                <a href="../linux/cvm-build-openvpn.html">
+            
+                    
+                    【linux】腾讯云cvm上搭建openvpn
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.3" data-path="../linux/vmware-install-centos-set-static-ip-address.html">
+            
+                <a href="../linux/vmware-install-centos-set-static-ip-address.html">
+            
+                    
+                    【linux】vmware安装centos环境设置静态的ip地址
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.4" data-path="../linux/Use-awk-to-extract-field-information.html">
+            
+                <a href="../linux/Use-awk-to-extract-field-information.html">
+            
+                    
+                    【linux】使用awk处理字段信息
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.5" data-path="../linux/Installation-and-use-of-atop-monitoring-tool-in-Linux-system.html">
+            
+                <a href="../linux/Installation-and-use-of-atop-monitoring-tool-in-Linux-system.html">
+            
+                    
+                    【linux】Linux系统atop监控工具的安装和使用
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.6" data-path="../linux/Basic-knowledge-of-iptables.html">
+            
+                <a href="../linux/Basic-knowledge-of-iptables.html">
+            
+                    
+                    【linux】iptables基础知识
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">数据库运维笔记</li>
+        
+        
+    
+        <li class="chapter " data-level="4.1" data-path="../database/mysql-devops-note.html">
+            
+                <a href="../database/mysql-devops-note.html">
+            
+                    
+                    【datebase】mysql运维笔记
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.2" data-path="../database/mongodb-devops-note.html">
+            
+                <a href="../database/mongodb-devops-note.html">
+            
+                    
+                    【datebase】mongodb运维笔记
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.3" data-path="../database/redis-devops-note.html">
+            
+                <a href="../database/redis-devops-note.html">
+            
+                    
+                    【datebase】redis运维笔记
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.4" data-path="../database/elasticsearch-devops-note.html">
+            
+                <a href="../database/elasticsearch-devops-note.html">
+            
+                    
+                    【datebase】elasticsearch运维笔记
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">docker/containerd运维笔记</li>
+        
+        
+    
+        <li class="chapter " data-level="5.1" data-path="../docker/dockerfile-study.html">
+            
+                <a href="../docker/dockerfile-study.html">
+            
+                    
+                    【docker】dockerfile学习笔记
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.2" data-path="../docker/docker-compose-study.html">
+            
+                <a href="../docker/docker-compose-study.html">
+            
+                    
+                    【docker】docker-compose学习笔记
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.3" data-path="../docker/Installation-and-use-of-containerd.html">
+            
+                <a href="../docker/Installation-and-use-of-containerd.html">
+            
+                    
+                    【containerd】containerd的安装和使用
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.4" data-path="../docker/Docker-limits-the-disk-space-that-containers-can-occupy.html">
+            
+                <a href="../docker/Docker-limits-the-disk-space-that-containers-can-occupy.html">
+            
+                    
+                    【docker】docker限制容器可占用的磁盘空间
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.5" data-path="../docker/Getting-started-with-buildkit.html">
+            
+                <a href="../docker/Getting-started-with-buildkit.html">
+            
+                    
+                    【docker】buildkit入门使用
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">kubernetes运维笔记</li>
+        
+        
+    
+        <li class="chapter " data-level="6.1" data-path="../k8s/k8s-common-commands.html">
+            
+                <a href="../k8s/k8s-common-commands.html">
+            
+                    
+                    【k8s】k8s常用命令总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.2" data-path="../k8s/k8s-force-delete-terminating-ns.html">
+            
+                <a href="../k8s/k8s-force-delete-terminating-ns.html">
+            
+                    
+                    【k8s】强制删除Terminating状态ns
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.3" data-path="../k8s/userd-filebeat-as-sidecar-collect-log.html">
+            
+                <a href="../k8s/userd-filebeat-as-sidecar-collect-log.html">
+            
+                    
+                    【k8s】k8s中filebeat作为sidecar采集容器日志
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.4" data-path="../k8s/k8s-generate-kubeonfig.html">
+            
+                <a href="../k8s/k8s-generate-kubeonfig.html">
+            
+                    
+                    【k8s】k8s中生成自定义用户kubeconfig
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.5" data-path="../k8s/kubecm-manages-k8s-clusters.html">
+            
+                <a href="../k8s/kubecm-manages-k8s-clusters.html">
+            
+                    
+                    【k8s】kubecm管理多k8s集群
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.6" data-path="../k8s/getting-started-with-kustomize-actually.html">
+            
+                <a href="../k8s/getting-started-with-kustomize-actually.html">
+            
+                    
+                    【k8s】kustomize入门实践
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.7" data-path="../k8s/Use-scripts-to-perform-health-detection-on-pods.html">
+            
+                <a href="../k8s/Use-scripts-to-perform-health-detection-on-pods.html">
+            
+                    
+                    【k8s】用脚本对pod进行健康探测
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.8" data-path="../k8s/Batch-delete-ns-in-terminating-state-in-the-cluster.html">
+            
+                <a href="../k8s/Batch-delete-ns-in-terminating-state-in-the-cluster.html">
+            
+                    
+                    【k8s】批量删除集群内terminating状态的ns
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.9" data-path="../k8s/Modify-the-resources-configuration-of-the-container-under-the-namespace.html">
+            
+                <a href="../k8s/Modify-the-resources-configuration-of-the-container-under-the-namespace.html">
+            
+                    
+                    【k8s】批量修改命名空间下容器的resources配置
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">TKE运维笔记</li>
+        
+        
+    
+        <li class="chapter " data-level="7.1" data-path="../tke/tke-used-docker-in-docker.html">
+            
+                <a href="../tke/tke-used-docker-in-docker.html">
+            
+                    
+                    【tke】tke上使用docker-in-docker
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.2" data-path="../tke/tke-deploy-jumpserver.html">
+            
+                <a href="../tke/tke-deploy-jumpserver.html">
+            
+                    
+                    【tke】tke上部署Jumpserver跳板机
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.3" data-path="../tke/get-the-cbsId-of-pvc-in-the-tke-cluster.html">
+            
+                <a href="../tke/get-the-cbsId-of-pvc-in-the-tke-cluster.html">
+            
+                    
+                    【tke】获取pvc对应的cbs-id
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.4" data-path="../tke/clean-the-evicted-state-pod-in-the-cluster.html">
+            
+                <a href="../tke/clean-the-evicted-state-pod-in-the-cluster.html">
+            
+                    
+                    【tke】清除集群中所有的evited状态pod
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.5" data-path="../tke/adjust-workload-replicas-under-the-namespace.html">
+            
+                <a href="../tke/adjust-workload-replicas-under-the-namespace.html">
+            
+                    
+                    【tke】调整命名空间所有deploy和sts的副本数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.6" data-path="../tke/modify-the-permissions-of-the-container-mount-directory.html">
+            
+                <a href="../tke/modify-the-permissions-of-the-container-mount-directory.html">
+            
+                    
+                    【tke】如何在非root用户启动的镜像中设置挂载目录权限
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.7" data-path="../tke/The-domain-name-resolved-in-the-alpine-container-exceeds-5s.html">
+            
+                <a href="../tke/The-domain-name-resolved-in-the-alpine-container-exceeds-5s.html">
+            
+                    
+                    【tke】alpine镜像内解析域名超5s
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.8" data-path="../tke/TKE-redeploys-cert-manager-and-keeps-getting-stuck.html">
+            
+                <a href="../tke/TKE-redeploys-cert-manager-and-keeps-getting-stuck.html">
+            
+                    
+                    【tke】TKE重新部署cert-manager一直卡主
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">云计算运维笔记</li>
+        
+        
+    
+        <li class="chapter " data-level="8.1" data-path="../cloud/1.md">
+            
+                <span>
+            
+                    
+                    云计算简介
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="8.2" >
+            
+                <span>
+            
+                    
+                    aws
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="8.2.1" data-path="../cloud/aws/awscli-command-operation.html">
+            
+                <a href="../cloud/aws/awscli-command-operation.html">
+            
+                    
+                    【aws】awscli命令行操作
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="8.3" >
+            
+                <span>
+            
+                    
+                    腾讯云
+            
+                </span>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">prometheus运维笔记</li>
+        
+        
+    
+        <li class="chapter " data-level="9.1" data-path="basic-knowledge-of-prometheus.html">
+            
+                <a href="basic-knowledge-of-prometheus.html">
+            
+                    
+                    【prometheus】prometheus入门知识概念
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="9.2" data-path="Prometheus-collects-Docker-Engine-Metrics.html">
+            
+                <a href="Prometheus-collects-Docker-Engine-Metrics.html">
+            
+                    
+                    【prometheus】Prometheus采集Docker Engine Metrics
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="9.3" data-path="Blackbox_exporter-monitoring-url.html">
+            
+                <a href="Blackbox_exporter-monitoring-url.html">
+            
+                    
+                    【prometheus】使用Blackbox_exporter服务探测
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="9.4" data-path="prometheus-monitors-k8s-cluster-coredns.html">
+            
+                <a href="prometheus-monitors-k8s-cluster-coredns.html">
+            
+                    
+                    【prometheus】prometheus监控k8s集群coredns
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="9.5" data-path="Prometheus-common-alarm-promsql.html">
+            
+                <a href="Prometheus-common-alarm-promsql.html">
+            
+                    
+                    【prometheus】prometheus常用告警promsql
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">istio运维笔记</li>
+        
+        
+    
+        <li class="chapter " data-level="10.1" data-path="../istio/istio-annotation-list.html">
+            
+                <a href="../istio/istio-annotation-list.html">
+            
+                    
+                    【istio】istio注解列表
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="10.2" data-path="../istio/Sidecar-startup-sequence-problem-in-istio.html">
+            
+                <a href="../istio/Sidecar-startup-sequence-problem-in-istio.html">
+            
+                    
+                    【istio】istio中sidecar启动顺序问题
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="10.3" data-path="../istio/istio-traffic-shift.html">
+            
+                <a href="../istio/istio-traffic-shift.html">
+            
+                    
+                    【istio】istio流量转移实践
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="10.4" data-path="../istio/istio-multi-cluster-nearby-access.html">
+            
+                <a href="../istio/istio-multi-cluster-nearby-access.html">
+            
+                    
+                    【istio】istio多集群就近接入
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="10.5" data-path="../istio/VirtualService-host-configuration-and-use.html">
+            
+                <a href="../istio/VirtualService-host-configuration-and-use.html">
+            
+                    
+                    【istio】VirtualService中hosts字段的配置使用
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="10.6" data-path="../istio/Gateway-configuration-http-forced-to-https.html">
+            
+                <a href="../istio/Gateway-configuration-http-forced-to-https.html">
+            
+                    
+                    【istio】gateway配置http强转https
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="10.7" data-path="../istio/istio-sidecar-injection.html">
+            
+                <a href="../istio/istio-sidecar-injection.html">
+            
+                    
+                    【istio】istio sidecar注入
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="10.8" data-path="../istio/How-to-modify-the-sidecar-resource-configuration.html">
+            
+                <a href="../istio/How-to-modify-the-sidecar-resource-configuration.html">
+            
+                    
+                    【istio】如何修改istio的sidecar资源配置
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">面试问题</li>
+        
+        
+    
+        <li class="chapter " data-level="11.1" data-path="../interview/redis.html">
+            
+                <a href="../interview/redis.html">
+            
+                    
+                    【面试】面试之redis篇
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            本书使用 GitBook 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >【prometheus】Prometheus采集Docker Engine Metrics</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="prometheus&#x91C7;&#x96C6;docker-engine-metrics">Prometheus&#x91C7;&#x96C6;Docker Engine Metrics</h1>
+<p>&#x4ECE;Docker 1.13&#x5F00;&#x59CB;&#x5F15;&#x5165;&#x4E86;&#x4E00;&#x4E2A;&#x7279;&#x6027;&#xFF1A;&#x5C06;Docker Engine Metrix&#x4EE5;Prometheus&#x8BED;&#x6CD5;&#x66B4;&#x9732;&#x51FA;&#x6765;&#xFF0C;&#x4F7F;&#x5F97;Prometheus&#x670D;&#x52A1;&#x5668;&#x53EF;&#x4EE5;&#x6536;&#x96C6;&#x5E76;&#x5C55;&#x793A;&#x3002;</p>
+<h2 id="&#x5F00;&#x542F;&#x8282;&#x70B9;docker-mertrics">&#x5F00;&#x542F;&#x8282;&#x70B9;docker mertrics</h2>
+<p>&#x8282;&#x70B9;&#x7684;docker&#x7684;daemon&#x6587;&#x4EF6;&#x4E2D;&#x52A0;&#x4E0A;&#x5982;&#x4E0B;&#x914D;&#x7F6E;&#xFF0C;&#x5C31;&#x53EF;&#x4EE5;&#x5F00;&#x542F;</p>
+<pre><code>{
+  &quot;metrics-addr&quot; : &quot;0.0.0.0:9323&quot;,
+  &quot;experimental&quot; : true
+}
+</code></pre><h2 id="prometheus&#x914D;&#x7F6E;rawjob">prometheus&#x914D;&#x7F6E;Rawjob</h2>
+<p>&#x914D;&#x7F6E;rawjob&#x91C7;&#x96C6;&#x6570;&#x636E;&#x5230;prometheus</p>
+<pre><code>scrape_configs:
+- job_name: docker-daemon
+  honor_timestamps: true
+  metrics_path: /metrics
+  scheme: http
+  kubernetes_sd_configs:
+  - role: node
+  relabel_configs:
+  - separator: ;
+    regex: __meta_kubernetes_node_label_(.+)
+    replacement: $1
+    action: labelmap
+  - source_labels: [__address__]
+    separator: ;
+    regex: ([^:;]+):(\d+)
+    target_label: __address__
+    replacement: ${1}:9323
+    action: replace
+</code></pre><h2 id="&#x67E5;&#x770B;&#x6307;&#x6807;">&#x67E5;&#x770B;&#x6307;&#x6807;</h2>
+<p>&#x901A;&#x8FC7;&#x63A5;&#x53E3;&#x67E5;&#x770B;&#x6570;&#x636E;&#x6307;&#x6807;&#xFF0C;&#x6839;&#x636E;&#x6307;&#x6807;&#x7F16;&#x5199;promsql&#x8FDB;&#x884C;&#x6570;&#x636E;&#x7684;&#x5C55;&#x793A;&#x548C;&#x805A;&#x5408;</p>
+<pre><code>[root@VM-0-2-centos ~]# curl http://10.0.0.2:9323/metrics
+# HELP builder_builds_failed_total Number of failed image builds
+# TYPE builder_builds_failed_total counter
+builder_builds_failed_total{reason=&quot;build_canceled&quot;} 0
+builder_builds_failed_total{reason=&quot;build_target_not_reachable_error&quot;} 0
+builder_builds_failed_total{reason=&quot;command_not_supported_error&quot;} 0
+builder_builds_failed_total{reason=&quot;dockerfile_empty_error&quot;} 0
+builder_builds_failed_total{reason=&quot;dockerfile_syntax_error&quot;} 0
+builder_builds_failed_total{reason=&quot;error_processing_commands_error&quot;} 0
+builder_builds_failed_total{reason=&quot;missing_onbuild_arguments_error&quot;} 0
+builder_builds_failed_total{reason=&quot;unknown_instruction_error&quot;} 0
+# HELP builder_builds_triggered_total Number of triggered image builds
+# TYPE builder_builds_triggered_total counter
+builder_builds_triggered_total 0
+# HELP engine_daemon_container_actions_seconds The number of seconds it takes to process each container action
+# TYPE engine_daemon_container_actions_seconds histogram
+engine_daemon_container_actions_seconds_bucket{action=&quot;changes&quot;,le=&quot;0.005&quot;} 1
+engine_daemon_container_actions_seconds_bucket{action=&quot;changes&quot;,le=&quot;0.01&quot;} 1
+engine_daemon_container_actions_seconds_bucket{action=&quot;changes&quot;,le=&quot;0.025&quot;} 1
+engine_daemon_container_actions_seconds_bucket{action=&quot;changes&quot;,le=&quot;0.05&quot;} 1
+engine_daemon_container_actions_seconds_bucket{action=&quot;changes&quot;,le=&quot;0.1&quot;} 1
+engine_daemon_container_actions_seconds_bucket{action=&quot;changes&quot;,le=&quot;0.25&quot;} 1
+engine_daemon_container_actions_seconds_bucket{action=&quot;changes&quot;,le=&quot;0.5&quot;} 1
+engine_daemon_container_actions_seconds_bucket{action=&quot;changes&quot;,le=&quot;1&quot;} 1
+engine_daemon_container_actions_seconds_bucket{action=&quot;changes&quot;,le=&quot;2.5&quot;} 1
+engine_daemon_container_actions_seconds_bucket{action=&quot;changes&quot;,le=&quot;5&quot;} 1
+engine_daemon_container_actions_seconds_bucket{action=&quot;changes&quot;,le=&quot;10&quot;} 1
+engine_daemon_container_actions_seconds_bucket{action=&quot;changes&quot;,le=&quot;+Inf&quot;} 1
+engine_daemon_container_actions_seconds_sum{action=&quot;changes&quot;} 0
+engine_daemon_container_actions_seconds_count{action=&quot;changes&quot;} 1
+engine_daemon_container_actions_seconds_bucket{action=&quot;commit&quot;,le=&quot;0.005&quot;} 1
+engine_daemon_container_actions_seconds_bucket{action=&quot;commit&quot;,le=&quot;0.01&quot;} 1
+engine_daemon_container_actions_seconds_bucket{action=&quot;commit&quot;,le=&quot;0.025&quot;} 1
+engine_daemon_container_actions_seconds_bucket{action=&quot;commit&quot;,le=&quot;0.05&quot;} 1
+engine_daemon_container_actions_seconds_bucket{action=&quot;commit&quot;,le=&quot;0.1&quot;} 1
+engine_daemon_container_actions_seconds_bucket{action=&quot;commit&quot;,le=&quot;0.25&quot;} 1
+engine_daemon_container_actions_seconds_bucket{action=&quot;commit&quot;,le=&quot;0.5&quot;} 1
+engine_daemon_container_actions_seconds_bucket{action=&quot;commit&quot;,le=&quot;1&quot;} 1
+engine_daemon_container_actions_seconds_bucket{action=&quot;commit&quot;,le=&quot;2.5&quot;} 1
+engine_daemon_container_actions_seconds_bucket{action=&quot;commit&quot;,le=&quot;5&quot;} 1
+engine_daemon_container_actions_seconds_bucket{action=&quot;commit&quot;,le=&quot;10&quot;} 1
+engine_daemon_container_actions_seconds_bucket{action=&quot;commit&quot;,le=&quot;+Inf&quot;} 1
+engine_daemon_container_actions_seconds_sum{action=&quot;commit&quot;} 0
+engine_daemon_container_actions_seconds_count{action=&quot;commit&quot;} 1
+engine_daemon_container_actions_seconds_bucket{action=&quot;create&quot;,le=&quot;0.005&quot;} 1
+engine_daemon_container_actions_seconds_bucket{action=&quot;create&quot;,le=&quot;0.01&quot;} 1
+engine_daemon_container_actions_seconds_bucket{action=&quot;create&quot;,le=&quot;0.025&quot;} 1
+engine_daemon_container_actions_seconds_bucket{action=&quot;create&quot;,le=&quot;0.05&quot;} 1
+engine_daemon_container_actions_seconds_bucket{action=&quot;create&quot;,le=&quot;0.1&quot;} 2
+engine_daemon_container_actions_seconds_bucket{action=&quot;create&quot;,le=&quot;0.25&quot;} 5
+engine_daemon_container_actions_seconds_bucket{action=&quot;create&quot;,le=&quot;0.5&quot;} 5
+engine_daemon_container_actions_seconds_bucket{action=&quot;create&quot;,le=&quot;1&quot;} 5
+engine_daemon_container_actions_seconds_bucket{action=&quot;create&quot;,le=&quot;2.5&quot;} 5
+engine_daemon_container_actions_seconds_bucket{action=&quot;create&quot;,le=&quot;5&quot;} 5
+engine_daemon_container_actions_seconds_bucket{action=&quot;create&quot;,le=&quot;10&quot;} 5
+engine_daemon_container_actions_seconds_bucket{action=&quot;create&quot;,le=&quot;+Inf&quot;} 5
+engine_daemon_container_actions_seconds_sum{action=&quot;create&quot;} 0.430104514
+engine_daemon_container_actions_seconds_count{action=&quot;create&quot;} 5
+engine_daemon_container_actions_seconds_bucket{action=&quot;delete&quot;,le=&quot;0.005&quot;} 1
+engine_daemon_container_actions_seconds_bucket{action=&quot;delete&quot;,le=&quot;0.01&quot;} 1
+engine_daemon_container_actions_seconds_bucket{action=&quot;delete&quot;,le=&quot;0.025&quot;} 3
+engine_daemon_container_actions_seconds_bucket{action=&quot;delete&quot;,le=&quot;0.05&quot;} 6
+engine_daemon_container_actions_seconds_bucket{action=&quot;delete&quot;,le=&quot;0.1&quot;} 6
+engine_daemon_container_actions_seconds_bucket{action=&quot;delete&quot;,le=&quot;0.25&quot;} 6
+engine_daemon_container_actions_seconds_bucket{action=&quot;delete&quot;,le=&quot;0.5&quot;} 7
+engine_daemon_container_actions_seconds_bucket{action=&quot;delete&quot;,le=&quot;1&quot;} 7
+engine_daemon_container_actions_seconds_bucket{action=&quot;delete&quot;,le=&quot;2.5&quot;} 7
+engine_daemon_container_actions_seconds_bucket{action=&quot;delete&quot;,le=&quot;5&quot;} 7
+engine_daemon_container_actions_seconds_bucket{action=&quot;delete&quot;,le=&quot;10&quot;} 7
+engine_daemon_container_actions_seconds_bucket{action=&quot;delete&quot;,le=&quot;+Inf&quot;} 7
+engine_daemon_container_actions_seconds_sum{action=&quot;delete&quot;} 0.45672375400000004
+engine_daemon_container_actions_seconds_count{action=&quot;delete&quot;} 7
+engine_daemon_container_actions_seconds_bucket{action=&quot;start&quot;,le=&quot;0.005&quot;} 1
+engine_daemon_container_actions_seconds_bucket{action=&quot;start&quot;,le=&quot;0.01&quot;} 1
+engine_daemon_container_actions_seconds_bucket{action=&quot;start&quot;,le=&quot;0.025&quot;} 1
+engine_daemon_container_actions_seconds_bucket{action=&quot;start&quot;,le=&quot;0.05&quot;} 1
+engine_daemon_container_actions_seconds_bucket{action=&quot;start&quot;,le=&quot;0.1&quot;} 1
+engine_daemon_container_actions_seconds_bucket{action=&quot;start&quot;,le=&quot;0.25&quot;} 1
+engine_daemon_container_actions_seconds_bucket{action=&quot;start&quot;,le=&quot;0.5&quot;} 1
+engine_daemon_container_actions_seconds_bucket{action=&quot;start&quot;,le=&quot;1&quot;} 1
+engine_daemon_container_actions_seconds_bucket{action=&quot;start&quot;,le=&quot;2.5&quot;} 1
+engine_daemon_container_actions_seconds_bucket{action=&quot;start&quot;,le=&quot;5&quot;} 1
+engine_daemon_container_actions_seconds_bucket{action=&quot;start&quot;,le=&quot;10&quot;} 1
+engine_daemon_container_actions_seconds_bucket{action=&quot;start&quot;,le=&quot;+Inf&quot;} 1
+engine_daemon_container_actions_seconds_sum{action=&quot;start&quot;} 0
+engine_daemon_container_actions_seconds_count{action=&quot;start&quot;} 1
+# HELP engine_daemon_container_states_containers The count of containers in various states
+# TYPE engine_daemon_container_states_containers gauge
+engine_daemon_container_states_containers{state=&quot;paused&quot;} 0
+engine_daemon_container_states_containers{state=&quot;running&quot;} 143
+engine_daemon_container_states_containers{state=&quot;stopped&quot;} 19
+# HELP engine_daemon_engine_cpus_cpus The number of cpus that the host system of the engine has
+# TYPE engine_daemon_engine_cpus_cpus gauge
+engine_daemon_engine_cpus_cpus 8
+# HELP engine_daemon_engine_info The information related to the engine and the OS it is running on
+# TYPE engine_daemon_engine_info gauge
+engine_daemon_engine_info{architecture=&quot;x86_64&quot;,commit=&quot;9d988398e7&quot;,daemon_id=&quot;YCLF:XBU5:6B75:3CYI:YM2J:4ES4:JH7P:XAUT:Q2NK:SR6B:3LQP:XOVR&quot;,graphdriver=&quot;overlay2&quot;,kernel=&quot;3.10.0-1062.1.2.el7.x86_64&quot;,os=&quot;CentOS Linux 7 (Core)&quot;,os_type=&quot;linux&quot;,version=&quot;19.03.9&quot;} 1
+# HELP engine_daemon_engine_memory_bytes The number of bytes of memory that the host system of the engine has
+# TYPE engine_daemon_engine_memory_bytes gauge
+engine_daemon_engine_memory_bytes 1.655640064e+10
+# HELP engine_daemon_events_subscribers_total The number of current subscribers to events
+# TYPE engine_daemon_events_subscribers_total gauge
+engine_daemon_events_subscribers_total 0
+# HELP engine_daemon_events_total The number of events logged
+# TYPE engine_daemon_events_total counter
+engine_daemon_events_total 3166
+# HELP engine_daemon_health_checks_failed_total The total number of failed health checks
+# TYPE engine_daemon_health_checks_failed_total counter
+engine_daemon_health_checks_failed_total 0
+# HELP engine_daemon_health_checks_total The total number of health checks
+# TYPE engine_daemon_health_checks_total counter
+engine_daemon_health_checks_total 0
+# HELP engine_daemon_network_actions_seconds The number of seconds it takes to process each network action
+# TYPE engine_daemon_network_actions_seconds histogram
+engine_daemon_network_actions_seconds_bucket{action=&quot;release&quot;,le=&quot;0.005&quot;} 0
+engine_daemon_network_actions_seconds_bucket{action=&quot;release&quot;,le=&quot;0.01&quot;} 0
+engine_daemon_network_actions_seconds_bucket{action=&quot;release&quot;,le=&quot;0.025&quot;} 0
+engine_daemon_network_actions_seconds_bucket{action=&quot;release&quot;,le=&quot;0.05&quot;} 0
+engine_daemon_network_actions_seconds_bucket{action=&quot;release&quot;,le=&quot;0.1&quot;} 0
+engine_daemon_network_actions_seconds_bucket{action=&quot;release&quot;,le=&quot;0.25&quot;} 1
+engine_daemon_network_actions_seconds_bucket{action=&quot;release&quot;,le=&quot;0.5&quot;} 1
+engine_daemon_network_actions_seconds_bucket{action=&quot;release&quot;,le=&quot;1&quot;} 1
+engine_daemon_network_actions_seconds_bucket{action=&quot;release&quot;,le=&quot;2.5&quot;} 1
+engine_daemon_network_actions_seconds_bucket{action=&quot;release&quot;,le=&quot;5&quot;} 1
+engine_daemon_network_actions_seconds_bucket{action=&quot;release&quot;,le=&quot;10&quot;} 1
+engine_daemon_network_actions_seconds_bucket{action=&quot;release&quot;,le=&quot;+Inf&quot;} 1
+engine_daemon_network_actions_seconds_sum{action=&quot;release&quot;} 0.109992905
+engine_daemon_network_actions_seconds_count{action=&quot;release&quot;} 1
+# HELP etcd_debugging_snap_save_marshalling_duration_seconds The marshalling cost distributions of save called by snapshot.
+# TYPE etcd_debugging_snap_save_marshalling_duration_seconds histogram
+etcd_debugging_snap_save_marshalling_duration_seconds_bucket{le=&quot;0.001&quot;} 0
+etcd_debugging_snap_save_marshalling_duration_seconds_bucket{le=&quot;0.002&quot;} 0
+etcd_debugging_snap_save_marshalling_duration_seconds_bucket{le=&quot;0.004&quot;} 0
+etcd_debugging_snap_save_marshalling_duration_seconds_bucket{le=&quot;0.008&quot;} 0
+etcd_debugging_snap_save_marshalling_duration_seconds_bucket{le=&quot;0.016&quot;} 0
+etcd_debugging_snap_save_marshalling_duration_seconds_bucket{le=&quot;0.032&quot;} 0
+etcd_debugging_snap_save_marshalling_duration_seconds_bucket{le=&quot;0.064&quot;} 0
+etcd_debugging_snap_save_marshalling_duration_seconds_bucket{le=&quot;0.128&quot;} 0
+etcd_debugging_snap_save_marshalling_duration_seconds_bucket{le=&quot;0.256&quot;} 0
+etcd_debugging_snap_save_marshalling_duration_seconds_bucket{le=&quot;0.512&quot;} 0
+etcd_debugging_snap_save_marshalling_duration_seconds_bucket{le=&quot;1.024&quot;} 0
+etcd_debugging_snap_save_marshalling_duration_seconds_bucket{le=&quot;2.048&quot;} 0
+etcd_debugging_snap_save_marshalling_duration_seconds_bucket{le=&quot;4.096&quot;} 0
+etcd_debugging_snap_save_marshalling_duration_seconds_bucket{le=&quot;8.192&quot;} 0
+etcd_debugging_snap_save_marshalling_duration_seconds_bucket{le=&quot;+Inf&quot;} 0
+etcd_debugging_snap_save_marshalling_duration_seconds_sum 0
+etcd_debugging_snap_save_marshalling_duration_seconds_count 0
+# HELP etcd_debugging_snap_save_total_duration_seconds The total latency distributions of save called by snapshot.
+# TYPE etcd_debugging_snap_save_total_duration_seconds histogram
+etcd_debugging_snap_save_total_duration_seconds_bucket{le=&quot;0.001&quot;} 0
+etcd_debugging_snap_save_total_duration_seconds_bucket{le=&quot;0.002&quot;} 0
+etcd_debugging_snap_save_total_duration_seconds_bucket{le=&quot;0.004&quot;} 0
+etcd_debugging_snap_save_total_duration_seconds_bucket{le=&quot;0.008&quot;} 0
+etcd_debugging_snap_save_total_duration_seconds_bucket{le=&quot;0.016&quot;} 0
+etcd_debugging_snap_save_total_duration_seconds_bucket{le=&quot;0.032&quot;} 0
+etcd_debugging_snap_save_total_duration_seconds_bucket{le=&quot;0.064&quot;} 0
+etcd_debugging_snap_save_total_duration_seconds_bucket{le=&quot;0.128&quot;} 0
+etcd_debugging_snap_save_total_duration_seconds_bucket{le=&quot;0.256&quot;} 0
+etcd_debugging_snap_save_total_duration_seconds_bucket{le=&quot;0.512&quot;} 0
+etcd_debugging_snap_save_total_duration_seconds_bucket{le=&quot;1.024&quot;} 0
+etcd_debugging_snap_save_total_duration_seconds_bucket{le=&quot;2.048&quot;} 0
+etcd_debugging_snap_save_total_duration_seconds_bucket{le=&quot;4.096&quot;} 0
+etcd_debugging_snap_save_total_duration_seconds_bucket{le=&quot;8.192&quot;} 0
+etcd_debugging_snap_save_total_duration_seconds_bucket{le=&quot;+Inf&quot;} 0
+etcd_debugging_snap_save_total_duration_seconds_sum 0
+etcd_debugging_snap_save_total_duration_seconds_count 0
+# HELP etcd_disk_wal_fsync_duration_seconds The latency distributions of fsync called by wal.
+# TYPE etcd_disk_wal_fsync_duration_seconds histogram
+etcd_disk_wal_fsync_duration_seconds_bucket{le=&quot;0.001&quot;} 0
+etcd_disk_wal_fsync_duration_seconds_bucket{le=&quot;0.002&quot;} 0
+etcd_disk_wal_fsync_duration_seconds_bucket{le=&quot;0.004&quot;} 0
+etcd_disk_wal_fsync_duration_seconds_bucket{le=&quot;0.008&quot;} 0
+etcd_disk_wal_fsync_duration_seconds_bucket{le=&quot;0.016&quot;} 0
+etcd_disk_wal_fsync_duration_seconds_bucket{le=&quot;0.032&quot;} 0
+etcd_disk_wal_fsync_duration_seconds_bucket{le=&quot;0.064&quot;} 0
+etcd_disk_wal_fsync_duration_seconds_bucket{le=&quot;0.128&quot;} 0
+etcd_disk_wal_fsync_duration_seconds_bucket{le=&quot;0.256&quot;} 0
+etcd_disk_wal_fsync_duration_seconds_bucket{le=&quot;0.512&quot;} 0
+etcd_disk_wal_fsync_duration_seconds_bucket{le=&quot;1.024&quot;} 0
+etcd_disk_wal_fsync_duration_seconds_bucket{le=&quot;2.048&quot;} 0
+etcd_disk_wal_fsync_duration_seconds_bucket{le=&quot;4.096&quot;} 0
+etcd_disk_wal_fsync_duration_seconds_bucket{le=&quot;8.192&quot;} 0
+etcd_disk_wal_fsync_duration_seconds_bucket{le=&quot;+Inf&quot;} 0
+etcd_disk_wal_fsync_duration_seconds_sum 0
+etcd_disk_wal_fsync_duration_seconds_count 0
+# HELP etcd_snap_db_fsync_duration_seconds The latency distributions of fsyncing .snap.db file
+# TYPE etcd_snap_db_fsync_duration_seconds histogram
+etcd_snap_db_fsync_duration_seconds_bucket{le=&quot;0.001&quot;} 0
+etcd_snap_db_fsync_duration_seconds_bucket{le=&quot;0.002&quot;} 0
+etcd_snap_db_fsync_duration_seconds_bucket{le=&quot;0.004&quot;} 0
+etcd_snap_db_fsync_duration_seconds_bucket{le=&quot;0.008&quot;} 0
+etcd_snap_db_fsync_duration_seconds_bucket{le=&quot;0.016&quot;} 0
+etcd_snap_db_fsync_duration_seconds_bucket{le=&quot;0.032&quot;} 0
+etcd_snap_db_fsync_duration_seconds_bucket{le=&quot;0.064&quot;} 0
+etcd_snap_db_fsync_duration_seconds_bucket{le=&quot;0.128&quot;} 0
+etcd_snap_db_fsync_duration_seconds_bucket{le=&quot;0.256&quot;} 0
+etcd_snap_db_fsync_duration_seconds_bucket{le=&quot;0.512&quot;} 0
+etcd_snap_db_fsync_duration_seconds_bucket{le=&quot;1.024&quot;} 0
+etcd_snap_db_fsync_duration_seconds_bucket{le=&quot;2.048&quot;} 0
+etcd_snap_db_fsync_duration_seconds_bucket{le=&quot;4.096&quot;} 0
+etcd_snap_db_fsync_duration_seconds_bucket{le=&quot;8.192&quot;} 0
+etcd_snap_db_fsync_duration_seconds_bucket{le=&quot;+Inf&quot;} 0
+etcd_snap_db_fsync_duration_seconds_sum 0
+etcd_snap_db_fsync_duration_seconds_count 0
+# HELP etcd_snap_db_save_total_duration_seconds The total latency distributions of v3 snapshot save
+# TYPE etcd_snap_db_save_total_duration_seconds histogram
+etcd_snap_db_save_total_duration_seconds_bucket{le=&quot;0.1&quot;} 0
+etcd_snap_db_save_total_duration_seconds_bucket{le=&quot;0.2&quot;} 0
+etcd_snap_db_save_total_duration_seconds_bucket{le=&quot;0.4&quot;} 0
+etcd_snap_db_save_total_duration_seconds_bucket{le=&quot;0.8&quot;} 0
+etcd_snap_db_save_total_duration_seconds_bucket{le=&quot;1.6&quot;} 0
+etcd_snap_db_save_total_duration_seconds_bucket{le=&quot;3.2&quot;} 0
+etcd_snap_db_save_total_duration_seconds_bucket{le=&quot;6.4&quot;} 0
+etcd_snap_db_save_total_duration_seconds_bucket{le=&quot;12.8&quot;} 0
+etcd_snap_db_save_total_duration_seconds_bucket{le=&quot;25.6&quot;} 0
+etcd_snap_db_save_total_duration_seconds_bucket{le=&quot;51.2&quot;} 0
+etcd_snap_db_save_total_duration_seconds_bucket{le=&quot;+Inf&quot;} 0
+etcd_snap_db_save_total_duration_seconds_sum 0
+etcd_snap_db_save_total_duration_seconds_count 0
+# HELP go_gc_duration_seconds A summary of the GC invocation durations.
+# TYPE go_gc_duration_seconds summary
+go_gc_duration_seconds{quantile=&quot;0&quot;} 1.0529e-05
+go_gc_duration_seconds{quantile=&quot;0.25&quot;} 1.4528e-05
+go_gc_duration_seconds{quantile=&quot;0.5&quot;} 1.7833e-05
+go_gc_duration_seconds{quantile=&quot;0.75&quot;} 2.4036e-05
+go_gc_duration_seconds{quantile=&quot;1&quot;} 0.004878993
+go_gc_duration_seconds_sum 0.023893318
+go_gc_duration_seconds_count 397
+# HELP go_goroutines Number of goroutines that currently exist.
+# TYPE go_goroutines gauge
+go_goroutines 647
+# HELP go_memstats_alloc_bytes Number of bytes allocated and still in use.
+# TYPE go_memstats_alloc_bytes gauge
+go_memstats_alloc_bytes 6.322868e+07
+# HELP go_memstats_alloc_bytes_total Total number of bytes allocated, even if freed.
+# TYPE go_memstats_alloc_bytes_total counter
+go_memstats_alloc_bytes_total 1.2068908064e+10
+# HELP go_memstats_buck_hash_sys_bytes Number of bytes used by the profiling bucket hash table.
+# TYPE go_memstats_buck_hash_sys_bytes gauge
+go_memstats_buck_hash_sys_bytes 1.984451e+06
+# HELP go_memstats_frees_total Total number of frees.
+# TYPE go_memstats_frees_total counter
+go_memstats_frees_total 9.9325482e+07
+# HELP go_memstats_gc_sys_bytes Number of bytes used for garbage collection system metadata.
+# TYPE go_memstats_gc_sys_bytes gauge
+go_memstats_gc_sys_bytes 4.907008e+06
+# HELP go_memstats_heap_alloc_bytes Number of heap bytes allocated and still in use.
+# TYPE go_memstats_heap_alloc_bytes gauge
+go_memstats_heap_alloc_bytes 6.322868e+07
+# HELP go_memstats_heap_idle_bytes Number of heap bytes waiting to be used.
+# TYPE go_memstats_heap_idle_bytes gauge
+go_memstats_heap_idle_bytes 5.7245696e+07
+# HELP go_memstats_heap_inuse_bytes Number of heap bytes that are in use.
+# TYPE go_memstats_heap_inuse_bytes gauge
+go_memstats_heap_inuse_bytes 6.8386816e+07
+# HELP go_memstats_heap_objects Number of allocated objects.
+# TYPE go_memstats_heap_objects gauge
+go_memstats_heap_objects 433408
+# HELP go_memstats_heap_released_bytes_total Total number of heap bytes released to OS.
+# TYPE go_memstats_heap_released_bytes_total counter
+go_memstats_heap_released_bytes_total 5.0003968e+07
+# HELP go_memstats_heap_sys_bytes Number of heap bytes obtained from system.
+# TYPE go_memstats_heap_sys_bytes gauge
+go_memstats_heap_sys_bytes 1.25632512e+08
+# HELP go_memstats_last_gc_time_seconds Number of seconds since 1970 of last garbage collection.
+# TYPE go_memstats_last_gc_time_seconds gauge
+go_memstats_last_gc_time_seconds 1.6289054392397587e+09
+# HELP go_memstats_lookups_total Total number of pointer lookups.
+# TYPE go_memstats_lookups_total counter
+go_memstats_lookups_total 0
+# HELP go_memstats_mallocs_total Total number of mallocs.
+# TYPE go_memstats_mallocs_total counter
+go_memstats_mallocs_total 9.975889e+07
+# HELP go_memstats_mcache_inuse_bytes Number of bytes in use by mcache structures.
+# TYPE go_memstats_mcache_inuse_bytes gauge
+go_memstats_mcache_inuse_bytes 13888
+# HELP go_memstats_mcache_sys_bytes Number of bytes used for mcache structures obtained from system.
+# TYPE go_memstats_mcache_sys_bytes gauge
+go_memstats_mcache_sys_bytes 16384
+# HELP go_memstats_mspan_inuse_bytes Number of bytes in use by mspan structures.
+# TYPE go_memstats_mspan_inuse_bytes gauge
+go_memstats_mspan_inuse_bytes 814776
+# HELP go_memstats_mspan_sys_bytes Number of bytes used for mspan structures obtained from system.
+# TYPE go_memstats_mspan_sys_bytes gauge
+go_memstats_mspan_sys_bytes 884736
+# HELP go_memstats_next_gc_bytes Number of heap bytes when next garbage collection will take place.
+# TYPE go_memstats_next_gc_bytes gauge
+go_memstats_next_gc_bytes 7.104408e+07
+# HELP go_memstats_other_sys_bytes Number of bytes used for other system allocations.
+# TYPE go_memstats_other_sys_bytes gauge
+go_memstats_other_sys_bytes 1.384757e+06
+# HELP go_memstats_stack_inuse_bytes Number of bytes in use by the stack allocator.
+# TYPE go_memstats_stack_inuse_bytes gauge
+go_memstats_stack_inuse_bytes 8.585216e+06
+# HELP go_memstats_stack_sys_bytes Number of bytes obtained from system for stack allocator.
+# TYPE go_memstats_stack_sys_bytes gauge
+go_memstats_stack_sys_bytes 8.585216e+06
+# HELP go_memstats_sys_bytes Number of bytes obtained by system. Sum of all system allocations.
+# TYPE go_memstats_sys_bytes gauge
+go_memstats_sys_bytes 1.43395064e+08
+# HELP http_request_duration_microseconds The HTTP request latencies in microseconds.
+# TYPE http_request_duration_microseconds summary
+http_request_duration_microseconds{handler=&quot;prometheus&quot;,quantile=&quot;0.5&quot;} 2470.569
+http_request_duration_microseconds{handler=&quot;prometheus&quot;,quantile=&quot;0.9&quot;} 2847.254
+http_request_duration_microseconds{handler=&quot;prometheus&quot;,quantile=&quot;0.99&quot;} 8325.889
+http_request_duration_microseconds_sum{handler=&quot;prometheus&quot;} 241802.613
+http_request_duration_microseconds_count{handler=&quot;prometheus&quot;} 92
+# HELP http_request_size_bytes The HTTP request sizes in bytes.
+# TYPE http_request_size_bytes summary
+http_request_size_bytes{handler=&quot;prometheus&quot;,quantile=&quot;0.5&quot;} 238
+http_request_size_bytes{handler=&quot;prometheus&quot;,quantile=&quot;0.9&quot;} 238
+http_request_size_bytes{handler=&quot;prometheus&quot;,quantile=&quot;0.99&quot;} 439
+http_request_size_bytes_sum{handler=&quot;prometheus&quot;} 23035
+http_request_size_bytes_count{handler=&quot;prometheus&quot;} 92
+# HELP http_requests_total Total number of HTTP requests made.
+# TYPE http_requests_total counter
+http_requests_total{code=&quot;200&quot;,handler=&quot;prometheus&quot;,method=&quot;get&quot;} 92
+# HELP http_response_size_bytes The HTTP response sizes in bytes.
+# TYPE http_response_size_bytes summary
+http_response_size_bytes{handler=&quot;prometheus&quot;,quantile=&quot;0.5&quot;} 4159
+http_response_size_bytes{handler=&quot;prometheus&quot;,quantile=&quot;0.9&quot;} 4167
+http_response_size_bytes{handler=&quot;prometheus&quot;,quantile=&quot;0.99&quot;} 4174
+http_response_size_bytes_sum{handler=&quot;prometheus&quot;} 381997
+http_response_size_bytes_count{handler=&quot;prometheus&quot;} 92
+# HELP logger_log_entries_size_greater_than_buffer_total Number of log entries which are larger than the log buffer
+# TYPE logger_log_entries_size_greater_than_buffer_total counter
+logger_log_entries_size_greater_than_buffer_total 3901
+# HELP logger_log_read_operations_failed_total Number of log reads from container stdio that failed
+# TYPE logger_log_read_operations_failed_total counter
+logger_log_read_operations_failed_total 0
+# HELP logger_log_write_operations_failed_total Number of log write operations that failed
+# TYPE logger_log_write_operations_failed_total counter
+logger_log_write_operations_failed_total 0
+# HELP process_cpu_seconds_total Total user and system CPU time spent in seconds.
+# TYPE process_cpu_seconds_total counter
+process_cpu_seconds_total 105.94
+# HELP process_max_fds Maximum number of open file descriptors.
+# TYPE process_max_fds gauge
+process_max_fds 1.048576e+06
+# HELP process_open_fds Number of open file descriptors.
+# TYPE process_open_fds gauge
+process_open_fds 808
+# HELP process_resident_memory_bytes Resident memory size in bytes.
+# TYPE process_resident_memory_bytes gauge
+process_resident_memory_bytes 8.4279296e+07
+# HELP process_start_time_seconds Start time of the process since unix epoch in seconds.
+# TYPE process_start_time_seconds gauge
+process_start_time_seconds 1.62890400767e+09
+# HELP process_virtual_memory_bytes Virtual memory size in bytes.
+# TYPE process_virtual_memory_bytes gauge
+process_virtual_memory_bytes 5.925912576e+09
+# HELP swarm_dispatcher_scheduling_delay_seconds Scheduling delay is the time a task takes to go from NEW to RUNNING state.
+# TYPE swarm_dispatcher_scheduling_delay_seconds histogram
+swarm_dispatcher_scheduling_delay_seconds_bucket{le=&quot;0.005&quot;} 0
+swarm_dispatcher_scheduling_delay_seconds_bucket{le=&quot;0.01&quot;} 0
+swarm_dispatcher_scheduling_delay_seconds_bucket{le=&quot;0.025&quot;} 0
+swarm_dispatcher_scheduling_delay_seconds_bucket{le=&quot;0.05&quot;} 0
+swarm_dispatcher_scheduling_delay_seconds_bucket{le=&quot;0.1&quot;} 0
+swarm_dispatcher_scheduling_delay_seconds_bucket{le=&quot;0.25&quot;} 0
+swarm_dispatcher_scheduling_delay_seconds_bucket{le=&quot;0.5&quot;} 0
+swarm_dispatcher_scheduling_delay_seconds_bucket{le=&quot;1&quot;} 0
+swarm_dispatcher_scheduling_delay_seconds_bucket{le=&quot;2.5&quot;} 0
+swarm_dispatcher_scheduling_delay_seconds_bucket{le=&quot;5&quot;} 0
+swarm_dispatcher_scheduling_delay_seconds_bucket{le=&quot;10&quot;} 0
+swarm_dispatcher_scheduling_delay_seconds_bucket{le=&quot;+Inf&quot;} 0
+swarm_dispatcher_scheduling_delay_seconds_sum 0
+swarm_dispatcher_scheduling_delay_seconds_count 0
+# HELP swarm_manager_configs_total The number of configs in the cluster object store
+# TYPE swarm_manager_configs_total gauge
+swarm_manager_configs_total 0
+# HELP swarm_manager_leader Indicates if this manager node is a leader
+# TYPE swarm_manager_leader gauge
+swarm_manager_leader 0
+# HELP swarm_manager_networks_total The number of networks in the cluster object store
+# TYPE swarm_manager_networks_total gauge
+swarm_manager_networks_total 0
+# HELP swarm_manager_nodes The number of nodes
+# TYPE swarm_manager_nodes gauge
+swarm_manager_nodes{state=&quot;disconnected&quot;} 0
+swarm_manager_nodes{state=&quot;down&quot;} 0
+swarm_manager_nodes{state=&quot;ready&quot;} 0
+swarm_manager_nodes{state=&quot;unknown&quot;} 0
+# HELP swarm_manager_secrets_total The number of secrets in the cluster object store
+# TYPE swarm_manager_secrets_total gauge
+swarm_manager_secrets_total 0
+# HELP swarm_manager_services_total The number of services in the cluster object store
+# TYPE swarm_manager_services_total gauge
+swarm_manager_services_total 0
+# HELP swarm_manager_tasks_total The number of tasks in the cluster object store
+# TYPE swarm_manager_tasks_total gauge
+swarm_manager_tasks_total{state=&quot;accepted&quot;} 0
+swarm_manager_tasks_total{state=&quot;assigned&quot;} 0
+swarm_manager_tasks_total{state=&quot;complete&quot;} 0
+swarm_manager_tasks_total{state=&quot;failed&quot;} 0
+swarm_manager_tasks_total{state=&quot;new&quot;} 0
+swarm_manager_tasks_total{state=&quot;orphaned&quot;} 0
+swarm_manager_tasks_total{state=&quot;pending&quot;} 0
+swarm_manager_tasks_total{state=&quot;preparing&quot;} 0
+swarm_manager_tasks_total{state=&quot;ready&quot;} 0
+swarm_manager_tasks_total{state=&quot;rejected&quot;} 0
+swarm_manager_tasks_total{state=&quot;remove&quot;} 0
+swarm_manager_tasks_total{state=&quot;running&quot;} 0
+swarm_manager_tasks_total{state=&quot;shutdown&quot;} 0
+swarm_manager_tasks_total{state=&quot;starting&quot;} 0
+# HELP swarm_node_manager Whether this node is a manager or not
+# TYPE swarm_node_manager gauge
+swarm_node_manager 0
+# HELP swarm_raft_snapshot_latency_seconds Raft snapshot create latency.
+# TYPE swarm_raft_snapshot_latency_seconds histogram
+swarm_raft_snapshot_latency_seconds_bucket{le=&quot;0.005&quot;} 0
+swarm_raft_snapshot_latency_seconds_bucket{le=&quot;0.01&quot;} 0
+swarm_raft_snapshot_latency_seconds_bucket{le=&quot;0.025&quot;} 0
+swarm_raft_snapshot_latency_seconds_bucket{le=&quot;0.05&quot;} 0
+swarm_raft_snapshot_latency_seconds_bucket{le=&quot;0.1&quot;} 0
+swarm_raft_snapshot_latency_seconds_bucket{le=&quot;0.25&quot;} 0
+swarm_raft_snapshot_latency_seconds_bucket{le=&quot;0.5&quot;} 0
+swarm_raft_snapshot_latency_seconds_bucket{le=&quot;1&quot;} 0
+swarm_raft_snapshot_latency_seconds_bucket{le=&quot;2.5&quot;} 0
+swarm_raft_snapshot_latency_seconds_bucket{le=&quot;5&quot;} 0
+swarm_raft_snapshot_latency_seconds_bucket{le=&quot;10&quot;} 0
+swarm_raft_snapshot_latency_seconds_bucket{le=&quot;+Inf&quot;} 0
+swarm_raft_snapshot_latency_seconds_sum 0
+swarm_raft_snapshot_latency_seconds_count 0
+# HELP swarm_raft_transaction_latency_seconds Raft transaction latency.
+# TYPE swarm_raft_transaction_latency_seconds histogram
+swarm_raft_transaction_latency_seconds_bucket{le=&quot;0.005&quot;} 0
+swarm_raft_transaction_latency_seconds_bucket{le=&quot;0.01&quot;} 0
+swarm_raft_transaction_latency_seconds_bucket{le=&quot;0.025&quot;} 0
+swarm_raft_transaction_latency_seconds_bucket{le=&quot;0.05&quot;} 0
+swarm_raft_transaction_latency_seconds_bucket{le=&quot;0.1&quot;} 0
+swarm_raft_transaction_latency_seconds_bucket{le=&quot;0.25&quot;} 0
+swarm_raft_transaction_latency_seconds_bucket{le=&quot;0.5&quot;} 0
+swarm_raft_transaction_latency_seconds_bucket{le=&quot;1&quot;} 0
+swarm_raft_transaction_latency_seconds_bucket{le=&quot;2.5&quot;} 0
+swarm_raft_transaction_latency_seconds_bucket{le=&quot;5&quot;} 0
+swarm_raft_transaction_latency_seconds_bucket{le=&quot;10&quot;} 0
+swarm_raft_transaction_latency_seconds_bucket{le=&quot;+Inf&quot;} 0
+swarm_raft_transaction_latency_seconds_sum 0
+swarm_raft_transaction_latency_seconds_count 0
+# HELP swarm_store_batch_latency_seconds Raft store batch latency.
+# TYPE swarm_store_batch_latency_seconds histogram
+swarm_store_batch_latency_seconds_bucket{le=&quot;0.005&quot;} 0
+swarm_store_batch_latency_seconds_bucket{le=&quot;0.01&quot;} 0
+swarm_store_batch_latency_seconds_bucket{le=&quot;0.025&quot;} 0
+swarm_store_batch_latency_seconds_bucket{le=&quot;0.05&quot;} 0
+swarm_store_batch_latency_seconds_bucket{le=&quot;0.1&quot;} 0
+swarm_store_batch_latency_seconds_bucket{le=&quot;0.25&quot;} 0
+swarm_store_batch_latency_seconds_bucket{le=&quot;0.5&quot;} 0
+swarm_store_batch_latency_seconds_bucket{le=&quot;1&quot;} 0
+swarm_store_batch_latency_seconds_bucket{le=&quot;2.5&quot;} 0
+swarm_store_batch_latency_seconds_bucket{le=&quot;5&quot;} 0
+swarm_store_batch_latency_seconds_bucket{le=&quot;10&quot;} 0
+swarm_store_batch_latency_seconds_bucket{le=&quot;+Inf&quot;} 0
+swarm_store_batch_latency_seconds_sum 0
+swarm_store_batch_latency_seconds_count 0
+# HELP swarm_store_lookup_latency_seconds Raft store read latency.
+# TYPE swarm_store_lookup_latency_seconds histogram
+swarm_store_lookup_latency_seconds_bucket{le=&quot;0.005&quot;} 0
+swarm_store_lookup_latency_seconds_bucket{le=&quot;0.01&quot;} 0
+swarm_store_lookup_latency_seconds_bucket{le=&quot;0.025&quot;} 0
+swarm_store_lookup_latency_seconds_bucket{le=&quot;0.05&quot;} 0
+swarm_store_lookup_latency_seconds_bucket{le=&quot;0.1&quot;} 0
+swarm_store_lookup_latency_seconds_bucket{le=&quot;0.25&quot;} 0
+swarm_store_lookup_latency_seconds_bucket{le=&quot;0.5&quot;} 0
+swarm_store_lookup_latency_seconds_bucket{le=&quot;1&quot;} 0
+swarm_store_lookup_latency_seconds_bucket{le=&quot;2.5&quot;} 0
+swarm_store_lookup_latency_seconds_bucket{le=&quot;5&quot;} 0
+swarm_store_lookup_latency_seconds_bucket{le=&quot;10&quot;} 0
+swarm_store_lookup_latency_seconds_bucket{le=&quot;+Inf&quot;} 0
+swarm_store_lookup_latency_seconds_sum 0
+swarm_store_lookup_latency_seconds_count 0
+# HELP swarm_store_memory_store_lock_duration_seconds Duration for which the raft memory store lock was held.
+# TYPE swarm_store_memory_store_lock_duration_seconds histogram
+swarm_store_memory_store_lock_duration_seconds_bucket{le=&quot;0.005&quot;} 0
+swarm_store_memory_store_lock_duration_seconds_bucket{le=&quot;0.01&quot;} 0
+swarm_store_memory_store_lock_duration_seconds_bucket{le=&quot;0.025&quot;} 0
+swarm_store_memory_store_lock_duration_seconds_bucket{le=&quot;0.05&quot;} 0
+swarm_store_memory_store_lock_duration_seconds_bucket{le=&quot;0.1&quot;} 0
+swarm_store_memory_store_lock_duration_seconds_bucket{le=&quot;0.25&quot;} 0
+swarm_store_memory_store_lock_duration_seconds_bucket{le=&quot;0.5&quot;} 0
+swarm_store_memory_store_lock_duration_seconds_bucket{le=&quot;1&quot;} 0
+swarm_store_memory_store_lock_duration_seconds_bucket{le=&quot;2.5&quot;} 0
+swarm_store_memory_store_lock_duration_seconds_bucket{le=&quot;5&quot;} 0
+swarm_store_memory_store_lock_duration_seconds_bucket{le=&quot;10&quot;} 0
+swarm_store_memory_store_lock_duration_seconds_bucket{le=&quot;+Inf&quot;} 0
+swarm_store_memory_store_lock_duration_seconds_sum 0
+swarm_store_memory_store_lock_duration_seconds_count 0
+# HELP swarm_store_read_tx_latency_seconds Raft store read tx latency.
+# TYPE swarm_store_read_tx_latency_seconds histogram
+swarm_store_read_tx_latency_seconds_bucket{le=&quot;0.005&quot;} 0
+swarm_store_read_tx_latency_seconds_bucket{le=&quot;0.01&quot;} 0
+swarm_store_read_tx_latency_seconds_bucket{le=&quot;0.025&quot;} 0
+swarm_store_read_tx_latency_seconds_bucket{le=&quot;0.05&quot;} 0
+swarm_store_read_tx_latency_seconds_bucket{le=&quot;0.1&quot;} 0
+swarm_store_read_tx_latency_seconds_bucket{le=&quot;0.25&quot;} 0
+swarm_store_read_tx_latency_seconds_bucket{le=&quot;0.5&quot;} 0
+swarm_store_read_tx_latency_seconds_bucket{le=&quot;1&quot;} 0
+swarm_store_read_tx_latency_seconds_bucket{le=&quot;2.5&quot;} 0
+swarm_store_read_tx_latency_seconds_bucket{le=&quot;5&quot;} 0
+swarm_store_read_tx_latency_seconds_bucket{le=&quot;10&quot;} 0
+swarm_store_read_tx_latency_seconds_bucket{le=&quot;+Inf&quot;} 0
+swarm_store_read_tx_latency_seconds_sum 0
+swarm_store_read_tx_latency_seconds_count 0
+# HELP swarm_store_write_tx_latency_seconds Raft store write tx latency.
+# TYPE swarm_store_write_tx_latency_seconds histogram
+swarm_store_write_tx_latency_seconds_bucket{le=&quot;0.005&quot;} 0
+swarm_store_write_tx_latency_seconds_bucket{le=&quot;0.01&quot;} 0
+swarm_store_write_tx_latency_seconds_bucket{le=&quot;0.025&quot;} 0
+swarm_store_write_tx_latency_seconds_bucket{le=&quot;0.05&quot;} 0
+swarm_store_write_tx_latency_seconds_bucket{le=&quot;0.1&quot;} 0
+swarm_store_write_tx_latency_seconds_bucket{le=&quot;0.25&quot;} 0
+swarm_store_write_tx_latency_seconds_bucket{le=&quot;0.5&quot;} 0
+swarm_store_write_tx_latency_seconds_bucket{le=&quot;1&quot;} 0
+swarm_store_write_tx_latency_seconds_bucket{le=&quot;2.5&quot;} 0
+swarm_store_write_tx_latency_seconds_bucket{le=&quot;5&quot;} 0
+swarm_store_write_tx_latency_seconds_bucket{le=&quot;10&quot;} 0
+swarm_store_write_tx_latency_seconds_bucket{le=&quot;+Inf&quot;} 0
+swarm_store_write_tx_latency_seconds_sum 0
+swarm_store_write_tx_latency_seconds_count 0
+</code></pre><p><footer class="page-footer"><span class="copyright">&#xA9; vishon all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">Updated at
+2021-08-14 09:45:21
+</span></footer></p>
+<div id="gitalk-container"></div>
+<script>console.log("plugin-popup....");document.onclick = function(e){ e.target.tagName === "IMG" && window.open(e.target.src,e.target.src)}</script><style>img{cursor:pointer}</style>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="basic-knowledge-of-prometheus.html" class="navigation navigation-prev " aria-label="Previous page: 【prometheus】prometheus入门知识概念">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="Blackbox_exporter-monitoring-url.html" class="navigation navigation-next " aria-label="Next page: 【prometheus】使用Blackbox_exporter服务探测">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"【prometheus】Prometheus采集Docker Engine Metrics","level":"9.2","depth":1,"next":{"title":"【prometheus】使用Blackbox_exporter服务探测","level":"9.3","depth":1,"path":"prometheus/Blackbox_exporter-monitoring-url.md","ref":"prometheus/Blackbox_exporter-monitoring-url.md","articles":[]},"previous":{"title":"【prometheus】prometheus入门知识概念","level":"9.1","depth":1,"path":"prometheus/basic-knowledge-of-prometheus.md","ref":"prometheus/basic-knowledge-of-prometheus.md","articles":[]},"dir":"ltr"},"config":{"plugins":["github","editlink","-lunr","-search","search-plus","tbfed-pagefooter","splitter","page-toc-button","back-to-top-button","-lunr","-search","search-plus","github-buttons@2.1.0","favicon@^0.0.2","3-ba","theme-default","pageview-count","auto-scroll-table","popup","code","mygitalk","-sharing"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"&copy vishon","modify_label":"Updated at","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-okaidia.css"]},"disqus":{"shortName":"nieweixing-github-io"},"github":{"url":"https://github.com/nieweixing"},"editlink":{"label":"编辑本页","multilingual":false,"base":"https://github.com/nieweixing/mybook/tree/gh-pages"},"splitter":{},"auto-scroll-table":{},"popup":{},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"favicon":{"shortcut":"favicon.ico","bookmark":"favicon.ico"},"page-toc-button":{},"back-to-top-button":{},"pageview-count":{},"github-buttons":{"repo":"nieweixing/mybook","types":["star"],"size":"small"},"3-ba":{"configuration":"auto","token":"c03bec8e82bc53c064e0e648ffa54d88"},"mygitalk":{"flipMoveOptions":{},"clientID":"5976cd3d9cc251569467","number":-1,"perPage":10,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","admin":["nieweixing"],"createIssueManually":false,"distractionFreeMode":false,"repo":"gitalk-comment","owner":"nieweixing","enableHotKey":true,"clientSecret":"74117131a57324d4d616267265a94f4a1ac293ec","pagerDirection":"last","labels":["Gitalk"]},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{},"image-captions":{"caption":"图片 - _CAPTION_"}},"theme":"default","author":"vishon","pdf":{"pageNumbers":true,"fontSize":11,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"toc":true},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"运维操作指南","language":"zh-hans","links":{"sidebar":{"聂伟星个人博客":"https://www.niewx.cn","云+社区TKE运维笔记":"https://cloud.tencent.com/developer/column/87421","运维操作宝典":"https://www.niewx.cn/mybook","运维问题集锦":"https://www.niewx.cn/question"}},"gitbook":">= 3.2.2","description":"运维操作指南"},"file":{"path":"prometheus/Prometheus-collects-Docker-Engine-Metrics.md","mtime":"2021-08-14T01:45:21.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-06-02T01:51:35.971Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-github/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-editlink/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-splitter/splitter.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-page-toc-button/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-back-to-top-button/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-3-ba/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-pageview-count/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-auto-scroll-table/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-code/plugin.js"></script>
+        
+    
+        
+        <script src="https://cdn.bootcss.com/blueimp-md5/2.12.0/js/md5.min.js"></script>
+        
+    
+        
+        <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-mygitalk/mygitalk.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

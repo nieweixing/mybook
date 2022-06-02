@@ -43,7 +43,7 @@ kubectl proxy --port=8081
 ## 新开窗口执行删除操作
 
 ```
-curl -k -H "Content-Type: application/json" -X PUT --data-binary @tmp.json http://127.0.0.1:8081/api/v1/namespaces
+curl -k -H "Content-Type: application/json" -X PUT --data-binary @tmp.json http://127.0.0.1:8081/api/v1/namespaces/testns/finalize
 ```
 
 如果上面方法无法删除namespace，可以通过如下方法看下namespace是不是还有什么资源没有清理
@@ -77,4 +77,15 @@ kubectl delete namespace cattle-system --grace-period=0 --force
 
 #注意修改@XXX.json ，修改 namespaces/XXX/finalize ,其中XXX 表示你要删除的命名空间名称
 [root@master-1 ~]# curl -k -H "Content-Type: application/json" -X PUT --data-binary @tmp.json http://127.0.0.1:8081/api/v1/namespaces/mysql/finalize
+```
+
+用下面命令清理也可以
+
+```
+$ kubectl get ns delete-me -o json | jq '.spec.finalizers=[]' > ns-without-finalizers.json
+cat ns-without-finalizers.json
+$ kubectl proxy &
+$ PID=$!
+$ curl -X PUT http://localhost:8001/api/v1/namespaces/delete-me/finalize -H "Content-Type: application/json" --data-binary @ns-without-finalizers.json
+$ kill $PID
 ```

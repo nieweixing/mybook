@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nieweixing/mybook.git"
+    "url": "git+://github.com/nieweixing/mybook.git"
   },
   "keywords": [],
   "author": "",

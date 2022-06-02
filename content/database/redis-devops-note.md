@@ -117,7 +117,7 @@ redis-trib.rb  create  --replicas  1  192.168.31.245:7000 192.168.31.245:7001  1
 
 如果运行报下面错误， 是因为这个工具是用 ruby 实现的，所以需要安装 ruby。安装命令如下：
 
-![upload-image](image/redis/1.png) 
+![upload-image](image/redis/1.jpg) 
 
 ```
 yum -y install ruby ruby-devel rubygems rpm-build
@@ -126,7 +126,7 @@ gem install redis
 
 之后再运行 redis-trib.rb 命令，会出现如下提示：
  
-![upload-image](image/redis/2.png) 
+![upload-image](image/redis/2.jpg) 
 
 输入 yes 即可，然后出现如下内容，说明安装成功。
  　　
@@ -136,11 +136,11 @@ gem install redis
 
 在7005节点执行命令  set hello world ，执行结果如下：
 
-![upload-image](image/redis/3.png) 
+![upload-image](image/redis/3.jpg) 
 
 然后在另外一台7002端口，查看 key 为 hello 的内容， get hello  ，执行结果如下：
 
-![upload-image](image/redis/4.png) 
+![upload-image](image/redis/4.jpg) 
  
 说明集群运作正常。
 

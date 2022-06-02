@@ -3,7 +3,7 @@ kubecm是一个k8s集群管理工具，可以合并多个kubeconfig文件，切�
 # 安装kubecm
 
 ```
-curl -Lo kubecm.tar.gz https://github.com/sunny0826/kubecm/releases/download/v${VERSION}/kubecm_${VERSION}_Linux_x86_64.tar.gz
+curl -Lo kubecm.tar.gz https://github.com/sunny0826/kubecm/releases/download/v0.15.3/kubecm_0.15.3_Linux_x86_64.tar.gz
 tar -zxvf kubecm.tar.gz kubecm
 cd kubecm
 sudo mv kubecm /usr/local/bin/

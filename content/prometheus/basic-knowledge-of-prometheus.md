@@ -47,6 +47,15 @@ Prometheus是为服务的可靠性而设计的，当服务出现故障时，它�
 
 Prometheus，它的价值在于可靠性，甚至在很恶劣的环境下，你都可以随时访问它和查看系统服务各种指标的统计信息。 如果你对统计数据需要100%的精确，它并不适用，例如：它不适用于实时计费系统
 
+# 基本概念
+
+* job: Prometheus的采集任务由配置文件中一个个的Job组成，一个Job里包含该Job下的所有监控目标的公共配置，比如使用哪种服务发现去获取监控目标，比如抓取时使用的证书配置，请求参数配置等等。
+* target: 一个监控目标就是一个target，一个job通过服务发现会得到多个需要监控的target，其包含一些label用于描述target的一些属性。
+* relabel_configs: 每个job都可以配置一个或多个relabel_config，relabel_config会对target的label集合进行处理，可以根据label过滤一些target或者修改，增加，删除一些label。relabel_config过程发生在target开始进行采集之前,针对的是通过服务发现得到的label集合。
+* metrics_relabel_configs：每个job还可以配置一个或者多个metrics_relabel_config，其配置方式和relabel_configs一模一样，但是其用于处理的是从target采集到的数据中的label。也就是发送在采集之后。
+* series(序列)：一个series就是指标名+label集合。
+* head series：Prometheus会将近2小时的series缓存在内测中，称为head series。
+
 # 指标类型
 
 Prometheus定义了4中不同的指标类型(metric type)：Counter（计数器）、Gauge（仪表盘）、Histogram（直方图）、Summary（摘要）

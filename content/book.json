@@ -7,7 +7,9 @@
     "links": {
         "sidebar": {
             "聂伟星个人博客": "https://www.niewx.cn",
-            "TKE使用操作文档": "https://cloud.tencent.com/developer/column/87421"
+            "云+社区TKE运维笔记": "https://cloud.tencent.com/developer/column/87421",
+            "运维操作宝典": "https://www.niewx.cn/mybook",
+			"运维问题集锦": "https://www.niewx.cn/question"
         }
     },
     "plugins": [
@@ -29,7 +31,8 @@
         "auto-scroll-table",
         "popup",
         "code",
-        "mygitalk"
+        "mygitalk",
+        "-sharing"
     ],
     "pdf": {
         "toc": true,
@@ -84,7 +87,20 @@
             "distractionFreeMode": false,
             "proxy": "https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token"
 
+        },
+        "sharing": {
+            "facebook": true,
+            "twitter": true,
+            "google": false,
+            "weibo": false,
+            "instapaper": false,
+            "vk": false,
+            "all": [
+                "facebook", "google", "twitter",
+                "weibo", "instapaper"
+            ]
         }
+
     },
     "generator": "site"
 }

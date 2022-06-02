@@ -13,7 +13,7 @@ if [ $# = 0 ];then
 fi
 
 if [[ $1 = "--h" ]];then
-  echo "Please enter the pvc name for the first parameter, and empty the name for the second parameter
+  echo "Please enter the first parameter enters the namespace, the second parameter enters the number of replicas 
 
 Usage: sh scale-workload-replicas.sh [namespace] [replicas]"
 fi

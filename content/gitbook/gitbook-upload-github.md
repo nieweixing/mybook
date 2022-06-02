@@ -45,15 +45,41 @@ function main() {
 
 上面的脚本的作用，就是把当前文件夹下的 gh-pages 文件夹中的所有内容，push 到本仓库的 gh-pages 分支。
 
-然后添加几个 npm 脚本 deploy （ deploy 就是部署的意思），还有 build （意思是编译），还有 publish（意思是发布），如下：
+然后在根目录下package.json文件添加几个npm脚本 deploy （ deploy 就是部署的意思），还有 build （意思是编译），还有 publish（意思是发布），如下：
 
 ```
-"scripts": {
- "start": "gitbook serve ./content ./gh-pages",
- "build": "gitbook build ./content ./gh-pages",
- "deploy": "node ./scripts/deploy-gh-pages.js",
- "publish": "npm run build&&npm run deploy"
-},
+{
+  "name": "gitbook",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "gitbook serve ./content ./gh-pages",
+    "build": "gitbook build ./content ./gh-pages",
+    "deploy": "node ./scripts/deploy-gh-pages.js",
+    "publish": "npm run build&&npm run deploy"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+://github.com/nieweixing/mybook.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nieweixing/mybook/issues"
+  },
+  "homepage": "https://github.com/nieweixing/mybook#readme",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.9",
+    "gh-pages": "^3.1.0",
+    "gitbook-plugin-code": "^0.1.0",
+    "gitbook-plugin-mygitalk": "^0.2.6",
+    "gitbook-plugin-prism": "^2.4.0",
+    "gitbook-plugin-prism-themes": "0.0.2",
+    "prismjs": "^1.23.0"
+  }
+}
 
 ```
 
