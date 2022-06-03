@@ -89,4 +89,4 @@ docker run -it test:v1 -c
 
 docker也给了一个表格来完美的解释了各类情况
 
-![upload-image](image/2018031211363722.png) 
+![upload-image](images/2018031211363722.png) 
