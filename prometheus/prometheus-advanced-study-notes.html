@@ -1,0 +1,1366 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>【prometheus】prometheus进阶学习笔记 · 运维操作指南</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="vishon">
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-splitter/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-page-toc-button/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-back-to-top-button/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-pageview-count/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-auto-scroll-table/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-code/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="Prometheus-collects-Docker-Engine-Metrics.html" />
+    
+    
+    <link rel="prev" href="basic-knowledge-of-prometheus.html" />
+    
+
+    
+        <link rel="shortcut icon" href='../favicon.ico' type="image/x-icon">
+    
+    
+        <link rel="bookmark" href='../favicon.ico' type="image/x-icon">
+    
+    
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"repo":"nieweixing/mybook","types":["star"],"size":"small"};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="输入并搜索" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="https://www.niewx.cn" target="_blank" class="custom-link">聂伟星个人博客</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://cloud.tencent.com/developer/column/87421" target="_blank" class="custom-link">云+社区TKE运维笔记</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://www.niewx.cn/mybook" target="_blank" class="custom-link">运维操作宝典</a>
+        </li>
+    
+        
+        <li>
+            <a href="https://www.niewx.cn/question" target="_blank" class="custom-link">运维问题集锦</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    简介
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">如何搭建属于自己的gitbook</li>
+        
+        
+    
+        <li class="chapter " data-level="2.1" data-path="../gitbook/install-gitbook.html">
+            
+                <a href="../gitbook/install-gitbook.html">
+            
+                    
+                    【gitbook】本地机器安装gitbook
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2" data-path="../gitbook/gitbook-add-note.html">
+            
+                <a href="../gitbook/gitbook-add-note.html">
+            
+                    
+                    【gitbook】gitbook添加笔记
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3" data-path="../gitbook/gitbook-upload-github.html">
+            
+                <a href="../gitbook/gitbook-upload-github.html">
+            
+                    
+                    【gitbook】gitbook上传到github托管
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.4" data-path="../gitbook/gitbook-plugin-usage.html">
+            
+                <a href="../gitbook/gitbook-plugin-usage.html">
+            
+                    
+                    【gitbook】gitbook插件使用
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">linux运维笔记</li>
+        
+        
+    
+        <li class="chapter " data-level="3.1" data-path="../linux/shell-script-template.html">
+            
+                <a href="../linux/shell-script-template.html">
+            
+                    
+                    【linux】shell脚本模板
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.2" data-path="../linux/cvm-build-openvpn.html">
+            
+                <a href="../linux/cvm-build-openvpn.html">
+            
+                    
+                    【linux】腾讯云cvm上搭建openvpn
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.3" data-path="../linux/vmware-install-centos-set-static-ip-address.html">
+            
+                <a href="../linux/vmware-install-centos-set-static-ip-address.html">
+            
+                    
+                    【linux】vmware安装centos环境设置静态的ip地址
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.4" data-path="../linux/Use-awk-to-extract-field-information.html">
+            
+                <a href="../linux/Use-awk-to-extract-field-information.html">
+            
+                    
+                    【linux】使用awk处理字段信息
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.5" data-path="../linux/Installation-and-use-of-atop-monitoring-tool-in-Linux-system.html">
+            
+                <a href="../linux/Installation-and-use-of-atop-monitoring-tool-in-Linux-system.html">
+            
+                    
+                    【linux】Linux系统atop监控工具的安装和使用
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="3.6" data-path="../linux/Basic-knowledge-of-iptables.html">
+            
+                <a href="../linux/Basic-knowledge-of-iptables.html">
+            
+                    
+                    【linux】iptables基础知识
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">数据库运维笔记</li>
+        
+        
+    
+        <li class="chapter " data-level="4.1" data-path="../database/mysql-devops-note.html">
+            
+                <a href="../database/mysql-devops-note.html">
+            
+                    
+                    【datebase】mysql运维笔记
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.2" data-path="../database/mongodb-devops-note.html">
+            
+                <a href="../database/mongodb-devops-note.html">
+            
+                    
+                    【datebase】mongodb运维笔记
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.3" data-path="../database/redis-devops-note.html">
+            
+                <a href="../database/redis-devops-note.html">
+            
+                    
+                    【datebase】redis运维笔记
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.4" data-path="../database/elasticsearch-devops-note.html">
+            
+                <a href="../database/elasticsearch-devops-note.html">
+            
+                    
+                    【datebase】elasticsearch运维笔记
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">docker/containerd运维笔记</li>
+        
+        
+    
+        <li class="chapter " data-level="5.1" data-path="../docker/dockerfile-study.html">
+            
+                <a href="../docker/dockerfile-study.html">
+            
+                    
+                    【docker】dockerfile学习笔记
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.2" data-path="../docker/docker-compose-study.html">
+            
+                <a href="../docker/docker-compose-study.html">
+            
+                    
+                    【docker】docker-compose学习笔记
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.3" data-path="../docker/Installation-and-use-of-containerd.html">
+            
+                <a href="../docker/Installation-and-use-of-containerd.html">
+            
+                    
+                    【containerd】containerd的安装和使用
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.4" data-path="../docker/Docker-limits-the-disk-space-that-containers-can-occupy.html">
+            
+                <a href="../docker/Docker-limits-the-disk-space-that-containers-can-occupy.html">
+            
+                    
+                    【docker】docker限制容器可占用的磁盘空间
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.5" data-path="../docker/Getting-started-with-buildkit.html">
+            
+                <a href="../docker/Getting-started-with-buildkit.html">
+            
+                    
+                    【docker】buildkit入门使用
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.6" data-path="../docker/Detailed-explanation-of-CMD-and-ENTRYPOINT-commands-of-Dockerfile.html">
+            
+                <a href="../docker/Detailed-explanation-of-CMD-and-ENTRYPOINT-commands-of-Dockerfile.html">
+            
+                    
+                    【docker】Dockerfile之CMD和ENTRYPOINT命令详解
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">kubernetes运维笔记</li>
+        
+        
+    
+        <li class="chapter " data-level="6.1" data-path="../k8s/k8s-common-commands.html">
+            
+                <a href="../k8s/k8s-common-commands.html">
+            
+                    
+                    【k8s】k8s常用命令总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.2" data-path="../k8s/k8s-force-delete-terminating-ns.html">
+            
+                <a href="../k8s/k8s-force-delete-terminating-ns.html">
+            
+                    
+                    【k8s】强制删除Terminating状态ns
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.3" data-path="../k8s/userd-filebeat-as-sidecar-collect-log.html">
+            
+                <a href="../k8s/userd-filebeat-as-sidecar-collect-log.html">
+            
+                    
+                    【k8s】k8s中filebeat作为sidecar采集容器日志
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.4" data-path="../k8s/k8s-generate-kubeonfig.html">
+            
+                <a href="../k8s/k8s-generate-kubeonfig.html">
+            
+                    
+                    【k8s】k8s中生成自定义用户kubeconfig
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.5" data-path="../k8s/kubecm-manages-k8s-clusters.html">
+            
+                <a href="../k8s/kubecm-manages-k8s-clusters.html">
+            
+                    
+                    【k8s】kubecm管理多k8s集群
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.6" data-path="../k8s/getting-started-with-kustomize-actually.html">
+            
+                <a href="../k8s/getting-started-with-kustomize-actually.html">
+            
+                    
+                    【k8s】kustomize入门实践
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.7" data-path="../k8s/Use-scripts-to-perform-health-detection-on-pods.html">
+            
+                <a href="../k8s/Use-scripts-to-perform-health-detection-on-pods.html">
+            
+                    
+                    【k8s】用脚本对pod进行健康探测
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.8" data-path="../k8s/Batch-delete-ns-in-terminating-state-in-the-cluster.html">
+            
+                <a href="../k8s/Batch-delete-ns-in-terminating-state-in-the-cluster.html">
+            
+                    
+                    【k8s】批量删除集群内terminating状态的ns
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.9" data-path="../k8s/Modify-the-resources-configuration-of-the-container-under-the-namespace.html">
+            
+                <a href="../k8s/Modify-the-resources-configuration-of-the-container-under-the-namespace.html">
+            
+                    
+                    【k8s】批量修改命名空间下容器的resources配置
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">TKE运维笔记</li>
+        
+        
+    
+        <li class="chapter " data-level="7.1" data-path="../tke/tke-used-docker-in-docker.html">
+            
+                <a href="../tke/tke-used-docker-in-docker.html">
+            
+                    
+                    【tke】tke上使用docker-in-docker
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.2" data-path="../tke/tke-deploy-jumpserver.html">
+            
+                <a href="../tke/tke-deploy-jumpserver.html">
+            
+                    
+                    【tke】tke上部署Jumpserver跳板机
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.3" data-path="../tke/get-the-cbsId-of-pvc-in-the-tke-cluster.html">
+            
+                <a href="../tke/get-the-cbsId-of-pvc-in-the-tke-cluster.html">
+            
+                    
+                    【tke】获取pvc对应的cbs-id
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.4" data-path="../tke/clean-the-evicted-state-pod-in-the-cluster.html">
+            
+                <a href="../tke/clean-the-evicted-state-pod-in-the-cluster.html">
+            
+                    
+                    【tke】清除集群中所有的evited状态pod
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.5" data-path="../tke/adjust-workload-replicas-under-the-namespace.html">
+            
+                <a href="../tke/adjust-workload-replicas-under-the-namespace.html">
+            
+                    
+                    【tke】调整命名空间所有deploy和sts的副本数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.6" data-path="../tke/modify-the-permissions-of-the-container-mount-directory.html">
+            
+                <a href="../tke/modify-the-permissions-of-the-container-mount-directory.html">
+            
+                    
+                    【tke】如何在非root用户启动的镜像中设置挂载目录权限
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.7" data-path="../tke/The-domain-name-resolved-in-the-alpine-container-exceeds-5s.html">
+            
+                <a href="../tke/The-domain-name-resolved-in-the-alpine-container-exceeds-5s.html">
+            
+                    
+                    【tke】alpine镜像内解析域名超5s
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="7.8" data-path="../tke/TKE-redeploys-cert-manager-and-keeps-getting-stuck.html">
+            
+                <a href="../tke/TKE-redeploys-cert-manager-and-keeps-getting-stuck.html">
+            
+                    
+                    【tke】TKE重新部署cert-manager一直卡主
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">云计算运维笔记</li>
+        
+        
+    
+        <li class="chapter " data-level="8.1" data-path="../cloud/1.md">
+            
+                <span>
+            
+                    
+                    云计算简介
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="8.2" >
+            
+                <span>
+            
+                    
+                    aws
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="8.2.1" data-path="../cloud/aws/awscli-command-operation.html">
+            
+                <a href="../cloud/aws/awscli-command-operation.html">
+            
+                    
+                    【aws】awscli命令行操作
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="8.3" >
+            
+                <span>
+            
+                    
+                    腾讯云
+            
+                </span>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">prometheus运维笔记</li>
+        
+        
+    
+        <li class="chapter " data-level="9.1" data-path="basic-knowledge-of-prometheus.html">
+            
+                <a href="basic-knowledge-of-prometheus.html">
+            
+                    
+                    【prometheus】prometheus入门知识概念
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="9.2" data-path="prometheus-advanced-study-notes.html">
+            
+                <a href="prometheus-advanced-study-notes.html">
+            
+                    
+                    【prometheus】prometheus进阶学习笔记
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="9.3" data-path="Prometheus-collects-Docker-Engine-Metrics.html">
+            
+                <a href="Prometheus-collects-Docker-Engine-Metrics.html">
+            
+                    
+                    【prometheus】Prometheus采集Docker Engine Metrics
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="9.4" data-path="Blackbox_exporter-monitoring-url.html">
+            
+                <a href="Blackbox_exporter-monitoring-url.html">
+            
+                    
+                    【prometheus】使用Blackbox_exporter服务探测
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="9.5" data-path="prometheus-monitors-k8s-cluster-coredns.html">
+            
+                <a href="prometheus-monitors-k8s-cluster-coredns.html">
+            
+                    
+                    【prometheus】prometheus监控k8s集群coredns
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="9.6" data-path="Prometheus-common-alarm-promsql.html">
+            
+                <a href="Prometheus-common-alarm-promsql.html">
+            
+                    
+                    【prometheus】prometheus常用告警promsql
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">istio运维笔记</li>
+        
+        
+    
+        <li class="chapter " data-level="10.1" data-path="../istio/istio-annotation-list.html">
+            
+                <a href="../istio/istio-annotation-list.html">
+            
+                    
+                    【istio】istio注解列表
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="10.2" data-path="../istio/Sidecar-startup-sequence-problem-in-istio.html">
+            
+                <a href="../istio/Sidecar-startup-sequence-problem-in-istio.html">
+            
+                    
+                    【istio】istio中sidecar启动顺序问题
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="10.3" data-path="../istio/istio-traffic-shift.html">
+            
+                <a href="../istio/istio-traffic-shift.html">
+            
+                    
+                    【istio】istio流量转移实践
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="10.4" data-path="../istio/istio-multi-cluster-nearby-access.html">
+            
+                <a href="../istio/istio-multi-cluster-nearby-access.html">
+            
+                    
+                    【istio】istio多集群就近接入
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="10.5" data-path="../istio/VirtualService-host-configuration-and-use.html">
+            
+                <a href="../istio/VirtualService-host-configuration-and-use.html">
+            
+                    
+                    【istio】VirtualService中hosts字段的配置使用
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="10.6" data-path="../istio/Gateway-configuration-http-forced-to-https.html">
+            
+                <a href="../istio/Gateway-configuration-http-forced-to-https.html">
+            
+                    
+                    【istio】gateway配置http强转https
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="10.7" data-path="../istio/istio-sidecar-injection.html">
+            
+                <a href="../istio/istio-sidecar-injection.html">
+            
+                    
+                    【istio】istio sidecar注入
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="10.8" data-path="../istio/How-to-modify-the-sidecar-resource-configuration.html">
+            
+                <a href="../istio/How-to-modify-the-sidecar-resource-configuration.html">
+            
+                    
+                    【istio】如何修改istio的sidecar资源配置
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">面试问题</li>
+        
+        
+    
+        <li class="chapter " data-level="11.1" data-path="../interview/redis.html">
+            
+                <a href="../interview/redis.html">
+            
+                    
+                    【面试】面试之redis篇
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            本书使用 GitBook 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >【prometheus】prometheus进阶学习笔记</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="prometheus&#x8FDB;&#x9636;&#x5B66;&#x4E60;&#x7B14;&#x8BB0;">prometheus&#x8FDB;&#x9636;&#x5B66;&#x4E60;&#x7B14;&#x8BB0;</h1>
+<h2 id="&#x6307;&#x6807;&#x91C7;&#x96C6;&#x65B9;&#x5F0F;">&#x6307;&#x6807;&#x91C7;&#x96C6;&#x65B9;&#x5F0F;</h2>
+<p>&#x6307;&#x6807;&#x91C7;&#x96C6;&#x65B9;&#x5F0F;&#x65E0;&#x8BBA;&#x90A3;&#x79CD;&#xFF0C;&#x90FD;&#x9700;&#x8981;&#x4FDD;&#x8BC1;prometheus&#x5230;&#x88AB;&#x76D1;&#x63A7;&#x5BF9;&#x8C61;&#x7684;&#x7F51;&#x7EDC;&#x662F;&#x901A;&#x7684;&#x3002;</p>
+<h3 id="pull">pull</h3>
+<p>&#x76D1;&#x63A7;&#x7CFB;&#x7EDF;&#x5468;&#x671F;&#x6027;&#x5F97;&#x5BF9;&#x88AB;&#x76D1;&#x63A7;&#x5BF9;&#x8C61;&#x53D1;&#x8D77;&#x91C7;&#x96C6;&#x8BF7;&#x6C42;&#xFF0C;&#x88AB;&#x76D1;&#x63A7;&#x5BF9;&#x8C61;&#x5C06;&#x4ED6;&#x60F3;&#x4E0A;&#x62A5;&#x7684;&#x6307;&#x6807;&#x7684;&#x5F53;&#x524D;&#x503C;&#x6309;&#x7EA6;&#x5B9A;&#x7684;&#x683C;&#x5F0F;&#x8FD4;&#x56DE;&#x7ED9;&#x76D1;&#x63A7;&#x7CFB;&#x7EDF;&#x3002;</p>
+<h3 id="push">push</h3>
+<p>&#x88AB;&#x76D1;&#x63A7;&#x5BF9;&#x8C61;&#x5468;&#x671F;&#x6027;&#x5F97;&#x5C06;&#x6307;&#x6807;&#x6570;&#x636E;&#x63A8;&#x9001;&#x5230;&#x76D1;&#x63A7;&#x7CFB;&#x7EDF;&#x3002;</p>
+<h2 id="&#x6307;&#x6807;&#x7C7B;&#x578B;">&#x6307;&#x6807;&#x7C7B;&#x578B;</h2>
+<p>prometheus&#x4E00;&#x5171;&#x63D0;&#x4F9B;&#x4E86;4&#x79CD;&#x6570;&#x636E;&#x7C7B;&#x578B;</p>
+<h3 id="counter">Counter</h3>
+<p>Counter&#x5C31;&#x662F;&#x2F00;&#x4E2A;&#x2FAE;&#x8D1F;&#x9012;&#x589E;&#x503C;&#xFF0C;&#x53EA;&#x589E;&#x4E0D;&#x51CF;&#xFF0C;&#x9002;&#x2F64;&#x4E8E;&#x4F8B;&#x5982;&#x603B;&#x8BF7;&#x6C42;&#x6570;&#x8FD9;&#x7C7B;&#x6307;&#x6807;&#xFF0C;&#x6211;&#x4EEC;&#x5728;&#x67E5;&#x8BE2;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x67E5;&#x8BE2;&#x8BED;&#x53E5;&#xFF0C;&#x5728;Counter&#x7684;&#x6570;&#x636E;&#x4E0A;&#x8BA1;&#x7B97;&#x51FA;&#x589E;&#x2ED3;&#x7387;&#x7B49;</p>
+<h3 id="gauge">Gauge</h3>
+<p>Gauge&#x6CA1;&#x5565;&#x9650;&#x5236;&#xFF0C;&#x53EF;&#x589E;&#x53EF;&#x51CF;&#xFF0C;&#x9002;&#x2F64;&#x4E8E;&#x4F8B;&#x5982;&#x5185;&#x5B58;&#x4F7F;&#x2F64;&#x91CF;&#x8FD9;&#x79CD;&#x6307;&#x6807;&#x3002;</p>
+<h3 id="histogram">Histogram</h3>
+<p>Histogram&#x662F;&#x6876;&#x7EDF;&#x8BA1;&#x7C7B;&#x578B;&#xFF0C;&#x5B83;&#x4F1A;&#x2F83;&#x52A8;&#x5C06;&#x4F60;&#x5B9A;&#x65F6;&#x7684;&#x6307;&#x6807;&#x53D8;&#x6210;3&#x4E2A;&#x6307;&#x6807;&#xFF0C;&#x4F8B;&#x5982;&#x4F60;&#x6307;&#x5B9A;&#x2F00;&#x4E2A;Histogram&#x53EB;a&#xFF0C;&#x90A3;&#x5C31;&#x4F1A;&#x2F63;&#x6210;</p>
+<ul>
+<li>a_bucket{le=&quot;&#x67D0;&#x4E2A;&#x6876;&#x503C;&#xFF0C;&#x4F8B;&#x5982;100&quot;}&#x2F64;&#x4E8E;&#x7EDF;&#x8BA1;&#x6253;&#x70B9;&#x503C;&#x4F4E;&#x4E8E;100&#x7684;&#x6B21;&#x6570;&#x3002;</li>
+<li>a_sum&#x8868;&#x793A;&#x6253;&#x70B9;&#x503C;&#x7684;&#x548C;</li>
+<li>a_count&#x8868;&#x793A;&#x6253;&#x70B9;&#x6B21;&#x6570;</li>
+</ul>
+<h3 id="summary">Summary</h3>
+<p>Summary&#x662F;&#x767E;&#x5206;&#x4F4D;&#x7EDF;&#x8BA1;&#x7C7B;&#x578B;&#xFF0C;&#x4F1A;&#x5728;&#x5BA2;&#x6237;&#x7AEF;&#x5BF9;&#x4E8E;&#x2F00;&#x6BB5;&#x65F6;&#x95F4;&#x5185;&#xFF08;&#x9ED8;&#x8BA4;&#x662F;10&#x5206;&#x949F;&#xFF09;&#x7684;&#x6BCF;&#x4E2A;&#x91C7;&#x6837;&#x70B9;&#x8FDB;&#x2F8F;&#x7EDF;&#x8BA1;&#xFF0C;&#x5E76;&#x5F62;&#x6210;&#x5206;&#x4F4D;&#x56FE;&#x3002; &#x5B83;&#x4E5F;&#x4F1A;&#x2F63;&#x6210;3&#x4E2A;&#x6307;&#x6807;&#xFF0C;&#x4F8B;&#x5982;&#x4F60;&#x6307;&#x5B9A;&#x2F00;&#x4E2A;Summary&#x53EB;a&#xFF0C;&#x90A3;&#x5C31;&#x4F1A;&#x2F63;&#x6210;</p>
+<ul>
+<li>a{quantile=&quot;0.99&quot;} p99&#x767E;&#x5206;&#x4F4D;&#x6570;&#xFF0C;&#x8FD9;&#x4E2A;0.99&#x662F;&#x5B9A;&#x4E49;&#x6307;&#x6807;&#x65F6;&#x6307;&#x5B9A;&#x7684;&#xFF0C;&#x53EF;&#x4EE5;&#x6307;&#x5B9A;&#x597D;&#x2F0F;&#x4E2A;&#x3002;</li>
+<li>a_sum&#x8868;&#x793A;&#x6253;&#x70B9;&#x503C;&#x7684;&#x548C;</li>
+<li>a_count&#x8868;&#x793A;&#x6253;&#x70B9;&#x6B21;&#x6570;</li>
+</ul>
+<h2 id="&#x91C7;&#x96C6;&#x914D;&#x7F6E;">&#x91C7;&#x96C6;&#x914D;&#x7F6E;</h2>
+<p>&#x5168;&#x5C40;&#x914D;&#x7F6E;</p>
+<pre><code>global: # &#x5168;&#x5C40;&#x914D;&#x7F6E;&#xFF0C;&#x5BF9;&#x6240;&#x6709;&#x91C7;&#x96C6;&#x2F63;&#x6548;
+ scrape_interval: 15s # &#x9ED8;&#x8BA4;&#x91C7;&#x96C6;&#x95F4;&#x9694;
+ external_labels: # &#x8FD9;&#x4E9B;label&#x4F1A;&#x88AB;&#x52A0;&#x5230;&#x6240;&#x6709;&#x91C7;&#x96C6;&#x5230;&#x7684;&#x6307;&#x6807;&#x4E0A;
+ cluster: a
+ replica: b
+scrape_configs: # &#x6700;&#x91CD;&#x8981;&#xFF0C;&#x6240;&#x6709;&#x91C7;&#x96C6;&#x914D;&#x7F6E;&#x90FD;&#x5728;&#x8FD9;&#x2FA5;&#x4E86;
+- job_name: &quot;job1&quot; # &#x91C7;&#x96C6;&#x4EFB;&#x52A1;&#xFF0C;&#x4E0B;&#x2FAF;&#x4ECB;&#x7ECD;
+ ....
+- job_name: &quot;job2&quot;
+ ....
+</code></pre><p>&#x5355;&#x4E2A;job&#x7684;&#x91C7;&#x96C6;&#x914D;&#x7F6E;</p>
+<pre><code>scrape_configs:
+- job_name: &quot;job1&quot;
+ kubernetes_sd_configs: # 1. &#x670D;&#x52A1;&#x53D1;&#x73B0;&#xFF0C;&#x6709;&#x54EA;&#x4E9B;&#x5BF9;&#x8C61;&#xFF08;Target)&#x9700;&#x8981;&#x76D1;&#x63A7;&#xFF0C;&#x8FD9;&#x2FA5;&#x4EE5;K8s&#x4E3A;&#x4F8B;&#x2F26;
+ ...
+ relabel_configs: # 2. &#x88AB;&#x53D1;&#x73B0;&#x7684;&#x5BF9;&#x8C61;&#x4F1A;&#x2F83;&#x5E26;&#x2F00;&#x4E9B;label&#xFF0C;&#x8FD9;&#x2F00;&#x6B65;&#x53EF;&#x4EE5;&#x4FEE;&#x6539;&#x6DFB;&#x52A0;label&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x6839;&#x636E;label&#x8FC7;&#x6EE4;
+&#x6389;&#x91C7;&#x96C6;&#x5BF9;&#x8C61;&#x3002;
+ ...
+ metrics_path: /metrics # 3. &#x5B9A;&#x4E49;&#x53D1;&#x8D77;&#x91C7;&#x96C6;&#x8BF7;&#x6C42;&#x7684;&#x2F45;&#x5F0F;&#xFF0C;&#x4F8B;&#x5982;path
+ scheme: https # 3. &#x5B9A;&#x4E49;&#x53D1;&#x8D77;&#x91C7;&#x96C6;&#x8BF7;&#x6C42;&#x7684;&#x534F;&#x8BAE;&#xFF0C;&#x4F8B;&#x5982;https
+ metric_relabel_configs: # 4. &#x9488;&#x5BF9;&#x91C7;&#x96C6;&#x8FC7;&#x6765;&#x7684;&#x6307;&#x6807;&#xFF0C;&#x8FDB;&#x2F8F;lable&#x7684;&#x6DFB;&#x52A0;&#x4FEE;&#x6539;&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x6839;&#x636E;label&#x8FC7;&#x6EE4;&#x6389;&#x2F00;&#x4E9B;
+&#x6307;&#x6807;
+ ...
+</code></pre><p>pod&#x7684;&#x6240;&#x6709;k8s label&#x4F1A;&#x88AB;&#x8F6C;&#x6362;&#x6210;&#x524D;&#x7F00;&#x662F; <strong>meta<em>kubernetes_pod_label</em> &#x7684;label&#x3002; &#x7531;&#x4E8E;Prometheus&#x7684;k8s label&#x7684;key&#x4E0D;&#x80FD;&#x5305;&#x542B;&#x2F00;&#x4E9B;&#x7279;&#x6B8A;&#x5B57;&#x7B26;&#x2F50;&#x5982; . / &#x7B49;&#x7B49;&#xFF0C;&#x6240;&#x4EE5;&#x8FD9;&#x4E9B;&#x5B57;&#x7B26;&#x90FD;&#x4F1A;&#x53D8;&#x6210;&#x4E0B;&#x5212;&#x7EBF; _ &#x4F8B;&#x5982;&#x5982;&#x679C;label&#x662F; app.kubernetes.io &#x5C31;&#x4F1A;&#x8F6C;&#x6362;&#x6210; </strong>meta_kubernetes_pod_label_app_kubernetes_io&#x6839;&#x636E;&#x4E0A;&#x8FB9;&#x7684;&#x7279;&#x6027;&#xFF0C;&#x6211;&#x4EEC;&#x5982;&#x679C;&#x8981;&#x8FC7;&#x6EE4;&#x51FA;&#x5305;&#x542B; app.kubernetes.io=test &#x8FD9;&#x6837;&#x7684;k8s label&#x7684;pod&#xFF0C;&#x5C31;&#x53EF;&#x4EE5;&#x2F64;&#x4EE5;&#x4E0B;&#x914D;&#x7F6E;</p>
+<pre><code>scrape_configs:
+- job_name: &quot;job1&quot;
+  kubernetes_sd_configs: # &#x4F7F;&#x2F64;k8s&#x670D;&#x52A1;&#x53D1;&#x73B0;
+  - role: pod # &#x53D1;&#x73B0;&#x7684;&#x662F;pod&#xFF0C;&#x8FD8;&#x53EF;&#x4EE5;&#x662F;node&#xFF0C;endpoint&#x7B49;
+  relabel_configs: # &#x53EF;&#x4EE5;&#x8BBE;&#x7F6E;&#x591A;&#x4E2A;&#x5339;&#x914D;&#x89C4;&#x5219;
+  - action: keep # keep&#x662F;&#x4FDD;&#x7559;&#x5339;&#x914D;&#x7684;&#xFF0C;&#x629B;&#x5F03;&#x4E0D;&#x5339;&#x914D;&#x7684;&#xFF0C;&#x53EF;&#x5199;drop, drop&#x5C31;&#x662F;&#x629B;&#x5F03;&#x6EE1;&#x2F9C;&#x6761;&#x4EF6;&#x7684;&#xFF0C;&#x7559;&#x4E0B;&#x5176;&#x4ED6;&#x7684;&#x7EE7;&#x7EED;&#x5F80;&#x4E0B;&#x5339;&#x914D;
+    source_labels:
+    - __meta_kubernetes_pod_label_app_kubernetes_io # &#x5BF9;&#x5E94;k8s label&#x662F;app.kubernetes.io
+    regex: &quot;test&quot; # &#x2F6C;&#x6807;label&#x7684;&#x2F6C;&#x6807;&#x503C;&#xFF0C;&#x2F40;&#x6301;&#x6B63;&#x5219;
+</code></pre><h2 id="&#x4FEE;&#x6539;target&#x7684;label">&#x4FEE;&#x6539;target&#x7684;label</h2>
+<p>&#x6DFB;&#x52A0;label</p>
+<pre><code>- job_name: &quot;test&quot;
+  relabel_configs: # &#x53EF;&#x4EE5;&#x8BBE;&#x7F6E;&#x591A;&#x4E2A;&#x5339;&#x914D;&#x89C4;&#x5219;
+  - action: replace # &#x4ECE;&#x67D0;&#x4E2A;label&#x4E2D;&#x53D6;&#x503C;&#x5199;&#x2F0A;&#x5230;&#x53E6;&#x5916;&#x2F00;&#x4E2A;label
+    source_labels:
+    - __meta_kubernetes_pod_name # &#x2F6C;&#x6807;label&#xFF0C;&#x7531;&#x4E8E;&#x5B83;&#x662F;__&#x5F00;&#x5934;&#xFF0C;&#x9ED8;&#x8BA4;&#x5C31;&#x4E0D;&#x4F1A;&#x88AB;&#x4FDD;&#x7559;
+    regex: (.*) # &#x2F64;&#x6B63;&#x5219;&#x4ECE;&#x2F6C;&#x6807;label&#x7684;&#x503C;&#x4E2D;&#x53D6;&#x503C;&#xFF0C;.* &#x8868;&#x793A;&#x53D6;&#x5168;&#x90E8;
+    target_label: pod_name # &#x65B0;label&#x7684;&#x540D;&#x5B57;&#xFF0C;&#x5B83;&#x4E0D;&#x662F;__&#x5F00;&#x5934;&#xFF0C;&#x5C31;&#x4F1A;&#x88AB;&#x52A0;&#x5230;&#x6240;&#x6709;&#x6307;&#x6807;&#x4E0A;
+    replacement: ${1} # ${1} &#x662F;&#x4E0A;&#x8FB9;&#x6B63;&#x5219;&#x4E2D;&#x7B2C;&#x2F00;&#x4E2A;&#x62EC;&#x53F7;&#x7684;&#x503C;
+</code></pre><p>&#x4E0A;&#x8FB9;&#x4F8B;&#x2F26;&#x7684;&#x8BED;&#x4E49;&#x5C31;&#x662F;&#x4ECE; __meta_kubernetes_pod_name &#x7684;&#x503C;&#x4E2D;&#x5339;&#x914D;&#x51FA; (.*) &#x5E76;&#x8BBE;&#x7F6E;&#x5230;&#x540D;&#x4E3A; pod_name &#x7684;&#x65B0;label&#x4E2D;&#xFF0C;label&#x7684;&#x503C;&#x4ECE;&#x6B63;&#x5219;&#x5339;&#x914D;&#x7684;&#x503C;&#x53D6;</p>
+<p>&#x4FEE;&#x6539;label</p>
+<pre><code>- job_name: &quot;test&quot;
+  relabel_configs: # &#x53EF;&#x4EE5;&#x8BBE;&#x7F6E;&#x591A;&#x4E2A;&#x5339;&#x914D;&#x89C4;&#x5219;
+  - action: replace # &#x4ECE;&#x67D0;&#x4E2A;label&#x4E2D;&#x53D6;&#x503C;&#x5199;&#x2F0A;&#x5230;&#x53E6;&#x5916;&#x2F00;&#x4E2A;label
+  source_labels:
+  - __meta_kubernetes_pod_ip # &#x2F6C;&#x6807;label
+  regex: (.*)
+  target_label: &quot;__address__&quot; # &#x8BE5;&#x503C;&#x4F1A;&#x88AB;&#x8986;&#x76D6;&#x6389;
+  replacement: &quot;${1}:8001&quot; # &#x73B0;&#x5728;__address__&#x5C31;&#x53D8;&#x6210;&#x4E86; podIP:8001
+</code></pre><p>&#x4E0A;&#x8FB9;&#x4F8B;&#x2F26;&#x7684;&#x8BED;&#x4E49;&#x5C31;&#x662F;&#x4ECE; <strong>meta_kubernetes_pod_ip &#x7684;&#x503C;&#x4E2D;&#x5339;&#x914D;&#x51FA; (.*) &#xFF0C;&#x5E76;&#x5C06; </strong>address__&#x8BBE;&#x7F6E;&#x6210;&#x5339;&#x914D;&#x51FA;&#x7684;&#x503C;:8001&#x3002;</p>
+<h2 id="&#x4FEE;&#x6539;&#x6307;&#x6807;&#x7684;label">&#x4FEE;&#x6539;&#x6307;&#x6807;&#x7684;label</h2>
+<p>&#x4FEE;&#x6539;&#x6307;&#x6807;label&#x2F64; metric_relabel_configs &#x914D;&#x7F6E;&#x6765;&#x505A;&#x8FD9;&#x4E2A;&#x4E8B;&#xFF0C;&#x4ED6;&#x7684;&#x914D;&#x7F6E;&#x2F45;&#x6CD5;&#x548C; relabel_configs &#x2F00;&#x6A21;&#x2F00;&#x6837;&#xFF0C;&#x552F;&#x2F00;&#x533A;&#x522B;&#x5C31;&#x662F;metric_relabel_configs&#x662F;&#x9488;&#x5BF9;&#x6307;&#x6807;&#x7684;&#xFF0C;&#x2F7D;relabel_configs&#x662F;&#x9488;&#x5BF9;Target&#x7684;</p>
+<pre><code>scrape_configs:
+- job_name: &quot;job1&quot;
+  metrics_path: &quot;/metrics&quot; # &#x9ED8;&#x8BA4;&#x5C31;&#x662F;metrics
+  metric_relabel_configs: # &#x4E3B;&#x8981;&#x548C;relabel_configs&#x533A;&#x5206;
+  - action: keep
+    source_labels:
+    - __name__ # &#x6307;&#x6807;&#x7684;&#x540D;&#x5B57;
+    regex: &quot;cpu_usage_total|mem_usage_bytes&quot; # &#x4F7F;&#x2F64;&#x4E86;&#x6B63;&#x5219;&#xFF0C;&#x53EA;&#x4FDD;&#x7559;cpu_usage_total&#x6216;mem_usage_bytes
+</code></pre><h2 id="&#x5982;&#x4F55;&#x68C0;&#x67E5;target&#x662F;&#x5426;&#x6B63;&#x5E38;">&#x5982;&#x4F55;&#x68C0;&#x67E5;target&#x662F;&#x5426;&#x6B63;&#x5E38;</h2>
+<p>&#x53EF;&#x4EE5;&#x901A;&#x8FC7;up&#x6307;&#x6807;&#x6765;&#x68C0;&#x67E5;target&#x662F;&#x5426;&#x6B63;&#x5E38;&#x91C7;&#x96C6;&#xFF0C;1&#x8868;&#x793A;&#x6210;&#x529F;&#xFF0C;0&#x8868;&#x793A;&#x5931;&#x8D25;&#xFF0C;up&#x4F1A;&#x5E26;&#x6709;Target&#x7ECF;&#x8FC7;relabel&#x4E4B;&#x540E;label&#x96C6;&#x5408;&#xFF0C;&#x6700;&#x5E38;&#x2F64;&#x7684;&#x4F8B;&#x5982; job , instance &#x7B49;&#x7B49;</p>
+<pre><code>up{job=&quot;xxx&quot;}
+</code></pre><p>&#x5982;&#x679C;up&#x65E0;&#x6CD5;&#x67E5;&#x8BE2;&#x5230;&#xFF0C;&#x8FD9;&#x5C31;&#x8BF4;&#x660E;Target&#x88AB;&#x8FC7;&#x6EE4;&#x6389;&#x4E86;&#xFF0C;&#x5373;&#x91C7;&#x96C6;&#x914D;&#x7F6E;&#x2FA5;&#x7684; relabel_configs &#x914D;&#x7F6E;&#x4E0D;&#x6B63;&#x786E;&#xFF0C;Prometheus&#x63D0;&#x4F9B;&#x4E86;&#x2F00;&#x4E2A;&#x63A5;&#x2F1D;&#x2F64;&#x4E8E;&#x83B7;&#x5F97;&#x6240;&#x6709;&#x88AB;&#x91C7;&#x96C6;&#x7684;Targets&#x548C;&#x88AB;&#x8FC7;&#x6EE4;&#x7684;Targets&#xFF0C;&#x5982;&#x679C;&#x91C7;&#x96C6;&#x5931;&#x8D25;&#xFF0C;&#x8FD8;&#x53EF;&#x4EE5;&#x770B;&#x5230;&#x4E0A;&#x6B21;&#x5931;&#x8D25;&#x7684;&#x539F;&#x56E0;&#x3002;</p>
+<p>&#x88AB;&#x76D1;&#x63A7;&#x7684;Target&#x4F1A;&#x653E;&#x5728; activeTargets &#x2FA5;&#xFF0C;&#x88AB;&#x8FC7;&#x6EE4;&#x6389;&#x7684;&#x4F1A;&#x653E;&#x5728; droppedTargets </p>
+<pre><code>$ curl http://localhost:9090/api/v1/targets
+{
+Target&#x4FE1;&#x606F;&#x662F;&#x6CA1;&#x6CD5;&#x4ECE;Grafana&#x4E0A;&#x67E5;&#x770B;&#x7684;&#xFF0C;&#x5982;&#x679C;&#x4F60;&#x80FD;&#x76F4;&#x63A5;&#x767B;&#x5F55;Prometheus&#x539F;&#x2F63;&#x7684;web&#x2EDA;&#x2FAF;&#xFF0C;&#x5219;&#x53EF;&#x4EE5;&#x5728;&#x8FD9;&#x2FA5;&#x770B;&#x5230;&#x3002;
+ &quot;status&quot;: &quot;success&quot;,
+ &quot;data&quot;: {
+ &quot;activeTargets&quot;: [
+ {
+ &quot;discoveredLabels&quot;: {
+ &quot;__address__&quot;: &quot;127.0.0.1:9090&quot;,
+ &quot;__metrics_path__&quot;: &quot;/metrics&quot;,
+ &quot;__scheme__&quot;: &quot;http&quot;,
+ &quot;job&quot;: &quot;prometheus&quot;
+ },
+ &quot;labels&quot;: {
+ &quot;instance&quot;: &quot;127.0.0.1:9090&quot;,
+ &quot;job&quot;: &quot;prometheus&quot;
+ },
+ &quot;scrapePool&quot;: &quot;prometheus&quot;,
+ &quot;scrapeUrl&quot;: &quot;http://127.0.0.1:9090/metrics&quot;,
+ &quot;globalUrl&quot;: &quot;http://example-prometheus:9090/metrics&quot;,
+ &quot;lastError&quot;: &quot;&quot;, # &#x4E0A;&#x6B21;&#x5931;&#x8D25;&#x7684;&#x539F;&#x56E0;&#x5728;&#x8FD9;&#x2FA5;
+ &quot;lastScrape&quot;: &quot;2017-01-17T15:07:44.723715405+01:00&quot;,
+ &quot;lastScrapeDuration&quot;: 0.050688943,
+ &quot;health&quot;: &quot;up&quot;,
+ &quot;scrapeInterval&quot;: &quot;1m&quot;,
+ &quot;scrapeTimeout&quot;: &quot;10s&quot;
+ }
+ ],
+ &quot;droppedTargets&quot;: [
+ {
+ &quot;discoveredLabels&quot;: {
+ &quot;__address__&quot;: &quot;127.0.0.1:9100&quot;,
+ &quot;__metrics_path__&quot;: &quot;/metrics&quot;,
+ &quot;__scheme__&quot;: &quot;http&quot;,
+ &quot;__scrape_interval__&quot;: &quot;1m&quot;,
+ &quot;__scrape_timeout__&quot;: &quot;10s&quot;,
+ &quot;job&quot;: &quot;node&quot;
+ },
+ }
+ ]
+ }
+}
+</code></pre><h2 id="&#x5982;&#x4F55;&#x7F16;&#x5199;promql">&#x5982;&#x4F55;&#x7F16;&#x5199;promql</h2>
+<h3 id="&#x57FA;&#x672C;&#x6982;&#x5FF5;">&#x57FA;&#x672C;&#x6982;&#x5FF5;</h3>
+<p>Instance vector&#x8868;&#x793A;&#x2F00;&#x4E2A;Series&#x96C6;&#x5408;&#xFF0C;&#x4F46;&#x662F;&#x6BCF;&#x4E2A;Series&#x53EA;&#x6709;&#x6700;&#x8FD1;&#x7684;&#x2F00;&#x4E2A;&#x70B9;&#xFF0C;&#x2F7D;&#x4E0D;&#x662F;&#x7EBF;&#x3002;</p>
+<p>Range vector&#x8868;&#x793A;&#x2F00;&#x6BB5;&#x65F6;&#x95F4;&#x8303;&#x56F4;&#x2FA5;&#x7684;Series&#xFF0C;&#x6BCF;&#x4E2A;Series&#x5305;&#x542B;&#x591A;&#x4E2A;&#x70B9;&#xFF0C;Range vector&#x4E5F;&#x53EF;&#x4EE5;&#x8868;&#x793A;&#x6210;&#x2F00;&#x5F20;&#x2F06;&#x7EF4;&#x8868;&#xFF0C;&#x53EA;&#x4E0D;&#x8FC7;&#x9700;&#x8981;&#x628A;&#x65F6;&#x95F4;&#x6233;&#x4E5F;&#x52A0;&#x5230;&#x8868;&#x2FA5;&#xFF0C;&#x6BCF;&#x2F8F;&#x8868;&#x793A;&#x67D0;&#x4E2A;&#x65F6;&#x95F4;&#x70B9;&#x4E0B;&#x7684;&#x67D0;&#x4E2A;Series&#x3002;</p>
+<p>Scalar&#x4E0D;&#x662F;&#x2F00;&#x4E2A;Series&#xFF0C;&#x2F7D;&#x662F;&#x2F00;&#x4E2A;&#x6570;&#x503C;&#xFF0C;&#x4F8B;&#x5982;&#x76F4;&#x63A5;&#x5728;&#x8BED;&#x53E5;&#x2FA5;&#x5199;&#x4E2A;100&#xFF0C;&#x8FD9;&#x5C31;&#x662F;&#x2F00;&#x4E2A;Scalar&#xFF0C;Prometheus&#x63D0;&#x4F9B;&#x4E86;&#x2F00;&#x4E2A;&#x51FD;&#x6570;&#xFF0C;&#x53EF;&#x4EE5;&#x5C06;&#x53EA;&#x6709;&#x2F00;&#x4E2A;Series&#x7684;Instance vector&#x8F6C;&#x6362;&#x6210;Scalar&#x3002;</p>
+<p>&#x76F4;&#x63A5;&#x5728;&#x67E5;&#x8BE2;&#x8F93;&#x5165;&#x6307;&#x6807;&#x540D;&#x5C31;&#x662F;&#x67E5;&#x8BE2;&#x5230;Instant vector</p>
+<pre><code>container_cpu_usage_seconds_total
+</code></pre><p>&#x5982;&#x679C;&#x662F;&#x52A0;&#x4E0A;&#x65F6;&#x95F4;&#x8303;&#x56F4;&#xFF0C;&#x67E5;&#x8BE2;&#x5230;&#x7684;&#x5C31;&#x662F;Range vector</p>
+<pre><code>container_cpu_usage_seconds_total{pod=&quot;cls-provisioner-66cf4d475-f4887&quot;}[1m]
+</code></pre><h3 id="&#x805A;&#x5408;&#x67E5;&#x8BE2;">&#x805A;&#x5408;&#x67E5;&#x8BE2;</h3>
+<p>&#x805A;&#x5408;&#x5C31;&#x662F;&#x9488;&#x5BF9;&#x67E5;&#x51FA;&#x6765;&#x7684;Instant vector&#xFF0C;Range vector&#x505A;&#x2F00;&#x4E9B;&#x51FD;&#x6570;&#x8FD0;&#x7B97;&#xFF0C;&#x5F97;&#x5230;&#x65B0;&#x7684;Instant vector&#x6216;&#x8005;Scalar&#x3002;</p>
+<p>sum,avg,max&#x7B49;&#x57FA;&#x672C;&#x7EDF;&#x8BA1;&#xFF0C;&#x8FD9;&#x7C7B;&#x51FD;&#x6570;&#x5148;&#x6839;&#x636E;label&#x5C06;&#x2F0A;&#x53C2;Instant vector&#x8FDB;&#x2F8F;&#x5206;&#x7EC4;&#xFF0C;&#x7136;&#x540E;&#x6309; sum , avg &#x7B49;&#x2F45;&#x5F0F;&#x7EDF;&#x8BA1;&#x7EC4;&#x5185;Series&#xFF0C;&#x6BCF;&#x4E2A;&#x7EC4;&#x8F93;&#x51FA;&#x2F00;&#x4E2A;&#x65B0;&#x7684;Series&#xFF0C;&#x6240;&#x6709;&#x5206;&#x7EC4;&#x8F93;&#x51FA;&#x7684;Series&#x5408;&#x5728;&#x2F00;&#x8D77;&#x91CD;&#x65B0;&#x6784;&#x6210;&#x2F00;&#x4E2A;&#x65B0;&#x7684;Instant vector&#x4F5C;&#x4E3A;&#x8F93;&#x51FA;</p>
+<pre><code>sum(container_cpu_usage_seconds_total{})
+
+&#x6CA1;&#x6709;&#x6307;&#x5B9A;&#x2F64;&#x4E8E;&#x5206;&#x7EC4;&#x7684;label&#xFF0C;&#x5219;&#x6240;&#x6709;Series&#x5206;&#x4E3A;&#x2F00;&#x7EC4;&#xFF0C;&#x5373;&#x6700;&#x7EC8;&#x8F93;&#x51FA;&#x7684;Instant vector&#x4E5F;&#x53EA;&#x6709;&#x2F00;&#x4E2A;Series&#xFF0C;&#x5373;&#x6240;&#x6709;container_cpu_usage_seconds_total&#x6307;&#x6807;&#x503C;&#x7684;&#x5408;
+
+sum(container_cpu_usage_seconds_total{}) by(namespace)
+
+&#x6309;namespace&#x8FD9;&#x4E2A;label&#x6765;&#x5206;&#x7EC4;&#xFF0C;namespace&#x2F00;&#x6837;&#x7684;&#x5206;&#x5230;&#x2F00;&#x8D77;&#xFF0C;&#x5373;&#x8BA1;&#x7B97;namespace&#x76F8;&#x540C;&#x7684;container_cpu_usage_seconds_total&#x6307;&#x6807;&#x7684;&#x5408;
+</code></pre><p>irate, increase&#x7B49;Range&#x7EDF;&#x8BA1;&#xFF0C;&#x8FD9;&#x7C7B;&#x51FD;&#x6570;&#x2F0A;&#x53C2;&#x90FD;&#x662F;Range vector&#xFF0C;&#x5373;&#x2F00;&#x6BB5;&#x65F6;&#x95F4;&#x8303;&#x56F4;&#x7684;&#x70B9;&#xFF0C;&#x4ED6;&#x4EEC;&#x90FD;&#x662F;&#x6839;&#x636E;&#x7EDF;&#x8BA1;&#x7C7B;&#x578B;&#x8BA1;&#x7B97;&#x6BCF;&#x4E2A;Series&#x5728;&#x6B64;&#x6BB5;&#x65F6;&#x95F4;&#x8303;&#x56F4;&#x5185;&#x6240;&#x6709;&#x7684;&#x70B9;&#x5E76;&#x83B7;&#x5F97;&#x2F00;&#x4E2A;&#x70B9;&#xFF0C;&#x8BA1;&#x7B97;&#x5B8C;&#x540E;&#xFF0C;&#x6BCF;&#x4E2A;Series&#x53EA;&#x4F1A;&#x5269;&#x4E0B;&#x2F00;&#x4E2A;&#x70B9;&#xFF0C;&#x4F5C;&#x4E3A;&#x5F53;&#x524D;&#x65F6;&#x95F4;&#x6233;&#x4E0B;&#x7684;&#x6570;&#x503C;&#xFF0C;&#x5373;Range vector&#x8BA1;&#x7B97;&#x5B8C;&#x540E;&#x4F1A;&#x53D8;&#x6210;Instant vector</p>
+<pre><code>irate(container_cpu_usage_seconds_total{}[1m])
+
+&#x8FD8;&#x8BB0;&#x5F97;Range vector&#x7684;&#x67E5;&#x8BE2;&#x2F45;&#x5F0F;&#x5417;&#xFF0C;&#x6307;&#x6807;&#x540E;&#x8FB9;&#x5E26;&#x4E0A;&#x65F6;&#x95F4;&#x8303;&#x56F4;&#x5373;&#x53EF;&#xFF0C;&#x7531;&#x4E8E;&#x8FD9;&#x7C7B;&#x51FD;&#x6570;&#x90FD;&#x662F;&#x9488;&#x5BF9;&#x6BCF;&#x4E2A;Series&#x8BA1;&#x7B97;&#x7684;&#xFF0C;&#x4E0D;&#x4F1A;&#x5BF9;Series&#x8FDB;&#x2F8F;&#x5206;&#x7EC4;&#xFF0C;&#x6240;&#x4EE5;&#x4E0D;&#x2F40;&#x6301;by&#x8FD9;&#x7C7B;&#x5206;&#x7EC4;&#x5173;&#x952E;&#x5B57;
+</code></pre><p>&#x591A;&#x91CD;&#x805A;&#x5408;&#xFF0C;&#x6240;&#x6709;&#x805A;&#x5408;&#x8BED;&#x53E5;&#x7684;&#x7ED3;&#x679C;&#xFF0C;&#x8981;&#x5417;&#x662F;Instance vector&#xFF0C;&#x8981;&#x5417;&#x662F;Scalar&#x3002;&#x6240;&#x4EE5;&#xFF0C;&#x805A;&#x5408;&#x7684;&#x7ED3;&#x679C;&#x8FD8;&#x53EF;&#x4EE5;&#x4F5C;&#x4E3A;&#x53C2;&#x6570;&#x8F93;&#x2F0A;&#x7ED9;&#x2F0A;&#x53C2;&#x662F;Instance vector&#x7684;&#x51FD;&#x6570;&#x5982; sum &#x8FD9;&#x7C7B;</p>
+<pre><code>avg( sum(container_cpu_usage_seconds_total{}) by(namespace) )
+
+&#x8BA1;&#x7B97;&#x6240;&#x6709;namespace&#x7684;&#x5E73;&#x5747;&#x503C;
+
+avg( irate(container_cpu_usage_seconds_total{}[1m]) )
+</code></pre><p>&#x9700;&#x8981;&#x6CE8;&#x610F;&#x7684;&#x662F;&#xFF0C;&#x6CA1;&#x6CD5;&#x628A;&#x805A;&#x5408;&#x8FC7;&#x7684;&#x6570;&#x636E;&#x4F20;&#x7ED9;&#x9700;&#x8981;Range vector&#x4F5C;&#x4E3A;&#x53C2;&#x6570;&#x7684;&#x51FD;&#x6570;&#xFF0C;&#x5982;irate&#xFF0C;&#x56E0;&#x4E3A;&#x805A;&#x5408;&#x540E;&#x5F97;&#x5230;&#x662F;Instance vector&#xFF0C;&#x4E0B;&#x9762;&#x7684;&#x8BED;&#x53E5;&#x662F;&#x62A5;&#x9519;&#x7684;</p>
+<pre><code>irate(avg(container_cpu_usage_seconds_total{}))
+</code></pre><p>&#x5BF9;2&#x4E2A;Instant vector&#x8FDB;&#x884C;&#x805A;&#x5408;</p>
+<p>Prometheus&#x2F40;&#x6301;&#x5982; + , - , * , / , and , or &#x7B49;</p>
+<pre><code>A * B
+&#x53D6;A&#x4E2D;&#x6BCF;&#x4E2A;Series&#xFF0C;&#x5728;B&#x4E2D;&#x627E;&#x5230;&#x548C;&#x5B83;&#x6240;&#x6709;Label&#xFF08;&#x4E0D;&#x542B;&#x6307;&#x6807;&#x540D;&#xFF09;&#x7684;key&#x548C;value&#x90FD;&#x76F8;&#x7B49;&#x7684;Series&#xFF0C;&#x628A;&#x4ED6;&#x4E24;&#x7684;&#x503C;&#x76F8;&#x4E58;&#xFF0C;&#x4F5C;&#x4E3A;A&#x4E2D;&#x90A3;&#x4E2A;Series&#x7684;&#x503C;&#xFF0C;&#x5982;&#x679C;&#x6CA1;&#x627E;&#x5230;&#xFF0C;&#x5219;&#x629B;&#x5F03;&#x8FD9;&#x4E2A;Series&#x3002;
+</code></pre><p>&#x6211;&#x4EEC;&#x4E5F;&#x53EF;&#x4EE5;&#x6307;&#x5B9A;&#x53EA;&#x6309;&#x67D0;&#x4E9B;label&#x53BB;&#x5339;&#x914D;</p>
+<pre><code>A * on(pod,container) B
+&#x53D6;A&#x4E2D;&#x6BCF;&#x4E2A;Series&#xFF0C;&#x5728;B&#x4E2D;&#x627E;&#x5230;&#x548C;&#x5B83;pod, container&#x8FD9;2&#x4E2A;label&#x90FD;&#x76F8;&#x7B49;&#x7684;Series&#xFF0C;&#x628A;&#x4ED6;&#x4E24;&#x7684;&#x503C;&#x76F8;&#x4E58;&#xFF0C;&#x4F5C;&#x4E3A;A&#x4E2D;&#x90A3;&#x4E2A;Series&#x7684;&#x503C;&#xFF0C;&#x5982;&#x679C;&#x6CA1;&#x627E;&#x5230;&#xFF0C;&#x5219;&#x629B;&#x5F03;&#x8FD9;&#x4E2A;Series&#x3002;
+</code></pre><p>&#x4E0A;&#x9762;&#x7684;&#x8BED;&#x53E5;&#x805A;&#x5408;&#x51FA;&#x6765;&#x7684;&#x7ED3;&#x679C;&#xFF0C;label&#x53EA;&#x6709;pod, container&#xFF0C;&#x5176;&#x4ED6;label&#x5168;&#x6CA1;&#x4E86;&#xFF0C;&#x600E;&#x4E48;&#x624D;&#x80FD;&#x4FDD;&#x7559;A&#x4E2D;&#x7684;&#x6240;&#x6709;label&#x5462;&#xFF0C;&#x6211;&#x4EEC;&#x8981;&#x52A0;&#x4E0B;group_left</p>
+<pre><code>A * on(pod,container) group_left B
+&#x53D6;A&#x4E2D;&#x6BCF;&#x4E2A;Series&#xFF0C;&#x5728;B&#x4E2D;&#x627E;&#x5230;&#x548C;&#x5B83;pod, container&#x8FD9;2&#x4E2A;label&#x90FD;&#x76F8;&#x7B49;&#x7684;Series&#xFF0C;&#x628A;&#x4ED6;&#x4E24;&#x7684;&#x503C;&#x76F8;&#x4E58;&#xFF0C;&#x4F5C;&#x4E3A;A&#x4E2D;&#x90A3;&#x4E2A;Series&#x7684;&#x503C;&#xFF0C;&#x5982;&#x679C;&#x6CA1;&#x627E;&#x5230;&#xFF0C;&#x5219;&#x629B;&#x5F03;&#x8FD9;&#x4E2A;Series&#x3002;&#x7ED3;&#x679C;&#x7684;label&#x96C6;&#x5408;&#x91C7;&#x2F64;&#x5DE6;&#x8FB9;A&#x7684;
+</code></pre><p>&#x5982;&#x679C;&#x4F60;&#x5E0C;&#x671B;&#x628A;B&#x4E2D;&#x7684;&#x2F00;&#x4E9B;label&#xFF0C;&#x9644;&#x52A0;&#x5230;A&#x539F;&#x6765;&#x7684;label&#x96C6;&#x5408;&#x2FA5;&#xFF0C;&#x2F64;&#x6765;&#x6269;&#x5C55;A&#x539F;&#x6765;&#x7684;label&#x96C6;&#x5408;&#xFF0C;&#x80FD;&#x505A;&#x5230;&#x5417;&#xFF1F;&#x80FD;&#xFF01;</p>
+<pre><code>A * on(pod,container) group_left(mylabel1, mylabel2) B
+&#x53D6;A&#x4E2D;&#x6BCF;&#x4E2A;Series&#xFF0C;&#x5728;B&#x4E2D;&#x627E;&#x5230;&#x548C;&#x5B83;pod, container&#x8FD9;2&#x4E2A;label&#x90FD;&#x76F8;&#x7B49;&#x7684;Series&#xFF0C;&#x628A;&#x4ED6;&#x4E24;&#x7684;&#x503C;&#x76F8;&#x4E58;&#xFF0C;&#x4F5C;&#x4E3A;A&#x4E2D;&#x90A3;&#x4E2A;Series&#x7684;&#x503C;&#xFF0C;&#x5982;&#x679C;&#x6CA1;&#x627E;&#x5230;&#xFF0C;&#x5219;&#x629B;&#x5F03;&#x8FD9;&#x4E2A;Series&#x3002;&#x7ED3;&#x679C;&#x7684;label&#x96C6;&#x5408;&#x91C7;&#x2F64;&#x5DE6;&#x8FB9;A&#x7684;&#x3002;&#x4E0D;&#x4EC5;&#x5982;&#x6B64;&#xFF0C;&#x8FD8;&#x4F1A;&#x4ECE;&#x5339;&#x914D;&#x7684;B&#x4E2D;Series&#x4E0A;&#x590D;&#x5236;&#x51FA;mylabel1,mylabel2&#x8FFD;&#x52A0;&#x5230;&#x7ED3;&#x679C;&#x7684;label&#x96C6;&#x5408;&#x4E0A;&#x3002;&#xFF1B;
+</code></pre><h2 id="labelreplace&#x548C;labeljoin">label_replace&#x548C;label_join</h2>
+<p>label_replace&#x548C;label_join&#x662F;PromQL&#x7684;&#x9884;&#x7F6E;&#x51FD;&#x6570;&#xFF0C;&#x652F;&#x6301;&#x5C06;label&#x7684;value&#x8FDB;&#x884C;&#x622A;&#x53D6;&#x548C;&#x62FC;&#x63A5;&#xFF0C;&#x751F;&#x6210;&#x65B0;&#x7684;label&#x3002;</p>
+<p>&#x503C;&#x5F97;&#x6CE8;&#x610F;&#x7684;&#x662F;&#xFF0C;&#x5B83;&#x4EEC;&#x4E0D;&#x6539;&#x53D8;&#x6E90;label&#x7684;name&#x53CA;value&#xFF0C;&#x4EC5;&#x751F;&#x6210;&#x65B0;label&#x3002;</p>
+<h3 id="labelreplace">label_replace</h3>
+<p>&#x652F;&#x6301;&#x5BF9;&#x67D0;&#x4E2A;label&#x7684;&#x503C;&#x8FDB;&#x884C;&#x6B63;&#x5219;&#x5339;&#x914D;&#xFF0C;&#x622A;&#x53D6;&#x51FA;&#x67D0;&#x4E9B;&#x503C;&#xFF0C;&#x751F;&#x6210;&#x65B0;&#x7684;label&#x3002;</p>
+<pre><code>label_replace(v instant-vector, dst_label string, replacement string, src_label string, regex string)
+</code></pre><p>&#x793A;&#x4F8B;&#x5982;&#x4E0B;</p>
+<pre><code>&#x539F;&#x59CB;&#x6307;&#x6807;
+node_network_transmit_bytes_total{container=&quot;kube-rbac-proxy&quot;,device=&quot;eth0&quot;,endpoint=&quot;https&quot;,instance=&quot;k8s-v22-1&quot;,job=&quot;node-exporter&quot;,namespace=&quot;monitoring&quot;,pod=&quot;node-exporter-nvj7r&quot;,service=&quot;node-exporter&quot;}    9457895219
+
+&#x901A;&#x8FC7;&#x901A;&#x8FC7;label_replace&#x5C06;device==&gt;iface
+label_replace(node_network_transmit_bytes_total{job=&quot;node-exporter&quot;, device=&quot;eth0&quot;}, &quot;iface&quot;, &quot;$1&quot;, &quot;device&quot;, &quot;(.+)&quot;)
+
+&#x7ED3;&#x679C;
+node_network_transmit_bytes_total{container=&quot;kube-rbac-proxy&quot;,device=&quot;eth0&quot;,endpoint=&quot;https&quot;,iface=&quot;eth0&quot;,instance=&quot;k8s-v22-1&quot;,job=&quot;node-exporter&quot;,namespace=&quot;monitoring&quot;,pod=&quot;node-exporter-nvj7r&quot;,service=&quot;node-exporter&quot;}    9465702581
+</code></pre><h3 id="labeljoin">label_join</h3>
+<p>&#x652F;&#x6301;&#x5C06;&#x67D0;&#x4E9B;label&#x62FC;&#x63A5;&#x8D77;&#x6765;&#xFF0C;&#x751F;&#x6210;&#x65B0;&#x7684;label&#x3002;</p>
+<pre><code>label_join(v instant-vector, dst_label string, separator string, src_label_1 string, src_label_2 string, ...)
+</code></pre><p>&#x793A;&#x4F8B;&#x5982;&#x4E0B;</p>
+<pre><code>&#x539F;&#x59CB;&#x6307;&#x6807;
+kubelet_node_name{endpoint=&quot;https-metrics&quot;,instance=&quot;178.104.163.63:10250&quot;,job=&quot;kubelet&quot;,metrics_path=&quot;/metrics&quot;,namespace=&quot;kube-system&quot;,node=&quot;k8s-v22-1&quot;,service=&quot;kubelet&quot;}    1
+
+&#x901A;&#x8FC7;label_join&#x5C06;instance&#x548C;metrics_path&#x62FC;&#x63A5;&#x8D77;&#x6765;&#xFF0C;&#x751F;&#x6210;&#x65B0;label: metrics_url
+label_join(kubelet_node_name, &quot;metrics_url&quot;, &quot;&quot;, &quot;instance&quot;, &quot;metrics_path&quot;)
+
+&#x7ED3;&#x679C;
+kubelet_node_name{endpoint=&quot;https-metrics&quot;,instance=&quot;178.104.163.63:10250&quot;,job=&quot;kubelet&quot;,metrics_path=&quot;/metrics&quot;,metrics_url=&quot;178.104.163.63:10250/metrics&quot;,namespace=&quot;kube-system&quot;,node=&quot;k8s-v22-1&quot;,service=&quot;kubelet&quot;}    1
+</code></pre><p><footer class="page-footer"><span class="copyright">&#xA9; vishon all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">Updated at
+2022-06-13 18:23:24
+</span></footer></p>
+<div id="gitalk-container"></div>
+<script>console.log("plugin-popup....");document.onclick = function(e){ e.target.tagName === "IMG" && window.open(e.target.src,e.target.src)}</script><style>img{cursor:pointer}</style>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="basic-knowledge-of-prometheus.html" class="navigation navigation-prev " aria-label="Previous page: 【prometheus】prometheus入门知识概念">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="Prometheus-collects-Docker-Engine-Metrics.html" class="navigation navigation-next " aria-label="Next page: 【prometheus】Prometheus采集Docker Engine Metrics">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"【prometheus】prometheus进阶学习笔记","level":"9.2","depth":1,"next":{"title":"【prometheus】Prometheus采集Docker Engine Metrics","level":"9.3","depth":1,"path":"prometheus/Prometheus-collects-Docker-Engine-Metrics.md","ref":"prometheus/Prometheus-collects-Docker-Engine-Metrics.md","articles":[]},"previous":{"title":"【prometheus】prometheus入门知识概念","level":"9.1","depth":1,"path":"prometheus/basic-knowledge-of-prometheus.md","ref":"prometheus/basic-knowledge-of-prometheus.md","articles":[]},"dir":"ltr"},"config":{"plugins":["github","editlink","-lunr","-search","search-plus","tbfed-pagefooter","splitter","page-toc-button","back-to-top-button","-lunr","-search","search-plus","github-buttons@2.1.0","favicon@^0.0.2","3-ba","theme-default","pageview-count","auto-scroll-table","popup","code","mygitalk","-sharing"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"&copy vishon","modify_label":"Updated at","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-okaidia.css"]},"disqus":{"shortName":"nieweixing-github-io"},"github":{"url":"https://github.com/nieweixing"},"editlink":{"label":"编辑本页","multilingual":false,"base":"https://github.com/nieweixing/mybook/tree/gh-pages"},"splitter":{},"auto-scroll-table":{},"popup":{},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"favicon":{"shortcut":"favicon.ico","bookmark":"favicon.ico"},"page-toc-button":{},"back-to-top-button":{},"pageview-count":{},"github-buttons":{"repo":"nieweixing/mybook","types":["star"],"size":"small"},"3-ba":{"configuration":"auto","token":"c03bec8e82bc53c064e0e648ffa54d88"},"mygitalk":{"flipMoveOptions":{},"clientID":"5976cd3d9cc251569467","number":-1,"perPage":10,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","admin":["nieweixing"],"createIssueManually":false,"distractionFreeMode":false,"repo":"gitalk-comment","owner":"nieweixing","enableHotKey":true,"clientSecret":"74117131a57324d4d616267265a94f4a1ac293ec","pagerDirection":"last","labels":["Gitalk"]},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{},"image-captions":{"caption":"图片 - _CAPTION_"}},"theme":"default","author":"vishon","pdf":{"pageNumbers":true,"fontSize":11,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"toc":true},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"运维操作指南","language":"zh-hans","links":{"sidebar":{"聂伟星个人博客":"https://www.niewx.cn","云+社区TKE运维笔记":"https://cloud.tencent.com/developer/column/87421","运维操作宝典":"https://www.niewx.cn/mybook","运维问题集锦":"https://www.niewx.cn/question"}},"gitbook":">= 3.2.2","description":"运维操作指南"},"file":{"path":"prometheus/prometheus-advanced-study-notes.md","mtime":"2022-06-13T10:23:24.226Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-06-13T10:24:02.328Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-github/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-editlink/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-splitter/splitter.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-page-toc-button/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-back-to-top-button/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-3-ba/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-pageview-count/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-auto-scroll-table/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-code/plugin.js"></script>
+        
+    
+        
+        <script src="https://cdn.bootcss.com/blueimp-md5/2.12.0/js/md5.min.js"></script>
+        
+    
+        
+        <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-mygitalk/mygitalk.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
