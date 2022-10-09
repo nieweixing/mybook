@@ -1483,8 +1483,10 @@
 </code></pre><h2 id="node-&#x7EA7;&#x522B;">node &#x7EA7;&#x522B;</h2>
 <h3 id="&#x6570;&#x636E;&#x6E90;&#x540D;&#x79F0;measurement">&#x6570;&#x636E;&#x6E90;&#x540D;&#x79F0;(measurement)</h3>
 <ul>
-<li>k8s_node<h3 id="&#x7EF4;&#x5EA6;&#x96C6;&#x5408;labels">&#x7EF4;&#x5EA6;&#x96C6;&#x5408;(labels)</h3>
-</li>
+<li>k8s_node</li>
+</ul>
+<h3 id="&#x7EF4;&#x5EA6;&#x96C6;&#x5408;labels">&#x7EF4;&#x5EA6;&#x96C6;&#x5408;(labels)</h3>
+<ul>
 <li>node &#x540D;&#x79F0;</li>
 <li>unInstanceId &#x6240;&#x5728;node&#x7684;unInstanceId</li>
 <li>node_role</li>
@@ -1596,16 +1598,18 @@
 </code></pre><h2 id="workload&#x7EA7;&#x522B;">workload&#x7EA7;&#x522B;</h2>
 <h3 id="&#x6570;&#x636E;&#x6E90;&#x540D;&#x79F0;measurement">&#x6570;&#x636E;&#x6E90;&#x540D;&#x79F0;(measurement)</h3>
 <ul>
-<li>k8s_workload<h3 id="&#x7EF4;&#x5EA6;&#x96C6;&#x5408;labels">&#x7EF4;&#x5EA6;&#x96C6;&#x5408;(labels)</h3>
-</li>
+<li>k8s_workload</li>
+</ul>
+<h3 id="&#x7EF4;&#x5EA6;&#x96C6;&#x5408;labels">&#x7EF4;&#x5EA6;&#x96C6;&#x5408;(labels)</h3>
+<ul>
 <li>namespace &#x5C5E;&#x4E8E;&#x54EA;&#x4E2A;namespace</li>
 <li>workload_kind &#x8D1F;&#x8F7D;&#x7C7B;&#x578B;</li>
 <li>workload_name &#x5DE5;&#x4F5C;&#x8D1F;&#x8F7D;&#x540D;&#x79F0;</li>
 <li>tke_cluster_instance_id &#x5C5E;&#x4E8E;&#x54EA;&#x4E2A;&#x96C6;&#x7FA4;</li>
 <li>appid &#x5C5E;&#x4E8E;&#x54EA;&#x4E2A;&#x7528;&#x6237;</li>
-<li>region &#x5C5E;&#x4E8E;&#x54EA;&#x4E2A;&#x5730;&#x57DF;<h3 id="&#x6307;&#x6807;&#x96C6;&#x5408;metrics">&#x6307;&#x6807;&#x96C6;&#x5408;(metrics)</h3>
-</li>
+<li>region &#x5C5E;&#x4E8E;&#x54EA;&#x4E2A;&#x5730;&#x57DF;</li>
 </ul>
+<h3 id="&#x6307;&#x6807;&#x96C6;&#x5408;metrics">&#x6307;&#x6807;&#x96C6;&#x5408;(metrics)</h3>
 <p><strong>k8s_workload_abnormal</strong></p>
 <ul>
 <li>&#x542B;&#x4E49;&#xFF1A;workload&#x662F;&#x5426;&#x662F;&#x4E0D;&#x6B63;&#x5E38;&#x72B6;&#x6001;&#xFF0C;&#x975E;0&#x5C31;&#x662F;&#x4E0D;&#x6B63;&#x5E38;</li>
@@ -1759,14 +1763,16 @@ label_replace(
 </code></pre><h2 id="namespace&#x7EA7;&#x522B;">namespace&#x7EA7;&#x522B;</h2>
 <h3 id="&#x6570;&#x636E;&#x6E90;&#x540D;&#x79F0;measurement">&#x6570;&#x636E;&#x6E90;&#x540D;&#x79F0;(measurement)</h3>
 <ul>
-<li>k8s_namespace<h3 id="&#x7EF4;&#x5EA6;&#x96C6;&#x5408;labels">&#x7EF4;&#x5EA6;&#x96C6;&#x5408;(labels)</h3>
-</li>
+<li>k8s_namespace</li>
+</ul>
+<h3 id="&#x7EF4;&#x5EA6;&#x96C6;&#x5408;labels">&#x7EF4;&#x5EA6;&#x96C6;&#x5408;(labels)</h3>
+<ul>
 <li>namespace &#x5C5E;&#x4E8E;&#x54EA;&#x4E2A;namespace</li>
 <li>tke_cluster_instance_id &#x5C5E;&#x4E8E;&#x54EA;&#x4E2A;&#x96C6;&#x7FA4;</li>
 <li>appid &#x5C5E;&#x4E8E;&#x54EA;&#x4E2A;&#x7528;&#x6237;</li>
-<li>region &#x5C5E;&#x4E8E;&#x54EA;&#x4E2A;&#x5730;&#x57DF;<h3 id="&#x6307;&#x6807;&#x96C6;&#x5408;metrics">&#x6307;&#x6807;&#x96C6;&#x5408;(metrics)</h3>
-</li>
+<li>region &#x5C5E;&#x4E8E;&#x54EA;&#x4E2A;&#x5730;&#x57DF;</li>
 </ul>
+<h3 id="&#x6307;&#x6807;&#x96C6;&#x5408;metrics">&#x6307;&#x6807;&#x96C6;&#x5408;(metrics)</h3>
 <p><strong>k8s_namespace_cpu_core_used</strong></p>
 <ul>
 <li>&#x542B;&#x4E49;&#xFF1A;namespace 5&#x5206;&#x949F;&#x5185;&#x7684;&#x5E73;&#x5747;cpu&#x6838;&#x6570;</li>
@@ -2025,7 +2031,7 @@ label_replace(
 </ul>
 <pre><code>sum(k8s_pod_gpu_memory_request_bytes * on(node) group_left kube_node_labels {node_role=&quot;Node&quot;} * on(pod_name, namespace) group_left sum(kube_pod_status_phase{phase!~&quot;Succeeded|Failed&quot;}==1) by (pod_name, namespace)) * 100 / scalar(k8s_cluster_gpu_memory_total_bytes)
 </code></pre><p><footer class="page-footer"><span class="copyright">&#xA9; vishon all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">Updated at
-2022-08-30 15:01:12
+2022-10-09 17:48:58
 </span></footer></p>
 <div id="gitalk-container"></div>
 <script>console.log("plugin-popup....");document.onclick = function(e){ e.target.tagName === "IMG" && window.open(e.target.src,e.target.src)}</script><style>img{cursor:pointer}</style>
@@ -2071,7 +2077,7 @@ label_replace(
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"【tke】TKE监控指标说明文档","level":"7.9","depth":1,"next":{"title":"云计算简介","level":"8.1","depth":1,"path":"cloud/1.md","ref":"cloud/1.md","articles":[]},"previous":{"title":"【tke】TKE重新部署cert-manager一直卡主","level":"7.8","depth":1,"path":"tke/TKE-redeploys-cert-manager-and-keeps-getting-stuck.md","ref":"tke/TKE-redeploys-cert-manager-and-keeps-getting-stuck.md","articles":[]},"dir":"ltr"},"config":{"plugins":["github","editlink","-lunr","-search","search-plus","tbfed-pagefooter","splitter","page-toc-button","back-to-top-button","-lunr","-search","search-plus","github-buttons@2.1.0","favicon@^0.0.2","3-ba","theme-default","pageview-count","auto-scroll-table","popup","code","mygitalk","-sharing"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"&copy vishon","modify_label":"Updated at","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-okaidia.css"]},"disqus":{"shortName":"nieweixing-github-io"},"github":{"url":"https://github.com/nieweixing"},"editlink":{"label":"编辑本页","multilingual":false,"base":"https://github.com/nieweixing/mybook/tree/gh-pages"},"splitter":{},"auto-scroll-table":{},"popup":{},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"favicon":{"shortcut":"favicon.ico","bookmark":"favicon.ico"},"page-toc-button":{},"back-to-top-button":{},"pageview-count":{},"github-buttons":{"repo":"nieweixing/mybook","types":["star"],"size":"small"},"3-ba":{"configuration":"auto","token":"c03bec8e82bc53c064e0e648ffa54d88"},"mygitalk":{"flipMoveOptions":{},"clientID":"5976cd3d9cc251569467","number":-1,"perPage":10,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","admin":["nieweixing"],"createIssueManually":false,"distractionFreeMode":false,"repo":"gitalk-comment","owner":"nieweixing","enableHotKey":true,"clientSecret":"74117131a57324d4d616267265a94f4a1ac293ec","pagerDirection":"last","labels":["Gitalk"]},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{},"image-captions":{"caption":"图片 - _CAPTION_"}},"theme":"default","author":"vishon","pdf":{"pageNumbers":true,"fontSize":11,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"toc":true},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"运维操作指南","language":"zh-hans","links":{"sidebar":{"聂伟星个人博客":"https://www.niewx.cn","云+社区TKE运维笔记":"https://cloud.tencent.com/developer/column/87421","运维操作宝典":"https://www.niewx.cn/mybook","运维问题集锦":"https://www.niewx.cn/question"}},"gitbook":">= 3.2.2","description":"运维操作指南"},"file":{"path":"tke/TKE-monitoring-indicators-description-document.md","mtime":"2022-08-30T07:01:12.065Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-09-09T14:03:45.001Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"【tke】TKE监控指标说明文档","level":"7.9","depth":1,"next":{"title":"云计算简介","level":"8.1","depth":1,"path":"cloud/1.md","ref":"cloud/1.md","articles":[]},"previous":{"title":"【tke】TKE重新部署cert-manager一直卡主","level":"7.8","depth":1,"path":"tke/TKE-redeploys-cert-manager-and-keeps-getting-stuck.md","ref":"tke/TKE-redeploys-cert-manager-and-keeps-getting-stuck.md","articles":[]},"dir":"ltr"},"config":{"plugins":["github","editlink","-lunr","-search","search-plus","tbfed-pagefooter","splitter","page-toc-button","back-to-top-button","-lunr","-search","search-plus","github-buttons@2.1.0","favicon@^0.0.2","3-ba","theme-default","pageview-count","auto-scroll-table","popup","code","mygitalk","-sharing"],"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"&copy vishon","modify_label":"Updated at","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{"css":["prismjs/themes/prism-okaidia.css"]},"disqus":{"shortName":"nieweixing-github-io"},"github":{"url":"https://github.com/nieweixing"},"editlink":{"label":"编辑本页","multilingual":false,"base":"https://github.com/nieweixing/mybook/tree/gh-pages"},"splitter":{},"auto-scroll-table":{},"popup":{},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"favicon":{"shortcut":"favicon.ico","bookmark":"favicon.ico"},"page-toc-button":{},"back-to-top-button":{},"pageview-count":{},"github-buttons":{"repo":"nieweixing/mybook","types":["star"],"size":"small"},"3-ba":{"configuration":"auto","token":"c03bec8e82bc53c064e0e648ffa54d88"},"mygitalk":{"flipMoveOptions":{},"clientID":"5976cd3d9cc251569467","number":-1,"perPage":10,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","admin":["nieweixing"],"createIssueManually":false,"distractionFreeMode":false,"repo":"gitalk-comment","owner":"nieweixing","enableHotKey":true,"clientSecret":"74117131a57324d4d616267265a94f4a1ac293ec","pagerDirection":"last","labels":["Gitalk"]},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"showLevel":false,"styles":{"ebook":"styles/ebook.css","epub":"styles/epub.css","mobi":"styles/mobi.css","pdf":"styles/pdf.css","print":"styles/print.css","website":"styles/website.css"}},"search-plus":{},"image-captions":{"caption":"图片 - _CAPTION_"}},"theme":"default","author":"vishon","pdf":{"pageNumbers":true,"fontSize":11,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"toc":true},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"运维操作指南","language":"zh-hans","links":{"sidebar":{"聂伟星个人博客":"https://www.niewx.cn","云+社区TKE运维笔记":"https://cloud.tencent.com/developer/column/87421","运维操作宝典":"https://www.niewx.cn/mybook","运维问题集锦":"https://www.niewx.cn/question"}},"gitbook":">= 3.2.2","description":"运维操作指南"},"file":{"path":"tke/TKE-monitoring-indicators-description-document.md","mtime":"2022-10-09T09:48:58.251Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-10-09T09:49:30.320Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

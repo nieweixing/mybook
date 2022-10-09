@@ -3,6 +3,7 @@
 ## 集群组件监控
 
 ### 数据源名称(measurement)
+
 * k8s_component
   
 ### 维度集合(labels)
@@ -46,9 +47,11 @@ max(label_replace(up{job="controller-manager"}, "node","$1", "instance","(.*):10
 ## 容器级别
 
 ### 数据源名称(measurement)
+
 * k8s_container
 
 ### 维度集合(labels)
+
 * container_name 容器的名字
 * pod_name 属于哪个pod
 * namespace 属于哪个namespace
@@ -273,9 +276,11 @@ k8s_container_gpu_memory_used_bytes * 100 / on(node) group_left() kube_node_stat
 ## pod级别
 
 ### 数据源名称(measurement)
+
 * k8s_pod
 
 ### 维度集合(labels)
+
 * pod_name 属于哪个pod
 * node 属于哪个node
 * namespace 属于哪个namespace
@@ -531,8 +536,11 @@ k8s_pod_gpu_memory_used_bytes * 100 / on(node) group_left() kube_node_status_cap
 ## node 级别
 
 ### 数据源名称(measurement)
+
 * k8s_node
+
 ### 维度集合(labels)
+
 * node 名称
 * unInstanceId 所在node的unInstanceId
 * node_role
@@ -667,14 +675,18 @@ sum(k8s_pod_gpu_memory_used_bytes) without(namespace,pod_name,workload_kind,work
 ## workload级别
 
 ### 数据源名称(measurement)
+
 * k8s_workload
+  
 ### 维度集合(labels)
+
 * namespace 属于哪个namespace
 * workload_kind 负载类型
 * workload_name 工作负载名称
 * tke_cluster_instance_id 属于哪个集群
 * appid 属于哪个用户
 * region 属于哪个地域
+
 ### 指标集合(metrics)
 
 **k8s_workload_abnormal**
@@ -874,12 +886,16 @@ k8s_workload_gpu_memory_used_bytes * 100 / scalar(k8s_cluster_gpu_memory_total_b
 ## namespace级别
 
 ### 数据源名称(measurement)
+
 * k8s_namespace
+
 ### 维度集合(labels)
+
 * namespace 属于哪个namespace
 * tke_cluster_instance_id 属于哪个集群
 * appid 属于哪个用户
 * region 属于哪个地域
+  
 ### 指标集合(metrics)
 
 **k8s_namespace_cpu_core_used**
@@ -1025,14 +1041,17 @@ k8s_namespace_gpu_memory_used_bytes * 100 / scalar(k8s_cluster_gpu_memory_total_
 ## cluster级别
 
 ### 数据源名称(measurement)
+
 * k8s_cluster
 
 ### 维度集合(labels)
+
 * tke_cluster_instance_id 属于哪个集群
 * appid 属于哪个用户
 * region 属于哪个地域
 
 ### 指标集合(metrics)
+
 **k8s_cluster_etcd_db_total_size_bytes**
 * 含义：集群etcd的db大小，只有独立集群有
 
